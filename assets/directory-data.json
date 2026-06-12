@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 37,
-  "draft_count": 37,
+  "entry_count": 38,
+  "draft_count": 38,
   "published_count": 0,
   "items": [
     {
@@ -177,6 +177,19 @@
         "https://www.openinghours.ca/dairy-queen-bathurst-nb"
       ],
       "path": "inbox/dairy-queen-bathurst.md"
+    },
+    {
+      "title": "Daly Point Nature Reserve",
+      "slug": "daly-point-nature-reserve",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "outdoor",
+      "area": "East Acadie-Bathurst",
+      "summary": "",
+      "sources": [
+        "https://www.tourismchaleur.ca/en/places/do/daly-point-nature-reserve"
+      ],
+      "path": "inbox/daly-point-nature-reserve.md"
     },
     {
       "title": "Eastside Deli",
