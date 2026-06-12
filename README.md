@@ -8,19 +8,19 @@ The public face of Acadie.sol — the website that renders the directory.
 
 ```
 acadie_sol_directory/  ← DATA (entries, schema, RSS feed)
-         ↓ pulls on build
-acadie_sol/            ← SITE (HTML, CSS, renders the data)
+         ↓ export script writes JSON
+acadie_sol/            ← SITE (HTML, CSS, renders the exported data)
          ↓ deploys to
 GitHub Pages           ← PUBLIC (acadie.sol)
 ```
 
 ## Data Source
 
-The directory data is pulled from: `github.com/MRLP-Riderverse/acadie-sol-directory`
+The directory data is exported from: `github.com/MRLP-Riderverse/acadie-sol-directory`
 
-- Entries: `entries/*/entry.md` + `entries/*/meta.json`
-- Schema: `schemas/entry.schema.yaml`
-- RSS Feed: `feed.xml`
+- Canonical source of truth: `acadie_sol_directory`
+- Manual export tool: `acadie_sol_directory/scripts/export_to_site.py`
+- Website payload: `acadie_sol/assets/directory-data.json`
 
 ## Quick Start
 
