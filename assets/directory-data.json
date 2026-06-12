@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 38,
-  "draft_count": 38,
+  "entry_count": 40,
+  "draft_count": 40,
   "published_count": 0,
   "items": [
     {
@@ -192,6 +192,19 @@
       "path": "inbox/daly-point-nature-reserve.md"
     },
     {
+      "title": "Dilli Delight",
+      "slug": "dilli-delight",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Acadie-Bathurst on St-Peters Ave. Replacing the old Dixie Lee, next to Dre Savoie optometrist, just across the street from Sobeys. Phone: 1 (506) 546-4545. Indian cuisine.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/dilli-delight.md"
+    },
+    {
       "title": "Eastside Deli",
       "slug": "eastside-deli",
       "draft": true,
@@ -271,6 +284,19 @@
         "https://www.tourismchaleur.ca/en/places/eat/kaffeine-espresso-bar"
       ],
       "path": "inbox/kaffeine-express-bathurst.md"
+    },
+    {
+      "title": "King’s Barber Shop",
+      "slug": "kings-barber-shop",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "By Cody Gosnell. Local barber. Homestyle comfort. Kinda punk tbh. 714 King St. Child friendly. Phone: 1 (506) 226-7016.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/kings-barber-shop.md"
     },
     {
       "title": "La Louga Night Bar - Resto",
