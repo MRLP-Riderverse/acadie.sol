@@ -147,6 +147,8 @@
     .description { margin: 0; color: rgba(248,245,234,0.94); line-height: 1.45; font-size: 0.9rem; font-weight: 600; }
     .notes { margin: 0; color: rgba(248,245,234,0.84); line-height: 1.45; font-size: 0.86rem; }
     .detail-grid { display: grid; gap: 6px; padding: 9px 10px; border: 1px solid rgba(248,245,234,0.08); border-radius: 12px; background: rgba(255,255,255,0.03); }
+    .related-line { color: rgba(248,245,234,0.72); font-size: 0.78rem; }
+    .related-line strong { color: var(--soft); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.72rem; }
     .detail-row { display: flex; gap: 8px; align-items: start; }
     .detail-label { min-width: 68px; color: var(--soft); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; flex: 0 0 auto; }
     .detail-value { color: var(--text); font-size: 0.83rem; line-height: 1.35; overflow-wrap: anywhere; }
@@ -288,7 +290,7 @@
     }
 
     function itemHaystack(item) {
-      return [item.title, item.category, item.area, publicCity(item), item.description, item.notes, item.address, item.hours, item.phone, item.email, ...(item.sources || [])].map(normalize).join(' ');
+      return [item.title, item.category, item.area, publicCity(item), item.description, item.notes, item.address, item.hours, item.phone, item.email, ...(item.related_places || []), ...(item.sources || [])].map(normalize).join(' ');
     }
 
     function derivedTags(item) {
@@ -345,6 +347,7 @@
     function renderCard(item) {
       const description = cleanSummary(item.description || item.summary);
       const notes = cleanSummary(item.notes);
+      const related = Array.isArray(item.related_places) ? item.related_places.filter(Boolean) : [];
       const tags = derivedTags(item);
       const city = publicCity(item);
       const detailRows = [
@@ -369,6 +372,7 @@
           <div class="card-body">
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
             ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
+            ${related.length ? `<div class="related-line"><strong>Related places:</strong> ${related.map(escapeHtml).join(' · ')}</div>` : ''}
             ${tags.length > 2 ? `<div class="meta-line">${tags.slice(2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${escapeHtml(value)}</div></div>`).join('')}</div>` : ''}
           </div>
