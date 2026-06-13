@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 40,
-  "draft_count": 40,
+  "entry_count": 44,
+  "draft_count": 44,
   "published_count": 0,
   "items": [
     {
@@ -29,6 +29,19 @@
       "summary": "A&W on St-Peters Ave in Acadie-Bathurst, next to Place Bathurst Mall and Home Hardware. 24/7 drive-thru accessible. Indoors is open as late as midnight, I believe. I've been there in person; it's quite nice. Home of the ",
       "sources": [],
       "path": "inbox/a-and-w.md"
+    },
+    {
+      "title": "Acadie-Bathurst Information Center",
+      "slug": "acadie-bathurst-information-center",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Next to Frost Bite and Monty's at La Promenade Waterfront. Open during the summer, as far as we’re pretty sure.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/acadie-bathurst-information-center.md"
     },
     {
       "title": "Apollo Cinema",
@@ -203,6 +216,19 @@
         "In person"
       ],
       "path": "inbox/dilli-delight.md"
+    },
+    {
+      "title": "Donair Shop",
+      "slug": "donair-shop",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "100 Main St. Phone: 1 (506) 546-5095. Next to Bootlegger and NB Distillery. Good food, good service.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/donair-shop.md"
     },
     {
       "title": "Eastside Deli",
@@ -411,6 +437,19 @@
       "path": "inbox/papa-joe-evys-restaurant.md"
     },
     {
+      "title": "Petro-Canada",
+      "slug": "petro-canada-main-st",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Gas station and car wash at 896 Main St. Phone: 1 (506) 544-9892.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/petro-canada-main-st.md"
+    },
+    {
       "title": "Pizza Delight Bathurst",
       "slug": "pizza-delight-bathurst",
       "draft": true,
@@ -482,6 +521,19 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Pizza-Shack/5832334.html"
       ],
       "path": "inbox/pizza-shack-bathurst.md"
+    },
+    {
+      "title": "Robin’s Donuts",
+      "slug": "robins-donuts-main-st",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Located in the same gas station as Petro-Canada at 896 Main St. Phone: 1 (506) 544-9892.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/robins-donuts-main-st.md"
     },
     {
       "title": "Subway Bathurst — 880 St. Anne St",
