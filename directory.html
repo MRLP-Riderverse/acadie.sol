@@ -144,9 +144,12 @@
     .meta-line { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
     .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 4px 7px; color: var(--muted); font-size: 0.72rem; }
     .card-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 10px 12px 12px; display: grid; gap: 9px; }
-    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.43; font-size: 0.88rem; }
-    .source-line { color: var(--soft); font-size: 0.79rem; }
-    .sources { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.81rem; line-height: 1.45; overflow-wrap: anywhere; }
+    .description { margin: 0; color: rgba(248,245,234,0.94); line-height: 1.45; font-size: 0.9rem; font-weight: 600; }
+    .notes { margin: 0; color: rgba(248,245,234,0.84); line-height: 1.45; font-size: 0.86rem; }
+    .detail-grid { display: grid; gap: 6px; padding: 9px 10px; border: 1px solid rgba(248,245,234,0.08); border-radius: 12px; background: rgba(255,255,255,0.03); }
+    .detail-row { display: flex; gap: 8px; align-items: start; }
+    .detail-label { min-width: 68px; color: var(--soft); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; flex: 0 0 auto; }
+    .detail-value { color: var(--text); font-size: 0.83rem; line-height: 1.35; overflow-wrap: anywhere; }
 
     .empty { border-radius: 18px; padding: 18px; color: var(--muted); }
     .empty h2 { margin: 0 0 8px; color: var(--text); font-size: 1.15rem; }
@@ -288,7 +291,7 @@
     }
 
     function itemHaystack(item) {
-      return [item.title, item.category, item.area, publicCity(item), item.summary, ...(item.sources || [])].map(normalize).join(' ');
+      return [item.title, item.category, item.area, publicCity(item), item.description, item.notes, item.address, item.hours, item.phone, item.email, ...(item.sources || [])].map(normalize).join(' ');
     }
 
     function derivedTags(item) {
@@ -354,10 +357,16 @@
     }
 
     function renderCard(item) {
-      const summary = cleanSummary(item.summary);
-      const sources = item.sources || [];
+      const description = cleanSummary(item.description || item.summary);
+      const notes = cleanSummary(item.notes);
       const tags = derivedTags(item);
       const city = publicCity(item);
+      const detailRows = [
+        ['Address', item.address],
+        ['Hours', item.hours],
+        ['Phone', item.phone],
+        ['Email', item.email],
+      ].filter(([, value]) => cleanSummary(value));
       return `
         <details class="directory-card">
           <summary>
@@ -372,10 +381,10 @@
             </div>
           </summary>
           <div class="card-body">
-            ${summary ? `<p class="summary">${escapeHtml(summary)}</p>` : '<p class="summary">Public description coming soon.</p>'}
+            ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
+            ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
             ${tags.length > 2 ? `<div class="meta-line">${tags.slice(2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
-            <div class="source-line">${sources.length ? `${sources.length} source${sources.length === 1 ? '' : 's'} · ${escapeHtml(sourceLabel(sources[0]))}` : 'Source cleanup pending'}</div>
-            ${sources.length ? `<ul class="sources">${sources.map(src => `<li>${src.startsWith('http') ? `<a href="${escapeHtml(src)}" target="_blank" rel="noreferrer noopener">${escapeHtml(sourceLabel(src))}</a>` : escapeHtml(src)}</li>`).join('')}</ul>` : '<p class="sources">No public source link in this export yet.</p>'}
+            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${escapeHtml(value)}</div></div>`).join('')}</div>` : ''}
           </div>
         </details>`;
     }
