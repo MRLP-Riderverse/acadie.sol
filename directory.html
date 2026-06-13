@@ -194,7 +194,7 @@
       <div>
         <div class="eyebrow">Acadie.sol directory</div>
         <h1>So what are you looking for?</h1>
-        <p class="lede">Search directly, or narrow by mood, category, and city. The full list is still available, but it is now opt-in instead of the first thing dumped onto the page.</p>
+        <p class="lede">Search directly, or narrow by mood, category, and city. The full list shows by default, and you can narrow it down from there.</p>
       </div>
       <aside class="mini-stats" aria-label="Directory status">
         <span class="mini-stat"><strong id="entry-stat">…</strong> entries</span>
@@ -217,19 +217,17 @@
         <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
         <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
       </div>
-      <div class="filter-note">City is normalized for public browsing: Bathurst variants display as <strong>Acadie-Bathurst</strong>. Source URLs stay inside each card’s expanded details.</div>
+      <div class="filter-note">City is normalized for public browsing: Bathurst variants display as <strong>Acadie-Bathurst</strong>.</div>
     </section>
 
     <div class="viewbar" id="directory-results">
       <div class="view-title">
         <h2>Directory browse</h2>
-        <span id="result-copy">Choose a search or filter to begin.</span>
+        <span id="result-copy">Showing all entries.</span>
       </div>
       <div class="view-actions">
         <button id="show-all">Show all</button>
         <button id="clear-filters">Clear</button>
-        <button id="sort-alpha" class="active">A–Z</button>
-        <button id="sort-category">Category</button>
       </div>
     </div>
 
@@ -245,8 +243,7 @@
       city: 'all',
       query: '',
       lens: '',
-      sort: 'alpha',
-      showAll: false
+      showAll: true
     };
 
     const lensTerms = {
@@ -302,10 +299,6 @@
       return [...tags].slice(0, 5);
     }
 
-    function hasActiveIntent() {
-      return state.showAll || state.query.trim() || state.lens || state.category !== 'all' || state.city !== 'all';
-    }
-
     function matchesLens(item) {
       if (!state.lens) return true;
       const hay = itemHaystack(item);
@@ -313,7 +306,6 @@
     }
 
     function filteredItems() {
-      if (!hasActiveIntent()) return [];
       const q = normalize(state.query).trim();
       let items = state.items.filter(item => {
         const hay = itemHaystack(item);
@@ -323,13 +315,7 @@
         return categoryOk && cityOk && queryOk && matchesLens(item);
       });
 
-      items.sort((a, b) => {
-        if (state.sort === 'category') {
-          const cat = String(a.category || '').localeCompare(String(b.category || ''));
-          if (cat) return cat;
-        }
-        return String(a.title || '').localeCompare(String(b.title || ''));
-      });
+      items.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')));
       return items;
     }
 
@@ -394,23 +380,15 @@
       const resultCopy = document.getElementById('result-copy');
       const showAllButton = document.getElementById('show-all');
 
-      if (!hasActiveIntent()) {
-        resultCopy.textContent = 'Choose a search or filter to begin.';
-        showAllButton.classList.remove('active');
-        app.innerHTML = `<section class="empty"><h2>So what are you looking for?</h2><p>Start with search, mood, category, or city. If you want the full raw browse, tap <strong>Show all</strong>.</p></section>`;
-        return;
-      }
-
       const items = filteredItems();
       const filters = [];
-      if (state.showAll) filters.push('all entries');
       if (state.query) filters.push(`search “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
       if (state.category !== 'all') filters.push(document.getElementById('category-select').selectedOptions[0]?.textContent || state.category);
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
-      showAllButton.classList.toggle('active', state.showAll);
-      resultCopy.textContent = `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}`;
+      showAllButton.classList.add('active');
+      resultCopy.textContent = filters.length ? `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}` : `Showing all ${items.length} entries`;
       app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
     }
 
@@ -419,7 +397,7 @@
       state.city = 'all';
       state.query = '';
       state.lens = '';
-      state.showAll = false;
+      state.showAll = true;
       document.getElementById('search').value = '';
       document.getElementById('mood-select').value = '';
       document.getElementById('category-select').value = 'all';
@@ -428,24 +406,12 @@
     }
 
     function bindEvents() {
-      document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; state.showAll = false; renderResults(); });
-      document.getElementById('mood-select').addEventListener('change', event => { state.lens = event.target.value; state.showAll = false; renderResults(); });
-      document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; state.showAll = false; renderResults(); });
-      document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; state.showAll = false; renderResults(); });
-      document.getElementById('show-all').addEventListener('click', () => { state.showAll = !state.showAll; renderResults(); });
+      document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; renderResults(); });
+      document.getElementById('mood-select').addEventListener('change', event => { state.lens = event.target.value; renderResults(); });
+      document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
+      document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
+      document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; renderResults(); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
-      document.getElementById('sort-alpha').addEventListener('click', () => {
-        state.sort = 'alpha';
-        document.getElementById('sort-alpha').classList.add('active');
-        document.getElementById('sort-category').classList.remove('active');
-        renderResults();
-      });
-      document.getElementById('sort-category').addEventListener('click', () => {
-        state.sort = 'category';
-        document.getElementById('sort-category').classList.add('active');
-        document.getElementById('sort-alpha').classList.remove('active');
-        renderResults();
-      });
     }
 
     loadData().then(data => {
