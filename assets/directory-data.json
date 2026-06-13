@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 50,
-  "draft_count": 50,
+  "entry_count": 54,
+  "draft_count": 54,
   "published_count": 0,
   "items": [
     {
@@ -268,6 +268,19 @@
       "path": "inbox/eastside-deli.md"
     },
     {
+      "title": "Flameo",
+      "slug": "flameo",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "1300 St-Peters Ave, within Place Bathurst Mall. 1(506)545-2456 Healthy Food options in a Bowl!",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/flameo.md"
+    },
+    {
       "title": "Four Rivers Brewing Co.",
       "slug": "four-rivers-brewing-co",
       "draft": true,
@@ -321,6 +334,19 @@
         "https://www.yelp.ca/biz/joeys-pub-and-eatery-bathurst-2"
       ],
       "path": "inbox/joeys-pub-and-eatery.md"
+    },
+    {
+      "title": "J’s Auto Detailing",
+      "slug": "js-auto-detailing",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "399 St Paul st, Acadie-Bathurst. 1(506)480-0031 Open Monday to Friday from 8:30am-6:30pm.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/js-auto-detailing.md"
     },
     {
       "title": "K.C. Irving Regional Centre",
@@ -612,6 +638,19 @@
       "path": "inbox/robins-donuts-main-st.md"
     },
     {
+      "title": "Speedy Glass",
+      "slug": "speedy-glass",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall. Open Monday to Friday, 8am-5pm. 1(506)548-3331",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/speedy-glass.md"
+    },
+    {
       "title": "Subway Bathurst — 880 St. Anne St",
       "slug": "subway-bathurst-880-st-anne-st",
       "draft": true,
@@ -650,6 +689,19 @@
         "In person"
       ],
       "path": "inbox/theriaults-grocers.md"
+    },
+    {
+      "title": "Thru-Shine Automotive Detailing Services",
+      "slug": "thru-shine-automotive-detailing-services",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In. 1(506)548-8799",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/thru-shine-automotive-detailing-services.md"
     },
     {
       "title": "Walmart Bathurst",
