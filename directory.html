@@ -10,8 +10,7 @@
       --bg2: #174b8e;
       --bg3: #2872c6;
       --card: rgba(255, 255, 255, 0.09);
-      --card-strong: rgba(255, 255, 255, 0.15);
-      --card-soft: rgba(255, 255, 255, 0.06);
+      --card-strong: rgba(255, 255, 255, 0.14);
       --line: rgba(244, 242, 236, 0.17);
       --line-strong: rgba(244, 242, 236, 0.34);
       --text: #f8f5ea;
@@ -19,10 +18,7 @@
       --soft: rgba(248, 245, 234, 0.58);
       --gold: #f2c84b;
       --gold-ink: #322600;
-      --green: #9ee6b8;
-      --blue: #9fd0ff;
-      --shadow: rgba(5, 13, 27, 0.3);
-      --danger: #ffbc9e;
+      --shadow: rgba(5, 13, 27, 0.28);
     }
 
     * { box-sizing: border-box; }
@@ -33,71 +29,80 @@
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.18), transparent 26rem),
-        radial-gradient(circle at 88% 8%, rgba(242, 200, 75, 0.18), transparent 24rem),
+        radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.16), transparent 24rem),
+        radial-gradient(circle at 92% 4%, rgba(242, 200, 75, 0.14), transparent 21rem),
         linear-gradient(145deg, var(--bg3) 0%, var(--bg2) 35%, var(--bg) 100%);
     }
 
     a { color: #fff; text-decoration-thickness: 1px; text-underline-offset: 3px; }
     code { color: #fff; }
 
-    .wrap { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 28px 0 46px; }
+    .wrap { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 22px 0 40px; }
 
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .hero-main,
-    .hero-panel,
+    .hero,
     .control-panel,
-    .feature-card,
-    .directory-card,
-    .index-panel {
+    .directory-card {
       border: 1px solid var(--line);
       background: linear-gradient(180deg, var(--card-strong), var(--card));
-      box-shadow: 0 18px 42px var(--shadow);
+      box-shadow: 0 16px 38px var(--shadow);
       backdrop-filter: blur(4px);
     }
 
-    .hero-main { border-radius: 28px; padding: clamp(22px, 4vw, 38px); }
-    .hero-panel { border-radius: 28px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+    .hero {
+      border-radius: 24px;
+      padding: clamp(18px, 4vw, 32px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+    }
 
     .eyebrow {
       text-transform: uppercase;
-      letter-spacing: 0.19em;
-      font-size: 0.76rem;
+      letter-spacing: 0.18em;
+      font-size: 0.72rem;
       color: var(--gold);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-weight: 800;
     }
 
-    h1 { margin: 0; font-size: clamp(2.1rem, 5vw, 4.2rem); line-height: 0.98; letter-spacing: 0.02em; }
-    .lede { margin: 16px 0 0; max-width: 70ch; color: var(--muted); line-height: 1.62; font-size: 1.02rem; }
+    h1 { margin: 0; font-size: clamp(1.85rem, 4.2vw, 3.45rem); line-height: 1; letter-spacing: 0.01em; }
+    .lede { margin: 12px 0 0; max-width: 72ch; color: var(--muted); line-height: 1.52; font-size: 0.98rem; }
 
-    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .mini-stats { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; min-width: min(360px, 100%); }
+    .mini-stat { border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px; background: rgba(255,255,255,0.06); color: var(--muted); font-size: 0.83rem; white-space: nowrap; }
+    .mini-stat strong { color: var(--gold); }
 
-    button,
-    .buttonish {
+    .control-panel { margin-top: 14px; border-radius: 20px; padding: 14px; display: grid; gap: 10px; }
+    .control-grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) repeat(4, minmax(130px, 0.55fr)); gap: 8px; }
+
+    .search,
+    .select {
+      width: 100%;
+      min-width: 0;
+      padding: 12px 13px;
+      border-radius: 13px;
+      border: 1px solid var(--line-strong);
+      background: rgba(8, 18, 40, 0.3);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+    .search::placeholder { color: rgba(248,245,234,0.55); }
+    .select option { color: #10233d; }
+
+    button {
       appearance: none;
       border: 1px solid var(--line-strong);
       border-radius: 999px;
-      padding: 10px 14px;
+      padding: 10px 13px;
       background: rgba(255, 255, 255, 0.08);
       color: var(--text);
       font: inherit;
       cursor: pointer;
     }
-
     button:hover,
-    button.active,
-    .buttonish.strong {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--gold-ink);
-    }
+    button.active { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
 
     button:focus-visible,
     input:focus-visible,
@@ -107,186 +112,129 @@
       outline-offset: 2px;
     }
 
-    .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .stat { border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(255,255,255,0.06); }
-    .stat-value { display: block; font-size: 1.65rem; font-weight: 900; color: var(--gold); }
-    .stat-label { display: block; margin-top: 3px; color: var(--muted); font-size: 0.82rem; line-height: 1.25; }
+    .filter-note { color: var(--soft); font-size: 0.86rem; line-height: 1.35; }
 
-    .trust-note { border: 1px dashed rgba(242, 200, 75, 0.45); border-radius: 18px; padding: 13px; color: var(--muted); line-height: 1.45; font-size: 0.92rem; }
-    .trust-note strong { color: var(--text); }
-
-    .control-panel { margin-top: 18px; border-radius: 24px; padding: 16px; display: grid; gap: 14px; }
-    .control-row { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(160px, 0.35fr); gap: 10px; }
-
-    .search,
-    .select {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--line-strong);
-      background: rgba(8, 18, 40, 0.3);
-      color: var(--text);
-      font: inherit;
-      outline: none;
-    }
-    .search::placeholder { color: rgba(248,245,234,0.56); }
-    .select option { color: #10233d; }
-
-    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .chip-label { color: var(--soft); font-size: 0.84rem; margin-right: 2px; }
-    .chip { font-size: 0.88rem; padding: 8px 11px; }
-
-    .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 20px 0 10px; flex-wrap: wrap; }
+    .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 18px 0 10px; flex-wrap: wrap; }
     .view-title { display: grid; gap: 3px; }
-    .view-title h2 { margin: 0; font-size: 1.28rem; }
-    .view-title span { color: var(--muted); font-size: 0.92rem; }
-    .view-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
+    .view-title h2 { margin: 0; font-size: 1.12rem; }
+    .view-title span { color: var(--muted); font-size: 0.9rem; }
+    .view-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-    .feature-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
-    .feature-card { border-radius: 22px; padding: 16px; cursor: pointer; text-align: left; min-height: 132px; }
-    .feature-card:hover,
-    .feature-card.active { border-color: rgba(242, 200, 75, 0.82); background: linear-gradient(180deg, rgba(242, 200, 75, 0.18), var(--card)); }
-    .feature-kicker { color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 900; }
-    .feature-title { display: block; margin-top: 10px; font-size: 1.05rem; font-weight: 900; }
-    .feature-copy { margin: 8px 0 0; color: var(--muted); line-height: 1.42; font-size: 0.9rem; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 
-    .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-
-    .directory-card { border-radius: 22px; padding: 15px; min-height: 220px; display: grid; gap: 12px; align-content: start; }
-    .card-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
-    .card-title { margin: 0; font-size: 1.12rem; line-height: 1.18; }
+    .directory-card { border-radius: 18px; padding: 13px; min-height: 188px; display: grid; gap: 9px; align-content: start; }
+    .card-top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+    .card-title { margin: 0; font-size: 1.02rem; line-height: 1.18; }
     .badge {
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
-      padding: 5px 8px;
-      font-size: 0.68rem;
+      padding: 4px 7px;
+      font-size: 0.63rem;
       font-weight: 900;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       background: var(--gold);
       color: var(--gold-ink);
       flex: 0 0 auto;
     }
-    .meta-line { display: flex; gap: 7px; flex-wrap: wrap; }
-    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 6px 8px; color: var(--muted); font-size: 0.78rem; }
-    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.5; font-size: 0.94rem; }
-    .source-line { color: var(--soft); font-size: 0.83rem; }
+    .meta-line { display: flex; gap: 6px; flex-wrap: wrap; }
+    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 5px 7px; color: var(--muted); font-size: 0.75rem; }
+    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.43; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .source-line { color: var(--soft); font-size: 0.8rem; }
 
-    details.more { border-top: 1px solid rgba(248,245,234,0.1); padding-top: 10px; }
-    details.more summary { cursor: pointer; color: var(--gold); font-size: 0.88rem; font-weight: 800; }
-    .sources { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.84rem; line-height: 1.5; overflow-wrap: anywhere; }
+    details.more { border-top: 1px solid rgba(248,245,234,0.1); padding-top: 8px; }
+    details.more summary { cursor: pointer; color: var(--gold); font-size: 0.84rem; font-weight: 800; }
+    .sources { margin: 9px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.82rem; line-height: 1.45; overflow-wrap: anywhere; }
 
-    .empty { border: 1px dashed var(--line); border-radius: 18px; padding: 22px; color: var(--muted); }
-
-    .index-panel { border-radius: 24px; padding: 14px; margin-top: 16px; }
-    .index-panel > summary { cursor: pointer; list-style: none; font-weight: 900; color: var(--gold); display: flex; justify-content: space-between; gap: 12px; }
-    .index-panel > summary::-webkit-details-marker { display: none; }
-    .letter-grid { display: grid; gap: 10px; margin-top: 14px; }
-    .letter-group { border: 1px solid var(--line); border-radius: 18px; padding: 12px; background: rgba(255,255,255,0.04); }
-    .letter-heading { color: var(--gold); font-weight: 900; margin-bottom: 8px; }
-    .letter-list { display: flex; gap: 8px; flex-wrap: wrap; }
-    .letter-list button { font-size: 0.82rem; padding: 7px 10px; }
-
-    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.9rem; line-height: 1.5; }
-    .hidden { display: none !important; }
+    .empty { border: 1px dashed var(--line); border-radius: 18px; padding: 20px; color: var(--muted); }
+    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.88rem; line-height: 1.45; }
 
     @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { grid-template-columns: 1fr; align-items: start; }
+      .mini-stats { justify-content: flex-start; min-width: 0; }
+      .control-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .search { grid-column: 1 / -1; }
       .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 650px) {
-      .wrap { width: min(100vw - 18px, 1180px); padding-top: 16px; }
-      .hero-main, .hero-panel { border-radius: 22px; padding: 18px; }
-      .control-row { grid-template-columns: 1fr; }
-      .feature-strip, .results-grid { grid-template-columns: 1fr; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .wrap { width: min(100vw - 16px, 1120px); padding-top: 12px; }
+      .hero { border-radius: 18px; padding: 16px; }
+      h1 { font-size: clamp(1.55rem, 8vw, 2.25rem); }
+      .lede { font-size: 0.91rem; line-height: 1.42; }
+      .mini-stats { gap: 6px; }
+      .mini-stat { font-size: 0.76rem; padding: 6px 8px; }
+      .control-panel { border-radius: 16px; padding: 10px; }
+      .control-grid { grid-template-columns: 1fr; gap: 7px; }
+      .search, .select { padding: 10px 11px; border-radius: 11px; font-size: 0.92rem; }
+      .filter-note { font-size: 0.79rem; }
+      .viewbar { margin-top: 14px; }
+      .view-title h2 { font-size: 1rem; }
+      .view-title span { font-size: 0.82rem; }
+      .view-actions button { padding: 8px 10px; font-size: 0.85rem; }
+      .results-grid { grid-template-columns: 1fr; gap: 8px; }
+      .directory-card { border-radius: 15px; padding: 11px; min-height: 0; gap: 8px; }
+      .card-title { font-size: 0.98rem; }
+      .summary { font-size: 0.86rem; -webkit-line-clamp: 3; }
+      .meta-pill { font-size: 0.71rem; padding: 4px 6px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="hero-main">
+      <div>
         <div class="eyebrow">Acadie.sol directory</div>
-        <h1>Find what’s d’icitte, then discover what’s nearby.</h1>
-        <p class="lede">A public-first directory mockup for local businesses, places, food, music, services, and community stops. Search still works, but the page now starts from discovery: category, area, intention, and relationship clues.</p>
-        <div class="hero-actions">
-          <a class="buttonish strong" href="#directory-results">Browse cards</a>
-          <a class="buttonish" href="#index">Open A–Z index</a>
-        </div>
+        <h1>Find what’s d’icitte.</h1>
+        <p class="lede">A lighter public preview for local places, food, music, services, and community stops. Use the dropdowns to browse by mood, category, area, or quick filter.</p>
       </div>
-      <aside class="hero-panel" aria-label="Directory status">
-        <div class="stat-grid">
-          <div class="stat"><span class="stat-value" id="entry-stat">…</span><span class="stat-label">entries loaded</span></div>
-          <div class="stat"><span class="stat-value" id="category-stat">…</span><span class="stat-label">categories</span></div>
-          <div class="stat"><span class="stat-value" id="area-stat">…</span><span class="stat-label">areas</span></div>
-          <div class="stat"><span class="stat-value" id="draft-stat">…</span><span class="stat-label">draft previews</span></div>
-        </div>
-        <div class="trust-note"><strong>Preview posture:</strong> draft cards stay visible, but the display treats them as public-facing previews instead of final verified listings.</div>
+      <aside class="mini-stats" aria-label="Directory status">
+        <span class="mini-stat"><strong id="entry-stat">…</strong> entries</span>
+        <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
+        <span class="mini-stat"><strong id="area-stat">…</strong> areas</span>
+        <span class="mini-stat"><strong id="draft-stat">…</strong> previews</span>
       </aside>
     </section>
 
-    <section class="feature-strip" aria-label="Discovery lanes">
-      <button class="feature-card" data-lens="food">
-        <span class="feature-kicker">Hungry</span>
-        <span class="feature-title">Food, cafés & treats</span>
-        <p class="feature-copy">Restaurants, coffee, pizza, breakfast, dessert, and quick stops.</p>
-      </button>
-      <button class="feature-card" data-lens="waterfront">
-        <span class="feature-kicker">Explore</span>
-        <span class="feature-title">Waterfront route</span>
-        <p class="feature-copy">Marina, promenade, beach, seasonal places, and scenic stops.</p>
-      </button>
-      <button class="feature-card" data-lens="family">
-        <span class="feature-kicker">Day plan</span>
-        <span class="feature-title">Family-friendly</span>
-        <p class="feature-copy">Bowling, cinema, parks, library, family dining, and easy errands.</p>
-      </button>
-      <button class="feature-card" data-lens="night">
-        <span class="feature-kicker">Evening</span>
-        <span class="feature-title">Night out</span>
-        <p class="feature-copy">Bars, lounges, local brews, music-adjacent and event-ready places.</p>
-      </button>
-    </section>
-
     <section class="control-panel" aria-label="Directory controls">
-      <div class="control-row">
-        <input id="search" class="search" type="search" placeholder="Search by name, area, category, source, or public note…" autocomplete="off" />
+      <div class="control-grid">
+        <input id="search" class="search" type="search" placeholder="Search by name, area, source, or public note…" autocomplete="off" />
+        <select id="mood-select" class="select" aria-label="Filter by mood">
+          <option value="">Mood / route</option>
+          <option value="food">Hungry — food, cafés & treats</option>
+          <option value="waterfront">Explore — waterfront route</option>
+          <option value="family">Day plan — family-friendly</option>
+          <option value="night">Evening — night out</option>
+        </select>
+        <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
         <select id="area-select" class="select" aria-label="Filter by area"><option value="all">All areas</option></select>
+        <select id="quick-select" class="select" aria-label="Quick filter">
+          <option value="">Quick filter</option>
+          <option value="waterfront">waterfront</option>
+          <option value="pizza">pizza</option>
+          <option value="coffee">coffee</option>
+          <option value="family">family</option>
+          <option value="auto">auto</option>
+          <option value="music">music</option>
+        </select>
       </div>
-      <div class="chip-row" id="category-chips"><span class="chip-label">Categories:</span></div>
-      <div class="chip-row" id="quick-chips">
-        <span class="chip-label">Quick filters:</span>
-        <button class="chip" data-term="waterfront">waterfront</button>
-        <button class="chip" data-term="pizza">pizza</button>
-        <button class="chip" data-term="coffee">coffee</button>
-        <button class="chip" data-term="family">family</button>
-        <button class="chip" data-term="auto">auto</button>
-        <button class="chip" data-term="music">music</button>
-      </div>
+      <div class="filter-note">One display, multiple entry points. No duplicate A–Z section; sorting can still switch the card order.</div>
     </section>
 
     <div class="viewbar" id="directory-results">
       <div class="view-title">
-        <h2>Public browse cards</h2>
+        <h2>Directory browse</h2>
         <span id="result-copy">Loading directory…</span>
       </div>
-      <div class="view-toggle">
-        <button id="clear-filters">Clear filters</button>
+      <div class="view-actions">
+        <button id="clear-filters">Clear</button>
         <button id="sort-alpha" class="active">A–Z</button>
-        <button id="sort-category">By category</button>
+        <button id="sort-category">Category</button>
       </div>
     </div>
 
     <main id="app"></main>
-
-    <details class="index-panel" id="index">
-      <summary><span>A–Z fallback index</span><span>names-first view</span></summary>
-      <div id="az-app"></div>
-    </details>
 
     <div class="footer">Data source: generated from <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
   </div>
@@ -298,6 +246,7 @@
       area: 'all',
       query: '',
       lens: '',
+      quick: '',
       sort: 'alpha'
     };
 
@@ -356,12 +305,14 @@
 
     function filteredItems() {
       const q = normalize(state.query).trim();
+      const quick = normalize(state.quick).trim();
       let items = state.items.filter(item => {
         const hay = itemHaystack(item);
         const categoryOk = state.category === 'all' || normalize(item.category) === state.category;
         const areaOk = state.area === 'all' || normalize(item.area) === state.area;
         const queryOk = !q || hay.includes(q);
-        return categoryOk && areaOk && queryOk && matchesLens(item);
+        const quickOk = !quick || hay.includes(quick);
+        return categoryOk && areaOk && queryOk && quickOk && matchesLens(item);
       });
 
       items.sort((a, b) => {
@@ -385,13 +336,12 @@
     }
 
     function renderControls() {
-      const categories = [...new Set(state.items.map(i => i.category).filter(Boolean).map(normalize))].sort();
+      const categories = [...new Set(state.items.map(i => i.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
       const areas = [...new Set(state.items.map(i => i.area).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
-      const chipHost = document.getElementById('category-chips');
-      chipHost.innerHTML = '<span class="chip-label">Categories:</span>' +
-        '<button class="chip active" data-category="all">all</button>' +
-        categories.map(cat => `<button class="chip" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`).join('');
+      const categorySelect = document.getElementById('category-select');
+      categorySelect.innerHTML = '<option value="all">All categories</option>' +
+        categories.map(cat => `<option value="${escapeHtml(normalize(cat))}">${escapeHtml(cat)}</option>`).join('');
 
       const areaSelect = document.getElementById('area-select');
       areaSelect.innerHTML = '<option value="all">All areas</option>' +
@@ -428,41 +378,12 @@
       const items = filteredItems();
       const filters = [];
       if (state.query) filters.push(`search “${state.query}”`);
-      if (state.category !== 'all') filters.push(state.category);
+      if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
+      if (state.category !== 'all') filters.push(document.getElementById('category-select').selectedOptions[0]?.textContent || state.category);
       if (state.area !== 'all') filters.push(document.getElementById('area-select').selectedOptions[0]?.textContent || state.area);
-      if (state.lens) filters.push(`${state.lens} lane`);
+      if (state.quick) filters.push(state.quick);
       resultCopy.textContent = filters.length ? `${items.length} matches for ${filters.join(' + ')}` : `${items.length} public preview cards`;
       app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty">No matching entries yet. Clear filters or try a broader search.</div>';
-      renderIndex(items);
-    }
-
-    function firstLetter(title) {
-      const ch = normalize(title).trim().charAt(0);
-      return ch && /[a-z0-9]/.test(ch) ? ch.toUpperCase() : '#';
-    }
-
-    function renderIndex(items) {
-      const host = document.getElementById('az-app');
-      const groups = new Map();
-      for (const item of items) {
-        const key = firstLetter(item.title);
-        if (!groups.has(key)) groups.set(key, []);
-        groups.get(key).push(item);
-      }
-      const markup = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([letter, group]) => `
-        <div class="letter-group">
-          <div class="letter-heading">${escapeHtml(letter)}</div>
-          <div class="letter-list">
-            ${group.sort((a, b) => a.title.localeCompare(b.title)).map(item => `<button type="button" data-jump="${escapeHtml(item.title)}">${escapeHtml(item.title)}</button>`).join('')}
-          </div>
-        </div>`).join('');
-      host.innerHTML = `<div class="letter-grid">${markup}</div>`;
-    }
-
-    function setActiveButtons(selector, attr, value) {
-      document.querySelectorAll(selector).forEach(button => {
-        button.classList.toggle('active', button.dataset[attr] === value || (value === 'all' && button.dataset[attr] === 'all'));
-      });
     }
 
     function clearFilters() {
@@ -470,37 +391,21 @@
       state.area = 'all';
       state.query = '';
       state.lens = '';
+      state.quick = '';
       document.getElementById('search').value = '';
+      document.getElementById('mood-select').value = '';
+      document.getElementById('category-select').value = 'all';
       document.getElementById('area-select').value = 'all';
-      setActiveButtons('[data-category]', 'category', 'all');
-      document.querySelectorAll('[data-lens]').forEach(b => b.classList.remove('active'));
+      document.getElementById('quick-select').value = '';
       renderResults();
     }
 
     function bindEvents() {
       document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; renderResults(); });
+      document.getElementById('mood-select').addEventListener('change', event => { state.lens = event.target.value; renderResults(); });
+      document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
       document.getElementById('area-select').addEventListener('change', event => { state.area = event.target.value; renderResults(); });
-      document.getElementById('category-chips').addEventListener('click', event => {
-        const button = event.target.closest('[data-category]');
-        if (!button) return;
-        state.category = button.dataset.category;
-        setActiveButtons('[data-category]', 'category', state.category);
-        renderResults();
-      });
-      document.getElementById('quick-chips').addEventListener('click', event => {
-        const button = event.target.closest('[data-term]');
-        if (!button) return;
-        document.getElementById('search').value = button.dataset.term;
-        state.query = button.dataset.term;
-        renderResults();
-      });
-      document.querySelectorAll('[data-lens]').forEach(button => {
-        button.addEventListener('click', () => {
-          state.lens = state.lens === button.dataset.lens ? '' : button.dataset.lens;
-          document.querySelectorAll('[data-lens]').forEach(b => b.classList.toggle('active', b === button && state.lens));
-          renderResults();
-        });
-      });
+      document.getElementById('quick-select').addEventListener('change', event => { state.quick = event.target.value; renderResults(); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       document.getElementById('sort-alpha').addEventListener('click', () => {
         state.sort = 'alpha';
@@ -513,14 +418,6 @@
         document.getElementById('sort-category').classList.add('active');
         document.getElementById('sort-alpha').classList.remove('active');
         renderResults();
-      });
-      document.getElementById('az-app').addEventListener('click', event => {
-        const button = event.target.closest('[data-jump]');
-        if (!button) return;
-        document.getElementById('search').value = button.dataset.jump;
-        state.query = button.dataset.jump;
-        renderResults();
-        document.getElementById('directory-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
 
