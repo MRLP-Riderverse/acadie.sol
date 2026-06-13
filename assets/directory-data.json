@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 57,
-  "draft_count": 57,
+  "entry_count": 58,
+  "draft_count": 58,
   "published_count": 0,
   "items": [
     {
@@ -668,6 +668,31 @@
         "https://www.mapquest.com/ca/new-brunswick/le-greenhouse-lounge-754714718"
       ],
       "path": "inbox/greenhouse-lounge-place-bathurst-mall.md"
+    },
+    {
+      "title": "House of Lee",
+      "slug": "house-of-lee",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "food",
+      "area": "Bathurst",
+      "description": "Chinese restaurant with lunch and supper buffet options.",
+      "notes": "Open every day, at least 3pm–9pm.",
+      "summary": "Chinese restaurant with lunch and supper buffet options. Open every day, at least 3pm–9pm.",
+      "address": "15 Main St, Bathurst, NB",
+      "hours": "Open every day, at least 3pm–9pm",
+      "phone": "1 (506) 548-3019",
+      "email": "",
+      "public_data": [
+        "Address: 15 Main St, Bathurst, NB",
+        "Hours: Open every day, at least 3pm–9pm",
+        "Phone: 1 (506) 548-3019"
+      ],
+      "related_places": [],
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/house-of-lee.md"
     },
     {
       "title": "Joey's Pub and Eatery",
