@@ -41,6 +41,7 @@
 
     .hero,
     .control-panel,
+    .recent-panel,
     .directory-card,
     .empty {
       border: 1px solid var(--line);
@@ -121,6 +122,40 @@
     .view-title span { color: var(--muted); font-size: 0.88rem; }
     .view-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
+    .recent-panel { margin-top: 14px; border-radius: 20px; overflow: clip; }
+    .recent-panel > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 14px;
+    }
+    .recent-panel > summary::-webkit-details-marker { display: none; }
+    .recent-copy { display: grid; gap: 4px; }
+    .recent-copy strong { font-size: 0.95rem; }
+    .recent-copy span { color: var(--muted); font-size: 0.82rem; line-height: 1.35; }
+    .recent-kicker { color: var(--gold); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .recent-chevron { color: var(--gold); font-size: 1rem; font-weight: 900; }
+    .recent-panel[open] .recent-chevron { transform: rotate(180deg); }
+    .recent-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 0 14px 14px; }
+    .recent-list { list-style: none; margin: 0; padding: 10px 0 0; display: grid; gap: 8px; }
+    .recent-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px 12px;
+      align-items: start;
+      padding: 10px 11px;
+      border: 1px solid rgba(248,245,234,0.1);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+    }
+    .recent-link { color: var(--text); font-weight: 700; text-decoration: none; }
+    .recent-link:hover { color: var(--gold); }
+    .recent-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .recent-date { color: var(--muted); font-size: 0.79rem; white-space: nowrap; }
+
     .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
 
     .directory-card { border-radius: 16px; padding: 0; overflow: clip; }
@@ -183,6 +218,11 @@
       .view-title h2 { font-size: 1rem; }
       .view-title span { font-size: 0.81rem; }
       .view-actions button { padding: 8px 10px; font-size: 0.84rem; }
+      .recent-panel { border-radius: 16px; }
+      .recent-panel > summary { padding: 11px; align-items: start; }
+      .recent-copy strong { font-size: 0.9rem; }
+      .recent-copy span, .recent-date { font-size: 0.76rem; }
+      .recent-item { grid-template-columns: 1fr; gap: 7px; }
       .results-grid { grid-template-columns: 1fr; gap: 7px; }
       .directory-card > summary { padding: 10px; }
       .card-body { padding: 9px 10px 10px; }
@@ -223,6 +263,20 @@
       </div>
       <div class="filter-note">City is normalized for public browsing: Bathurst variants display as <strong>Acadie-Bathurst</strong>.</div>
     </section>
+
+    <details class="recent-panel" id="recent-panel">
+      <summary>
+        <div class="recent-copy">
+          <div class="recent-kicker">Fresh intake</div>
+          <strong>Recently added</strong>
+          <span>Latest 10 entries by source file timestamp.</span>
+        </div>
+        <span class="recent-chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="recent-body">
+        <ol class="recent-list" id="recent-list"></ol>
+      </div>
+    </details>
 
     <div class="viewbar" id="directory-results">
       <div class="view-title">
@@ -279,6 +333,23 @@
 
     function normalize(value) { return String(value || '').toLowerCase(); }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function modifiedTs(item) {
+      const numeric = Number(item?.source_modified_ts || 0);
+      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+      const parsed = Date.parse(item?.source_modified_at || '');
+      return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
+    }
+    function formatTimestamp(value) {
+      const numeric = Number(value || 0);
+      if (!Number.isFinite(numeric) || numeric <= 0) return 'Timestamp unavailable';
+      return new Intl.DateTimeFormat(undefined, {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(new Date(numeric * 1000));
+    }
     function phoneHref(value) {
       const digits = cleanSummary(value).replace(/[^\d+]/g, '');
       return digits ? `tel:${digits}` : '';
@@ -348,6 +419,12 @@
       return items;
     }
 
+    function recentItems(limit = 10) {
+      return [...state.items]
+        .sort((a, b) => modifiedTs(b) - modifiedTs(a) || String(a.title || '').localeCompare(String(b.title || '')))
+        .slice(0, limit);
+    }
+
     function updateStats(data) {
       const items = data.items || [];
       const categories = new Set(items.map(i => i.category).filter(Boolean));
@@ -371,6 +448,28 @@
         cities.map(city => `<option value="${escapeHtml(normalize(city))}">${escapeHtml(city)}</option>`).join('');
     }
 
+    function renderRecent() {
+      const recentList = document.getElementById('recent-list');
+      const items = recentItems(10);
+      recentList.innerHTML = items.length
+        ? items.map(item => {
+            const city = publicCity(item);
+            const stamp = modifiedTs(item);
+            return `<li class="recent-item">
+              <div>
+                <a class="recent-link" href="#entry-${escapeHtml(item.slug)}">${escapeHtml(item.title)}</a>
+                <div class="recent-meta">
+                  ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+                  ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
+                  ${item.draft ? '<span class="meta-pill">preview</span>' : ''}
+                </div>
+              </div>
+              <div class="recent-date">${escapeHtml(formatTimestamp(stamp))}</div>
+            </li>`;
+          }).join('')
+        : '<li class="recent-item"><div>No recent entries yet.</div></li>';
+    }
+
     function renderCard(item) {
       const description = cleanSummary(item.description || item.summary);
       const notes = cleanSummary(item.notes);
@@ -384,7 +483,7 @@
         ['Email', item.email],
       ].filter(([, value]) => cleanSummary(value));
       return `
-        <details class="directory-card">
+        <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
           <summary>
             <div class="card-top">
               <h3 class="card-title">${escapeHtml(item.title)}</h3>
@@ -421,6 +520,15 @@
       showAllButton.classList.add('active');
       resultCopy.textContent = filters.length ? `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}` : `Showing all ${items.length} entries`;
       app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
+      syncHashTarget();
+    }
+
+    function syncHashTarget() {
+      const hash = window.location.hash;
+      if (!hash.startsWith('#entry-')) return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      target.open = true;
     }
 
     function clearFilters() {
@@ -443,12 +551,14 @@
       document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
       document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; renderResults(); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
+      window.addEventListener('hashchange', syncHashTarget);
     }
 
     loadData().then(data => {
       state.items = data.items || [];
       updateStats(data);
       renderControls();
+      renderRecent();
       bindEvents();
       renderResults();
     }).catch(err => {

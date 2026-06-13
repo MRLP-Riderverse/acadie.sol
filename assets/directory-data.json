@@ -31,7 +31,9 @@
         "https://tourismnewbrunswick.ca/listing/13-barrels-brewing",
         "https://www.restaurantji.com/nb/bathurst/13-barrels-brewing-/"
       ],
-      "path": "inbox/13-barrels-brewing.md"
+      "path": "inbox/13-barrels-brewing.md",
+      "source_modified_at": "2026-06-13T16:36:06.306996Z",
+      "source_modified_ts": 1781368566
     },
     {
       "title": "A&W",
@@ -55,7 +57,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/a-and-w.md"
+      "path": "inbox/a-and-w.md",
+      "source_modified_at": "2026-06-13T18:31:44.713890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Acadie-Bathurst Information Center",
@@ -79,7 +83,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/acadie-bathurst-information-center.md"
+      "path": "inbox/acadie-bathurst-information-center.md",
+      "source_modified_at": "2026-06-13T18:31:44.734377Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Apollo Cinema",
@@ -105,7 +111,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/apollo-cinema.md"
+      "path": "inbox/apollo-cinema.md",
+      "source_modified_at": "2026-06-13T17:47:03.894844Z",
+      "source_modified_ts": 1781372823
     },
     {
       "title": "Atlantic Host",
@@ -129,7 +137,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/atlantic-host.md"
+      "path": "inbox/atlantic-host.md",
+      "source_modified_at": "2026-06-13T18:31:44.777890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Bathurst Agricultural Society #3",
@@ -154,7 +164,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/bathurst-agricultural-society-3.md"
+      "path": "inbox/bathurst-agricultural-society-3.md",
+      "source_modified_at": "2026-06-13T20:57:25.929786Z",
+      "source_modified_ts": 1781384245
     },
     {
       "title": "Bathurst Municipal Library",
@@ -178,7 +190,9 @@
         "https://www1.gnb.ca/0003/pages/en/biblio-e.asp?Code=CN",
         "https://www1.gnb.ca/0003/Pages/fr/Biblio-f.asp?CODE=CN"
       ],
-      "path": "inbox/bathurst-municipal-library.md"
+      "path": "inbox/bathurst-municipal-library.md",
+      "source_modified_at": "2026-06-13T17:47:03.895068Z",
+      "source_modified_ts": 1781372823
     },
     {
       "title": "Big D Drive-In",
@@ -201,7 +215,9 @@
       ],
       "related_places": [],
       "sources": [],
-      "path": "inbox/big-d-drive-in.md"
+      "path": "inbox/big-d-drive-in.md",
+      "source_modified_at": "2026-06-13T18:23:25.039830Z",
+      "source_modified_ts": 1781375005
     },
     {
       "title": "Big Deal Market",
@@ -228,7 +244,9 @@
       "sources": [
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Big-Deal-Produce-Market-Ltd/191082.html"
       ],
-      "path": "inbox/big-deal-market.md"
+      "path": "inbox/big-deal-market.md",
+      "source_modified_at": "2026-06-13T17:47:03.895281Z",
+      "source_modified_ts": 1781372823
     },
     {
       "title": "Bootlegger",
@@ -253,7 +271,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/bootlegger.md"
+      "path": "inbox/bootlegger.md",
+      "source_modified_at": "2026-06-13T18:31:44.943890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Bowlorama Bathurst Bowling & Arcade",
@@ -279,7 +299,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/bowlorama.md"
+      "path": "inbox/bowlorama.md",
+      "source_modified_at": "2026-06-13T18:31:44.784890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Burger King Bathurst",
@@ -303,7 +325,9 @@
         "https://locations.burgerking.ca/nb/bathurst/",
         "https://www.openinghours.ca/burger-king-bathurst-nb"
       ],
-      "path": "inbox/burger-king-bathurst.md"
+      "path": "inbox/burger-king-bathurst.md",
+      "source_modified_at": "2026-06-13T17:47:03.895468Z",
+      "source_modified_ts": 1781372823
     },
     {
       "title": "CCNB Bathurst Campus — 725 College St",
@@ -330,7 +354,9 @@
         "https://ccnb.ca/nous-joindre/",
         "https://www.mapquest.com/directions/to/ca/new-brunswick/ccnb-campus-de-bathurst-359124020"
       ],
-      "path": "inbox/ccnb-bathurst-campus-725-college-st.md"
+      "path": "inbox/ccnb-bathurst-campus-725-college-st.md",
+      "source_modified_at": "2026-06-13T18:31:44.869890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "CCNB Bathurst Campus — 75 Youghall Dr",
@@ -357,7 +383,9 @@
         "https://ccnb.ca/nous-joindre/",
         "https://opengovca.com/place/ChIJOy2IuLeTmEwR34vK8QiHodo"
       ],
-      "path": "inbox/ccnb-bathurst-campus-75-youghall-dr.md"
+      "path": "inbox/ccnb-bathurst-campus-75-youghall-dr.md",
+      "source_modified_at": "2026-06-13T18:31:44.776890Z",
+      "source_modified_ts": 1781375504
     },
     {
       "title": "Chicken King & Chinese Palace Restaurant",
@@ -383,7 +411,9 @@
       "sources": [
         "https://www.restaurantji.com/nb/bathurst/chicken-king-and-chinese-palace-restaurant-/"
       ],
-      "path": "inbox/chicken-king-and-chinese-palace.md"
+      "path": "inbox/chicken-king-and-chinese-palace.md",
+      "source_modified_at": "2026-06-13T17:47:03.895633Z",
+      "source_modified_ts": 1781372823
     },
     {
       "title": "Dairy Queen Bathurst",
@@ -408,7 +438,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Dairy-Queen-Grill-Chill/103086515.html",
         "https://www.openinghours.ca/dairy-queen-bathurst-nb"
       ],
-      "path": "inbox/dairy-queen-bathurst.md"
+      "path": "inbox/dairy-queen-bathurst.md",
+      "source_modified_at": "2026-06-13T18:07:54.438444Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Daly Point Nature Reserve",
@@ -431,7 +463,9 @@
       "sources": [
         "https://www.tourismchaleur.ca/en/places/do/daly-point-nature-reserve"
       ],
-      "path": "inbox/daly-point-nature-reserve.md"
+      "path": "inbox/daly-point-nature-reserve.md",
+      "source_modified_at": "2026-06-13T18:07:54.438586Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Dilli Delight",
@@ -457,7 +491,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/dilli-delight.md"
+      "path": "inbox/dilli-delight.md",
+      "source_modified_at": "2026-06-13T18:07:54.438734Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "District Burger",
@@ -481,7 +517,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/district-burger.md"
+      "path": "inbox/district-burger.md",
+      "source_modified_at": "2026-06-13T18:07:54.438889Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Donair Shop",
@@ -508,7 +546,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/donair-shop.md"
+      "path": "inbox/donair-shop.md",
+      "source_modified_at": "2026-06-13T18:07:54.439017Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Eastside Deli",
@@ -531,7 +571,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/eastside-deli.md"
+      "path": "inbox/eastside-deli.md",
+      "source_modified_at": "2026-06-13T18:07:54.439158Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Flameo",
@@ -557,7 +599,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/flameo.md"
+      "path": "inbox/flameo.md",
+      "source_modified_at": "2026-06-13T18:07:54.439268Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Four Rivers Brewing Co.",
@@ -583,7 +627,9 @@
         "https://fourriversbrewing.ca/",
         "https://www.tourismchaleur.ca/en/places/eat/four-rivers-brewing-co"
       ],
-      "path": "inbox/four-rivers-brewing-co.md"
+      "path": "inbox/four-rivers-brewing-co.md",
+      "source_modified_at": "2026-06-13T18:07:54.439334Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Fresco",
@@ -604,7 +650,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/fresco.md"
+      "path": "inbox/fresco.md",
+      "source_modified_at": "2026-06-13T18:07:54.439399Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Frost Bite",
@@ -634,7 +682,9 @@
         "In person",
         "https://www.tourismchaleur.ca/en/places/eat/frostbites-dairy-bar"
       ],
-      "path": "inbox/frost-bite.md"
+      "path": "inbox/frost-bite.md",
+      "source_modified_at": "2026-06-13T18:07:54.439457Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Greenhouse Lounge - Marina",
@@ -663,7 +713,9 @@
         "https://www.facebook.com/marina.de.bathurst/",
         "https://www.bathurstmarina.ca/en/contact"
       ],
-      "path": "inbox/greenhouse-lounge-marina.md"
+      "path": "inbox/greenhouse-lounge-marina.md",
+      "source_modified_at": "2026-06-13T18:07:54.439512Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "Greenhouse Lounge - Place Bathurst Mall",
@@ -692,7 +744,9 @@
         "https://www.eventbrite.ca/e/rainbows-edge-le-greenhouse-lounge-tickets-1962693893269",
         "https://www.mapquest.com/ca/new-brunswick/le-greenhouse-lounge-754714718"
       ],
-      "path": "inbox/greenhouse-lounge-place-bathurst-mall.md"
+      "path": "inbox/greenhouse-lounge-place-bathurst-mall.md",
+      "source_modified_at": "2026-06-13T18:07:54.439570Z",
+      "source_modified_ts": 1781374074
     },
     {
       "title": "House of Lee",
@@ -717,7 +771,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/house-of-lee.md"
+      "path": "inbox/house-of-lee.md",
+      "source_modified_at": "2026-06-13T20:20:16.946930Z",
+      "source_modified_ts": 1781382016
     },
     {
       "title": "Joey's Pub and Eatery",
@@ -739,7 +795,9 @@
         "https://www.facebook.com/Joeyspub/",
         "https://www.yelp.ca/biz/joeys-pub-and-eatery-bathurst-2"
       ],
-      "path": "inbox/joeys-pub-and-eatery.md"
+      "path": "inbox/joeys-pub-and-eatery.md",
+      "source_modified_at": "2026-06-13T16:19:05.659850Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "J’s Auto Detailing",
@@ -760,7 +818,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/js-auto-detailing.md"
+      "path": "inbox/js-auto-detailing.md",
+      "source_modified_at": "2026-06-13T16:19:16.054039Z",
+      "source_modified_ts": 1781367556
     },
     {
       "title": "K.C. Irving Regional Centre",
@@ -784,7 +844,9 @@
         "https://www.bathurst.ca/en/services/k-c-irving-regional-centre/142/kci-family-activity-schedule",
         "https://www.mapquest.com/ca/new-brunswick/kc-irving-regional-centre-359124145"
       ],
-      "path": "inbox/k-c-irving-regional-centre.md"
+      "path": "inbox/k-c-irving-regional-centre.md",
+      "source_modified_at": "2026-06-13T16:19:05.659991Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Kaffeine Express Bathurst",
@@ -809,7 +871,9 @@
         "https://www.kaffeine.ca/",
         "https://www.tourismchaleur.ca/en/places/eat/kaffeine-espresso-bar"
       ],
-      "path": "inbox/kaffeine-express-bathurst.md"
+      "path": "inbox/kaffeine-express-bathurst.md",
+      "source_modified_at": "2026-06-13T16:19:05.660114Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "King’s Barber Shop",
@@ -830,7 +894,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/kings-barber-shop.md"
+      "path": "inbox/kings-barber-shop.md",
+      "source_modified_at": "2026-06-13T16:19:05.660248Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Kryptic",
@@ -856,7 +922,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/kryptic.md"
+      "path": "inbox/kryptic.md",
+      "source_modified_at": "2026-06-13T14:12:02.285289Z",
+      "source_modified_ts": 1781359922
     },
     {
       "title": "La Louga Night Bar - Resto",
@@ -888,7 +956,9 @@
         "https://www.facebook.com/people/La-Louga-Night-Bar-Resto/100091963240775/",
         "https://www.instagram.com/lalouga.nb/"
       ],
-      "path": "inbox/la-louga-night-bar-resto.md"
+      "path": "inbox/la-louga-night-bar-resto.md",
+      "source_modified_at": "2026-06-13T16:19:05.660378Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Liberty Tax Bathurst",
@@ -913,7 +983,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Liberty-Tax-Service/7866956.html",
         "https://canada.chamberofcommerce.com/business-directory/new-brunswick/bathurst/tax-consultant/123159-liberty-tax"
       ],
-      "path": "inbox/liberty-tax-bathurst.md"
+      "path": "inbox/liberty-tax-bathurst.md",
+      "source_modified_at": "2026-06-13T16:19:05.660518Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Librairie Pélagie",
@@ -938,7 +1010,9 @@
         "https://pelagie.leslibraires.ca/",
         "https://www.facebook.com/promenadewaterfront/posts/librairie-p%C3%A9lagie14-douglas-avenue506-547-9777a-delightful-little-bookstore-nest/1725543840871748/"
       ],
-      "path": "inbox/librairie-pelagie.md"
+      "path": "inbox/librairie-pelagie.md",
+      "source_modified_at": "2026-06-13T16:19:05.660611Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "McDonald's Bathurst — 620 St. Peter Ave",
@@ -962,7 +1036,9 @@
       "sources": [
         "https://www.mcdonalds.com/ca/en-ca/location/bathurst/bathurst-nb/620-st-peter-avenue/4466.html"
       ],
-      "path": "inbox/mcdonalds-bathurst-620-st-peter-ave.md"
+      "path": "inbox/mcdonalds-bathurst-620-st-peter-ave.md",
+      "source_modified_at": "2026-06-13T16:19:05.660756Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "McDonald's Bathurst — 900 St. Anne St (Walmart)",
@@ -985,7 +1061,9 @@
       "sources": [
         "https://www.mcdonalds.com/ca/en-ca/location/bathurst/wm-bathurst/wal-mart-900-st-anne-street/40183.html"
       ],
-      "path": "inbox/mcdonalds-bathurst-900-st-anne-st-walmart.md"
+      "path": "inbox/mcdonalds-bathurst-900-st-anne-st-walmart.md",
+      "source_modified_at": "2026-06-13T16:19:05.660838Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "MexiGlu",
@@ -1008,7 +1086,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/mexiglu.md"
+      "path": "inbox/mexiglu.md",
+      "source_modified_at": "2026-06-13T16:19:05.660901Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Monty's Pretzelria",
@@ -1033,7 +1113,9 @@
         "https://www.tourismchaleur.ca/en/places/eat/monty-s-pretzelria",
         "https://www.facebook.com/Montyduncles/"
       ],
-      "path": "inbox/montys-pretzelria.md"
+      "path": "inbox/montys-pretzelria.md",
+      "source_modified_at": "2026-06-13T16:19:05.660960Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "New Brunswick Distillery",
@@ -1065,7 +1147,9 @@
         "https://www.tourismechaleur.ca/en/places/buy/new-brunswick-distillery",
         "https://www.nbdistillery.ca/"
       ],
-      "path": "inbox/new-brunswick-distillery.md"
+      "path": "inbox/new-brunswick-distillery.md",
+      "source_modified_at": "2026-06-13T16:19:05.661018Z",
+      "source_modified_ts": 1781367545
     },
     {
       "title": "Pabineau First Nations Mawi'om",
@@ -1086,7 +1170,9 @@
         "Bathurst"
       ],
       "sources": [],
-      "path": "inbox/pabineau-first-nations-mawiom.md"
+      "path": "inbox/pabineau-first-nations-mawiom.md",
+      "source_modified_at": "2026-06-13T16:29:08.215582Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Papa Joe & Evy's Restaurant",
@@ -1108,7 +1194,9 @@
         "https://papajoeandevys.com/",
         "https://www.facebook.com/papajoeandevysrestaurant/"
       ],
-      "path": "inbox/papa-joe-evys-restaurant.md"
+      "path": "inbox/papa-joe-evys-restaurant.md",
+      "source_modified_at": "2026-06-13T16:29:08.215698Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Petro-Canada",
@@ -1131,7 +1219,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/petro-canada-main-st.md"
+      "path": "inbox/petro-canada-main-st.md",
+      "source_modified_at": "2026-06-13T16:29:08.215817Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pizza Delight Bathurst",
@@ -1154,7 +1244,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Pizza-Delight/4407372.html",
         "https://www.canada.chamberofcommerce.com/business-directory/new-brunswick/bathurst/pizza-restaurant/120769-pizza-delight"
       ],
-      "path": "inbox/pizza-delight-bathurst.md"
+      "path": "inbox/pizza-delight-bathurst.md",
+      "source_modified_at": "2026-06-13T16:29:08.215942Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pizza Delight Campbellton",
@@ -1177,7 +1269,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Campbellton/Pizza-Delight/1238538.html",
         "https://www.canada.chamberofcommerce.com/business-directory/new-brunswick/campbellton/pizza-restaurant/291612-pizza-delight"
       ],
-      "path": "inbox/pizza-delight-campbellton.md"
+      "path": "inbox/pizza-delight-campbellton.md",
+      "source_modified_at": "2026-06-13T16:29:08.216051Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pizza Delight Tracadie",
@@ -1200,7 +1294,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Tracadie-Sheila/Pizza-Delight/8154167.html",
         "https://www.canada.chamberofcommerce.com/business-directory/new-brunswick/tracadie-sheila/pizza-restaurant/917835-pizza-delight"
       ],
-      "path": "inbox/pizza-delight-tracadie.md"
+      "path": "inbox/pizza-delight-tracadie.md",
+      "source_modified_at": "2026-06-13T16:29:08.216154Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pizza Pro Bathurst",
@@ -1225,7 +1321,9 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Pizza-Pro/7621361.html",
         "https://www.restaurantji.com/nb/bathurst/pizza-pro-bathurst-/"
       ],
-      "path": "inbox/pizza-pro-bathurst.md"
+      "path": "inbox/pizza-pro-bathurst.md",
+      "source_modified_at": "2026-06-13T16:29:08.216211Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pizza Shack (Bathurst location)",
@@ -1251,7 +1349,9 @@
       "sources": [
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Pizza-Shack/5832334.html"
       ],
-      "path": "inbox/pizza-shack-bathurst.md"
+      "path": "inbox/pizza-shack-bathurst.md",
+      "source_modified_at": "2026-06-13T16:29:08.216278Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Pur and Simple",
@@ -1276,7 +1376,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/pur-and-simple.md"
+      "path": "inbox/pur-and-simple.md",
+      "source_modified_at": "2026-06-13T16:29:08.216336Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Robin’s Donuts",
@@ -1299,7 +1401,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/robins-donuts-main-st.md"
+      "path": "inbox/robins-donuts-main-st.md",
+      "source_modified_at": "2026-06-13T16:29:08.216419Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Speedy Glass",
@@ -1322,7 +1426,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/speedy-glass.md"
+      "path": "inbox/speedy-glass.md",
+      "source_modified_at": "2026-06-13T16:29:08.216503Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Subway Bathurst — 880 St. Anne St",
@@ -1346,7 +1452,9 @@
       "sources": [
         "https://restaurants.subway.com/canada/nb/bathurst"
       ],
-      "path": "inbox/subway-bathurst-880-st-anne-st.md"
+      "path": "inbox/subway-bathurst-880-st-anne-st.md",
+      "source_modified_at": "2026-06-13T16:29:08.216559Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Subway Belle-Baie (Beresford) — 730 Rue Principale",
@@ -1368,7 +1476,9 @@
         "https://restaurants.subway.com/canada/nb/beresford",
         "https://bellebaie.ca/"
       ],
-      "path": "inbox/subway-belle-baie-beresford-730-rue-principale.md"
+      "path": "inbox/subway-belle-baie-beresford-730-rue-principale.md",
+      "source_modified_at": "2026-06-13T16:29:08.216614Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Theriault’s Grocers",
@@ -1397,7 +1507,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/theriaults-grocers.md"
+      "path": "inbox/theriaults-grocers.md",
+      "source_modified_at": "2026-06-13T16:29:08.216671Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Thru-Shine Automotive Detailing Services",
@@ -1421,7 +1533,9 @@
       "sources": [
         "In person"
       ],
-      "path": "inbox/thru-shine-automotive-detailing-services.md"
+      "path": "inbox/thru-shine-automotive-detailing-services.md",
+      "source_modified_at": "2026-06-13T16:29:08.216727Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Walmart Bathurst",
@@ -1446,7 +1560,9 @@
         "https://www.walmart.ca/en/store/3003",
         "https://www.openinghours.ca/walmart-bathurst-nb"
       ],
-      "path": "inbox/walmart-bathurst.md"
+      "path": "inbox/walmart-bathurst.md",
+      "source_modified_at": "2026-06-13T16:29:08.216780Z",
+      "source_modified_ts": 1781368148
     },
     {
       "title": "Youghall Beach",
@@ -1471,7 +1587,9 @@
         "https://www.bathurst.ca/en/services/recreation-and-tourism/74/youghall-beach",
         "https://www.bathurst.ca/en/services/8/parks-recreation-and-tourism"
       ],
-      "path": "inbox/youghall-beach.md"
+      "path": "inbox/youghall-beach.md",
+      "source_modified_at": "2026-06-13T16:29:08.216836Z",
+      "source_modified_ts": 1781368148
     }
   ]
 }
