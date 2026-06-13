@@ -152,6 +152,8 @@
     .detail-row { display: flex; gap: 8px; align-items: start; }
     .detail-label { min-width: 68px; color: var(--soft); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; flex: 0 0 auto; }
     .detail-value { color: var(--text); font-size: 0.83rem; line-height: 1.35; overflow-wrap: anywhere; }
+    .detail-link { color: #d8f2ff; text-decoration: underline; text-underline-offset: 2px; }
+    .detail-link:hover { color: #ffffff; }
 
     .empty { border-radius: 18px; padding: 18px; color: var(--muted); }
     .empty h2 { margin: 0 0 8px; color: var(--text); font-size: 1.15rem; }
@@ -277,6 +279,31 @@
 
     function normalize(value) { return String(value || '').toLowerCase(); }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function phoneHref(value) {
+      const digits = cleanSummary(value).replace(/[^\d+]/g, '');
+      return digits ? `tel:${digits}` : '';
+    }
+    function mapsHref(value) {
+      const query = encodeURIComponent(cleanSummary(value));
+      return query ? `https://www.google.com/maps/search/?api=1&query=${query}` : '';
+    }
+    function renderDetailValue(label, value) {
+      const text = cleanSummary(value);
+      if (!text) return '';
+      const lower = String(label || '').toLowerCase();
+      if (lower === 'phone') {
+        const href = phoneHref(text);
+        return href ? `<a class="detail-link" href="${href}">${escapeHtml(text)}</a>` : escapeHtml(text);
+      }
+      if (lower === 'address') {
+        const href = mapsHref(text);
+        return href ? `<a class="detail-link" href="${href}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>` : escapeHtml(text);
+      }
+      if (lower === 'email') {
+        return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
+      }
+      return escapeHtml(text);
+    }
     function sourceLabel(src) {
       if (!src) return '';
       if (src === 'In person') return 'In person';
@@ -374,7 +401,7 @@
             ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
             ${related.length ? `<div class="related-line"><strong>Related places:</strong> ${related.map(escapeHtml).join(' · ')}</div>` : ''}
             ${tags.length > 2 ? `<div class="meta-line">${tags.slice(2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
-            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${escapeHtml(value)}</div></div>`).join('')}</div>` : ''}
+            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}</div>` : ''}
           </div>
         </details>`;
     }
