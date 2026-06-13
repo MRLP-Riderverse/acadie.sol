@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 44,
-  "draft_count": 44,
+  "entry_count": 49,
+  "draft_count": 49,
   "published_count": 0,
   "items": [
     {
@@ -57,6 +57,19 @@
         "https://www.tourismchaleur.ca/en/places/do/apollo-cinemas"
       ],
       "path": "inbox/apollo-cinema.md"
+    },
+    {
+      "title": "Atlantic Host",
+      "slug": "atlantic-host",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "On Vanier St on the way to the airport. Hotel. Winter snowmobilers love it. Good restaurant, good breakfast, bar section, pool, and good parking. Next to Tim Hortons.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/atlantic-host.md"
     },
     {
       "title": "Bathurst Municipal Library",
@@ -218,6 +231,19 @@
       "path": "inbox/dilli-delight.md"
     },
     {
+      "title": "District Burger",
+      "slug": "district-burger",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Good restaurant within the Best Western hotel building on Main St, just next to NB Distillery and Bootlegger.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/district-burger.md"
+    },
+    {
       "title": "Donair Shop",
       "slug": "donair-shop",
       "draft": true,
@@ -254,6 +280,19 @@
         "https://www.tourismchaleur.ca/en/places/eat/four-rivers-brewing-co"
       ],
       "path": "inbox/four-rivers-brewing-co.md"
+    },
+    {
+      "title": "Fresco",
+      "slug": "fresco",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "King St in Acadie-Bathurst. Fine dining style. Seafood, pasta, and various options.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/fresco.md"
     },
     {
       "title": "Frost Bite",
@@ -395,6 +434,19 @@
       "path": "inbox/mcdonalds-bathurst-900-st-anne-st-walmart.md"
     },
     {
+      "title": "MexiGlu",
+      "slug": "mexiglu",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Same building as Pizza Pro on St-Peters. Mexican cuisine.",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/mexiglu.md"
+    },
+    {
       "title": "Monty's Pretzelria",
       "slug": "montys-pretzelria",
       "draft": true,
@@ -521,6 +573,19 @@
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Pizza-Shack/5832334.html"
       ],
       "path": "inbox/pizza-shack-bathurst.md"
+    },
+    {
+      "title": "Pur and Simple",
+      "slug": "pur-and-simple",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "On St-Anne St, behind the Walmart parking lot. Nearby to Cast and Crew, Apollo Cinema, and KC Irving. Great breakfast and lunch place with sweet-and-salty style mixes like crepes, fruit, eggs, bacon, hollandaise sauce, a",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/pur-and-simple.md"
     },
     {
       "title": "Robin’s Donuts",
