@@ -41,7 +41,8 @@
 
     .hero,
     .control-panel,
-    .directory-card {
+    .directory-card,
+    .empty {
       border: 1px solid var(--line);
       background: linear-gradient(180deg, var(--card-strong), var(--card));
       box-shadow: 0 16px 38px var(--shadow);
@@ -50,7 +51,7 @@
 
     .hero {
       border-radius: 24px;
-      padding: clamp(18px, 4vw, 32px);
+      padding: clamp(18px, 4vw, 30px);
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 16px;
@@ -66,15 +67,15 @@
       font-weight: 800;
     }
 
-    h1 { margin: 0; font-size: clamp(1.85rem, 4.2vw, 3.45rem); line-height: 1; letter-spacing: 0.01em; }
-    .lede { margin: 12px 0 0; max-width: 72ch; color: var(--muted); line-height: 1.52; font-size: 0.98rem; }
+    h1 { margin: 0; font-size: clamp(1.85rem, 4.2vw, 3.35rem); line-height: 1; letter-spacing: 0.01em; }
+    .lede { margin: 12px 0 0; max-width: 72ch; color: var(--muted); line-height: 1.5; font-size: 0.96rem; }
 
     .mini-stats { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; min-width: min(360px, 100%); }
-    .mini-stat { border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px; background: rgba(255,255,255,0.06); color: var(--muted); font-size: 0.83rem; white-space: nowrap; }
+    .mini-stat { border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px; background: rgba(255,255,255,0.06); color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
     .mini-stat strong { color: var(--gold); }
 
     .control-panel { margin-top: 14px; border-radius: 20px; padding: 14px; display: grid; gap: 10px; }
-    .control-grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) repeat(4, minmax(130px, 0.55fr)); gap: 8px; }
+    .control-grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) repeat(3, minmax(130px, 0.55fr)); gap: 8px; }
 
     .search,
     .select {
@@ -112,25 +113,27 @@
       outline-offset: 2px;
     }
 
-    .filter-note { color: var(--soft); font-size: 0.86rem; line-height: 1.35; }
+    .filter-note { color: var(--soft); font-size: 0.85rem; line-height: 1.35; }
 
-    .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 18px 0 10px; flex-wrap: wrap; }
+    .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 9px; flex-wrap: wrap; }
     .view-title { display: grid; gap: 3px; }
-    .view-title h2 { margin: 0; font-size: 1.12rem; }
-    .view-title span { color: var(--muted); font-size: 0.9rem; }
+    .view-title h2 { margin: 0; font-size: 1.08rem; }
+    .view-title span { color: var(--muted); font-size: 0.88rem; }
     .view-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
-    .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
 
-    .directory-card { border-radius: 18px; padding: 13px; min-height: 188px; display: grid; gap: 9px; align-content: start; }
+    .directory-card { border-radius: 16px; padding: 0; overflow: clip; }
+    .directory-card > summary { list-style: none; cursor: pointer; padding: 12px; }
+    .directory-card > summary::-webkit-details-marker { display: none; }
     .card-top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
-    .card-title { margin: 0; font-size: 1.02rem; line-height: 1.18; }
+    .card-title { margin: 0; font-size: 0.99rem; line-height: 1.18; }
     .badge {
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
       padding: 4px 7px;
-      font-size: 0.63rem;
+      font-size: 0.62rem;
       font-weight: 900;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -138,17 +141,17 @@
       color: var(--gold-ink);
       flex: 0 0 auto;
     }
-    .meta-line { display: flex; gap: 6px; flex-wrap: wrap; }
-    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 5px 7px; color: var(--muted); font-size: 0.75rem; }
-    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.43; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-    .source-line { color: var(--soft); font-size: 0.8rem; }
+    .meta-line { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 4px 7px; color: var(--muted); font-size: 0.72rem; }
+    .card-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 10px 12px 12px; display: grid; gap: 9px; }
+    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.43; font-size: 0.88rem; }
+    .source-line { color: var(--soft); font-size: 0.79rem; }
+    .sources { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.81rem; line-height: 1.45; overflow-wrap: anywhere; }
 
-    details.more { border-top: 1px solid rgba(248,245,234,0.1); padding-top: 8px; }
-    details.more summary { cursor: pointer; color: var(--gold); font-size: 0.84rem; font-weight: 800; }
-    .sources { margin: 9px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.82rem; line-height: 1.45; overflow-wrap: anywhere; }
-
-    .empty { border: 1px dashed var(--line); border-radius: 18px; padding: 20px; color: var(--muted); }
-    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.88rem; line-height: 1.45; }
+    .empty { border-radius: 18px; padding: 18px; color: var(--muted); }
+    .empty h2 { margin: 0 0 8px; color: var(--text); font-size: 1.15rem; }
+    .empty p { margin: 0; line-height: 1.45; }
+    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.87rem; line-height: 1.45; }
 
     @media (max-width: 980px) {
       .hero { grid-template-columns: 1fr; align-items: start; }
@@ -160,24 +163,25 @@
 
     @media (max-width: 650px) {
       .wrap { width: min(100vw - 16px, 1120px); padding-top: 12px; }
-      .hero { border-radius: 18px; padding: 16px; }
-      h1 { font-size: clamp(1.55rem, 8vw, 2.25rem); }
-      .lede { font-size: 0.91rem; line-height: 1.42; }
+      .hero { border-radius: 18px; padding: 15px; }
+      h1 { font-size: clamp(1.55rem, 8vw, 2.18rem); }
+      .lede { font-size: 0.9rem; line-height: 1.4; }
       .mini-stats { gap: 6px; }
-      .mini-stat { font-size: 0.76rem; padding: 6px 8px; }
+      .mini-stat { font-size: 0.74rem; padding: 6px 8px; }
       .control-panel { border-radius: 16px; padding: 10px; }
       .control-grid { grid-template-columns: 1fr; gap: 7px; }
       .search, .select { padding: 10px 11px; border-radius: 11px; font-size: 0.92rem; }
-      .filter-note { font-size: 0.79rem; }
-      .viewbar { margin-top: 14px; }
+      .filter-note { font-size: 0.78rem; }
+      .viewbar { margin-top: 13px; }
       .view-title h2 { font-size: 1rem; }
-      .view-title span { font-size: 0.82rem; }
-      .view-actions button { padding: 8px 10px; font-size: 0.85rem; }
-      .results-grid { grid-template-columns: 1fr; gap: 8px; }
-      .directory-card { border-radius: 15px; padding: 11px; min-height: 0; gap: 8px; }
-      .card-title { font-size: 0.98rem; }
-      .summary { font-size: 0.86rem; -webkit-line-clamp: 3; }
-      .meta-pill { font-size: 0.71rem; padding: 4px 6px; }
+      .view-title span { font-size: 0.81rem; }
+      .view-actions button { padding: 8px 10px; font-size: 0.84rem; }
+      .results-grid { grid-template-columns: 1fr; gap: 7px; }
+      .directory-card > summary { padding: 10px; }
+      .card-body { padding: 9px 10px 10px; }
+      .card-title { font-size: 0.96rem; }
+      .summary { font-size: 0.85rem; }
+      .meta-pill { font-size: 0.69rem; padding: 4px 6px; }
     }
   </style>
 </head>
@@ -186,20 +190,20 @@
     <section class="hero">
       <div>
         <div class="eyebrow">Acadie.sol directory</div>
-        <h1>Find what’s d’icitte.</h1>
-        <p class="lede">A lighter public preview for local places, food, music, services, and community stops. Use the dropdowns to browse by mood, category, area, or quick filter.</p>
+        <h1>So what are you looking for?</h1>
+        <p class="lede">Search directly, or narrow by mood, category, and city. The full list is still available, but it is now opt-in instead of the first thing dumped onto the page.</p>
       </div>
       <aside class="mini-stats" aria-label="Directory status">
         <span class="mini-stat"><strong id="entry-stat">…</strong> entries</span>
         <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
-        <span class="mini-stat"><strong id="area-stat">…</strong> areas</span>
+        <span class="mini-stat"><strong id="city-stat">…</strong> cities</span>
         <span class="mini-stat"><strong id="draft-stat">…</strong> previews</span>
       </aside>
     </section>
 
     <section class="control-panel" aria-label="Directory controls">
       <div class="control-grid">
-        <input id="search" class="search" type="search" placeholder="Search by name, area, source, or public note…" autocomplete="off" />
+        <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" />
         <select id="mood-select" class="select" aria-label="Filter by mood">
           <option value="">Mood / route</option>
           <option value="food">Hungry — food, cafés & treats</option>
@@ -208,26 +212,18 @@
           <option value="night">Evening — night out</option>
         </select>
         <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
-        <select id="area-select" class="select" aria-label="Filter by area"><option value="all">All areas</option></select>
-        <select id="quick-select" class="select" aria-label="Quick filter">
-          <option value="">Quick filter</option>
-          <option value="waterfront">waterfront</option>
-          <option value="pizza">pizza</option>
-          <option value="coffee">coffee</option>
-          <option value="family">family</option>
-          <option value="auto">auto</option>
-          <option value="music">music</option>
-        </select>
+        <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
       </div>
-      <div class="filter-note">One display, multiple entry points. No duplicate A–Z section; sorting can still switch the card order.</div>
+      <div class="filter-note">City is normalized for public browsing: Bathurst variants display as <strong>Acadie-Bathurst</strong>. Source URLs stay inside each card’s expanded details.</div>
     </section>
 
     <div class="viewbar" id="directory-results">
       <div class="view-title">
         <h2>Directory browse</h2>
-        <span id="result-copy">Loading directory…</span>
+        <span id="result-copy">Choose a search or filter to begin.</span>
       </div>
       <div class="view-actions">
+        <button id="show-all">Show all</button>
         <button id="clear-filters">Clear</button>
         <button id="sort-alpha" class="active">A–Z</button>
         <button id="sort-category">Category</button>
@@ -243,11 +239,11 @@
     const state = {
       items: [],
       category: 'all',
-      area: 'all',
+      city: 'all',
       query: '',
       lens: '',
-      quick: '',
-      sort: 'alpha'
+      sort: 'alpha',
+      showAll: false
     };
 
     const lensTerms = {
@@ -285,8 +281,14 @@
       try { return new URL(src).hostname.replace(/^www\./, ''); } catch { return src; }
     }
 
+    function publicCity(item) {
+      const area = String(item.area || '').trim();
+      if (/bathurst/i.test(area)) return 'Acadie-Bathurst';
+      return area || 'Unsorted';
+    }
+
     function itemHaystack(item) {
-      return [item.title, item.category, item.area, item.summary, ...(item.sources || [])].map(normalize).join(' ');
+      return [item.title, item.category, item.area, publicCity(item), item.summary, ...(item.sources || [])].map(normalize).join(' ');
     }
 
     function derivedTags(item) {
@@ -297,6 +299,10 @@
       return [...tags].slice(0, 5);
     }
 
+    function hasActiveIntent() {
+      return state.showAll || state.query.trim() || state.lens || state.category !== 'all' || state.city !== 'all';
+    }
+
     function matchesLens(item) {
       if (!state.lens) return true;
       const hay = itemHaystack(item);
@@ -304,15 +310,14 @@
     }
 
     function filteredItems() {
+      if (!hasActiveIntent()) return [];
       const q = normalize(state.query).trim();
-      const quick = normalize(state.quick).trim();
       let items = state.items.filter(item => {
         const hay = itemHaystack(item);
         const categoryOk = state.category === 'all' || normalize(item.category) === state.category;
-        const areaOk = state.area === 'all' || normalize(item.area) === state.area;
+        const cityOk = state.city === 'all' || normalize(publicCity(item)) === state.city;
         const queryOk = !q || hay.includes(q);
-        const quickOk = !quick || hay.includes(quick);
-        return categoryOk && areaOk && queryOk && quickOk && matchesLens(item);
+        return categoryOk && cityOk && queryOk && matchesLens(item);
       });
 
       items.sort((a, b) => {
@@ -328,84 +333,97 @@
     function updateStats(data) {
       const items = data.items || [];
       const categories = new Set(items.map(i => i.category).filter(Boolean));
-      const areas = new Set(items.map(i => i.area).filter(Boolean));
+      const cities = new Set(items.map(publicCity).filter(Boolean));
       document.getElementById('entry-stat').textContent = items.length;
       document.getElementById('category-stat').textContent = categories.size;
-      document.getElementById('area-stat').textContent = areas.size;
+      document.getElementById('city-stat').textContent = cities.size;
       document.getElementById('draft-stat').textContent = items.filter(i => i.draft).length;
     }
 
     function renderControls() {
       const categories = [...new Set(state.items.map(i => i.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
-      const areas = [...new Set(state.items.map(i => i.area).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+      const cities = [...new Set(state.items.map(publicCity).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
       const categorySelect = document.getElementById('category-select');
       categorySelect.innerHTML = '<option value="all">All categories</option>' +
         categories.map(cat => `<option value="${escapeHtml(normalize(cat))}">${escapeHtml(cat)}</option>`).join('');
 
-      const areaSelect = document.getElementById('area-select');
-      areaSelect.innerHTML = '<option value="all">All areas</option>' +
-        areas.map(area => `<option value="${escapeHtml(normalize(area))}">${escapeHtml(area)}</option>`).join('');
+      const citySelect = document.getElementById('city-select');
+      citySelect.innerHTML = '<option value="all">All cities</option>' +
+        cities.map(city => `<option value="${escapeHtml(normalize(city))}">${escapeHtml(city)}</option>`).join('');
     }
 
     function renderCard(item) {
       const summary = cleanSummary(item.summary);
       const sources = item.sources || [];
       const tags = derivedTags(item);
+      const city = publicCity(item);
       return `
-        <article class="directory-card">
-          <div class="card-top">
-            <h3 class="card-title">${escapeHtml(item.title)}</h3>
-            ${item.draft ? '<span class="badge">preview</span>' : ''}
-          </div>
-          <div class="meta-line">
-            ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
-            ${item.area ? `<span class="meta-pill">${escapeHtml(item.area)}</span>` : ''}
-          </div>
-          ${summary ? `<p class="summary">${escapeHtml(summary)}</p>` : '<p class="summary">Public description coming soon.</p>'}
-          ${tags.length ? `<div class="meta-line">${tags.map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
-          <div class="source-line">${sources.length ? `${sources.length} source${sources.length === 1 ? '' : 's'} · ${escapeHtml(sourceLabel(sources[0]))}` : 'Source cleanup pending'}</div>
-          <details class="more">
-            <summary>Details & sources</summary>
+        <details class="directory-card">
+          <summary>
+            <div class="card-top">
+              <h3 class="card-title">${escapeHtml(item.title)}</h3>
+              ${item.draft ? '<span class="badge">preview</span>' : ''}
+            </div>
+            <div class="meta-line">
+              ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+              ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
+              ${tags.slice(0, 2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
+            </div>
+          </summary>
+          <div class="card-body">
+            ${summary ? `<p class="summary">${escapeHtml(summary)}</p>` : '<p class="summary">Public description coming soon.</p>'}
+            ${tags.length > 2 ? `<div class="meta-line">${tags.slice(2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
+            <div class="source-line">${sources.length ? `${sources.length} source${sources.length === 1 ? '' : 's'} · ${escapeHtml(sourceLabel(sources[0]))}` : 'Source cleanup pending'}</div>
             ${sources.length ? `<ul class="sources">${sources.map(src => `<li>${src.startsWith('http') ? `<a href="${escapeHtml(src)}" target="_blank" rel="noreferrer noopener">${escapeHtml(sourceLabel(src))}</a>` : escapeHtml(src)}</li>`).join('')}</ul>` : '<p class="sources">No public source link in this export yet.</p>'}
-          </details>
-        </article>`;
+          </div>
+        </details>`;
     }
 
     function renderResults() {
       const app = document.getElementById('app');
       const resultCopy = document.getElementById('result-copy');
+      const showAllButton = document.getElementById('show-all');
+
+      if (!hasActiveIntent()) {
+        resultCopy.textContent = 'Choose a search or filter to begin.';
+        showAllButton.classList.remove('active');
+        app.innerHTML = `<section class="empty"><h2>So what are you looking for?</h2><p>Start with search, mood, category, or city. If you want the full raw browse, tap <strong>Show all</strong>.</p></section>`;
+        return;
+      }
+
       const items = filteredItems();
       const filters = [];
+      if (state.showAll) filters.push('all entries');
       if (state.query) filters.push(`search “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
       if (state.category !== 'all') filters.push(document.getElementById('category-select').selectedOptions[0]?.textContent || state.category);
-      if (state.area !== 'all') filters.push(document.getElementById('area-select').selectedOptions[0]?.textContent || state.area);
-      if (state.quick) filters.push(state.quick);
-      resultCopy.textContent = filters.length ? `${items.length} matches for ${filters.join(' + ')}` : `${items.length} public preview cards`;
-      app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty">No matching entries yet. Clear filters or try a broader search.</div>';
+      if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
+
+      showAllButton.classList.toggle('active', state.showAll);
+      resultCopy.textContent = `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}`;
+      app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
     }
 
     function clearFilters() {
       state.category = 'all';
-      state.area = 'all';
+      state.city = 'all';
       state.query = '';
       state.lens = '';
-      state.quick = '';
+      state.showAll = false;
       document.getElementById('search').value = '';
       document.getElementById('mood-select').value = '';
       document.getElementById('category-select').value = 'all';
-      document.getElementById('area-select').value = 'all';
-      document.getElementById('quick-select').value = '';
+      document.getElementById('city-select').value = 'all';
       renderResults();
     }
 
     function bindEvents() {
-      document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; renderResults(); });
-      document.getElementById('mood-select').addEventListener('change', event => { state.lens = event.target.value; renderResults(); });
-      document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
-      document.getElementById('area-select').addEventListener('change', event => { state.area = event.target.value; renderResults(); });
-      document.getElementById('quick-select').addEventListener('change', event => { state.quick = event.target.value; renderResults(); });
+      document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; state.showAll = false; renderResults(); });
+      document.getElementById('mood-select').addEventListener('change', event => { state.lens = event.target.value; state.showAll = false; renderResults(); });
+      document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; state.showAll = false; renderResults(); });
+      document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; state.showAll = false; renderResults(); });
+      document.getElementById('show-all').addEventListener('click', () => { state.showAll = !state.showAll; renderResults(); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       document.getElementById('sort-alpha').addEventListener('click', () => {
         state.sort = 'alpha';
@@ -429,7 +447,7 @@
       renderResults();
     }).catch(err => {
       document.getElementById('entry-stat').textContent = '!';
-      document.getElementById('app').innerHTML = `<div class="empty">${escapeHtml(err.message)}.</div>`;
+      document.getElementById('app').innerHTML = `<div class="empty"><h2>Directory failed to load.</h2><p>${escapeHtml(err.message)}</p></div>`;
       console.error(err);
     });
   </script>
