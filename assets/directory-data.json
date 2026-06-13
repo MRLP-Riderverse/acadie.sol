@@ -43,11 +43,14 @@
       "description": "Classic A&W on St-Peters Ave near Place Bathurst Mall and Home Hardware.",
       "notes": "24/7 drive-thru accessible. Indoor dining is open late, possibly until midnight. Home of the A&W Famous Root Beer.",
       "summary": "Classic A&W on St-Peters Ave near Place Bathurst Mall and Home Hardware. 24/7 drive-thru accessible. Indoor dining is open late, possibly until midnight. Home of the A&W Famous Root Beer.",
-      "address": "",
+      "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
-      "phone": "",
+      "phone": "(506) 546-4095",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 1300 St Peter Ave, Bathurst, NB E2A 3A6",
+        "Phone: (506) 546-4095"
+      ],
       "related_places": [],
       "sources": [
         "In person"
@@ -64,11 +67,14 @@
       "description": "Tourism info stop at La Promenade Waterfront near Frost Bite and Monty's.",
       "notes": "Open during the summer, as far as we’re pretty sure.",
       "summary": "Tourism info stop at La Promenade Waterfront near Frost Bite and Monty's. Open during the summer, as far as we’re pretty sure.",
-      "address": "",
+      "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
       "hours": "",
-      "phone": "",
+      "phone": "506-548-0418",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 86 Douglas Ave, Bathurst, NB E2A 7S6",
+        "Phone: 506-548-0418"
+      ],
       "related_places": [],
       "sources": [
         "In person"
@@ -111,11 +117,14 @@
       "description": "Hotel on Vanier St near the airport.",
       "notes": "Popular with winter snowmobilers. Has a restaurant, breakfast service, bar section, pool, and good parking. Next to Tim Hortons.",
       "summary": "Hotel on Vanier St near the airport. Popular with winter snowmobilers. Has a restaurant, breakfast service, bar section, pool, and good parking. Next to Tim Hortons.",
-      "address": "",
+      "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
       "hours": "",
-      "phone": "",
+      "phone": "1 (800) 898-9292",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 1450 Vanier Blvd, Bathurst, NB E2A 7B7",
+        "Phone: 1 (800) 898-9292"
+      ],
       "related_places": [],
       "sources": [
         "In person"
@@ -206,11 +215,15 @@
       "description": "Bar and patio on Main St near La Louga Night Club and La Promenade Waterfront.",
       "notes": "Services include local draft and brew, food, a well-received popcorn machine, and a beautiful outdoor terrace for nice summer days. It is part of the summer event circuit for Block Party and Hospitality Days. Also close to La Promenade Waterfront.",
       "summary": "Bar and patio on Main St near La Louga Night Club and La Promenade Waterfront. Services include local draft and brew, food, a well-received popcorn machine, and a beautiful outdoor terrace for nice summer days. It is par",
-      "address": "",
+      "address": "100 Main St, Bathurst, NB",
       "hours": "",
-      "phone": "",
+      "phone": "(506) 350-3350",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Public name found as: Au Bootlegger",
+        "Address: 100 Main St, Bathurst, NB",
+        "Phone: (506) 350-3350"
+      ],
       "related_places": [],
       "sources": [
         "In person"
@@ -227,11 +240,14 @@
       "description": "Bowling and arcade venue on St-Peters in front of Big D Drive-In.",
       "notes": "Food and drink services available. Has slushies and fried pickles. Nice.",
       "summary": "Bowling and arcade venue on St-Peters in front of Big D Drive-In. Food and drink services available. Has slushies and fried pickles. Nice.",
-      "address": "",
+      "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
       "hours": "",
-      "phone": "",
+      "phone": "(506) 546-2020",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 2020 St Peter Ave, Bathurst, NB E2A 7J6",
+        "Phone: (506) 546-2020"
+      ],
       "related_places": [
         "Big D Drive-In"
       ],
@@ -274,11 +290,14 @@
       "description": "Main CCNB Bathurst campus at 725 College St.",
       "notes": "CCNB / campus de Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page.",
       "summary": "Main CCNB Bathurst campus at 725 College St. CCNB / campus de Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page.",
-      "address": "",
+      "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
       "hours": "",
-      "phone": "",
+      "phone": "506-547-2145",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
+        "Phone: 506-547-2145"
+      ],
       "related_places": [
         "CCNB Bathurst Campus — 75 Youghall Dr"
       ],
@@ -298,11 +317,14 @@
       "description": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr.",
       "notes": "Often described as the former trades / Youghall campus.",
       "summary": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr. Often described as the former trades / Youghall campus.",
-      "address": "",
+      "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
       "hours": "",
-      "phone": "",
+      "phone": "506-547-2145",
       "email": "",
-      "public_data": [],
+      "public_data": [
+        "Address: 75 Youghall Dr, Bathurst, NB E2A 4X5",
+        "Phone: 506-547-2145"
+      ],
       "related_places": [
         "CCNB Bathurst Campus — 725 College St"
       ],
