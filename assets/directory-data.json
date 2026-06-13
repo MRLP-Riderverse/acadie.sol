@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 58,
-  "draft_count": 58,
+  "entry_count": 59,
+  "draft_count": 59,
   "published_count": 0,
   "items": [
     {
@@ -130,6 +130,33 @@
         "In person"
       ],
       "path": "inbox/atlantic-host.md"
+    },
+    {
+      "title": "Bathurst Agricultural Society #3",
+      "slug": "bathurst-agricultural-society-3",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "service",
+      "area": "Acadie-Bathurst",
+      "description": "Livestock feed and supply store in Bathurst.",
+      "notes": "Check online or call to confirm whether it’s open. At least open Tuesday to Saturday, 9am–12pm.",
+      "summary": "Livestock feed and supply store in Bathurst. Check online or call to confirm whether it’s open. At least open Tuesday to Saturday, 9am–12pm.",
+      "address": "1525 Rough Waters Dr",
+      "hours": "Tuesday to Saturday, 9am–12pm",
+      "phone": "1 (506) 548-8730",
+      "email": "",
+      "public_data": [
+        "Address: 1525 Rough Waters Dr",
+        "Hours: Tuesday to Saturday, 9am–12pm",
+        "Phone: 1 (506) 548-8730"
+      ],
+      "related_places": [
+        "[if applicable]"
+      ],
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/bathurst-agricultural-society-3.md"
     },
     {
       "title": "Bathurst Municipal Library",
