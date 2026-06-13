@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 54,
-  "draft_count": 54,
+  "entry_count": 55,
+  "draft_count": 55,
   "published_count": 0,
   "items": [
     {
@@ -388,6 +388,19 @@
         "In person"
       ],
       "path": "inbox/kings-barber-shop.md"
+    },
+    {
+      "title": "Kryptic",
+      "slug": "kryptic",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Acadie-Bathurst",
+      "summary": "Artist name. Does live shows in EDM style and produces his own style to enjoy. Has personally enjoyed many shows at The Southside Lounge. Also played at Future Forest Festival. Based in Acadie-Bathurst. Also does live st",
+      "sources": [
+        "In person"
+      ],
+      "path": "inbox/kryptic.md"
     },
     {
       "title": "La Louga Night Bar - Resto",
