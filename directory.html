@@ -6,179 +6,313 @@
   <title>ACADIE.SOL Directory</title>
   <style>
     :root {
-      --bg: #10386d;
-      --bg2: #1f4f95;
-      --card: rgba(255,255,255,0.09);
-      --card-strong: rgba(255,255,255,0.14);
-      --line: rgba(244,242,236,0.18);
-      --line-strong: rgba(244,242,236,0.32);
-      --text: #f4f2ec;
-      --muted: rgba(244,242,236,0.78);
-      --draft: #f2c84b;
-      --shadow: rgba(5, 13, 27, 0.28);
+      --bg: #0d2f5e;
+      --bg2: #174b8e;
+      --bg3: #2872c6;
+      --card: rgba(255, 255, 255, 0.09);
+      --card-strong: rgba(255, 255, 255, 0.15);
+      --card-soft: rgba(255, 255, 255, 0.06);
+      --line: rgba(244, 242, 236, 0.17);
+      --line-strong: rgba(244, 242, 236, 0.34);
+      --text: #f8f5ea;
+      --muted: rgba(248, 245, 234, 0.74);
+      --soft: rgba(248, 245, 234, 0.58);
+      --gold: #f2c84b;
+      --gold-ink: #322600;
+      --green: #9ee6b8;
+      --blue: #9fd0ff;
+      --shadow: rgba(5, 13, 27, 0.3);
+      --danger: #ffbc9e;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
-      background: radial-gradient(circle at top, #2d67b8 0%, var(--bg2) 35%, var(--bg) 100%);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.18), transparent 26rem),
+        radial-gradient(circle at 88% 8%, rgba(242, 200, 75, 0.18), transparent 24rem),
+        linear-gradient(145deg, var(--bg3) 0%, var(--bg2) 35%, var(--bg) 100%);
     }
-    .wrap { width: min(1100px, calc(100vw - 32px)); margin: 0 auto; padding: 28px 0 44px; }
-    .topbar { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-    .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.76rem; color: var(--draft); margin-bottom: 8px; }
-    h1 { margin: 0; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.05; letter-spacing: 0.04em; }
-    .lede { margin: 10px 0 0; max-width: 68ch; color: var(--muted); line-height: 1.55; }
-    .pillrow { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-    .pill { border: 1px solid var(--line); background: rgba(255,255,255,0.08); border-radius: 999px; padding: 10px 14px; font-size: 0.92rem; box-shadow: 0 12px 26px var(--shadow); }
-    .controls {
+
+    a { color: #fff; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    code { color: #fff; }
+
+    .wrap { width: min(1180px, calc(100vw - 28px)); margin: 0 auto; padding: 28px 0 46px; }
+
+    .hero {
       display: grid;
-      gap: 10px;
-      margin-top: 22px;
-      padding: 16px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-panel,
+    .control-panel,
+    .feature-card,
+    .directory-card,
+    .index-panel {
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 16px 34px var(--shadow);
-      backdrop-filter: blur(3px);
+      background: linear-gradient(180deg, var(--card-strong), var(--card));
+      box-shadow: 0 18px 42px var(--shadow);
+      backdrop-filter: blur(4px);
     }
-    .controls-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
+
+    .hero-main { border-radius: 28px; padding: clamp(22px, 4vw, 38px); }
+    .hero-panel { border-radius: 28px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.19em;
+      font-size: 0.76rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 800;
     }
-    .search {
-      flex: 1 1 280px;
-      min-width: 0;
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 12px;
+
+    h1 { margin: 0; font-size: clamp(2.1rem, 5vw, 4.2rem); line-height: 0.98; letter-spacing: 0.02em; }
+    .lede { margin: 16px 0 0; max-width: 70ch; color: var(--muted); line-height: 1.62; font-size: 1.02rem; }
+
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+    button,
+    .buttonish {
+      appearance: none;
       border: 1px solid var(--line-strong);
-      background: rgba(8, 18, 40, 0.28);
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button.active,
+    .buttonish.strong {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--gold-ink);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid rgba(242, 200, 75, 0.34);
+      outline-offset: 2px;
+    }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .stat { border: 1px solid var(--line); border-radius: 18px; padding: 14px; background: rgba(255,255,255,0.06); }
+    .stat-value { display: block; font-size: 1.65rem; font-weight: 900; color: var(--gold); }
+    .stat-label { display: block; margin-top: 3px; color: var(--muted); font-size: 0.82rem; line-height: 1.25; }
+
+    .trust-note { border: 1px dashed rgba(242, 200, 75, 0.45); border-radius: 18px; padding: 13px; color: var(--muted); line-height: 1.45; font-size: 0.92rem; }
+    .trust-note strong { color: var(--text); }
+
+    .control-panel { margin-top: 18px; border-radius: 24px; padding: 16px; display: grid; gap: 14px; }
+    .control-row { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(160px, 0.35fr); gap: 10px; }
+
+    .search,
+    .select {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line-strong);
+      background: rgba(8, 18, 40, 0.3);
       color: var(--text);
       font: inherit;
       outline: none;
     }
-    .search::placeholder { color: rgba(244,242,236,0.58); }
-    .search:focus { border-color: var(--draft); box-shadow: 0 0 0 3px rgba(242, 200, 75, 0.14); }
-    .helper { color: var(--muted); font-size: 0.92rem; line-height: 1.4; }
-    .tree { display: grid; gap: 12px; margin-top: 22px; }
-    .bucket {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(180deg, var(--card-strong), var(--card));
-      box-shadow: 0 16px 34px var(--shadow);
-      overflow: clip;
-    }
-    .bucket > summary,
-    .entry > summary {
-      list-style: none;
-      cursor: pointer;
-    }
-    .bucket > summary::-webkit-details-marker,
-    .entry > summary::-webkit-details-marker { display: none; }
-    .bucket > summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--draft);
-      border-bottom: 1px solid transparent;
-    }
-    .bucket[open] > summary { border-bottom-color: var(--line); }
-    .bucket-count { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.08em; }
-    .bucket-body { padding: 10px 10px 14px; display: grid; gap: 8px; }
-    .entry {
-      border: 1px solid rgba(244,242,236,0.14);
-      border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      overflow: clip;
-    }
-    .entry > summary {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: space-between;
-      padding: 12px 14px;
-      outline: none;
-    }
-    .entry > summary:focus-visible,
-    .bucket > summary:focus-visible,
-    .search:focus-visible {
-      box-shadow: 0 0 0 3px rgba(242, 200, 75, 0.16);
-      border-color: var(--draft);
-    }
-    .entry-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      font-weight: 700;
-    }
-    .entry-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .search::placeholder { color: rgba(248,245,234,0.56); }
+    .select option { color: #10233d; }
+
+    .chip-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .chip-label { color: var(--soft); font-size: 0.84rem; margin-right: 2px; }
+    .chip { font-size: 0.88rem; padding: 8px 11px; }
+
+    .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 20px 0 10px; flex-wrap: wrap; }
+    .view-title { display: grid; gap: 3px; }
+    .view-title h2 { margin: 0; font-size: 1.28rem; }
+    .view-title span { color: var(--muted); font-size: 0.92rem; }
+    .view-toggle { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .feature-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .feature-card { border-radius: 22px; padding: 16px; cursor: pointer; text-align: left; min-height: 132px; }
+    .feature-card:hover,
+    .feature-card.active { border-color: rgba(242, 200, 75, 0.82); background: linear-gradient(180deg, rgba(242, 200, 75, 0.18), var(--card)); }
+    .feature-kicker { color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 900; }
+    .feature-title { display: block; margin-top: 10px; font-size: 1.05rem; font-weight: 900; }
+    .feature-copy { margin: 8px 0 0; color: var(--muted); line-height: 1.42; font-size: 0.9rem; }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+    .directory-card { border-radius: 22px; padding: 15px; min-height: 220px; display: grid; gap: 12px; align-content: start; }
+    .card-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+    .card-title { margin: 0; font-size: 1.12rem; line-height: 1.18; }
     .badge {
       display: inline-flex;
       align-items: center;
       border-radius: 999px;
-      padding: 5px 9px;
+      padding: 5px 8px;
       font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 900;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      background: var(--draft);
-      color: #3a2c00;
+      background: var(--gold);
+      color: var(--gold-ink);
       flex: 0 0 auto;
     }
-    .entry-chevron { color: var(--muted); flex: 0 0 auto; }
-    .entry-panel {
-      padding: 0 14px 14px;
-      border-top: 1px solid rgba(244,242,236,0.08);
-    }
-    .meta { color: var(--muted); font-size: 0.9rem; line-height: 1.45; margin: 12px 0 10px; }
-    .summary { line-height: 1.55; color: rgba(244,242,236,0.94); margin: 0 0 12px; }
-    .sources { margin: 0; padding-left: 18px; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
-    .sources a { color: #fff; text-decoration-thickness: 1px; }
-    .footer { margin-top: 18px; color: rgba(244,242,236,0.66); font-size: 0.9rem; line-height: 1.5; }
-    .empty { margin-top: 24px; padding: 20px; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); }
+    .meta-line { display: flex; gap: 7px; flex-wrap: wrap; }
+    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 6px 8px; color: var(--muted); font-size: 0.78rem; }
+    .summary { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.5; font-size: 0.94rem; }
+    .source-line { color: var(--soft); font-size: 0.83rem; }
+
+    details.more { border-top: 1px solid rgba(248,245,234,0.1); padding-top: 10px; }
+    details.more summary { cursor: pointer; color: var(--gold); font-size: 0.88rem; font-weight: 800; }
+    .sources { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 0.84rem; line-height: 1.5; overflow-wrap: anywhere; }
+
+    .empty { border: 1px dashed var(--line); border-radius: 18px; padding: 22px; color: var(--muted); }
+
+    .index-panel { border-radius: 24px; padding: 14px; margin-top: 16px; }
+    .index-panel > summary { cursor: pointer; list-style: none; font-weight: 900; color: var(--gold); display: flex; justify-content: space-between; gap: 12px; }
+    .index-panel > summary::-webkit-details-marker { display: none; }
+    .letter-grid { display: grid; gap: 10px; margin-top: 14px; }
+    .letter-group { border: 1px solid var(--line); border-radius: 18px; padding: 12px; background: rgba(255,255,255,0.04); }
+    .letter-heading { color: var(--gold); font-weight: 900; margin-bottom: 8px; }
+    .letter-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .letter-list button { font-size: 0.82rem; padding: 7px 10px; }
+
+    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.9rem; line-height: 1.5; }
     .hidden { display: none !important; }
-    @media (max-width: 640px) { .wrap { width: min(100vw - 20px, 1100px); padding-top: 18px; } .pillrow { justify-content: flex-start; } .controls { padding: 14px; } .bucket > summary, .entry > summary, .entry-panel { padding-left: 12px; padding-right: 12px; } }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      .wrap { width: min(100vw - 18px, 1180px); padding-top: 16px; }
+      .hero-main, .hero-panel { border-radius: 22px; padding: 18px; }
+      .control-row { grid-template-columns: 1fr; }
+      .feature-strip, .results-grid { grid-template-columns: 1fr; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="topbar">
-      <div>
+    <section class="hero">
+      <div class="hero-main">
         <div class="eyebrow">Acadie.sol directory</div>
-        <h1>Local listings while the backend keeps moving.</h1>
-        <p class="lede">This is a V1 connected mockup: the directory page renders from the inbox drafts, and draft cards are marked so people can browse the site before everything is finalized.</p>
+        <h1>Find what’s d’icitte, then discover what’s nearby.</h1>
+        <p class="lede">A public-first directory mockup for local businesses, places, food, music, services, and community stops. Search still works, but the page now starts from discovery: category, area, intention, and relationship clues.</p>
+        <div class="hero-actions">
+          <a class="buttonish strong" href="#directory-results">Browse cards</a>
+          <a class="buttonish" href="#index">Open A–Z index</a>
+        </div>
       </div>
-      <div class="pillrow">
-        <div class="pill" id="count-pill">Loading entries…</div>
-        <div class="pill">Drafts stay visible</div>
-        <div class="pill">Public-first preview</div>
+      <aside class="hero-panel" aria-label="Directory status">
+        <div class="stat-grid">
+          <div class="stat"><span class="stat-value" id="entry-stat">…</span><span class="stat-label">entries loaded</span></div>
+          <div class="stat"><span class="stat-value" id="category-stat">…</span><span class="stat-label">categories</span></div>
+          <div class="stat"><span class="stat-value" id="area-stat">…</span><span class="stat-label">areas</span></div>
+          <div class="stat"><span class="stat-value" id="draft-stat">…</span><span class="stat-label">draft previews</span></div>
+        </div>
+        <div class="trust-note"><strong>Preview posture:</strong> draft cards stay visible, but the display treats them as public-facing previews instead of final verified listings.</div>
+      </aside>
+    </section>
+
+    <section class="feature-strip" aria-label="Discovery lanes">
+      <button class="feature-card" data-lens="food">
+        <span class="feature-kicker">Hungry</span>
+        <span class="feature-title">Food, cafés & treats</span>
+        <p class="feature-copy">Restaurants, coffee, pizza, breakfast, dessert, and quick stops.</p>
+      </button>
+      <button class="feature-card" data-lens="waterfront">
+        <span class="feature-kicker">Explore</span>
+        <span class="feature-title">Waterfront route</span>
+        <p class="feature-copy">Marina, promenade, beach, seasonal places, and scenic stops.</p>
+      </button>
+      <button class="feature-card" data-lens="family">
+        <span class="feature-kicker">Day plan</span>
+        <span class="feature-title">Family-friendly</span>
+        <p class="feature-copy">Bowling, cinema, parks, library, family dining, and easy errands.</p>
+      </button>
+      <button class="feature-card" data-lens="night">
+        <span class="feature-kicker">Evening</span>
+        <span class="feature-title">Night out</span>
+        <p class="feature-copy">Bars, lounges, local brews, music-adjacent and event-ready places.</p>
+      </button>
+    </section>
+
+    <section class="control-panel" aria-label="Directory controls">
+      <div class="control-row">
+        <input id="search" class="search" type="search" placeholder="Search by name, area, category, source, or public note…" autocomplete="off" />
+        <select id="area-select" class="select" aria-label="Filter by area"><option value="all">All areas</option></select>
+      </div>
+      <div class="chip-row" id="category-chips"><span class="chip-label">Categories:</span></div>
+      <div class="chip-row" id="quick-chips">
+        <span class="chip-label">Quick filters:</span>
+        <button class="chip" data-term="waterfront">waterfront</button>
+        <button class="chip" data-term="pizza">pizza</button>
+        <button class="chip" data-term="coffee">coffee</button>
+        <button class="chip" data-term="family">family</button>
+        <button class="chip" data-term="auto">auto</button>
+        <button class="chip" data-term="music">music</button>
+      </div>
+    </section>
+
+    <div class="viewbar" id="directory-results">
+      <div class="view-title">
+        <h2>Public browse cards</h2>
+        <span id="result-copy">Loading directory…</span>
+      </div>
+      <div class="view-toggle">
+        <button id="clear-filters">Clear filters</button>
+        <button id="sort-alpha" class="active">A–Z</button>
+        <button id="sort-category">By category</button>
       </div>
     </div>
 
-    <div class="controls">
-      <div class="controls-row">
-        <input id="search" class="search" type="search" placeholder="Search a business, area, or keyword…" autocomplete="off" />
-        <div class="pill">Expand a name to see the card</div>
-      </div>
-      <div class="helper">Compact tree view: names first, details on demand. Search narrows the tree without changing the underlying export.</div>
-    </div>
+    <main id="app"></main>
 
-    <div id="app"></div>
-    <div class="footer">Data source: generated from <code>acadie_sol_directory/inbox</code>. The display is just a renderer on top of the same export payload.</div>
+    <details class="index-panel" id="index">
+      <summary><span>A–Z fallback index</span><span>names-first view</span></summary>
+      <div id="az-app"></div>
+    </details>
+
+    <div class="footer">Data source: generated from <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
   </div>
 
   <script>
+    const state = {
+      items: [],
+      category: 'all',
+      area: 'all',
+      query: '',
+      lens: '',
+      sort: 'alpha'
+    };
+
+    const lensTerms = {
+      food: ['food', 'restaurant', 'cafe', 'coffee', 'pizza', 'breakfast', 'brunch', 'donut', 'burger', 'deli', 'ice cream', 'treat', 'grocery'],
+      waterfront: ['waterfront', 'marina', 'beach', 'promenade', 'youghall', 'queen elizabeth', 'cunard', 'seasonal', 'patio'],
+      family: ['family', 'library', 'cinema', 'bowling', 'park', 'beach', 'breakfast', 'walmart', 'arena', 'campus'],
+      night: ['bar', 'lounge', 'brew', 'brewery', 'night', 'pub', 'music', 'event', 'taproom', 'distillery']
+    };
+
+    const tagHints = [
+      'waterfront', 'pizza', 'coffee', 'breakfast', 'brunch', 'family', 'auto', 'music', 'bar', 'lounge', 'brewery', 'taproom',
+      'beach', 'library', 'cinema', 'bowling', 'grocery', 'campus', 'hotel', 'mall', 'drive-thru', 'seasonal', 'event', 'patio'
+    ];
+
     async function loadData() {
       const res = await fetch('assets/directory-data.json', { cache: 'no-store' });
       if (!res.ok) throw new Error(`Failed to load data (${res.status})`);
@@ -186,7 +320,7 @@
     }
 
     function escapeHtml(str) {
-      return String(str)
+      return String(str || '')
         .replaceAll('&', '&amp;')
         .replaceAll('<', '&lt;')
         .replaceAll('>', '&gt;')
@@ -194,103 +328,210 @@
         .replaceAll("'", '&#39;');
     }
 
-    function normalizeText(value) {
-      return String(value || '').toLowerCase();
+    function normalize(value) { return String(value || '').toLowerCase(); }
+    function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function sourceLabel(src) {
+      if (!src) return '';
+      if (src === 'In person') return 'In person';
+      try { return new URL(src).hostname.replace(/^www\./, ''); } catch { return src; }
+    }
+
+    function itemHaystack(item) {
+      return [item.title, item.category, item.area, item.summary, ...(item.sources || [])].map(normalize).join(' ');
+    }
+
+    function derivedTags(item) {
+      const hay = itemHaystack(item);
+      const tags = new Set();
+      if (item.category) tags.add(item.category);
+      for (const tag of tagHints) if (hay.includes(tag)) tags.add(tag);
+      return [...tags].slice(0, 5);
+    }
+
+    function matchesLens(item) {
+      if (!state.lens) return true;
+      const hay = itemHaystack(item);
+      return (lensTerms[state.lens] || []).some(term => hay.includes(term));
+    }
+
+    function filteredItems() {
+      const q = normalize(state.query).trim();
+      let items = state.items.filter(item => {
+        const hay = itemHaystack(item);
+        const categoryOk = state.category === 'all' || normalize(item.category) === state.category;
+        const areaOk = state.area === 'all' || normalize(item.area) === state.area;
+        const queryOk = !q || hay.includes(q);
+        return categoryOk && areaOk && queryOk && matchesLens(item);
+      });
+
+      items.sort((a, b) => {
+        if (state.sort === 'category') {
+          const cat = String(a.category || '').localeCompare(String(b.category || ''));
+          if (cat) return cat;
+        }
+        return String(a.title || '').localeCompare(String(b.title || ''));
+      });
+      return items;
+    }
+
+    function updateStats(data) {
+      const items = data.items || [];
+      const categories = new Set(items.map(i => i.category).filter(Boolean));
+      const areas = new Set(items.map(i => i.area).filter(Boolean));
+      document.getElementById('entry-stat').textContent = items.length;
+      document.getElementById('category-stat').textContent = categories.size;
+      document.getElementById('area-stat').textContent = areas.size;
+      document.getElementById('draft-stat').textContent = items.filter(i => i.draft).length;
+    }
+
+    function renderControls() {
+      const categories = [...new Set(state.items.map(i => i.category).filter(Boolean).map(normalize))].sort();
+      const areas = [...new Set(state.items.map(i => i.area).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+
+      const chipHost = document.getElementById('category-chips');
+      chipHost.innerHTML = '<span class="chip-label">Categories:</span>' +
+        '<button class="chip active" data-category="all">all</button>' +
+        categories.map(cat => `<button class="chip" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`).join('');
+
+      const areaSelect = document.getElementById('area-select');
+      areaSelect.innerHTML = '<option value="all">All areas</option>' +
+        areas.map(area => `<option value="${escapeHtml(normalize(area))}">${escapeHtml(area)}</option>`).join('');
+    }
+
+    function renderCard(item) {
+      const summary = cleanSummary(item.summary);
+      const sources = item.sources || [];
+      const tags = derivedTags(item);
+      return `
+        <article class="directory-card">
+          <div class="card-top">
+            <h3 class="card-title">${escapeHtml(item.title)}</h3>
+            ${item.draft ? '<span class="badge">preview</span>' : ''}
+          </div>
+          <div class="meta-line">
+            ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+            ${item.area ? `<span class="meta-pill">${escapeHtml(item.area)}</span>` : ''}
+          </div>
+          ${summary ? `<p class="summary">${escapeHtml(summary)}</p>` : '<p class="summary">Public description coming soon.</p>'}
+          ${tags.length ? `<div class="meta-line">${tags.map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
+          <div class="source-line">${sources.length ? `${sources.length} source${sources.length === 1 ? '' : 's'} · ${escapeHtml(sourceLabel(sources[0]))}` : 'Source cleanup pending'}</div>
+          <details class="more">
+            <summary>Details & sources</summary>
+            ${sources.length ? `<ul class="sources">${sources.map(src => `<li>${src.startsWith('http') ? `<a href="${escapeHtml(src)}" target="_blank" rel="noreferrer noopener">${escapeHtml(sourceLabel(src))}</a>` : escapeHtml(src)}</li>`).join('')}</ul>` : '<p class="sources">No public source link in this export yet.</p>'}
+          </details>
+        </article>`;
+    }
+
+    function renderResults() {
+      const app = document.getElementById('app');
+      const resultCopy = document.getElementById('result-copy');
+      const items = filteredItems();
+      const filters = [];
+      if (state.query) filters.push(`search “${state.query}”`);
+      if (state.category !== 'all') filters.push(state.category);
+      if (state.area !== 'all') filters.push(document.getElementById('area-select').selectedOptions[0]?.textContent || state.area);
+      if (state.lens) filters.push(`${state.lens} lane`);
+      resultCopy.textContent = filters.length ? `${items.length} matches for ${filters.join(' + ')}` : `${items.length} public preview cards`;
+      app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty">No matching entries yet. Clear filters or try a broader search.</div>';
+      renderIndex(items);
     }
 
     function firstLetter(title) {
-      const ch = normalizeText(title).trim().charAt(0);
+      const ch = normalize(title).trim().charAt(0);
       return ch && /[a-z0-9]/.test(ch) ? ch.toUpperCase() : '#';
     }
 
-    function groupItems(items) {
+    function renderIndex(items) {
+      const host = document.getElementById('az-app');
       const groups = new Map();
       for (const item of items) {
         const key = firstLetter(item.title);
         if (!groups.has(key)) groups.set(key, []);
         groups.get(key).push(item);
       }
-      return [...groups.entries()]
-        .sort((a, b) => a[0].localeCompare(b[0]))
-        .map(([letter, group]) => [letter, group.sort((a, b) => a.title.localeCompare(b.title))]);
-    }
-
-    function renderEntry(item) {
-      const metaBits = [];
-      if (item.category) metaBits.push(`<strong>Category:</strong> ${escapeHtml(item.category)}`);
-      if (item.area) metaBits.push(`<strong>Area:</strong> ${escapeHtml(item.area)}`);
-      const srcMarkup = item.sources && item.sources.length
-        ? `<ul class="sources">${item.sources.map(src => `<li><a href="${escapeHtml(src)}" target="_blank" rel="noreferrer noopener">${escapeHtml(src)}</a></li>`).join('')}</ul>`
-        : '';
-
-      return `
-        <details class="entry" data-title="${escapeHtml(normalizeText(item.title))}" data-area="${escapeHtml(normalizeText(item.area))}" data-category="${escapeHtml(normalizeText(item.category))}" data-summary="${escapeHtml(normalizeText(item.summary))}">
-          <summary>
-            <span class="entry-title">
-              <span class="entry-name">${escapeHtml(item.title)}</span>
-              ${item.draft ? '<span class="badge">DRAFT</span>' : ''}
-            </span>
-            <span class="entry-chevron" aria-hidden="true">⌄</span>
-          </summary>
-          <div class="entry-panel">
-            ${metaBits.length ? `<div class="meta">${metaBits.join('<br>')}</div>` : ''}
-            ${item.summary ? `<p class="summary">${escapeHtml(item.summary)}</p>` : ''}
-            ${srcMarkup}
+      const markup = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([letter, group]) => `
+        <div class="letter-group">
+          <div class="letter-heading">${escapeHtml(letter)}</div>
+          <div class="letter-list">
+            ${group.sort((a, b) => a.title.localeCompare(b.title)).map(item => `<button type="button" data-jump="${escapeHtml(item.title)}">${escapeHtml(item.title)}</button>`).join('')}
           </div>
-        </details>`;
+        </div>`).join('');
+      host.innerHTML = `<div class="letter-grid">${markup}</div>`;
     }
 
-    function render(items) {
-      const app = document.getElementById('app');
-      const countPill = document.getElementById('count-pill');
-      countPill.textContent = `${items.length} entries loaded`;
-
-      if (!items.length) {
-        app.innerHTML = '<div class="empty">No entries found yet.</div>';
-        return;
-      }
-
-      const tree = groupItems(items).map(([letter, group]) => `
-        <details class="bucket" data-letter="${escapeHtml(letter)}">
-          <summary>
-            <span>${escapeHtml(letter)}</span>
-            <span class="bucket-count">${group.length} places</span>
-          </summary>
-          <div class="bucket-body">
-            ${group.map(renderEntry).join('')}
-          </div>
-        </details>
-      `).join('');
-
-      app.innerHTML = `<section class="tree">${tree}</section>`;
+    function setActiveButtons(selector, attr, value) {
+      document.querySelectorAll(selector).forEach(button => {
+        button.classList.toggle('active', button.dataset[attr] === value || (value === 'all' && button.dataset[attr] === 'all'));
+      });
     }
 
-    function applyFilter() {
-      const q = normalizeText(document.getElementById('search').value).trim();
-      const entries = [...document.querySelectorAll('.entry')];
-      const buckets = [...document.querySelectorAll('.bucket')];
+    function clearFilters() {
+      state.category = 'all';
+      state.area = 'all';
+      state.query = '';
+      state.lens = '';
+      document.getElementById('search').value = '';
+      document.getElementById('area-select').value = 'all';
+      setActiveButtons('[data-category]', 'category', 'all');
+      document.querySelectorAll('[data-lens]').forEach(b => b.classList.remove('active'));
+      renderResults();
+    }
 
-      let visibleCount = 0;
-      for (const entry of entries) {
-        const hay = [entry.dataset.title, entry.dataset.area, entry.dataset.category, entry.dataset.summary].join(' ');
-        const show = !q || hay.includes(q);
-        entry.classList.toggle('hidden', !show);
-        if (show) visibleCount += 1;
-      }
-
-      for (const bucket of buckets) {
-        const visibleEntries = bucket.querySelectorAll('.entry:not(.hidden)').length;
-        bucket.classList.toggle('hidden', visibleEntries === 0);
-      }
-
-      document.getElementById('count-pill').textContent = q ? `${visibleCount} matches` : `${entries.length} entries loaded`;
+    function bindEvents() {
+      document.getElementById('search').addEventListener('input', event => { state.query = event.target.value; renderResults(); });
+      document.getElementById('area-select').addEventListener('change', event => { state.area = event.target.value; renderResults(); });
+      document.getElementById('category-chips').addEventListener('click', event => {
+        const button = event.target.closest('[data-category]');
+        if (!button) return;
+        state.category = button.dataset.category;
+        setActiveButtons('[data-category]', 'category', state.category);
+        renderResults();
+      });
+      document.getElementById('quick-chips').addEventListener('click', event => {
+        const button = event.target.closest('[data-term]');
+        if (!button) return;
+        document.getElementById('search').value = button.dataset.term;
+        state.query = button.dataset.term;
+        renderResults();
+      });
+      document.querySelectorAll('[data-lens]').forEach(button => {
+        button.addEventListener('click', () => {
+          state.lens = state.lens === button.dataset.lens ? '' : button.dataset.lens;
+          document.querySelectorAll('[data-lens]').forEach(b => b.classList.toggle('active', b === button && state.lens));
+          renderResults();
+        });
+      });
+      document.getElementById('clear-filters').addEventListener('click', clearFilters);
+      document.getElementById('sort-alpha').addEventListener('click', () => {
+        state.sort = 'alpha';
+        document.getElementById('sort-alpha').classList.add('active');
+        document.getElementById('sort-category').classList.remove('active');
+        renderResults();
+      });
+      document.getElementById('sort-category').addEventListener('click', () => {
+        state.sort = 'category';
+        document.getElementById('sort-category').classList.add('active');
+        document.getElementById('sort-alpha').classList.remove('active');
+        renderResults();
+      });
+      document.getElementById('az-app').addEventListener('click', event => {
+        const button = event.target.closest('[data-jump]');
+        if (!button) return;
+        document.getElementById('search').value = button.dataset.jump;
+        state.query = button.dataset.jump;
+        renderResults();
+        document.getElementById('directory-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
     }
 
     loadData().then(data => {
-      render(data.items || []);
-      document.getElementById('search').addEventListener('input', applyFilter);
+      state.items = data.items || [];
+      updateStats(data);
+      renderControls();
+      bindEvents();
+      renderResults();
     }).catch(err => {
-      document.getElementById('count-pill').textContent = 'Data load failed';
+      document.getElementById('entry-stat').textContent = '!';
       document.getElementById('app').innerHTML = `<div class="empty">${escapeHtml(err.message)}.</div>`;
       console.error(err);
     });
