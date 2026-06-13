@@ -24,10 +24,12 @@
       "slug": "a-and-w",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
-      "summary": "A&W on St-Peters Ave in Acadie-Bathurst, next to Place Bathurst Mall and Home Hardware. 24/7 drive-thru accessible. Indoors is open as late as midnight, I believe. I've been there in person; it's quite nice. Home of the ",
-      "sources": [],
+      "category": "food",
+      "area": "Acadie-Bathurst",
+      "summary": "A&W on St-Peters Ave in Acadie-Bathurst, next to Place Bathurst Mall and Home Hardware. 24/7 drive-thru accessible. Indoor dining is open late, possibly until midnight. Home of the A&W Famous Root Beer.",
+      "sources": [
+        "In person"
+      ],
       "path": "inbox/a-and-w.md"
     },
     {
@@ -35,7 +37,7 @@
       "slug": "acadie-bathurst-information-center",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "tourism",
       "area": "Acadie-Bathurst",
       "summary": "Next to Frost Bite and Monty's at La Promenade Waterfront. Open during the summer, as far as we’re pretty sure.",
       "sources": [
@@ -48,14 +50,10 @@
       "slug": "apollo-cinema",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "entertainment",
       "area": "Acadie-Bathurst",
       "summary": "- Address: 855 St. Anne St, Bathurst, NB E2A 4H7 - Phone: not yet confirmed - Hours: most evenings and some matinee showings - Email: not provided - Movie theatre - Concession snacks available - Cash, debit, and credit a",
-      "sources": [
-        "In person",
-        "https://www.apollocinemas.nb.ca/?lang=1",
-        "https://www.tourismchaleur.ca/en/places/do/apollo-cinemas"
-      ],
+      "sources": [],
       "path": "inbox/apollo-cinema.md"
     },
     {
@@ -63,9 +61,9 @@
       "slug": "atlantic-host",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "hospitality",
       "area": "Acadie-Bathurst",
-      "summary": "On Vanier St on the way to the airport. Hotel. Winter snowmobilers love it. Good restaurant, good breakfast, bar section, pool, and good parking. Next to Tim Hortons.",
+      "summary": "Hotel on Vanier St on the way to the airport. Popular with winter snowmobilers. Has a good restaurant, breakfast service, bar section, pool, and good parking. Next to Tim Hortons.",
       "sources": [
         "In person"
       ],
@@ -76,9 +74,9 @@
       "slug": "bathurst-municipal-library",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
-      "summary": "Bathurst Public Library / Bibliothèque publique de Bathurst at 150 St George St, Bathurst, NB E2A 1B5. Public library serving Bathurst and surrounding parish.",
+      "category": "civic",
+      "area": "Acadie-Bathurst",
+      "summary": "Bathurst Public Library / Bibliothèque publique de Bathurst at 150 St George St, Bathurst, NB E2A 1B5. Public library serving Bathurst and the surrounding parish.",
       "sources": [
         "https://www1.gnb.ca/0003/pages/en/biblio-e.asp?Code=CN",
         "https://www1.gnb.ca/0003/Pages/fr/Biblio-f.asp?CODE=CN"
@@ -86,13 +84,13 @@
       "path": "inbox/bathurst-municipal-library.md"
     },
     {
-      "title": "Big D Drive-in",
+      "title": "Big D Drive-In",
       "slug": "big-d-drive-in",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "food",
       "area": "Acadie-Bathurst",
-      "summary": "- Address: 2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada - Phone: (506) 546-3585 - Hours: Mon-Sun 11:00–19:00 - Email: not found publicly - Unique notes: Home of the Big D Burger. Picnic tables available, main attentio",
+      "summary": "- Address: 2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada - Phone: (506) 546-3585 - Hours: Mon-Sun 11:00–19:00 - Email: not found publicly - Unique notes: Home of the Big D Burger. Picnic tables available. Traditional c",
       "sources": [
         "https://www.restaurantji.com/nb/bathurst/big-d-drive-in/",
         "https://www.tourismchaleur.ca/en/places/eat/big-d-drive-in"
@@ -104,9 +102,9 @@
       "slug": "big-deal-market",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "grocery",
       "area": "Acadie-Bathurst",
-      "summary": "- Name found publicly as: Big Deal Produce Market Ltd - Address: 305 King Av, Bathurst, NB E2A 1P4, Canada - Phone: (506) 548-8369 - Hours: Mon-Fri 09:00–19:00; Sat 10:00–19:00 - Email: not found publicly - Submitted by ",
+      "summary": "- Name found publicly as: Big Deal Produce Market Ltd - Address: 305 King Av, Bathurst, NB E2A 1P4, Canada - Phone: (506) 548-8369 - Hours: Mon-Fri 09:00–19:00; Sat 10:00–19:00 - Email: not found publicly",
       "sources": [
         "https://www.yellowpages.ca/bus/New-Brunswick/Bathurst/Big-Deal-Produce-Market-Ltd/191082.html"
       ],
@@ -117,10 +115,12 @@
       "slug": "bootlegger",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
-      "summary": "Bootlegger, Acadie-Bathurst, on Main St in front of the TD Bank and La Louga Night Club, also next door to other local shops that I'll add later. Services include local draft and brew, food, and the well received popcorn",
-      "sources": [],
+      "category": "bar",
+      "area": "Acadie-Bathurst",
+      "summary": "Bootlegger on Main St in Acadie-Bathurst. It sits in front of the TD Bank and La Louga Night Club, and is also next door to other local shops that can be added later. Services include local draft and brew, food, a well-r",
+      "sources": [
+        "In person"
+      ],
       "path": "inbox/bootlegger.md"
     },
     {
@@ -128,10 +128,12 @@
       "slug": "bowlorama",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "entertainment",
       "area": "Acadie-Bathurst",
-      "summary": "",
-      "sources": [],
+      "summary": "On St-Peters in front of Big D Drive-In. Bowling, arcade, and food & drink services. Has slushies and fried pickles. Nice. ## Related places - Big D Drive-In",
+      "sources": [
+        "In person"
+      ],
       "path": "inbox/bowlorama.md"
     },
     {
@@ -139,8 +141,8 @@
       "slug": "burger-king-bathurst",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
+      "category": "food",
+      "area": "Acadie-Bathurst",
       "summary": "Burger King at 725 St Peter Ave, Bathurst, NB E2A 2Z7. Search results also point to the Burger King Canada location page.",
       "sources": [
         "https://locations.burgerking.ca/nb/bathurst/",
@@ -153,9 +155,9 @@
       "slug": "ccnb-bathurst-campus-725-college-st",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
-      "summary": "CCNB / campus de Bathurst at 725 College St, Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page.",
+      "category": "education",
+      "area": "Acadie-Bathurst",
+      "summary": "CCNB / campus de Bathurst at 725 College St, Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page. ## Related places - CCNB Bathurst Campus — 75 Youghall Dr",
       "sources": [
         "https://ccnb.ca/nous-joindre/",
         "https://www.mapquest.com/directions/to/ca/new-brunswick/ccnb-campus-de-bathurst-359124020"
@@ -167,9 +169,9 @@
       "slug": "ccnb-bathurst-campus-75-youghall-dr",
       "draft": true,
       "badge": "DRAFT",
-      "category": "",
-      "area": "",
-      "summary": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr, Bathurst. Often described as the former trades / Youghall campus.",
+      "category": "education",
+      "area": "Acadie-Bathurst",
+      "summary": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr, Bathurst. Often described as the former trades / Youghall campus. ## Related places - CCNB Bathurst Campus — 725 College St",
       "sources": [
         "https://ccnb.ca/nous-joindre/",
         "https://opengovca.com/place/ChIJOy2IuLeTmEwR34vK8QiHodo"
@@ -181,9 +183,9 @@
       "slug": "chicken-king-and-chinese-palace",
       "draft": true,
       "badge": "DRAFT",
-      "category": "business",
+      "category": "food",
       "area": "Acadie-Bathurst",
-      "summary": "- Address: 1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada - Phone: (855) 245-7827 - Hours: Mon-Sun 11:00–19:00 - Email: not found publicly - Submitted by : Acadie.sol - Keep only public-facing contact data. - If a publ",
+      "summary": "- Address: 1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada - Phone: (855) 245-7827 - Hours: Mon-Sun 11:00–19:00 - Email: not found publicly - Keep only public-facing contact data. - If a public email appears later, add ",
       "sources": [
         "https://www.restaurantji.com/nb/bathurst/chicken-king-and-chinese-palace-restaurant-/"
       ],
