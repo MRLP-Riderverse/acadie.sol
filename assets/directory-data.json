@@ -1,7 +1,7 @@
 {
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 49,
-  "draft_count": 49,
+  "entry_count": 50,
+  "draft_count": 50,
   "published_count": 0,
   "items": [
     {
@@ -473,6 +473,17 @@
         "https://www.nbdistillery.ca/"
       ],
       "path": "inbox/new-brunswick-distillery.md"
+    },
+    {
+      "title": "Pabineau First Nations Mawi'om",
+      "slug": "pabineau-first-nations-mawiom",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "business",
+      "area": "Bathurst",
+      "summary": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst. Open 24/7 except Monday, Tuesday, and Wednesday, when it closes at midnight.",
+      "sources": [],
+      "path": "inbox/pabineau-first-nations-mawiom.md"
     },
     {
       "title": "Papa Joe & Evy's Restaurant",
