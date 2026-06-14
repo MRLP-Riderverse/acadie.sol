@@ -12,13 +12,14 @@
     }
 
     :root {
+      --page-bg: #121212;
       --acadian-blue: #1f4f95;
       --acadian-blue-deep: #16396d;
       --acadian-yellow: #f2c84b;
       --acadian-red: #bf4a4f;
       --soft-white: #f4f2ec;
       --panel-shadow: rgba(8, 18, 40, 0.28);
-      --panel-bg: rgba(10, 24, 54, 0.16);
+      --panel-bg: rgba(18, 63, 122, 0.54);
     }
 
     * {
@@ -32,7 +33,9 @@
       display: grid;
       place-items: center;
       padding: 24px;
-      background: radial-gradient(circle at top, #2d67b8 0%, var(--acadian-blue) 45%, var(--acadian-blue-deep) 100%);
+      background:
+        radial-gradient(circle at top, rgba(45, 103, 184, 0.34) 0%, rgba(31, 79, 149, 0.18) 28%, transparent 52%),
+        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 42%, #0d0d0d 100%);
       color: var(--soft-white);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
