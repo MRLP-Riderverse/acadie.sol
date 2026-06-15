@@ -38,7 +38,49 @@
     a { color: #fff; text-decoration-thickness: 1px; text-underline-offset: 3px; }
     code { color: #fff; }
 
-    .wrap { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 22px 0 40px; }
+    .wrap { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 88px 0 40px; }
+
+    .top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 45;
+      padding: 10px max(14px, calc((100vw - 1120px) / 2));
+      background: linear-gradient(180deg, rgba(13,47,94,0.97), rgba(16,53,102,0.91));
+      border-bottom: 1px solid var(--line-strong);
+      box-shadow: 0 10px 28px rgba(5,13,27,0.32);
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease;
+    }
+    .top-nav.nav-hidden { transform: translateY(-100%); }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .nav-brand { display: grid; gap: 2px; text-decoration: none; color: var(--text); line-height: 1.05; }
+    .nav-brand strong { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-brand span { color: var(--muted); font-size: 0.74rem; }
+    .nav-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+    .nav-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: rgba(255,255,255,0.07);
+      color: var(--text);
+      text-decoration: none;
+      font: inherit;
+      white-space: nowrap;
+    }
+    .nav-action:hover,
+    .nav-action.active { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .top-search {
+      margin-top: 10px;
+      border-radius: 18px;
+      overflow: clip;
+      display: none;
+    }
+    .top-search.search-open { display: block; }
 
     .control-panel,
     .recent-panel,
@@ -94,7 +136,6 @@
     .control-kicker { color: var(--gold); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
     .control-panel[open] .recent-chevron { transform: rotate(180deg); }
     .control-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 14px; display: grid; gap: 10px; }
-    body.search-focus .wrap > :not(.tool-dock) { filter: blur(2px); opacity: 0.68; transition: filter 0.16s ease, opacity 0.16s ease; }
     .control-grid { display: grid; gap: 10px; }
     .search-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .search-action { white-space: nowrap; border-radius: 13px; }
@@ -162,88 +203,31 @@
       justify-items: end;
       gap: 10px;
     }
-    .tool-menu {
-      display: grid;
-      gap: 8px;
-      justify-items: end;
-      opacity: 0;
-      transform: translateY(8px) scale(0.98);
-      pointer-events: none;
-      transition: opacity 0.16s ease, transform 0.16s ease;
-    }
-    .tool-dock.menu-open .tool-menu {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-    .tool-option {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      padding: 10px 13px;
-      background: linear-gradient(180deg, rgba(33,98,177,0.94), rgba(16,53,102,0.94));
-      color: var(--text);
-      text-decoration: none;
-      box-shadow: 0 12px 28px rgba(5,13,27,0.34);
-      font: inherit;
-      white-space: nowrap;
-    }
-    .tool-option:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
     .tool-fab {
       width: 52px;
       height: 52px;
       padding: 0;
       display: grid;
       place-items: center;
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--gold-ink);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(33,98,177,0.95), rgba(16,53,102,0.95));
+      border: 1px solid rgba(255,255,255,0.45);
+      color: var(--text);
       box-shadow: 0 14px 32px rgba(5,13,27,0.42);
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
       touch-action: manipulation;
     }
-    .tool-fab-icon,
-    .tool-fab-icon::before,
-    .tool-fab-icon::after {
+    .tool-fab:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .tool-fab-icon {
       display: block;
-      width: 21px;
-      height: 2px;
-      border-radius: 99px;
-      background: currentColor;
-      transition: transform 0.16s ease, opacity 0.16s ease;
-      content: "";
+      width: 13px;
+      height: 13px;
+      border-left: 3px solid currentColor;
+      border-top: 3px solid currentColor;
+      transform: translateY(4px) rotate(45deg);
     }
-    .tool-fab-icon { position: relative; }
-    .tool-fab-icon::before,
-    .tool-fab-icon::after { position: absolute; left: 0; }
-    .tool-fab-icon::before { top: -7px; }
-    .tool-fab-icon::after { top: 7px; }
-    .tool-dock.menu-open .tool-fab-icon,
-    .tool-dock.search-open .tool-fab-icon { transform: rotate(45deg); }
-    .tool-dock.menu-open .tool-fab-icon::before,
-    .tool-dock.search-open .tool-fab-icon::before { transform: translateY(7px) rotate(90deg); }
-    .tool-dock.menu-open .tool-fab-icon::after,
-    .tool-dock.search-open .tool-fab-icon::after { transform: translateY(-7px); opacity: 0; }
-    .tool-dock .control-panel {
-      position: absolute;
-      right: 0;
-      bottom: calc(100% + 10px);
-      width: min(440px, calc(100vw - 28px));
-      max-height: min(70vh, 560px);
-      margin: 0;
-      overflow: auto;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(33,98,177,0.98), rgba(16,53,102,0.98));
-      box-shadow: 0 18px 44px rgba(5,13,27,0.46);
-      backdrop-filter: blur(6px);
-    }
-    .tool-dock .control-panel[hidden] { display: none; }
-    .tool-dock .control-body { border-top: 0; }
-    .tool-hint { color: var(--soft); font-size: 0.74rem; text-align: right; margin: -2px 2px 0 0; }
 
     .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 9px; flex-wrap: wrap; }
     .view-title { display: grid; gap: 3px; }
@@ -357,7 +341,12 @@
     }
 
     @media (max-width: 650px) {
-      .wrap { width: min(100vw - 16px, 1120px); padding-top: 12px; }
+      .wrap { width: min(100vw - 16px, 1120px); padding-top: 96px; }
+      .top-nav { padding: 8px; }
+      .nav-row { align-items: start; }
+      .nav-brand span { display: none; }
+      .nav-actions { gap: 6px; }
+      .nav-action { padding: 7px 9px; font-size: 0.84rem; }
       .hero { padding: 4px 0 13px; }
       h1 { font-size: clamp(1.55rem, 8vw, 2.18rem); }
       .lede { font-size: 0.9rem; line-height: 1.4; }
@@ -387,6 +376,51 @@
   </style>
 </head>
 <body>
+  <header class="top-nav" id="top-nav">
+    <div class="nav-row">
+      <a class="nav-brand" href="directory.html" aria-label="Acadie.sol directory top">
+        <strong>Acadie.sol</strong>
+        <span>Community directory</span>
+      </a>
+      <nav class="nav-actions" aria-label="Directory navigation">
+        <button class="nav-action" id="nav-search" type="button" aria-expanded="false" aria-controls="search-panel">🔎 Search</button>
+        <a class="nav-action" href="recents.html">Fresh drafts</a>
+        <a class="nav-action" href="index.html">Home</a>
+      </nav>
+    </div>
+    <div class="control-panel top-search" id="search-panel">
+      <div class="control-body">
+        <div class="control-grid">
+          <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
+          <div class="search-actions">
+            <button id="open-filters" class="search-action" type="button">Filter</button>
+            <button id="show-results" class="search-action" type="button">Search</button>
+            <button id="quick-clear" class="search-action" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="filter-popover" id="filter-popover" hidden>
+          <div class="filter-title">
+            <span>Filter options</span>
+            <button id="close-filters" type="button" aria-label="Close filters">×</button>
+          </div>
+          <select id="mood-select" class="select" aria-label="Filter by mood">
+            <option value="">Mood / route</option>
+            <option value="food">Hungry — food, cafés & treats</option>
+            <option value="waterfront">Explore — waterfront route</option>
+            <option value="family">Day plan — family-friendly</option>
+            <option value="night">Evening — night out</option>
+          </select>
+          <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
+          <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
+          <div class="filter-actions">
+            <button id="apply-filters" type="button">Done</button>
+            <button id="reset-filters" type="button">Reset</button>
+          </div>
+        </div>
+        <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/city, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
+      </div>
+    </div>
+  </header>
   <div class="wrap">
     <section class="hero">
       <div>
@@ -402,45 +436,8 @@
       </aside>
     </section>
 
-    <div class="tool-dock" id="tool-dock" aria-label="Directory quick tools">
-      <div class="control-panel" id="search-panel" hidden>
-        <div class="control-body">
-          <div class="control-grid">
-            <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
-            <div class="search-actions">
-              <button id="open-filters" class="search-action" type="button">Filter</button>
-              <button id="show-results" class="search-action" type="button">Search</button>
-              <button id="quick-clear" class="search-action" type="button">Clear</button>
-            </div>
-          </div>
-          <div class="filter-popover" id="filter-popover" hidden>
-            <div class="filter-title">
-              <span>Filter options</span>
-              <button id="close-filters" type="button" aria-label="Close filters">×</button>
-            </div>
-            <select id="mood-select" class="select" aria-label="Filter by mood">
-              <option value="">Mood / route</option>
-              <option value="food">Hungry — food, cafés & treats</option>
-              <option value="waterfront">Explore — waterfront route</option>
-              <option value="family">Day plan — family-friendly</option>
-              <option value="night">Evening — night out</option>
-            </select>
-            <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
-            <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
-            <div class="filter-actions">
-              <button id="apply-filters" type="button">Done</button>
-              <button id="reset-filters" type="button">Reset</button>
-            </div>
-          </div>
-          <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/city, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
-        </div>
-      </div>
-      <nav class="tool-menu" id="tool-menu" aria-label="Quick menu">
-        <button class="tool-option" id="menu-search" type="button">🔎 Search</button>
-        <a class="tool-option" href="recents.html">Fresh drafts</a>
-        <a class="tool-option" href="index.html">Home</a>
-      </nav>
-      <button class="tool-fab" id="tool-fab" type="button" aria-label="Open directory menu" aria-expanded="false" aria-controls="tool-menu search-panel">
+    <div class="tool-dock" aria-label="Return to top">
+      <button class="tool-fab" id="to-top" type="button" aria-label="Return to top of page">
         <span class="tool-fab-icon" aria-hidden="true"></span>
       </button>
     </div>
@@ -786,38 +783,43 @@
       if (popover) popover.hidden = true;
     }
 
-    function setToolState(mode = '') {
-      const dock = document.getElementById('tool-dock');
-      const fab = document.getElementById('tool-fab');
+    function openSearchTool() {
+      const nav = document.getElementById('top-nav');
       const searchPanel = document.getElementById('search-panel');
-      if (!dock || !fab || !searchPanel) return;
-      const menuOpen = mode === 'menu';
-      const searchOpen = mode === 'search';
-      dock.classList.toggle('menu-open', menuOpen);
-      dock.classList.toggle('search-open', searchOpen);
-      searchPanel.hidden = !searchOpen;
-      document.body.classList.toggle('search-focus', searchOpen);
+      const searchButton = document.getElementById('nav-search');
+      nav?.classList.remove('nav-hidden');
+      searchPanel?.classList.add('search-open');
+      searchButton?.classList.add('active');
+      searchButton?.setAttribute('aria-expanded', 'true');
+      setTimeout(() => document.getElementById('search')?.focus(), 30);
+    }
+
+    function closeSearchTool() {
+      const searchPanel = document.getElementById('search-panel');
+      const searchButton = document.getElementById('nav-search');
+      searchPanel?.classList.remove('search-open');
+      searchButton?.classList.remove('active');
+      searchButton?.setAttribute('aria-expanded', 'false');
       closeFilterPopover();
-      fab.setAttribute('aria-expanded', String(menuOpen || searchOpen));
-      fab.setAttribute('aria-label', menuOpen || searchOpen ? 'Close directory menu' : 'Open directory menu');
-      if (searchOpen) setTimeout(() => document.getElementById('search')?.focus(), 30);
     }
 
-    function currentToolState() {
-      const dock = document.getElementById('tool-dock');
-      if (!dock) return '';
-      if (dock.classList.contains('menu-open')) return 'menu';
-      if (dock.classList.contains('search-open')) return 'search';
-      return '';
+    function toggleSearchTool() {
+      document.getElementById('search-panel')?.classList.contains('search-open') ? closeSearchTool() : openSearchTool();
     }
 
-    function openSearchTool() { setToolState('search'); }
-    function openMenuTool() { setToolState('menu'); }
-    function closeToolPanels() { setToolState(''); }
+    function searchIsOpen() {
+      return Boolean(document.getElementById('search-panel')?.classList.contains('search-open'));
+    }
+
+    function showHeader() { document.getElementById('top-nav')?.classList.remove('nav-hidden'); }
+    function hideHeader() {
+      if (searchIsOpen()) return;
+      document.getElementById('top-nav')?.classList.add('nav-hidden');
+    }
 
     function showResults() {
       if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
-      closeToolPanels();
+      closeSearchTool();
       renderResults();
       document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -857,18 +859,12 @@
       document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
       document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
       document.getElementById('show-results').addEventListener('click', showResults);
-      const toolFab = document.getElementById('tool-fab');
-      const menuSearch = document.getElementById('menu-search');
-      toolFab.addEventListener('click', () => {
-        currentToolState() ? closeToolPanels() : openMenuTool();
+      const navSearch = document.getElementById('nav-search');
+      navSearch.addEventListener('click', toggleSearchTool);
+      document.getElementById('to-top').addEventListener('click', () => {
+        showHeader();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-      toolFab.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          currentToolState() ? closeToolPanels() : openMenuTool();
-        }
-      });
-      menuSearch.addEventListener('click', openSearchTool);
       document.getElementById('open-filters').addEventListener('click', openFilterPopover);
       document.getElementById('close-filters').addEventListener('click', closeFilterPopover);
       document.getElementById('apply-filters').addEventListener('click', () => {
@@ -897,14 +893,13 @@
         clearFilters();
         openSearchTool();
       });
-      document.addEventListener('click', event => {
-        const dock = document.getElementById('tool-dock');
-        if (!dock?.contains(event.target)) closeToolPanels();
-      });
       let lastScrollY = window.scrollY;
       window.addEventListener('scroll', () => {
-        if (currentToolState() === 'search' && Math.abs(window.scrollY - lastScrollY) > 18) closeToolPanels();
-        lastScrollY = window.scrollY;
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY;
+        if (currentY < 24 || delta < -6) showHeader();
+        else if (delta > 10) hideHeader();
+        lastScrollY = currentY;
       }, { passive: true });
       document.querySelectorAll('.mini-stat[data-target]').forEach(button => {
         button.addEventListener('click', () => focusSection(button.dataset.target));
