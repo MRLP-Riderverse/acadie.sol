@@ -158,6 +158,10 @@
     .recent-date { color: var(--muted); font-size: 0.79rem; white-space: nowrap; }
 
     .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+    .result-section { display: grid; gap: 9px; margin-bottom: 18px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 4px; }
+    .section-heading h3 { margin: 0; font-size: 0.96rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; }
+    .section-heading span { color: var(--soft); font-size: 0.82rem; }
 
     .directory-card { border-radius: 16px; padding: 0; overflow: clip; }
     .directory-card > summary { list-style: none; cursor: pointer; padding: 12px; }
@@ -182,9 +186,8 @@
     .card-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 10px 12px 12px; display: grid; gap: 9px; }
     .description { margin: 0; color: rgba(248,245,234,0.94); line-height: 1.45; font-size: 0.9rem; font-weight: 600; }
     .notes { margin: 0; color: rgba(248,245,234,0.84); line-height: 1.45; font-size: 0.86rem; }
+    .note-list { margin: 0; padding-left: 1.1rem; color: rgba(248,245,234,0.84); line-height: 1.45; font-size: 0.86rem; display: grid; gap: 4px; }
     .detail-grid { display: grid; gap: 6px; padding: 9px 10px; border: 1px solid rgba(248,245,234,0.08); border-radius: 12px; background: rgba(255,255,255,0.03); }
-    .related-line { color: rgba(248,245,234,0.72); font-size: 0.78rem; }
-    .related-line strong { color: var(--soft); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.72rem; }
     .detail-row { display: flex; gap: 8px; align-items: start; }
     .detail-label { min-width: 68px; color: var(--soft); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; flex: 0 0 auto; }
     .detail-value { color: var(--text); font-size: 0.83rem; line-height: 1.35; overflow-wrap: anywhere; }
@@ -406,12 +409,22 @@
       ].map(normalize).join(' ');
     }
 
+    function displayTags(item) {
+      const seen = new Set();
+      const blocked = new Set([normalize(item.category), normalize(publicCity(item)), normalize(item.area)]);
+      return (Array.isArray(item.tags) ? item.tags : [])
+        .map(cleanSummary)
+        .filter(Boolean)
+        .filter(tag => {
+          const key = normalize(tag);
+          if (seen.has(key) || blocked.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+    }
+
     function derivedTags(item) {
-      const tags = new Set(Array.isArray(item.tags) ? item.tags.filter(Boolean) : []);
-      const hay = itemHaystack(item);
-      if (item.category) tags.add(item.category);
-      for (const tag of tagHints) if (hay.includes(tag)) tags.add(tag);
-      return [...tags].slice(0, 5);
+      return displayTags(item);
     }
 
     function matchesLens(item) {
@@ -430,7 +443,10 @@
         return categoryOk && cityOk && queryOk && matchesLens(item);
       });
 
-      items.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')));
+      items.sort((a, b) => {
+        const statusRank = Number(Boolean(a.draft)) - Number(Boolean(b.draft));
+        return statusRank || String(a.title || '').localeCompare(String(b.title || ''));
+      });
       return items;
     }
 
@@ -485,10 +501,15 @@
         : '<li class="recent-item"><div>No recent entries yet.</div></li>';
     }
 
+    function renderNoteBlock(item, notes) {
+      const points = Array.isArray(item.note_points) ? item.note_points.map(cleanSummary).filter(Boolean) : [];
+      if (points.length) return `<ul class="note-list">${points.map(point => `<li>${escapeHtml(point)}</li>`).join('')}</ul>`;
+      return notes ? `<p class="notes">${escapeHtml(notes)}</p>` : '';
+    }
+
     function renderCard(item) {
       const description = cleanSummary(item.description || item.summary);
       const notes = cleanSummary(item.notes);
-      const related = Array.isArray(item.related_places) ? item.related_places.filter(Boolean) : [];
       const tags = derivedTags(item);
       const city = publicCity(item);
       const detailRows = [
@@ -507,18 +528,23 @@
             </div>
             <div class="meta-line">
               ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
-              ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
-              ${tags.slice(0, 2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
+              ${tags.slice(0, 3).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
             </div>
           </summary>
           <div class="card-body">
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
-            ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
-            ${related.length ? `<div class="related-line"><strong>Related places:</strong> ${related.map(escapeHtml).join(' · ')}</div>` : ''}
-            ${tags.length > 2 ? `<div class="meta-line">${tags.slice(2).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}</div>` : ''}
+            ${renderNoteBlock(item, notes)}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}</div>` : ''}
           </div>
         </details>`;
+    }
+
+    function renderSection(title, subtitle, items) {
+      if (!items.length) return '';
+      return `<section class="result-section">
+        <div class="section-heading"><h3>${escapeHtml(title)}</h3><span>${escapeHtml(subtitle)}</span></div>
+        <div class="results-grid">${items.map(renderCard).join('')}</div>
+      </section>`;
     }
 
     function renderResults() {
@@ -535,7 +561,13 @@
 
       showAllButton.classList.add('active');
       resultCopy.textContent = filters.length ? `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}` : `Showing all ${items.length} entries`;
-      app.innerHTML = items.length ? `<section class="results-grid">${items.map(renderCard).join('')}</section>` : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
+      const published = items.filter(item => !item.draft);
+      const drafts = items.filter(item => item.draft);
+      const sections = [
+        renderSection('Official entries', `${published.length} published`, published),
+        renderSection('Draft previews', `${drafts.length} still being shaped`, drafts),
+      ].filter(Boolean).join('');
+      app.innerHTML = items.length ? sections : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
       syncHashTarget();
     }
 

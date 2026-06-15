@@ -21,9 +21,15 @@
       "category": "food",
       "area": "Acadie-Bathurst",
       "public_area": "Acadie-Bathurst",
-      "description": "Classic burger drive-in on St Peter Ave in Bathurst.",
-      "notes": "Home of the Big D Burger. Long-running Bathurst drive-in with a 1950s and 1960s diner feel, picnic tables, and traditional car-park-and-dine service. Located near Bowlarama Bathurst Bowling & Arcade.",
-      "summary": "Classic burger drive-in on St Peter Ave in Bathurst. Home of the Big D Burger. Long-running Bathurst drive-in with a 1950s and 1960s diner feel, picnic tables, and traditional car-park-and-dine service. Located near Bowl",
+      "description": "Home of the Big D Burger.",
+      "notes": "- Traditional drive-in with car-park-and-dine service. - Takeout is available. - Nearby picnic tables make it easy to stay and eat outside. - Long-running Bathurst stop with a 1950s and 1960s diner feel.",
+      "note_points": [
+        "Traditional drive-in with car-park-and-dine service.",
+        "Takeout is available.",
+        "Nearby picnic tables make it easy to stay and eat outside.",
+        "Long-running Bathurst stop with a 1950s and 1960s diner feel."
+      ],
+      "summary": "Home of the Big D Burger. - Traditional drive-in with car-park-and-dine service. - Takeout is available. - Nearby picnic tables make it easy to stay and eat outside. - Long-running Bathurst stop with a 1950s and 1960s di",
       "tags": [
         "drive-in",
         "burger",
@@ -32,11 +38,11 @@
         "family"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "Mon-Sun 11:00–19:00",
         "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
         "phone": "506-546-3585",
-        "website": "",
-        "hours": "Mon-Sun 11:00–19:00"
+        "email": ""
       },
       "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -56,8 +62,8 @@
       ],
       "source_type": "public-source",
       "path": "entries/big-d-drive-in/entry.md",
-      "source_modified_at": "2026-06-15T15:17:13.973255Z",
-      "source_modified_ts": 1781536633
+      "source_modified_at": "2026-06-15T15:38:42.124919Z",
+      "source_modified_ts": 1781537922
     },
     {
       "title": "Draft: 13 Barrels Brewing",
@@ -75,6 +81,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "craft beer, taproom, bistro-style menu, online orders",
       "notes": "",
+      "note_points": [],
       "summary": "craft beer, taproom, bistro-style menu, online orders",
       "tags": [
         "brewery",
@@ -84,11 +91,11 @@
         "event space"
       ],
       "contact": {
-        "email": "13barrelsbrewing@gmail.com",
+        "website": "",
+        "hours": "",
         "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
         "phone": "(506) 546-5300",
-        "website": "",
-        "hours": ""
+        "email": "13barrelsbrewing@gmail.com"
       },
       "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
       "hours": "",
@@ -129,6 +136,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Classic A&W on St-Peters Ave near Place Bathurst Mall and Home Hardware.",
       "notes": "24/7 drive-thru accessible. Indoor dining is open late, possibly until midnight. Home of the A&W Famous Root Beer.",
+      "note_points": [],
       "summary": "Classic A&W on St-Peters Ave near Place Bathurst Mall and Home Hardware. 24/7 drive-thru accessible. Indoor dining is open late, possibly until midnight. Home of the A&W Famous Root Beer.",
       "tags": [
         "food",
@@ -136,11 +144,11 @@
         "drive-thru"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
         "phone": "(506) 546-4095",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -176,6 +184,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Tourism info stop at La Promenade Waterfront near Frost Bite and Monty's.",
       "notes": "Open during the summer, as far as we’re pretty sure.",
+      "note_points": [],
       "summary": "Tourism info stop at La Promenade Waterfront near Frost Bite and Monty's. Open during the summer, as far as we’re pretty sure.",
       "tags": [
         "tourism",
@@ -183,11 +192,11 @@
         "waterfront"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
         "phone": "506-548-0418",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
       "hours": "",
@@ -223,6 +232,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Movie theatre on St. Anne St in Bathurst.",
       "notes": "Concession snacks available. Cash, debit, and credit accepted. Tickets can be reserved in advance. Cast & Crew is the closest dine-in restaurant.",
+      "note_points": [],
       "summary": "Movie theatre on St. Anne St in Bathurst. Concession snacks available. Cash, debit, and credit accepted. Tickets can be reserved in advance. Cast & Crew is the closest dine-in restaurant.",
       "tags": [
         "cinema",
@@ -231,11 +241,11 @@
         "movies"
       ],
       "contact": {
-        "email": "not provided",
+        "website": "",
+        "hours": "most evenings and some matinee showings",
         "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
         "phone": "not yet confirmed",
-        "website": "",
-        "hours": "most evenings and some matinee showings"
+        "email": "not provided"
       },
       "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
       "hours": "most evenings and some matinee showings",
@@ -273,6 +283,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Hotel on Vanier St near the airport.",
       "notes": "Popular with winter snowmobilers. Has a restaurant, breakfast service, bar section, pool, and good parking. Next to Tim Hortons.",
+      "note_points": [],
       "summary": "Hotel on Vanier St near the airport. Popular with winter snowmobilers. Has a restaurant, breakfast service, bar section, pool, and good parking. Next to Tim Hortons.",
       "tags": [
         "hotel",
@@ -282,11 +293,11 @@
         "parking"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
         "phone": "1 (800) 898-9292",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
       "hours": "",
@@ -322,6 +333,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Livestock feed and supply store in Bathurst.",
       "notes": "Check online or call to confirm whether it’s open. At least open Tuesday to Saturday, 9am–12pm.",
+      "note_points": [],
       "summary": "Livestock feed and supply store in Bathurst. Check online or call to confirm whether it’s open. At least open Tuesday to Saturday, 9am–12pm.",
       "tags": [
         "livestock",
@@ -330,11 +342,11 @@
         "farm"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "Tuesday to Saturday, 9am–12pm",
         "address": "1525 Rough Waters Dr",
         "phone": "1 (506) 548-8730",
-        "website": "",
-        "hours": "Tuesday to Saturday, 9am–12pm"
+        "email": ""
       },
       "address": "1525 Rough Waters Dr",
       "hours": "Tuesday to Saturday, 9am–12pm",
@@ -371,6 +383,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Public library serving Bathurst and the surrounding parish.",
       "notes": "Bathurst Public Library / Bibliothèque publique de Bathurst.",
+      "note_points": [],
       "summary": "Public library serving Bathurst and the surrounding parish. Bathurst Public Library / Bibliothèque publique de Bathurst.",
       "tags": [
         "library",
@@ -378,11 +391,11 @@
         "civic"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "150 St George St, Bathurst, NB E2A 1B5",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "150 St George St, Bathurst, NB E2A 1B5",
       "hours": "",
@@ -418,6 +431,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Produce market on King Ave in Bathurst.",
       "notes": "Grocery and produce market with a public-facing location page trail.",
+      "note_points": [],
       "summary": "Produce market on King Ave in Bathurst. Grocery and produce market with a public-facing location page trail.",
       "tags": [
         "grocery",
@@ -425,11 +439,11 @@
         "market"
       ],
       "contact": {
-        "email": "not found publicly",
+        "website": "",
+        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
         "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
         "phone": "(506) 548-8369",
-        "website": "",
-        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00"
+        "email": "not found publicly"
       },
       "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
       "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
@@ -468,6 +482,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Bar and patio on Main St near La Louga Night Club and La Promenade Waterfront.",
       "notes": "Services include local draft and brew, food, a well-received popcorn machine, and a beautiful outdoor terrace for nice summer days. It is part of the summer event circuit for Block Party and Hospitality Days. Also close to La Promenade Waterfront.",
+      "note_points": [],
       "summary": "Bar and patio on Main St near La Louga Night Club and La Promenade Waterfront. Services include local draft and brew, food, a well-received popcorn machine, and a beautiful outdoor terrace for nice summer days. It is par",
       "tags": [
         "bar",
@@ -476,11 +491,11 @@
         "restaurant"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "100 Main St, Bathurst, NB",
         "phone": "(506) 350-3350",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "100 Main St, Bathurst, NB",
       "hours": "",
@@ -517,6 +532,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Bowling and arcade venue on St-Peters in front of Big D Drive-In.",
       "notes": "Food and drink services available. Has slushies and fried pickles. Nice.",
+      "note_points": [],
       "summary": "Bowling and arcade venue on St-Peters in front of Big D Drive-In. Food and drink services available. Has slushies and fried pickles. Nice.",
       "tags": [
         "bowling",
@@ -525,11 +541,11 @@
         "food"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
         "phone": "(506) 546-2020",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
       "hours": "",
@@ -567,6 +583,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Fast-food Burger King on 725 St Peter Ave in Bathurst.",
       "notes": "Search results also point to the Burger King Canada location page.",
+      "note_points": [],
       "summary": "Fast-food Burger King on 725 St Peter Ave in Bathurst. Search results also point to the Burger King Canada location page.",
       "tags": [
         "fast food",
@@ -574,11 +591,11 @@
         "drive-thru"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
       "hours": "",
@@ -614,6 +631,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Main CCNB Bathurst campus at 725 College St.",
       "notes": "CCNB / campus de Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page.",
+      "note_points": [],
       "summary": "Main CCNB Bathurst campus at 725 College St. CCNB / campus de Bathurst. This is the main CCNB Bathurst campus listing from the CCNB contact page.",
       "tags": [
         "college",
@@ -621,11 +639,11 @@
         "education"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
         "phone": "506-547-2145",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
       "hours": "",
@@ -664,6 +682,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr.",
       "notes": "Often described as the former trades / Youghall campus.",
+      "note_points": [],
       "summary": "CCNB Bathurst / Campus Youghall at 75 Youghall Dr. Often described as the former trades / Youghall campus.",
       "tags": [
         "college",
@@ -672,11 +691,11 @@
         "trades"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
         "phone": "506-547-2145",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
       "hours": "",
@@ -715,6 +734,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Restaurant with chicken and Chinese takeout on Miramichi Ave.",
       "notes": "Keep only public-facing contact data. If a public email appears later, add it here.",
+      "note_points": [],
       "summary": "Restaurant with chicken and Chinese takeout on Miramichi Ave. Keep only public-facing contact data. If a public email appears later, add it here.",
       "tags": [
         "restaurant",
@@ -723,11 +743,11 @@
         "fried chicken"
       ],
       "contact": {
-        "email": "not found publicly",
+        "website": "",
+        "hours": "Mon-Sun 11:00–19:00",
         "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
         "phone": "(855) 245-7827",
-        "website": "",
-        "hours": "Mon-Sun 11:00–19:00"
+        "email": "not found publicly"
       },
       "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -765,6 +785,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Dairy Queen Grill & Chill on St. Peter Avenue in Bathurst.",
       "notes": "Public source pages point to the Bathurst location.",
+      "note_points": [],
       "summary": "Dairy Queen Grill & Chill on St. Peter Avenue in Bathurst. Public source pages point to the Bathurst location.",
       "tags": [
         "fast food",
@@ -773,11 +794,11 @@
         "dessert"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "435 St. Peter Avenue, Bathurst, NB",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "435 St. Peter Avenue, Bathurst, NB",
       "hours": "",
@@ -814,6 +835,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Nature reserve and walking trail network near East Acadie-Bathurst.",
       "notes": "Near Theriault’s Grocer in East Acadie-Bathurst. Open year round and publicly accessible. Footpaths and boardwalk through marshland and Acadian forest northeast of Bathurst harbour.",
+      "note_points": [],
       "summary": "Nature reserve and walking trail network near East Acadie-Bathurst. Near Theriault’s Grocer in East Acadie-Bathurst. Open year round and publicly accessible. Footpaths and boardwalk through marshland and Acadian forest n",
       "tags": [
         "nature reserve",
@@ -823,11 +845,11 @@
         "boardwalk"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -862,6 +884,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Indian cuisine spot on St-Peters Ave in Acadie-Bathurst.",
       "notes": "Replacing the old Dixie Lee, next to Dre Savoie optometrist and just across the street from Sobeys.",
+      "note_points": [],
       "summary": "Indian cuisine spot on St-Peters Ave in Acadie-Bathurst. Replacing the old Dixie Lee, next to Dre Savoie optometrist and just across the street from Sobeys.",
       "tags": [
         "indian food",
@@ -870,11 +893,11 @@
         "st peters ave"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "1 (506) 546-4545",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -912,6 +935,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Restaurant inside the Best Western hotel building on Main St.",
       "notes": "Just next to NB Distillery and Bootlegger.",
+      "note_points": [],
       "summary": "Restaurant inside the Best Western hotel building on Main St. Just next to NB Distillery and Bootlegger.",
       "tags": [
         "burger",
@@ -920,11 +944,11 @@
         "main street"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -960,6 +984,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Donair and takeout spot at 100 Main St.",
       "notes": "Next to Bootlegger and NB Distillery. Good food, good service.",
+      "note_points": [],
       "summary": "Donair and takeout spot at 100 Main St. Next to Bootlegger and NB Distillery. Good food, good service.",
       "tags": [
         "donair",
@@ -968,11 +993,11 @@
         "main street"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "100 Main St.",
         "phone": "1 (506) 546-5095",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "100 Main St.",
       "hours": "",
@@ -1011,6 +1036,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Local foods restaurant on Miramichi Ave in Acadie-Bathurst.",
       "notes": "Has amazing Donair and Steak Subs, and great Poutine. Daily open hours are short, so it’s worth trying if you can catch them open.",
+      "note_points": [],
       "summary": "Local foods restaurant on Miramichi Ave in Acadie-Bathurst. Has amazing Donair and Steak Subs, and great Poutine. Daily open hours are short, so it’s worth trying if you can catch them open.",
       "tags": [
         "deli",
@@ -1020,11 +1046,11 @@
         "sandwiches"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1395 Miramichi Ave, Acadie-Bathurst",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1395 Miramichi Ave, Acadie-Bathurst",
       "hours": "",
@@ -1059,6 +1085,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Healthy bowl and quick lunch spot inside Place Bathurst Mall.",
       "notes": "1300 St-Peters Ave. Phone: 1 (506) 545-2456. Healthy food options in a bowl.",
+      "note_points": [],
       "summary": "Healthy bowl and quick lunch spot inside Place Bathurst Mall. 1300 St-Peters Ave. Phone: 1 (506) 545-2456. Healthy food options in a bowl.",
       "tags": [
         "healthy food",
@@ -1067,11 +1094,11 @@
         "quick lunch"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
         "phone": "1 (506) 545-2456",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1109,6 +1136,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Locally owned craft brewery and taproom on Murray Ave.",
       "notes": "Brewery tours and private functions on request. Open on most public holidays.",
+      "note_points": [],
       "summary": "Locally owned craft brewery and taproom on Murray Ave. Brewery tours and private functions on request. Open on most public holidays.",
       "tags": [
         "brewery",
@@ -1118,11 +1146,11 @@
         "local"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
         "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
         "phone": "(506) 350-2800",
-        "website": "",
-        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm"
+        "email": ""
       },
       "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
       "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
@@ -1160,6 +1188,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Fine dining style restaurant on King St in Acadie-Bathurst.",
       "notes": "Seafood, pasta, and various options.",
+      "note_points": [],
       "summary": "Fine dining style restaurant on King St in Acadie-Bathurst. Seafood, pasta, and various options.",
       "tags": [
         "fine dining",
@@ -1168,11 +1197,11 @@
         "restaurant"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -1205,6 +1234,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Seasonal ice cream shop at La Promenade Waterfront.",
       "notes": "Wet location. Local ice cream shop. Cash only. On-site ATM available but sometimes breaks down, so bring cash ahead of time. Several banks are a short walk away downtown. Closed for winter / seasonal operation.",
+      "note_points": [],
       "summary": "Seasonal ice cream shop at La Promenade Waterfront. Wet location. Local ice cream shop. Cash only. On-site ATM available but sometimes breaks down, so bring cash ahead of time. Several banks are a short walk away downtow",
       "tags": [
         "ice cream",
@@ -1213,11 +1243,11 @@
         "dessert"
       ],
       "contact": {
-        "email": "not provided",
+        "website": "",
+        "hours": "seasonal / closed for winter",
         "address": "La Promenade Waterfront, Bathurst, NB",
         "phone": "(506) 480-0436",
-        "website": "",
-        "hours": "seasonal / closed for winter"
+        "email": "not provided"
       },
       "address": "La Promenade Waterfront, Bathurst, NB",
       "hours": "seasonal / closed for winter",
@@ -1259,6 +1289,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Restaurant and lounge at Bathurst Marina.",
       "notes": "Also listed publicly as *Le Greenhouse Lounge - Marina*. Public description says it is a restaurant located at Bathurst Marina and notes it is closed for winter.",
+      "note_points": [],
       "summary": "Restaurant and lounge at Bathurst Marina. Also listed publicly as *Le Greenhouse Lounge - Marina*. Public description says it is a restaurant located at Bathurst Marina and notes it is closed for winter.",
       "tags": [
         "venue",
@@ -1268,11 +1299,11 @@
         "marina"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
       "hours": "",
@@ -1313,6 +1344,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Restaurant, bar, and lounge inside Place Bathurst Mall.",
       "notes": "Also listed publicly as *Le Greenhouse Lounge*. Public descriptions describe it as a family style restaurant / bar / lounge and a venue for live events.",
+      "note_points": [],
       "summary": "Restaurant, bar, and lounge inside Place Bathurst Mall. Also listed publicly as *Le Greenhouse Lounge*. Public descriptions describe it as a family style restaurant / bar / lounge and a venue for live events.",
       "tags": [
         "venue",
@@ -1322,11 +1354,11 @@
         "mall"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1367,6 +1399,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Chinese restaurant with lunch and supper buffet options.",
       "notes": "Open every day, at least 3pm–9pm.",
+      "note_points": [],
       "summary": "Chinese restaurant with lunch and supper buffet options. Open every day, at least 3pm–9pm.",
       "tags": [
         "buffet",
@@ -1374,11 +1407,11 @@
         "restaurant"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "Open every day, at least 3pm–9pm",
         "address": "15 Main St, Bathurst, NB",
         "phone": "1 (506) 548-3019",
-        "website": "",
-        "hours": "Open every day, at least 3pm–9pm"
+        "email": ""
       },
       "address": "15 Main St, Bathurst, NB",
       "hours": "Open every day, at least 3pm–9pm",
@@ -1415,6 +1448,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
       "notes": "Local pub and eatery; multiple listings point to the top of Bathurst.",
+      "note_points": [],
       "summary": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst. Local pub and eatery; multiple listings point to the top of Bathurst.",
       "tags": [
         "pub",
@@ -1423,11 +1457,11 @@
         "restaurant"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -1463,6 +1497,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "399 St Paul st, Acadie-Bathurst.",
       "notes": "Open Monday to Friday from 8:30am-6:30pm.",
+      "note_points": [],
       "summary": "399 St Paul st, Acadie-Bathurst. Open Monday to Friday from 8:30am-6:30pm.",
       "tags": [
         "auto detailing",
@@ -1470,11 +1505,11 @@
         "services"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "399 St Paul st, Acadie-Bathurst.",
         "phone": "1(506)480-0031",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "399 St Paul st, Acadie-Bathurst.",
       "hours": "",
@@ -1510,6 +1545,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Arena / regional centre in Bathurst.",
       "notes": "Arena / regional centre in Bathurst.",
+      "note_points": [],
       "summary": "Arena / regional centre in Bathurst. Arena / regional centre in Bathurst.",
       "tags": [
         "arena",
@@ -1518,11 +1554,11 @@
         "sports"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -1560,6 +1596,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
       "notes": "Coffee shop in downtown Bathurst.",
+      "note_points": [],
       "summary": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6. Coffee shop in downtown Bathurst.",
       "tags": [
         "coffee",
@@ -1568,11 +1605,11 @@
         "downtown"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
       "hours": "",
@@ -1611,6 +1648,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "By Cody Gosnell.",
       "notes": "Local barber with homestyle comfort and a punk edge. Child friendly. Phone: 1 (506) 226-7016.",
+      "note_points": [],
       "summary": "By Cody Gosnell. Local barber with homestyle comfort and a punk edge. Child friendly. Phone: 1 (506) 226-7016.",
       "tags": [
         "barber",
@@ -1619,11 +1657,11 @@
         "family-friendly"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Located at 714 King St.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Located at 714 King St.",
       "hours": "",
@@ -1658,17 +1696,18 @@
       "public_area": "Acadie-Bathurst",
       "description": "EDM-style live artist based in Acadie-Bathurst.",
       "notes": "Produces his own style and performs live shows. Has played at The Southside Lounge and Future Forest Festival. Also does live streaming shows on Twitch.",
+      "note_points": [],
       "summary": "EDM-style live artist based in Acadie-Bathurst. Produces his own style and performs live shows. Has played at The Southside Lounge and Future Forest Festival. Also does live streaming shows on Twitch.",
       "tags": [
         "music",
         "artist"
       ],
       "contact": {
-        "email": "kylegodinn4200@gmail.com",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": "kylegodinn4200@gmail.com"
       },
       "address": "",
       "hours": "",
@@ -1706,6 +1745,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Bathurst night bar / resto with a strong French-language social presence; user refers to it as La Louga Night Club",
       "notes": "",
+      "note_points": [],
       "summary": "Bathurst night bar / resto with a strong French-language social presence; user refers to it as La Louga Night Club",
       "tags": [
         "bar",
@@ -1715,11 +1755,11 @@
         "live music"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
         "phone": "(506) 226-6056",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
       "hours": "",
@@ -1763,6 +1803,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Liberty Tax office in Bathurst.",
       "notes": "Liberty Tax office in Bathurst.",
+      "note_points": [],
       "summary": "Liberty Tax office in Bathurst. Liberty Tax office in Bathurst.",
       "tags": [
         "tax",
@@ -1771,11 +1812,11 @@
         "services"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -1814,6 +1855,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
       "notes": "Often referenced as part of the La Promenade Waterfront cluster.",
+      "note_points": [],
       "summary": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6. Often referenced as part of the La Promenade Waterfront cluster.",
       "tags": [
         "bookstore",
@@ -1822,11 +1864,11 @@
         "retail"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
       "hours": "",
@@ -1865,6 +1907,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
       "notes": "Official McDonald's Canada location page surfaced this store.",
+      "note_points": [],
       "summary": "McDonald's location at 620 St. Peter Avenue, Bathurst. Official McDonald's Canada location page surfaced this store.",
       "tags": [
         "fast food",
@@ -1873,11 +1916,11 @@
         "fries"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -1915,6 +1958,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
       "notes": "Official McDonald's Canada location page for the Walmart site.",
+      "note_points": [],
       "summary": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst. Official McDonald's Canada location page for the Walmart site.",
       "tags": [
         "fast food",
@@ -1923,11 +1967,11 @@
         "drive-thru"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
       "hours": "",
@@ -1964,6 +2008,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Same building as Pizza Pro on St-Peters.",
       "notes": "Mexican cuisine.",
+      "note_points": [],
       "summary": "Same building as Pizza Pro on St-Peters. Mexican cuisine.",
       "tags": [
         "mexican food",
@@ -1972,11 +2017,11 @@
         "st peters ave"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -2011,6 +2056,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Seasonal pretzel / pizza spot at La Promenade Waterfront in Bathurst.",
       "notes": "Online listings vary on Douglas Ave details, but waterfront pages consistently place it at La Promenade Waterfront. Has unique foods like pretzel-burger and pretzel-dog. Very close to Frost Bite.",
+      "note_points": [],
       "summary": "Seasonal pretzel / pizza spot at La Promenade Waterfront in Bathurst. Online listings vary on Douglas Ave details, but waterfront pages consistently place it at La Promenade Waterfront. Has unique foods like pretzel-burg",
       "tags": [
         "pretzel",
@@ -2019,11 +2065,11 @@
         "seasonal"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -2060,6 +2106,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "distilled spirits, craft beer",
       "notes": "",
+      "note_points": [],
       "summary": "distilled spirits, craft beer",
       "tags": [
         "distillery",
@@ -2068,11 +2115,11 @@
         "downtown"
       ],
       "contact": {
-        "email": "info@nbdistillery.ca",
+        "website": "",
+        "hours": "",
         "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": "info@nbdistillery.ca"
       },
       "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
       "hours": "",
@@ -2116,6 +2163,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
       "notes": "Open 24/7 except Monday, Tuesday, and Wednesday, when it closes at midnight.",
+      "note_points": [],
       "summary": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst. Open 24/7 except Monday, Tuesday, and Wednesday, when it closes at midnight.",
       "tags": [
         "gas station",
@@ -2124,11 +2172,11 @@
         "24-7"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
       "hours": "",
@@ -2163,6 +2211,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
       "notes": "Homestyle eats; multiple online listings confirm the address.",
+      "note_points": [],
       "summary": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7. Homestyle eats; multiple online listings confirm the address.",
       "tags": [
         "restaurant",
@@ -2171,11 +2220,11 @@
         "local"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
       "hours": "",
@@ -2211,6 +2260,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Gas station and car wash at 896 Main St.",
       "notes": "Phone: 1 (506) 544-9892. Robin’s Donuts is in the same gas station.",
+      "note_points": [],
       "summary": "Gas station and car wash at 896 Main St. Phone: 1 (506) 544-9892. Robin’s Donuts is in the same gas station.",
       "tags": [
         "gas station",
@@ -2219,11 +2269,11 @@
         "fuel"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Gas station and car wash at 896 Main St.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Gas station and car wash at 896 Main St.",
       "hours": "",
@@ -2260,6 +2310,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Pizza Delight location in Bathurst.",
       "notes": "Pizza Delight location in Bathurst.",
+      "note_points": [],
       "summary": "Pizza Delight location in Bathurst. Pizza Delight location in Bathurst.",
       "tags": [
         "pizza",
@@ -2268,11 +2319,11 @@
         "delivery"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -2309,6 +2360,7 @@
       "public_area": "Restigouche",
       "description": "Pizza Delight location in Campbellton.",
       "notes": "Pizza Delight location in Campbellton.",
+      "note_points": [],
       "summary": "Pizza Delight location in Campbellton. Pizza Delight location in Campbellton.",
       "tags": [
         "pizza",
@@ -2317,11 +2369,11 @@
         "delivery"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
       "hours": "",
@@ -2358,6 +2410,7 @@
       "public_area": "Acadian Peninsula",
       "description": "Pizza Delight location in Tracadie.",
       "notes": "Pizza Delight location in Tracadie.",
+      "note_points": [],
       "summary": "Pizza Delight location in Tracadie. Pizza Delight location in Tracadie.",
       "tags": [
         "pizza",
@@ -2366,11 +2419,11 @@
         "delivery"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
       "hours": "",
@@ -2407,6 +2460,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Pizza Pro location in Bathurst.",
       "notes": "Same corridor as MexiGlu.",
+      "note_points": [],
       "summary": "Pizza Pro location in Bathurst. Same corridor as MexiGlu.",
       "tags": [
         "pizza",
@@ -2415,11 +2469,11 @@
         "st peters ave"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
       "hours": "",
@@ -2458,6 +2512,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "You flagged this one as part of a larger provincial chain, so this is a location draft only.",
       "notes": "",
+      "note_points": [],
       "summary": "You flagged this one as part of a larger provincial chain, so this is a location draft only.",
       "tags": [
         "pizza",
@@ -2466,11 +2521,11 @@
         "delivery"
       ],
       "contact": {
-        "email": "not found publicly",
+        "website": "",
+        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
         "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
         "phone": "(506) 547-8080",
-        "website": "",
-        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)"
+        "email": "not found publicly"
       },
       "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
       "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
@@ -2508,6 +2563,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "On St-Anne St, behind the Walmart parking lot.",
       "notes": "Near Cast and Crew, Apollo Cinema, and K.C. Irving. Great breakfast and lunch place with sweet-and-salty mixes like crepes, fruit, eggs, bacon, hollandaise sauce, and English cream options. Great date place and great family place.",
+      "note_points": [],
       "summary": "On St-Anne St, behind the Walmart parking lot. Near Cast and Crew, Apollo Cinema, and K.C. Irving. Great breakfast and lunch place with sweet-and-salty mixes like crepes, fruit, eggs, bacon, hollandaise sauce, and Englis",
       "tags": [
         "breakfast",
@@ -2517,11 +2573,11 @@
         "family dining"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "",
       "hours": "",
@@ -2558,6 +2614,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Located in the same gas station as Petro-Canada at 896 Main St.",
       "notes": "Phone: 1 (506) 544-9892.",
+      "note_points": [],
       "summary": "Located in the same gas station as Petro-Canada at 896 Main St. Phone: 1 (506) 544-9892.",
       "tags": [
         "coffee",
@@ -2566,11 +2623,11 @@
         "gas station"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
       "hours": "",
@@ -2607,6 +2664,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
       "notes": "Open Monday to Friday, 8am-5pm. Phone: 1(506)548-3331.",
+      "note_points": [],
       "summary": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall. Open Monday to Friday, 8am-5pm. Phone: 1(506)548-3331.",
       "tags": [
         "auto glass",
@@ -2614,11 +2672,11 @@
         "automotive service"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
       "hours": "",
@@ -2655,6 +2713,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Subway location at 880 St. Anne Street, Bathurst.",
       "notes": "Official Subway Canada Bathurst location page lists this restaurant.",
+      "note_points": [],
       "summary": "Subway location at 880 St. Anne Street, Bathurst. Official Subway Canada Bathurst location page lists this restaurant.",
       "tags": [
         "sandwich",
@@ -2663,11 +2722,11 @@
         "chain"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Subway location at 880 St. Anne Street, Bathurst.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Subway location at 880 St. Anne Street, Bathurst.",
       "hours": "",
@@ -2705,6 +2764,7 @@
       "public_area": "Belle-Baie",
       "description": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
       "notes": "Belle-Baie is the renamed municipality formerly known as Beresford.",
+      "note_points": [],
       "summary": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7. Belle-Baie is the renamed municipality formerly known as Beresford.",
       "tags": [
         "sandwich",
@@ -2713,11 +2773,11 @@
         "chain"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
       "hours": "",
@@ -2753,6 +2813,11 @@
       "public_area": "Acadie-Bathurst",
       "description": "Locally owned small grocery store with in-house meat butcher and processing.",
       "notes": "- Near the Daly Point nature walk. - East of Bathurst proper. - Good community shopping experience.",
+      "note_points": [
+        "Near the Daly Point nature walk.",
+        "East of Bathurst proper.",
+        "Good community shopping experience."
+      ],
       "summary": "Locally owned small grocery store with in-house meat butcher and processing. - Near the Daly Point nature walk. - East of Bathurst proper. - Good community shopping experience.",
       "tags": [
         "grocery",
@@ -2762,11 +2827,11 @@
         "community"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Bridge St (exact civic address not confirmed)",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Bridge St (exact civic address not confirmed)",
       "hours": "",
@@ -2803,6 +2868,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
       "notes": "Phone: 1(506)548-8799.",
+      "note_points": [],
       "summary": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In. Phone: 1(506)548-8799.",
       "tags": [
         "auto detailing",
@@ -2810,11 +2876,11 @@
         "automotive service"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
       "hours": "",
@@ -2852,6 +2918,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
       "notes": "Online lookups: Walmart Canada store page and Bathurst store-hours listings.",
+      "note_points": [],
       "summary": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2. Online lookups: Walmart Canada store page and Bathurst store-hours listings.",
       "tags": [
         "big box",
@@ -2860,11 +2927,11 @@
         "retail"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "",
         "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
         "phone": "",
-        "website": "",
-        "hours": ""
+        "email": ""
       },
       "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -2903,6 +2970,7 @@
       "public_area": "Acadie-Bathurst",
       "description": "Youghall Beach park north of Acadie-Bathurst near Gowen Brae and the CCNB Youghall Campus.",
       "notes": "City of Bathurst describes it as a beach park with free access to warm waters, groomed sandy beaches, a scenic boardwalk, and an easy boat slip. The city page also says no swimming on the part of the beach nearest the channel.",
+      "note_points": [],
       "summary": "Youghall Beach park north of Acadie-Bathurst near Gowen Brae and the CCNB Youghall Campus. City of Bathurst describes it as a beach park with free access to warm waters, groomed sandy beaches, a scenic boardwalk, and an ",
       "tags": [
         "beach",
@@ -2912,11 +2980,11 @@
         "waterfront"
       ],
       "contact": {
-        "email": "",
+        "website": "",
+        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",
         "address": "",
         "phone": "",
-        "website": "",
-        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash."
+        "email": ""
       },
       "address": "",
       "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",
