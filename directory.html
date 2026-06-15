@@ -94,8 +94,26 @@
     .control-kicker { color: var(--gold); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
     .control-panel[open] .recent-chevron { transform: rotate(180deg); }
     .control-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 14px; display: grid; gap: 10px; }
-    .control-grid { display: grid; grid-template-columns: minmax(220px, 1.35fr) repeat(3, minmax(130px, 0.55fr)) auto; gap: 8px; }
+    body.search-focus .wrap > :not(.tool-dock) { filter: blur(2px); opacity: 0.68; transition: filter 0.16s ease, opacity 0.16s ease; }
+    .control-grid { display: grid; gap: 10px; }
+    .search-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .search-action { white-space: nowrap; border-radius: 13px; }
+    .filter-popover {
+      position: absolute;
+      inset: 10px;
+      z-index: 2;
+      display: grid;
+      align-content: start;
+      gap: 9px;
+      padding: 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(18,54,101,0.99), rgba(9,30,64,0.99));
+      box-shadow: 0 16px 36px rgba(5,13,27,0.38);
+    }
+    .filter-popover[hidden] { display: none; }
+    .filter-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--gold); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; }
+    .filter-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 
     .search,
     .select {
@@ -183,6 +201,10 @@
       border-color: var(--gold);
       color: var(--gold-ink);
       box-shadow: 0 14px 32px rgba(5,13,27,0.42);
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      touch-action: manipulation;
     }
     .tool-fab-icon,
     .tool-fab-icon::before,
@@ -265,7 +287,6 @@
 
     .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
     .result-section { display: grid; gap: 9px; margin-bottom: 18px; border-radius: 20px; overflow: clip; }
-    .result-section + .result-section { margin-top: 24px; border-top: 1px solid rgba(242,200,75,0.34); padding-top: 18px; }
     .result-section > summary {
       list-style: none;
       cursor: pointer;
@@ -343,8 +364,8 @@
       .mini-stats { gap: 6px; }
       .mini-stat { font-size: 0.74rem; padding: 6px 8px; }
       .control-body { padding: 10px; }
-      .control-grid { grid-template-columns: 1fr; gap: 7px; }
-      .search-action { width: 100%; }
+      .control-grid { gap: 7px; }
+      .search-actions { grid-template-columns: 1fr; }
       .search, .select { padding: 10px 11px; border-radius: 11px; font-size: 0.92rem; }
       .filter-note { font-size: 0.78rem; }
       .viewbar { margin-top: 13px; }
@@ -377,7 +398,7 @@
         <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> entries</button>
         <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
         <span class="mini-stat"><strong id="city-stat">…</strong> cities</span>
-        <button class="mini-stat" data-target="draft-section"><strong id="draft-stat">…</strong> previews</button>
+        <a class="mini-stat" href="recents.html"><strong id="draft-stat">…</strong> previews</a>
       </aside>
     </section>
 
@@ -386,6 +407,17 @@
         <div class="control-body">
           <div class="control-grid">
             <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
+            <div class="search-actions">
+              <button id="open-filters" class="search-action" type="button">Filter</button>
+              <button id="show-results" class="search-action" type="button">Search</button>
+              <button id="quick-clear" class="search-action" type="button">Clear</button>
+            </div>
+          </div>
+          <div class="filter-popover" id="filter-popover" hidden>
+            <div class="filter-title">
+              <span>Filter options</span>
+              <button id="close-filters" type="button" aria-label="Close filters">×</button>
+            </div>
             <select id="mood-select" class="select" aria-label="Filter by mood">
               <option value="">Mood / route</option>
               <option value="food">Hungry — food, cafés & treats</option>
@@ -395,9 +427,12 @@
             </select>
             <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
             <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
-            <button id="show-results" class="search-action">Show results</button>
+            <div class="filter-actions">
+              <button id="apply-filters" type="button">Done</button>
+              <button id="reset-filters" type="button">Reset</button>
+            </div>
           </div>
-          <div class="filter-note">Live search updates as you type. <strong>Show results</strong> closes mobile keyboards and jumps to the matching cards.</div>
+          <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/city, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
         </div>
       </div>
       <nav class="tool-menu" id="tool-menu" aria-label="Quick menu">
@@ -405,8 +440,7 @@
         <a class="tool-option" href="recents.html">Fresh drafts</a>
         <a class="tool-option" href="index.html">Home</a>
       </nav>
-      <div class="tool-hint">tap: search · hold: menu</div>
-      <button class="tool-fab" id="tool-fab" type="button" aria-label="Open quick search. Hold for menu." aria-expanded="false" aria-controls="search-panel tool-menu">
+      <button class="tool-fab" id="tool-fab" type="button" aria-label="Open directory menu" aria-expanded="false" aria-controls="tool-menu search-panel">
         <span class="tool-fab-icon" aria-hidden="true"></span>
       </button>
     </div>
@@ -419,7 +453,6 @@
       <div class="view-actions">
         <button id="show-all">Show all</button>
         <button id="view-official">View official</button>
-        <button id="view-drafts">View drafts</button>
         <button id="clear-filters">Clear</button>
       </div>
     </div>
@@ -591,7 +624,7 @@
       const items = data.items || [];
       const categories = new Set(items.map(i => i.category).filter(Boolean));
       const cities = new Set(items.map(publicCity).filter(Boolean));
-      document.getElementById('entry-stat').textContent = items.length;
+      document.getElementById('entry-stat').textContent = items.filter(i => !i.draft).length;
       document.getElementById('category-stat').textContent = categories.size;
       document.getElementById('city-stat').textContent = cities.size;
       document.getElementById('draft-stat').textContent = items.filter(i => i.draft).length;
@@ -709,7 +742,8 @@
       const resultCopy = document.getElementById('result-copy');
       const showAllButton = document.getElementById('show-all');
 
-      const items = filteredItems();
+      const allMatches = filteredItems();
+      const items = allMatches.filter(item => !item.draft);
       const filters = [];
       if (state.query) filters.push(`search “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
@@ -717,13 +751,9 @@
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
       showAllButton.classList.add('active');
-      resultCopy.textContent = filters.length ? `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}` : `Showing all ${items.length} entries`;
-      const published = items.filter(item => !item.draft);
-      const drafts = items.filter(item => item.draft);
-      const hasFilters = filters.length > 0;
+      resultCopy.textContent = filters.length ? `${items.length} official match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}. Draft previews live on the Fresh drafts page.` : `Showing ${items.length} official entr${items.length === 1 ? 'y' : 'ies'}`;
       const sections = [
-        renderSection('official-section', 'Official entries', `${published.length} published`, published, { open: true, groupByCity: true }),
-        renderSection('draft-section', 'Draft previews', `${drafts.length} still being shaped`, drafts, { open: hasFilters }),
+        renderSection('official-section', 'Official entries', `${items.length} published`, items, { open: true, groupByCity: true }),
       ].filter(Boolean).join('');
       app.innerHTML = items.length ? sections : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
       syncHashTarget();
@@ -744,6 +774,18 @@
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    function openFilterPopover() {
+      const popover = document.getElementById('filter-popover');
+      if (!popover) return;
+      popover.hidden = false;
+      setTimeout(() => document.getElementById('mood-select')?.focus(), 30);
+    }
+
+    function closeFilterPopover() {
+      const popover = document.getElementById('filter-popover');
+      if (popover) popover.hidden = true;
+    }
+
     function setToolState(mode = '') {
       const dock = document.getElementById('tool-dock');
       const fab = document.getElementById('tool-fab');
@@ -754,8 +796,10 @@
       dock.classList.toggle('menu-open', menuOpen);
       dock.classList.toggle('search-open', searchOpen);
       searchPanel.hidden = !searchOpen;
+      document.body.classList.toggle('search-focus', searchOpen);
+      closeFilterPopover();
       fab.setAttribute('aria-expanded', String(menuOpen || searchOpen));
-      fab.setAttribute('aria-label', menuOpen || searchOpen ? 'Close directory tools' : 'Open quick search. Hold for menu.');
+      fab.setAttribute('aria-label', menuOpen || searchOpen ? 'Close directory menu' : 'Open directory menu');
       if (searchOpen) setTimeout(() => document.getElementById('search')?.focus(), 30);
     }
 
@@ -815,37 +859,44 @@
       document.getElementById('show-results').addEventListener('click', showResults);
       const toolFab = document.getElementById('tool-fab');
       const menuSearch = document.getElementById('menu-search');
-      let holdTimer = null;
-      let longPress = false;
-      const clearHold = () => {
-        if (holdTimer) clearTimeout(holdTimer);
-        holdTimer = null;
-      };
-      toolFab.addEventListener('pointerdown', event => {
-        longPress = false;
-        clearHold();
-        holdTimer = setTimeout(() => {
-          longPress = true;
-          openMenuTool();
-        }, 480);
+      toolFab.addEventListener('click', () => {
+        currentToolState() ? closeToolPanels() : openMenuTool();
       });
-      toolFab.addEventListener('pointerup', () => {
-        clearHold();
-        if (longPress) return;
-        currentToolState() ? closeToolPanels() : openSearchTool();
-      });
-      toolFab.addEventListener('pointerleave', clearHold);
       toolFab.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          currentToolState() ? closeToolPanels() : openSearchTool();
-        }
-        if (event.key === 'ArrowUp') {
-          event.preventDefault();
-          openMenuTool();
+          currentToolState() ? closeToolPanels() : openMenuTool();
         }
       });
       menuSearch.addEventListener('click', openSearchTool);
+      document.getElementById('open-filters').addEventListener('click', openFilterPopover);
+      document.getElementById('close-filters').addEventListener('click', closeFilterPopover);
+      document.getElementById('apply-filters').addEventListener('click', () => {
+        closeFilterPopover();
+        document.getElementById('search')?.focus();
+      });
+      document.getElementById('reset-filters').addEventListener('click', () => {
+        state.category = 'all';
+        state.city = 'all';
+        state.lens = '';
+        document.getElementById('mood-select').value = '';
+        document.getElementById('category-select').value = 'all';
+        document.getElementById('city-select').value = 'all';
+        renderResults();
+        closeFilterPopover();
+      });
+      document.getElementById('filter-popover').addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          closeFilterPopover();
+          document.getElementById('search')?.focus();
+        }
+        if (event.key === 'Escape') closeFilterPopover();
+      });
+      document.getElementById('quick-clear').addEventListener('click', () => {
+        clearFilters();
+        openSearchTool();
+      });
       document.addEventListener('click', event => {
         const dock = document.getElementById('tool-dock');
         if (!dock?.contains(event.target)) closeToolPanels();
@@ -860,7 +911,6 @@
       });
       document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; renderResults(); });
       document.getElementById('view-official').addEventListener('click', () => focusSection('official-section'));
-      document.getElementById('view-drafts').addEventListener('click', () => focusSection('draft-section'));
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       window.addEventListener('hashchange', syncHashTarget);
     }
