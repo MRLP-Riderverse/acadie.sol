@@ -374,6 +374,10 @@
       if (lower === 'email') {
         return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
       }
+      if (lower === 'website') {
+        const href = /^https?:\/\//i.test(text) ? text : `https://${text}`;
+        return `<a class="detail-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
+      }
       return escapeHtml(text);
     }
     function sourceLabel(src) {
@@ -383,18 +387,28 @@
     }
 
     function publicCity(item) {
+      const declared = String(item.public_area || '').trim();
+      if (declared) return declared;
       const area = String(item.area || '').trim();
       if (/bathurst/i.test(area)) return 'Acadie-Bathurst';
       return area || 'Unsorted';
     }
 
+    function contactValue(item, key) {
+      return (item.contact && item.contact[key]) || item[key] || '';
+    }
+
     function itemHaystack(item) {
-      return [item.title, item.category, item.area, publicCity(item), item.description, item.notes, item.address, item.hours, item.phone, item.email, ...(item.related_places || []), ...(item.sources || [])].map(normalize).join(' ');
+      return [
+        item.title, item.name, item.category, item.area, publicCity(item), item.description, item.notes,
+        contactValue(item, 'address'), contactValue(item, 'hours'), contactValue(item, 'phone'), contactValue(item, 'email'), contactValue(item, 'website'),
+        ...(item.tags || []), ...(item.aliases || []), ...(item.related_places || []), ...(item.sources || [])
+      ].map(normalize).join(' ');
     }
 
     function derivedTags(item) {
+      const tags = new Set(Array.isArray(item.tags) ? item.tags.filter(Boolean) : []);
       const hay = itemHaystack(item);
-      const tags = new Set();
       if (item.category) tags.add(item.category);
       for (const tag of tagHints) if (hay.includes(tag)) tags.add(tag);
       return [...tags].slice(0, 5);
@@ -478,10 +492,11 @@
       const tags = derivedTags(item);
       const city = publicCity(item);
       const detailRows = [
-        ['Address', item.address],
-        ['Hours', item.hours],
-        ['Phone', item.phone],
-        ['Email', item.email],
+        ['Address', contactValue(item, 'address')],
+        ['Hours', contactValue(item, 'hours')],
+        ['Phone', contactValue(item, 'phone')],
+        ['Email', contactValue(item, 'email')],
+        ['Website', contactValue(item, 'website')],
       ].filter(([, value]) => cleanSummary(value));
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
