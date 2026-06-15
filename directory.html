@@ -140,43 +140,88 @@
       right: 16px;
       bottom: 16px;
       z-index: 40;
-      display: flex;
+      display: grid;
+      justify-items: end;
+      gap: 10px;
+    }
+    .tool-menu {
+      display: grid;
       gap: 8px;
-      align-items: flex-end;
+      justify-items: end;
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease;
     }
-    .tool-dock .recent-panel,
-    .tool-dock .control-panel { margin: 0; overflow: visible; }
-    .tool-dock .recent-panel > summary,
-    .tool-dock .control-panel > summary {
+    .tool-dock.menu-open .tool-menu {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .tool-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line-strong);
       border-radius: 999px;
-      min-width: 0;
-      padding: 11px 13px;
-      background: linear-gradient(180deg, rgba(33,98,177,0.92), rgba(16,53,102,0.92));
+      padding: 10px 13px;
+      background: linear-gradient(180deg, rgba(33,98,177,0.94), rgba(16,53,102,0.94));
+      color: var(--text);
+      text-decoration: none;
       box-shadow: 0 12px 28px rgba(5,13,27,0.34);
+      font: inherit;
+      white-space: nowrap;
     }
-    .tool-dock .recent-copy,
-    .tool-dock .control-copy { display: flex; align-items: center; gap: 8px; }
-    .tool-dock .recent-kicker,
-    .tool-dock .control-kicker { font-size: 0.82rem; letter-spacing: 0.04em; }
-    .tool-dock .recent-copy strong,
-    .tool-dock .control-copy strong,
-    .tool-dock .recent-copy span,
-    .tool-dock .control-copy span { display: none; }
-    .tool-dock .recent-body,
-    .tool-dock .control-body {
+    .tool-option:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .tool-fab {
+      width: 52px;
+      height: 52px;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--gold-ink);
+      box-shadow: 0 14px 32px rgba(5,13,27,0.42);
+    }
+    .tool-fab-icon,
+    .tool-fab-icon::before,
+    .tool-fab-icon::after {
+      display: block;
+      width: 21px;
+      height: 2px;
+      border-radius: 99px;
+      background: currentColor;
+      transition: transform 0.16s ease, opacity 0.16s ease;
+      content: "";
+    }
+    .tool-fab-icon { position: relative; }
+    .tool-fab-icon::before,
+    .tool-fab-icon::after { position: absolute; left: 0; }
+    .tool-fab-icon::before { top: -7px; }
+    .tool-fab-icon::after { top: 7px; }
+    .tool-dock.menu-open .tool-fab-icon,
+    .tool-dock.search-open .tool-fab-icon { transform: rotate(45deg); }
+    .tool-dock.menu-open .tool-fab-icon::before,
+    .tool-dock.search-open .tool-fab-icon::before { transform: translateY(7px) rotate(90deg); }
+    .tool-dock.menu-open .tool-fab-icon::after,
+    .tool-dock.search-open .tool-fab-icon::after { transform: translateY(-7px); opacity: 0; }
+    .tool-dock .control-panel {
       position: absolute;
       right: 0;
       bottom: calc(100% + 10px);
       width: min(440px, calc(100vw - 28px));
       max-height: min(70vh, 560px);
+      margin: 0;
       overflow: auto;
-      border: 1px solid var(--line);
       border-radius: 18px;
       background: linear-gradient(180deg, rgba(33,98,177,0.98), rgba(16,53,102,0.98));
       box-shadow: 0 18px 44px rgba(5,13,27,0.46);
       backdrop-filter: blur(6px);
     }
-    .tool-dock .recent-body { padding: 0 14px 14px; }
+    .tool-dock .control-panel[hidden] { display: none; }
+    .tool-dock .control-body { border-top: 0; }
+    .tool-hint { color: var(--soft); font-size: 0.74rem; text-align: right; margin: -2px 2px 0 0; }
 
     .viewbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 9px; flex-wrap: wrap; }
     .view-title { display: grid; gap: 3px; }
@@ -336,47 +381,34 @@
       </aside>
     </section>
 
-    <div class="tool-dock" aria-label="Directory quick tools">
-      <details class="recent-panel" id="recent-panel">
-      <summary>
-        <div class="recent-copy">
-          <div class="recent-kicker">Fresh</div>
-          <strong>Recently added</strong>
-          <span>Latest 10 entries by source file timestamp.</span>
+    <div class="tool-dock" id="tool-dock" aria-label="Directory quick tools">
+      <div class="control-panel" id="search-panel" hidden>
+        <div class="control-body">
+          <div class="control-grid">
+            <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
+            <select id="mood-select" class="select" aria-label="Filter by mood">
+              <option value="">Mood / route</option>
+              <option value="food">Hungry — food, cafés & treats</option>
+              <option value="waterfront">Explore — waterfront route</option>
+              <option value="family">Day plan — family-friendly</option>
+              <option value="night">Evening — night out</option>
+            </select>
+            <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
+            <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
+            <button id="show-results" class="search-action">Show results</button>
+          </div>
+          <div class="filter-note">Live search updates as you type. <strong>Show results</strong> closes mobile keyboards and jumps to the matching cards.</div>
         </div>
-        <span class="recent-chevron" aria-hidden="true">▾</span>
-      </summary>
-      <div class="recent-body">
-        <ol class="recent-list" id="recent-list"></ol>
       </div>
-    </details>
-
-      <details class="control-panel" id="search-panel">
-      <summary>
-        <div class="control-copy">
-          <div class="control-kicker">🔎 Search</div>
-          <strong>Find places live</strong>
-          <span>Type to filter instantly, then tap Show results to close the keyboard and jump down.</span>
-        </div>
-        <span class="recent-chevron" aria-hidden="true">▾</span>
-      </summary>
-      <div class="control-body">
-        <div class="control-grid">
-          <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
-          <select id="mood-select" class="select" aria-label="Filter by mood">
-            <option value="">Mood / route</option>
-            <option value="food">Hungry — food, cafés & treats</option>
-            <option value="waterfront">Explore — waterfront route</option>
-            <option value="family">Day plan — family-friendly</option>
-            <option value="night">Evening — night out</option>
-          </select>
-          <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
-          <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
-          <button id="show-results" class="search-action">Show results</button>
-        </div>
-        <div class="filter-note">Live search updates as you type. <strong>Show results</strong> closes mobile keyboards and jumps to the matching cards. City is normalized for public browsing: Bathurst variants display as <strong>Acadie-Bathurst</strong>.</div>
-      </div>
-    </details>
+      <nav class="tool-menu" id="tool-menu" aria-label="Quick menu">
+        <button class="tool-option" id="menu-search" type="button">🔎 Search</button>
+        <a class="tool-option" href="recents.html">Fresh drafts</a>
+        <a class="tool-option" href="index.html">Home</a>
+      </nav>
+      <div class="tool-hint">tap: search · hold: menu</div>
+      <button class="tool-fab" id="tool-fab" type="button" aria-label="Open quick search. Hold for menu." aria-expanded="false" aria-controls="search-panel tool-menu">
+        <span class="tool-fab-icon" aria-hidden="true"></span>
+      </button>
     </div>
 
     <div class="viewbar" id="directory-results">
@@ -580,6 +612,7 @@
 
     function renderRecent() {
       const recentList = document.getElementById('recent-list');
+      if (!recentList) return;
       const items = recentItems(10);
       recentList.innerHTML = items.length
         ? items.map(item => {
@@ -711,8 +744,36 @@
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    function setToolState(mode = '') {
+      const dock = document.getElementById('tool-dock');
+      const fab = document.getElementById('tool-fab');
+      const searchPanel = document.getElementById('search-panel');
+      if (!dock || !fab || !searchPanel) return;
+      const menuOpen = mode === 'menu';
+      const searchOpen = mode === 'search';
+      dock.classList.toggle('menu-open', menuOpen);
+      dock.classList.toggle('search-open', searchOpen);
+      searchPanel.hidden = !searchOpen;
+      fab.setAttribute('aria-expanded', String(menuOpen || searchOpen));
+      fab.setAttribute('aria-label', menuOpen || searchOpen ? 'Close directory tools' : 'Open quick search. Hold for menu.');
+      if (searchOpen) setTimeout(() => document.getElementById('search')?.focus(), 30);
+    }
+
+    function currentToolState() {
+      const dock = document.getElementById('tool-dock');
+      if (!dock) return '';
+      if (dock.classList.contains('menu-open')) return 'menu';
+      if (dock.classList.contains('search-open')) return 'search';
+      return '';
+    }
+
+    function openSearchTool() { setToolState('search'); }
+    function openMenuTool() { setToolState('menu'); }
+    function closeToolPanels() { setToolState(''); }
+
     function showResults() {
       if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
+      closeToolPanels();
       renderResults();
       document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -752,12 +813,48 @@
       document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
       document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
       document.getElementById('show-results').addEventListener('click', showResults);
-      document.querySelectorAll('.tool-dock details').forEach(panel => {
-        panel.addEventListener('toggle', () => {
-          if (!panel.open) return;
-          document.querySelectorAll('.tool-dock details').forEach(other => { if (other !== panel) other.open = false; });
-        });
+      const toolFab = document.getElementById('tool-fab');
+      const menuSearch = document.getElementById('menu-search');
+      let holdTimer = null;
+      let longPress = false;
+      const clearHold = () => {
+        if (holdTimer) clearTimeout(holdTimer);
+        holdTimer = null;
+      };
+      toolFab.addEventListener('pointerdown', event => {
+        longPress = false;
+        clearHold();
+        holdTimer = setTimeout(() => {
+          longPress = true;
+          openMenuTool();
+        }, 480);
       });
+      toolFab.addEventListener('pointerup', () => {
+        clearHold();
+        if (longPress) return;
+        currentToolState() ? closeToolPanels() : openSearchTool();
+      });
+      toolFab.addEventListener('pointerleave', clearHold);
+      toolFab.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          currentToolState() ? closeToolPanels() : openSearchTool();
+        }
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          openMenuTool();
+        }
+      });
+      menuSearch.addEventListener('click', openSearchTool);
+      document.addEventListener('click', event => {
+        const dock = document.getElementById('tool-dock');
+        if (!dock?.contains(event.target)) closeToolPanels();
+      });
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (currentToolState() === 'search' && Math.abs(window.scrollY - lastScrollY) > 18) closeToolPanels();
+        lastScrollY = window.scrollY;
+      }, { passive: true });
       document.querySelectorAll('.mini-stat[data-target]').forEach(button => {
         button.addEventListener('click', () => focusSection(button.dataset.target));
       });

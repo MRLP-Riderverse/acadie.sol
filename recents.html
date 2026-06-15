@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fresh Drafts · ACADIE.SOL Directory</title>
+  <style>
+    :root {
+      --page-bg: #121212;
+      --card: rgba(16, 53, 102, 0.84);
+      --card-strong: rgba(33, 98, 177, 0.72);
+      --line: rgba(244, 242, 236, 0.17);
+      --line-strong: rgba(244, 242, 236, 0.34);
+      --text: #f8f5ea;
+      --muted: rgba(248, 245, 234, 0.74);
+      --soft: rgba(248, 245, 234, 0.58);
+      --gold: #f2c84b;
+      --gold-ink: #322600;
+      --shadow: rgba(5, 13, 27, 0.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Verdana", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(40, 114, 198, 0.25), transparent 24rem),
+        radial-gradient(circle at 92% 4%, rgba(242, 200, 75, 0.12), transparent 21rem),
+        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 38%, #0e0e0e 100%);
+    }
+    a { color: #fff; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .wrap { width: min(980px, calc(100vw - 28px)); margin: 0 auto; padding: 22px 0 42px; }
+    .hero { padding: 6px 0 16px; border-bottom: 1px solid rgba(248,245,234,0.1); display: grid; gap: 12px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; color: var(--gold); font-weight: 800; }
+    h1 { margin: 0; font-size: clamp(1.85rem, 4.2vw, 3.15rem); line-height: 1; }
+    .lede { margin: 0; max-width: 70ch; color: var(--muted); line-height: 1.5; }
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .pill-link,
+    button {
+      appearance: none;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: rgba(255,255,255,0.08);
+      color: var(--text);
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .pill-link:hover,
+    button:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 10px; flex-wrap: wrap; }
+    .toolbar span { color: var(--muted); font-size: 0.88rem; }
+    .draft-list { display: grid; gap: 10px; }
+    .draft-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 13px;
+      background: linear-gradient(180deg, var(--card-strong), var(--card));
+      box-shadow: 0 16px 38px var(--shadow);
+      display: grid;
+      gap: 9px;
+    }
+    .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .card-title { margin: 0; font-size: 1rem; line-height: 1.2; }
+    .badge { border-radius: 999px; padding: 4px 7px; background: var(--gold); color: var(--gold-ink); font-size: 0.62rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
+    .meta { display: flex; gap: 6px; flex-wrap: wrap; }
+    .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 4px 7px; color: var(--muted); font-size: 0.72rem; }
+    .desc { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.45; font-size: 0.9rem; }
+    .date { color: var(--soft); font-size: 0.8rem; }
+    .empty { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: linear-gradient(180deg, var(--card-strong), var(--card)); color: var(--muted); }
+    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.87rem; line-height: 1.45; }
+    @media (max-width: 650px) {
+      .wrap { width: min(100vw - 16px, 980px); padding-top: 12px; }
+      .card-top { display: grid; gap: 8px; }
+      .badge { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Acadie.sol directory</div>
+      <h1>Fresh draft intake</h1>
+      <p class="lede">The latest draft places being shaped before promotion into official entries. This page is intentionally draft-first: useful for seeing what is coming in without crowding the main browse view.</p>
+      <nav class="nav" aria-label="Page navigation">
+        <a class="pill-link" href="directory.html">Directory</a>
+        <a class="pill-link" href="index.html">Home</a>
+      </nav>
+    </section>
+
+    <div class="toolbar">
+      <span id="count-copy">Loading drafts…</span>
+      <button id="show-more" type="button" hidden>Show more</button>
+    </div>
+
+    <main id="app" class="draft-list"></main>
+    <div class="footer">Data source: generated from <code>acadie_sol_directory/inbox</code>. Drafts are public previews, not final business profiles.</div>
+  </div>
+
+  <script>
+    const state = { drafts: [], visible: 20 };
+
+    async function loadData() {
+      const res = await fetch('assets/directory-data.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to load data (${res.status})`);
+      return res.json();
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+    function clean(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function modifiedTs(item) {
+      const numeric = Number(item?.source_modified_ts || 0);
+      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+      const parsed = Date.parse(item?.source_modified_at || '');
+      return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
+    }
+    function formatTimestamp(value) {
+      const numeric = Number(value || 0);
+      if (!Number.isFinite(numeric) || numeric <= 0) return 'Timestamp unavailable';
+      return new Intl.DateTimeFormat(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(numeric * 1000));
+    }
+    function publicCity(item) {
+      const declared = String(item.public_area || '').trim();
+      if (declared) return declared;
+      const area = String(item.area || '').trim();
+      if (/bathurst/i.test(area)) return 'Acadie-Bathurst';
+      return area || 'Unsorted';
+    }
+    function sourceLabel(src) {
+      if (!src) return '';
+      if (src === 'In person') return 'In person';
+      try { return new URL(src).hostname.replace(/^www\./, ''); } catch { return src; }
+    }
+    function displayTags(item) {
+      const blocked = new Set([clean(item.category).toLowerCase(), clean(publicCity(item)).toLowerCase(), clean(item.area).toLowerCase()]);
+      const seen = new Set();
+      return (Array.isArray(item.tags) ? item.tags : []).map(clean).filter(Boolean).filter(tag => {
+        const key = tag.toLowerCase();
+        if (blocked.has(key) || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).slice(0, 4);
+    }
+    function renderCard(item) {
+      const city = publicCity(item);
+      const stamp = modifiedTs(item);
+      const description = clean(item.description || item.summary || item.notes) || 'Draft details are still being shaped.';
+      const tags = displayTags(item);
+      const source = sourceLabel((item.sources || [])[0]);
+      return `<article class="draft-card" id="entry-${escapeHtml(item.slug)}">
+        <div class="card-top">
+          <h2 class="card-title"><a href="directory.html#entry-${escapeHtml(item.slug)}">${escapeHtml(item.title)}</a></h2>
+          <span class="badge">preview</span>
+        </div>
+        <div class="meta">
+          ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+          ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
+          ${tags.map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
+        </div>
+        <p class="desc">${escapeHtml(description)}</p>
+        <div class="date">${escapeHtml(formatTimestamp(stamp))}${source ? ` · ${escapeHtml(source)}` : ''}</div>
+      </article>`;
+    }
+    function render() {
+      const app = document.getElementById('app');
+      const countCopy = document.getElementById('count-copy');
+      const showMore = document.getElementById('show-more');
+      const visible = state.drafts.slice(0, state.visible);
+      countCopy.textContent = `${state.drafts.length} draft preview${state.drafts.length === 1 ? '' : 's'}, newest first`;
+      app.innerHTML = visible.length ? visible.map(renderCard).join('') : '<div class="empty">No draft previews found.</div>';
+      showMore.hidden = state.visible >= state.drafts.length;
+    }
+    document.getElementById('show-more').addEventListener('click', () => {
+      state.visible += 20;
+      render();
+    });
+    loadData().then(data => {
+      state.drafts = (data.items || [])
+        .filter(item => item.draft)
+        .sort((a, b) => modifiedTs(b) - modifiedTs(a) || String(a.title || '').localeCompare(String(b.title || '')));
+      render();
+    }).catch(err => {
+      document.getElementById('count-copy').textContent = 'Could not load drafts.';
+      document.getElementById('app').innerHTML = `<div class="empty">${escapeHtml(err.message)}</div>`;
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
