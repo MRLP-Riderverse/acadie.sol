@@ -74,15 +74,9 @@
     }
     .nav-action:hover,
     .nav-action.active { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
-    .top-search {
-      margin-top: 10px;
-      border-radius: 18px;
-      overflow: clip;
-      display: none;
-    }
-    .top-search.search-open { display: block; }
 
     .control-panel,
+    .choice-panel,
     .recent-panel,
     .directory-card,
     .empty {
@@ -118,6 +112,30 @@
     button.mini-stat { font: inherit; cursor: pointer; }
     .mini-stat:hover { border-color: var(--gold); color: var(--text); background: rgba(242,200,75,0.12); }
     .mini-stat strong { color: var(--gold); }
+
+    .choice-panel { margin-top: 16px; border-radius: 22px; padding: 16px; display: grid; gap: 13px; }
+    .choice-copy { display: grid; gap: 5px; max-width: 72ch; }
+    .choice-copy strong { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .choice-copy h2 { margin: 0; font-size: clamp(1.18rem, 2.4vw, 1.75rem); }
+    .choice-copy p { margin: 0; color: var(--muted); line-height: 1.45; }
+    .choice-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .choice-button {
+      border-radius: 18px;
+      padding: 15px;
+      display: grid;
+      gap: 6px;
+      text-align: left;
+      background: rgba(255,255,255,0.07);
+    }
+    .choice-button.active,
+    .choice-button:hover { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+    .choice-button b { font-size: 1.02rem; }
+    .choice-button span { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
+    .choice-button:hover span,
+    .choice-button.active span { color: rgba(50,38,0,0.76); }
+    .body-search { margin-top: 14px; position: relative; }
+    .body-search[hidden],
+    .directory-shell[hidden] { display: none; }
 
     .control-panel { margin-top: 14px; border-radius: 20px; overflow: clip; }
     .control-panel > summary {
@@ -352,6 +370,9 @@
       .lede { font-size: 0.9rem; line-height: 1.4; }
       .mini-stats { gap: 6px; }
       .mini-stat { font-size: 0.74rem; padding: 6px 8px; }
+      .choice-panel { padding: 12px; border-radius: 18px; }
+      .choice-actions { grid-template-columns: 1fr; gap: 8px; }
+      .choice-button { padding: 12px; border-radius: 15px; }
       .control-body { padding: 10px; }
       .control-grid { gap: 7px; }
       .search-actions { grid-template-columns: 1fr; }
@@ -388,10 +409,44 @@
         <a class="nav-action" href="index.html">Home</a>
       </nav>
     </div>
-    <div class="control-panel top-search" id="search-panel">
+  </header>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Acadie.sol directory</div>
+        <h1>Discover or search Acadie.sol places.</h1>
+        <p class="lede">Choose a browsing style first. Discover opens the full official directory; Search gives you a clean filter-first path into the same results.</p>
+      </div>
+      <aside class="mini-stats" aria-label="Directory status">
+        <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> entries</button>
+        <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
+        <span class="mini-stat"><strong id="city-stat">…</strong> cities</span>
+        <a class="mini-stat" href="recents.html"><strong id="draft-stat">…</strong> previews</a>
+      </aside>
+    </section>
+
+    <section class="choice-panel" id="choice-panel" aria-label="Choose how to use the directory">
+      <div class="choice-copy">
+        <strong>Start here</strong>
+        <h2>Do you want to discover or search?</h2>
+        <p>Discover is for browsing the whole directory and opening city groups at your pace. Search is for when you already have a place, area, or vibe in mind.</p>
+      </div>
+      <div class="choice-actions">
+        <button class="choice-button" id="choose-discover" type="button">
+          <b>Discover</b>
+          <span>Show all official entries, grouped for open-ended browsing.</span>
+        </button>
+        <button class="choice-button" id="choose-search" type="button">
+          <b>Search</b>
+          <span>Open a focused search and filter panel before browsing results.</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="control-panel body-search" id="search-panel" hidden>
       <div class="control-body">
         <div class="control-grid">
-          <input id="search" class="search" type="search" placeholder="Search by name, source, or public note…" autocomplete="off" enterkeyhint="search" />
+          <input id="search" class="search" type="search" placeholder="Search by name, area, category, or public note…" autocomplete="off" enterkeyhint="search" />
           <div class="search-actions">
             <button id="open-filters" class="search-action" type="button">Filter</button>
             <button id="show-results" class="search-action" type="button">Search</button>
@@ -411,29 +466,14 @@
             <option value="night">Evening — night out</option>
           </select>
           <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
-          <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All cities</option></select>
+          <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All areas</option></select>
           <div class="filter-actions">
             <button id="apply-filters" type="button">Done</button>
             <button id="reset-filters" type="button">Reset</button>
           </div>
         </div>
-        <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/city, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
+        <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/area, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
       </div>
-    </div>
-  </header>
-  <div class="wrap">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Acadie.sol directory</div>
-        <h1>So what are you looking for?</h1>
-        <p class="lede">Search directly, or narrow by mood, category, and city. The full list shows by default, and you can narrow it down from there.</p>
-      </div>
-      <aside class="mini-stats" aria-label="Directory status">
-        <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> entries</button>
-        <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
-        <span class="mini-stat"><strong id="city-stat">…</strong> cities</span>
-        <a class="mini-stat" href="recents.html"><strong id="draft-stat">…</strong> previews</a>
-      </aside>
     </section>
 
     <div class="tool-dock" aria-label="Return to top">
@@ -442,19 +482,21 @@
       </button>
     </div>
 
-    <div class="viewbar" id="directory-results">
-      <div class="view-title">
-        <h2>Directory browse</h2>
-        <span id="result-copy">Showing all entries.</span>
+    <section class="directory-shell" id="directory-shell" hidden>
+      <div class="viewbar" id="directory-results">
+        <div class="view-title">
+          <h2>Directory browse</h2>
+          <span id="result-copy">Showing all entries.</span>
+        </div>
+        <div class="view-actions">
+          <button id="show-all">Show all</button>
+          <button id="view-official">View official</button>
+          <button id="clear-filters">Clear</button>
+        </div>
       </div>
-      <div class="view-actions">
-        <button id="show-all">Show all</button>
-        <button id="view-official">View official</button>
-        <button id="clear-filters">Clear</button>
-      </div>
-    </div>
 
-    <main id="app"></main>
+      <main id="app"></main>
+    </section>
 
     <div class="footer">Data source: generated from <code>acadie_sol_directory/entries</code> and <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
   </div>
@@ -466,7 +508,8 @@
       city: 'all',
       query: '',
       lens: '',
-      showAll: true
+      showAll: true,
+      mode: 'intro'
     };
 
     const lensTerms = {
@@ -636,7 +679,7 @@
         categories.map(cat => `<option value="${escapeHtml(normalize(cat))}">${escapeHtml(cat)}</option>`).join('');
 
       const citySelect = document.getElementById('city-select');
-      citySelect.innerHTML = '<option value="all">All cities</option>' +
+      citySelect.innerHTML = '<option value="all">All areas</option>' +
         cities.map(city => `<option value="${escapeHtml(normalize(city))}">${escapeHtml(city)}</option>`).join('');
     }
 
@@ -783,32 +826,41 @@
       if (popover) popover.hidden = true;
     }
 
+    function setDirectoryMode(mode, options = {}) {
+      state.mode = mode;
+      const isIntro = mode === 'intro';
+      const isSearch = mode === 'search';
+      document.getElementById('directory-shell').hidden = isIntro;
+      document.getElementById('search-panel').hidden = !isSearch;
+      document.getElementById('choose-discover')?.classList.toggle('active', mode === 'discover');
+      document.getElementById('choose-search')?.classList.toggle('active', isSearch);
+      document.getElementById('nav-search')?.classList.toggle('active', isSearch);
+      document.getElementById('nav-search')?.setAttribute('aria-expanded', String(isSearch));
+      if (!isSearch) closeFilterPopover();
+      if (!isIntro) renderResults();
+      if (options.scroll) {
+        const target = isSearch ? document.getElementById('search-panel') : document.getElementById('directory-results');
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (isSearch && options.focus !== false) setTimeout(() => document.getElementById('search')?.focus(), 80);
+    }
+
     function openSearchTool() {
-      const nav = document.getElementById('top-nav');
-      const searchPanel = document.getElementById('search-panel');
-      const searchButton = document.getElementById('nav-search');
-      nav?.classList.remove('nav-hidden');
-      searchPanel?.classList.add('search-open');
-      searchButton?.classList.add('active');
-      searchButton?.setAttribute('aria-expanded', 'true');
-      setTimeout(() => document.getElementById('search')?.focus(), 30);
+      showHeader();
+      setDirectoryMode('search', { scroll: true, focus: true });
     }
 
     function closeSearchTool() {
-      const searchPanel = document.getElementById('search-panel');
-      const searchButton = document.getElementById('nav-search');
-      searchPanel?.classList.remove('search-open');
-      searchButton?.classList.remove('active');
-      searchButton?.setAttribute('aria-expanded', 'false');
       closeFilterPopover();
+      if (state.mode === 'search') setDirectoryMode('discover', { scroll: false, focus: false });
     }
 
     function toggleSearchTool() {
-      document.getElementById('search-panel')?.classList.contains('search-open') ? closeSearchTool() : openSearchTool();
+      state.mode === 'search' ? closeSearchTool() : openSearchTool();
     }
 
     function searchIsOpen() {
-      return Boolean(document.getElementById('search-panel')?.classList.contains('search-open'));
+      return state.mode === 'search';
     }
 
     function showHeader() { document.getElementById('top-nav')?.classList.remove('nav-hidden'); }
@@ -819,7 +871,7 @@
 
     function showResults() {
       if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
-      closeSearchTool();
+      setDirectoryMode('search', { scroll: false, focus: false });
       renderResults();
       document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -861,6 +913,11 @@
       document.getElementById('show-results').addEventListener('click', showResults);
       const navSearch = document.getElementById('nav-search');
       navSearch.addEventListener('click', toggleSearchTool);
+      document.getElementById('choose-discover').addEventListener('click', () => {
+        clearFilters();
+        setDirectoryMode('discover', { scroll: true, focus: false });
+      });
+      document.getElementById('choose-search').addEventListener('click', openSearchTool);
       document.getElementById('to-top').addEventListener('click', () => {
         showHeader();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -902,10 +959,13 @@
         lastScrollY = currentY;
       }, { passive: true });
       document.querySelectorAll('.mini-stat[data-target]').forEach(button => {
-        button.addEventListener('click', () => focusSection(button.dataset.target));
+        button.addEventListener('click', () => {
+          setDirectoryMode('discover', { scroll: false, focus: false });
+          focusSection(button.dataset.target);
+        });
       });
-      document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; renderResults(); });
-      document.getElementById('view-official').addEventListener('click', () => focusSection('official-section'));
+      document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; clearFilters(); setDirectoryMode('discover', { scroll: false, focus: false }); });
+      document.getElementById('view-official').addEventListener('click', () => { setDirectoryMode('discover', { scroll: false, focus: false }); focusSection('official-section'); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       window.addEventListener('hashchange', syncHashTarget);
     }
@@ -917,6 +977,7 @@
       renderRecent();
       bindEvents();
       renderResults();
+      if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
       document.getElementById('entry-stat').textContent = '!';
       document.getElementById('app').innerHTML = `<div class="empty"><h2>Directory failed to load.</h2><p>${escapeHtml(err.message)}</p></div>`;
