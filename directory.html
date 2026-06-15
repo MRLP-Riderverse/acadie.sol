@@ -86,13 +86,20 @@
       backdrop-filter: blur(4px);
     }
 
+    .splash {
+      min-height: calc(100svh - 140px);
+      display: grid;
+      align-content: center;
+      gap: 18px;
+      padding: clamp(18px, 4vw, 42px) 0;
+    }
+    .splash[hidden] { display: none; }
     .hero {
-      padding: 6px 0 16px;
+      padding: 0;
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 16px;
+      gap: 18px;
       align-items: end;
-      border-bottom: 1px solid rgba(248,245,234,0.1);
     }
 
     .eyebrow {
@@ -113,26 +120,41 @@
     .mini-stat:hover { border-color: var(--gold); color: var(--text); background: rgba(242,200,75,0.12); }
     .mini-stat strong { color: var(--gold); }
 
-    .choice-panel { margin-top: 16px; border-radius: 22px; padding: 16px; display: grid; gap: 13px; }
-    .choice-copy { display: grid; gap: 5px; max-width: 72ch; }
-    .choice-copy strong { color: var(--gold); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .choice-copy h2 { margin: 0; font-size: clamp(1.18rem, 2.4vw, 1.75rem); }
-    .choice-copy p { margin: 0; color: var(--muted); line-height: 1.45; }
-    .choice-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .choice-button {
-      border-radius: 18px;
-      padding: 15px;
+    .choice-panel {
+      border-radius: 28px;
+      padding: clamp(16px, 3vw, 28px);
       display: grid;
-      gap: 6px;
+      gap: 18px;
+      background:
+        linear-gradient(135deg, rgba(33,98,177,0.62), rgba(16,53,102,0.76)),
+        radial-gradient(circle at 20% 0%, rgba(242,200,75,0.16), transparent 18rem);
+    }
+    .choice-copy { display: grid; gap: 7px; max-width: 76ch; }
+    .choice-copy strong { color: var(--gold); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .choice-copy h2 { margin: 0; font-size: clamp(1.28rem, 2.8vw, 2rem); line-height: 1.05; }
+    .choice-copy p { margin: 0; color: var(--muted); line-height: 1.45; }
+    .choice-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .choice-button {
+      min-height: 148px;
+      border-radius: 22px;
+      padding: 18px;
+      display: grid;
+      align-content: space-between;
+      gap: 12px;
       text-align: left;
-      background: rgba(255,255,255,0.07);
+      background: rgba(8,18,40,0.24);
+      border-color: rgba(248,245,234,0.2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
     }
     .choice-button.active,
-    .choice-button:hover { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
-    .choice-button b { font-size: 1.02rem; }
-    .choice-button span { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
+    .choice-button:hover { background: rgba(242,200,75,0.94); color: var(--gold-ink); border-color: var(--gold); }
+    .choice-button b { font-size: clamp(1.1rem, 2.6vw, 1.45rem); }
+    .choice-button span { color: var(--muted); font-size: 0.9rem; line-height: 1.38; max-width: 28ch; }
+    .choice-button small { color: var(--gold); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 900; }
     .choice-button:hover span,
     .choice-button.active span { color: rgba(50,38,0,0.76); }
+    .choice-button:hover small,
+    .choice-button.active small { color: rgba(50,38,0,0.78); }
     .body-search { margin-top: 14px; position: relative; }
     .body-search[hidden],
     .directory-shell[hidden] { display: none; }
@@ -365,7 +387,8 @@
       .nav-brand span { display: none; }
       .nav-actions { gap: 6px; }
       .nav-action { padding: 7px 9px; font-size: 0.84rem; }
-      .hero { padding: 4px 0 13px; }
+      .splash { min-height: calc(100svh - 112px); padding: 12px 0 22px; align-content: start; }
+      .hero { padding: 4px 0 8px; }
       h1 { font-size: clamp(1.55rem, 8vw, 2.18rem); }
       .lede { font-size: 0.9rem; line-height: 1.4; }
       .mini-stats { gap: 6px; }
@@ -411,7 +434,8 @@
     </div>
   </header>
   <div class="wrap">
-    <section class="hero">
+    <section class="splash" id="splash-panel" aria-label="Directory start">
+      <section class="hero">
       <div>
         <div class="eyebrow">Acadie.sol directory</div>
         <h1>Discover or search Acadie.sol places.</h1>
@@ -433,14 +457,17 @@
       </div>
       <div class="choice-actions">
         <button class="choice-button" id="choose-discover" type="button">
+          <small>Open browse</small>
           <b>Discover</b>
-          <span>Show all official entries, grouped for open-ended browsing.</span>
+          <span>Enter the full official directory and unfold places by area.</span>
         </button>
         <button class="choice-button" id="choose-search" type="button">
+          <small>Find directly</small>
           <b>Search</b>
-          <span>Open a focused search and filter panel before browsing results.</span>
+          <span>Start with a name, area, category, or vibe before browsing results.</span>
         </button>
       </div>
+    </section>
     </section>
 
     <section class="control-panel body-search" id="search-panel" hidden>
@@ -830,6 +857,7 @@
       state.mode = mode;
       const isIntro = mode === 'intro';
       const isSearch = mode === 'search';
+      document.getElementById('splash-panel').hidden = !isIntro;
       document.getElementById('directory-shell').hidden = isIntro;
       document.getElementById('search-panel').hidden = !isSearch;
       document.getElementById('choose-discover')?.classList.toggle('active', mode === 'discover');
