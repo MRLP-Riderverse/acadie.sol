@@ -158,10 +158,30 @@
     .recent-date { color: var(--muted); font-size: 0.79rem; white-space: nowrap; }
 
     .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
-    .result-section { display: grid; gap: 9px; margin-bottom: 18px; }
-    .section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 4px; }
+    .result-section { display: grid; gap: 9px; margin-bottom: 18px; border-radius: 20px; overflow: clip; }
+    .result-section > summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 14px;
+    }
+    .result-section > summary::-webkit-details-marker { display: none; }
+    .section-heading { display: grid; gap: 4px; }
     .section-heading h3 { margin: 0; font-size: 0.96rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.08em; }
     .section-heading span { color: var(--soft); font-size: 0.82rem; }
+    .section-chevron { color: var(--gold); font-size: 1rem; font-weight: 900; transition: transform 0.15s ease; }
+    .result-section[open] .section-chevron { transform: rotate(180deg); }
+    .section-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 12px 14px 14px; display: grid; gap: 10px; }
+    .city-section { border: 1px solid rgba(248,245,234,0.1); border-radius: 16px; overflow: clip; background: rgba(255,255,255,0.025); }
+    .city-section > summary { list-style: none; cursor: pointer; padding: 10px 11px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .city-section > summary::-webkit-details-marker { display: none; }
+    .city-heading { display: grid; gap: 3px; }
+    .city-heading strong { color: var(--text); font-size: 0.9rem; }
+    .city-heading span { color: var(--muted); font-size: 0.78rem; }
+    .city-section .results-grid { padding: 0 11px 11px; }
 
     .directory-card { border-radius: 16px; padding: 0; overflow: clip; }
     .directory-card > summary { list-style: none; cursor: pointer; padding: 12px; }
@@ -289,13 +309,15 @@
       </div>
       <div class="view-actions">
         <button id="show-all">Show all</button>
+        <button id="view-official">View official</button>
+        <button id="view-drafts">View drafts</button>
         <button id="clear-filters">Clear</button>
       </div>
     </div>
 
     <main id="app"></main>
 
-    <div class="footer">Data source: generated from <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
+    <div class="footer">Data source: generated from <code>acadie_sol_directory/entries</code> and <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
   </div>
 
   <script>
@@ -517,7 +539,7 @@
         ['Hours', contactValue(item, 'hours')],
         ['Phone', contactValue(item, 'phone')],
         ['Email', contactValue(item, 'email')],
-        ['Website', contactValue(item, 'website')],
+        ...(item.draft ? [['Website', contactValue(item, 'website')]] : []),
       ].filter(([, value]) => cleanSummary(value));
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
@@ -539,12 +561,37 @@
         </details>`;
     }
 
-    function renderSection(title, subtitle, items) {
+    function groupByCity(items) {
+      return items.reduce((groups, item) => {
+        const city = publicCity(item) || 'Unsorted';
+        if (!groups.has(city)) groups.set(city, []);
+        groups.get(city).push(item);
+        return groups;
+      }, new Map());
+    }
+
+    function renderCityGroups(items) {
+      const groups = [...groupByCity(items).entries()].sort(([a], [b]) => a.localeCompare(b));
+      return groups.map(([city, cityItems], index) => `<details class="city-section" ${index === 0 ? 'open' : ''}>
+        <summary>
+          <div class="city-heading"><strong>${escapeHtml(city)}</strong><span>${cityItems.length} place${cityItems.length === 1 ? '' : 's'}</span></div>
+          <span class="section-chevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="results-grid">${cityItems.map(renderCard).join('')}</div>
+      </details>`).join('');
+    }
+
+    function renderSection(id, title, subtitle, items, options = {}) {
       if (!items.length) return '';
-      return `<section class="result-section">
-        <div class="section-heading"><h3>${escapeHtml(title)}</h3><span>${escapeHtml(subtitle)}</span></div>
-        <div class="results-grid">${items.map(renderCard).join('')}</div>
-      </section>`;
+      const openAttr = options.open ? ' open' : '';
+      const body = options.groupByCity ? renderCityGroups(items) : `<div class="results-grid">${items.map(renderCard).join('')}</div>`;
+      return `<details class="result-section glass" id="${escapeHtml(id)}"${openAttr}>
+        <summary>
+          <div class="section-heading"><h3>${escapeHtml(title)}</h3><span>${escapeHtml(subtitle)}</span></div>
+          <span class="section-chevron" aria-hidden="true">▾</span>
+        </summary>
+        <div class="section-body">${body}</div>
+      </details>`;
     }
 
     function renderResults() {
@@ -563,12 +610,28 @@
       resultCopy.textContent = filters.length ? `${items.length} match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}` : `Showing all ${items.length} entries`;
       const published = items.filter(item => !item.draft);
       const drafts = items.filter(item => item.draft);
+      const hasFilters = filters.length > 0;
       const sections = [
-        renderSection('Official entries', `${published.length} published`, published),
-        renderSection('Draft previews', `${drafts.length} still being shaped`, drafts),
+        renderSection('official-section', 'Official entries', `${published.length} published`, published, { open: true, groupByCity: true }),
+        renderSection('draft-section', 'Draft previews', `${drafts.length} still being shaped`, drafts, { open: hasFilters }),
       ].filter(Boolean).join('');
       app.innerHTML = items.length ? sections : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
       syncHashTarget();
+    }
+
+    function openParentDetails(target) {
+      let node = target?.parentElement;
+      while (node) {
+        if (node.tagName === 'DETAILS') node.open = true;
+        node = node.parentElement;
+      }
+    }
+
+    function focusSection(id) {
+      const section = document.getElementById(id);
+      if (!section) return;
+      section.open = true;
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function syncHashTarget() {
@@ -576,6 +639,7 @@
       if (!hash.startsWith('#entry-')) return;
       const target = document.querySelector(hash);
       if (!target) return;
+      openParentDetails(target);
       target.open = true;
     }
 
@@ -598,6 +662,8 @@
       document.getElementById('category-select').addEventListener('change', event => { state.category = event.target.value; renderResults(); });
       document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
       document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; renderResults(); });
+      document.getElementById('view-official').addEventListener('click', () => focusSection('official-section'));
+      document.getElementById('view-drafts').addEventListener('click', () => focusSection('draft-section'));
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       window.addEventListener('hashchange', syncHashTarget);
     }
