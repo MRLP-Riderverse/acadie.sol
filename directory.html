@@ -427,9 +427,124 @@
       .summary { font-size: 0.85rem; }
       .meta-pill { font-size: 0.69rem; padding: 4px 6px; }
     }
+    /* Light editorial visual pass: mirrors the latest mockup by moving away from
+       dashboard chrome and toward cream paper, warm ink, and compact search cards. */
+    :root {
+      --page-bg: #f8f2e8;
+      --panel: #fffaf2;
+      --panel-strong: #fffdf8;
+      --card: #fffaf2;
+      --card-strong: #fffdf8;
+      --text: #2f261d;
+      --muted: #766a5b;
+      --soft: #8d8275;
+      --line: rgba(47, 38, 29, 0.14);
+      --line-strong: rgba(47, 38, 29, 0.18);
+      --gold: #d89b20;
+      --gold-ink: #2f261d;
+      --shadow: rgba(65, 47, 29, 0.10);
+    }
+    body {
+      background: radial-gradient(circle at 18% 0%, rgba(216,155,32,.13), transparent 18rem), linear-gradient(180deg, #fffaf3 0%, var(--page-bg) 55%, #efe4d4 100%);
+    }
+    .top-nav { background: rgba(255,250,242,.92); border-bottom-color: var(--line); box-shadow: 0 10px 28px rgba(65,47,29,.10); }
+    .nav-brand strong, .eyebrow, .control-kicker, .control-intro strong, .choice-copy strong, .mini-stat strong { color: var(--blue-deep); }
+    .nav-action, button, .mini-stat { background: #fffaf2; color: var(--text); }
+    .nav-action:hover, .nav-action.active, button:hover, button.active { background: var(--blue-deep); border-color: var(--blue-deep); color: #fffaf2; }
+    .choice-panel, .control-panel, .recent-panel, .directory-card, .empty { background: rgba(255,250,242,.88); border-color: var(--line); box-shadow: 0 14px 32px var(--shadow); }
+    .choice-panel { border-radius: 24px; }
+    .choice-button { min-height: 104px; background: #fffdf8; border-color: var(--line); }
+    .choice-button.active, .choice-button:hover { background: var(--blue-deep); color: #fffaf2; border-color: var(--blue-deep); }
+    .choice-button.active span, .choice-button:hover span, .choice-button.active small, .choice-button:hover small { color: rgba(255,250,242,.76); }
+    .search, .select { background: #fffdf8; color: var(--text); border-color: var(--line-strong); }
+    .search::placeholder { color: rgba(47,38,29,.42); }
+    .filter-popover { background: #fffaf2; color: var(--text); box-shadow: 0 16px 36px rgba(65,47,29,.16); }
+    .mini-stats { display: none; }
+    .splash { min-height: auto; padding: 12px 0 20px; }
+    .wrap { padding-top: 76px; }
+    @media (max-width: 720px) { .wrap { width: min(100vw - 18px, 1120px); } .choice-actions { grid-template-columns: 1fr; } }
+    /* OS-shaped search screen pass: compact app shell, visual rows, bottom dock. */
+    .top-nav { left: 50%; right: auto; width: min(430px, 100vw); transform: translateX(-50%); padding: 10px 14px; background: transparent; border-bottom: 0; box-shadow: none; backdrop-filter: none; }
+    .top-nav.nav-hidden { transform: translate(-50%, -100%); }
+    .nav-brand strong { letter-spacing: .08em; }
+    .nav-brand span { display: none; }
+    .nav-actions { display: none; }
+    .nav-action { padding: 8px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(65,47,29,.08); }
+    .wrap { width: min(430px, 100vw); padding: 66px 14px 86px; }
+    .control-panel { margin-top: 0; border-radius: 28px; overflow: visible; }
+    .control-body { padding: 14px; border-top: 0; gap: 12px; }
+    .control-intro { padding: 3px 2px 0; }
+    .control-intro strong { font-size: 1.18rem; color: var(--text); }
+    .control-intro span { font-size: .82rem; }
+    .search { border-radius: 19px; padding: 14px 15px; font-size: .96rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.7); }
+    .search-actions { grid-template-columns: 1fr 1fr auto; }
+    .search-action { border-radius: 16px; padding: 10px 11px; font-size: .82rem; }
+    .filter-note { display: none; }
+    .viewbar { display: none; }
+    .directory-shell { margin-top: 10px; }
+    .result-section { border: 0; background: transparent; box-shadow: none; }
+    .result-section > summary { padding: 6px 2px 10px; }
+    .section-heading h3 { color: var(--muted); font-size: .78rem; letter-spacing: .11em; text-transform: uppercase; }
+    .section-heading span, .section-chevron { display: none; }
+    .section-body { padding: 0; }
+    .city-section { border: 0; background: transparent; }
+    .city-section > summary { padding: 8px 2px; }
+    .city-heading strong { font-size: .88rem; }
+    .results-grid { gap: 8px; }
+    .directory-card { border-radius: 21px; background: rgba(255,250,242,.94); }
+    .directory-card > summary { padding: 9px; }
+    .card-main { min-width: 0; display: grid; gap: 6px; }
+    .card-top { display: flex; align-items: start; justify-content: space-between; gap: 7px; }
+    .card-title { font-size: .95rem; letter-spacing: -.01em; }
+    .meta-line { margin-top: 0; gap: 5px; overflow: hidden; }
+    .meta-pill, .badge { font-size: .66rem; padding: 4px 6px; background: #f3eadc; color: var(--muted); border-color: transparent; }
+    .expanded-thumb { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(13,47,94,.92), rgba(217,155,33,.72)); color: #fffaf2; font-weight: 900; font-size: 1.28rem; box-shadow: inset 0 0 0 1px rgba(255,250,242,.24); margin-bottom: 8px; }
+    .full-page-link { display: inline-block; margin-top: 8px; padding: 8px 14px; border-radius: 14px; background: var(--blue-deep); color: #fffaf2; font-size: .82rem; font-weight: 900; text-decoration: none; }
+    .card-body { padding: 0 12px 12px; }
+    .tool-dock { display: none; }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: rgba(255,250,242,.68); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a.active { color: #fffaf2; background: var(--blue-deep); }
+    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: rgba(255,250,242,.72); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px rgba(65,47,29,.24); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+    .drawer-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .drawer-title { display: grid; gap: 2px; }
+    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+    .drawer-title span { color: var(--muted); font-size: .8rem; }
+    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
+    .drawer-nav { display: grid; gap: 8px; }
+    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: rgba(255,250,242,.72); color: var(--text); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .city-pill { background: var(--blue-deep); color: #fffaf2; }
+    [data-theme="dark"] {
+      --page-bg: #171512;
+      --card: #25211b;
+      --card-strong: #2d281f;
+      --line: rgba(255, 246, 232, 0.14);
+      --line-strong: rgba(255, 246, 232, 0.18);
+      --text: #fff6e8;
+      --muted: #c8b9a4;
+      --soft: #b9aa96;
+      --gold: #f0bd4b;
+      --shadow: rgba(0,0,0,.30);
+    }
   </style>
 </head>
 <body>
+  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
+  <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
+  <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-head">
+      <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
+    </div>
+    <nav class="drawer-nav">
+      <a href="directory.html">Full directory</a>
+      <a href="index.html#about">About Acadie.sol</a>
+      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+    </nav>
+  </aside>
   <header class="top-nav" id="top-nav">
     <div class="nav-row">
       <a class="nav-brand" href="directory.html" aria-label="Acadie.sol directory top">
@@ -469,7 +584,7 @@
         <button class="choice-button" id="choose-discover" type="button">
           <small>Browse freely</small>
           <b>Show all places</b>
-          <span>Open the full directory and unfold places by area.</span>
+          <span>Open the full directory as one alphabetical stack.</span>
         </button>
         <button class="choice-button" id="choose-search" type="button">
           <small>Find directly</small>
@@ -542,6 +657,13 @@
     <div class="footer">A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.</div>
   </div>
 
+  <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html"><span>⌂</span><span>Home</span></a>
+    <a href="events.html"><span>◷</span><span>Events</span></a>
+    <a class="active" href="directory.html"><span>⌕</span><span>Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+  </nav>
+
   <script>
     const state = {
       items: [],
@@ -553,9 +675,13 @@
       city: 'all',
       query: '',
       lens: '',
+      mode: 'intro',
       showAll: true,
-      mode: 'intro'
     };
+    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
+    const savedTheme = localStorage.getItem('acadie-theme');
+    if (savedTheme) applyTheme(savedTheme);
+    document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
     const lensTerms = {
       food: ['food', 'restaurant', 'cafe', 'coffee', 'pizza', 'breakfast', 'brunch', 'donut', 'burger', 'deli', 'ice cream', 'treat', 'grocery'],
@@ -698,7 +824,7 @@
         const hay = itemHaystack(item);
         const categoryOk = state.category === 'all' || normalize(item.category) === state.category;
         const cityOk = state.city === 'all' || normalize(publicCity(item)) === state.city;
-        const queryOk = !q || hay.includes(q);
+        const queryOk = !q || q.split(/\s+/).filter(Boolean).every(term => hay.includes(term));
         return categoryOk && cityOk && queryOk && matchesLens(item);
       });
 
@@ -839,24 +965,30 @@
         ['Email', contactValue(item, 'email')],
         ...(item.draft ? [['Website', contactValue(item, 'website')]] : []),
       ].filter(([, value]) => cleanSummary(value));
+      const entryLink = !item.draft ? `<a class="full-page-link" href="entry.html#${escapeHtml(item.slug)}">View full page</a>` : '';
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
           <summary>
-            <div class="card-top">
-              <h3 class="card-title">${escapeHtml(item.title)}</h3>
-              ${item.draft ? '<span class="badge">preview</span>' : ''}
-              ${renderUpcomingBadge(item)}
-            </div>
-            <div class="meta-line">
-              ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
-              ${tags.slice(0, 3).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
-            </div>
+            <span class="card-main">
+              <span class="card-top">
+                <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                ${item.draft ? '<span class="badge">preview</span>' : ''}
+                ${renderUpcomingBadge(item)}
+              </span>
+              <span class="meta-line">
+                ${city ? `<span class="meta-pill city-pill">${escapeHtml(city)}</span>` : ''}
+                ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+                ${tags.slice(0, 1).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
+              </span>
+            </span>
           </summary>
           <div class="card-body">
+            <div class="expanded-thumb">${escapeHtml((item.title || '?').trim().charAt(0).toUpperCase())}</div>
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
             ${eventFeed}
+            ${entryLink}
           </div>
         </details>`;
     }
@@ -900,7 +1032,7 @@
       const showAllButton = document.getElementById('show-all');
 
       const allMatches = filteredItems();
-      const items = allMatches.filter(item => !item.draft);
+      const items = allMatches;
       const filters = [];
       if (state.query) filters.push(`search “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
@@ -908,11 +1040,10 @@
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
       showAllButton.classList.add('active');
-      resultCopy.textContent = filters.length ? `${items.length} place${items.length === 1 ? '' : 's'} matching ${filters.join(' + ')}.` : `Showing ${items.length} local place${items.length === 1 ? '' : 's'}.`;
-      const sections = [
-        renderSection('official-section', 'Local places', `${items.length} in the directory`, items, { open: true, groupByCity: true }),
-      ].filter(Boolean).join('');
-      app.innerHTML = items.length ? sections : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
+      resultCopy.textContent = filters.length ? `${items.length} place${items.length === 1 ? '' : 's'} matching ${filters.join(' + ')}.` : `Showing ${items.length} local place${items.length === 1 ? '' : 's'} alphabetically.`;
+      app.innerHTML = items.length
+        ? `<div class="flat-results results-grid">${items.map(renderCard).join('')}</div>`
+        : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
       syncHashTarget();
     }
 
@@ -1083,7 +1214,7 @@
         });
       });
       document.getElementById('show-all').addEventListener('click', () => { state.showAll = true; clearFilters(); setDirectoryMode('discover', { scroll: false, focus: false }); });
-      document.getElementById('view-official').addEventListener('click', () => { setDirectoryMode('discover', { scroll: false, focus: false }); focusSection('official-section'); });
+      document.getElementById('view-official').addEventListener('click', () => { setDirectoryMode('discover', { scroll: false, focus: false }); document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       document.getElementById('clear-filters').addEventListener('click', clearFilters);
       window.addEventListener('hashchange', syncHashTarget);
     }

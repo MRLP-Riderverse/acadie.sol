@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23f8f2e8'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23174b8e'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='22' fill='%23fffaf2'%3EA%3C/text%3E%3C/svg%3E" />
+  <title>Acadie.sol — Entry</title>
+  <style>
+    :root {
+      --bg: #f5ede1;
+      --paper: #fffaf2;
+      --paper-soft: #fbf3e7;
+      --ink: #2f261d;
+      --muted: #786c5f;
+      --line: rgba(47, 38, 29, 0.13);
+      --blue: #174b8e;
+      --blue-deep: #0d2f5e;
+      --gold: #d99b21;
+      --red: #bf4a4f;
+      --shadow: rgba(65, 47, 29, 0.14);
+      --glass: rgba(255,250,242,.64);
+    }
+    [data-theme="dark"] {
+      --bg: #171512;
+      --paper: #25211b;
+      --paper-soft: #2d281f;
+      --ink: #fff6e8;
+      --muted: #c8b9a4;
+      --line: rgba(255, 246, 232, 0.14);
+      --blue: #5b91d9;
+      --blue-deep: #8fb9ef;
+      --gold: #f0bd4b;
+      --red: #dc6b70;
+      --shadow: rgba(0, 0, 0, 0.30);
+      --glass: rgba(37,33,27,.62);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(217,155,33,.20), transparent 17rem),
+        linear-gradient(180deg, #fffaf3 0%, var(--bg) 58%, #eadcca 100%);
+    }
+    [data-theme="dark"] body { background: radial-gradient(circle at 20% 0%, rgba(217,155,33,.14), transparent 17rem), linear-gradient(180deg, #1d1a16 0%, var(--bg) 68%, #0f0e0d 100%); }
+    a { color: inherit; }
+    .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; color: var(--muted); font-size: .74rem; letter-spacing: .10em; text-transform: uppercase; }
+    .brand-row a { color: var(--blue-deep); font-weight: 900; text-decoration: none; }
+    .poster { position: relative; min-height: 260px; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, rgba(13,47,94,.94), rgba(23,75,142,.72)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), #174b8e; display: grid; place-items: center; }
+    .poster::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; pointer-events: none; }
+    .poster-initial { font-size: 4.5rem; font-weight: 900; color: rgba(255,250,242,.88); text-shadow: 0 4px 24px rgba(0,0,0,.24); }
+    .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
+    h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.1; }
+    .entry-city { color: var(--muted); font-size: .82rem; margin-top: 4px; }
+    .entry-category { display: inline-block; padding: 4px 8px; border-radius: 999px; background: var(--blue-deep); color: #fffaf2; font-size: .68rem; font-weight: 900; margin-top: 6px; }
+    .description { margin: 0; font-size: .92rem; line-height: 1.42; color: var(--ink); }
+    .detail-grid { display: grid; gap: 8px; margin-top: 12px; }
+    .detail-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
+    .detail-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 900; white-space: nowrap; }
+    .detail-value { font-size: .88rem; word-break: break-word; }
+    .detail-link { color: var(--blue-deep); text-decoration: none; }
+    .section-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: var(--muted); font-weight: 900; margin-top: 12px; margin-bottom: 6px; }
+    .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; margin-top: 6px; }
+    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: var(--red); color: #fffaf2; display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; font-size: .78rem; }
+    .date-chip small { display: block; font-size: .56rem; opacity: .84; text-transform: uppercase; }
+    .event-row strong { display: block; font-size: .88rem; }
+    .event-row span { display: block; color: var(--muted); font-size: .75rem; }
+    .related-place { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-soft); color: var(--ink); text-decoration: none; font-size: .82rem; font-weight: 900; margin: 4px 4px 4px 0; }
+    .empty-msg { padding: 28px; text-align: center; color: var(--muted); }
+    .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
+    .page-footer p { margin: 0; }
+
+    /* Universal site dock + drawer (same as other pages) */
+    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px rgba(65,47,29,.24); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+    .drawer-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .drawer-title { display: grid; gap: 2px; }
+    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+    .drawer-title span { color: var(--muted); font-size: .8rem; }
+    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
+    .drawer-nav { display: grid; gap: 8px; }
+    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .dock a, .dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .dock a.active { color: var(--paper); background: var(--blue-deep); }
+  </style>
+</head>
+<body>
+  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
+  <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
+  <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-head">
+      <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
+    </div>
+    <nav class="drawer-nav">
+      <a href="directory.html">Full directory</a>
+      <a href="index.html#about">About Acadie.sol</a>
+      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+    </nav>
+  </aside>
+
+  <main class="phone-shell" id="entry-root">
+    <header class="brand-row"><a href="index.html">Acadie.sol</a><span>entry</span></header>
+    <div class="empty-msg" id="loading">Loading entry…</div>
+  </main>
+
+  <nav class="dock" aria-label="Primary dock">
+    <a href="index.html"><span>⌂</span><span>Home</span></a>
+    <a href="events.html"><span>◷</span><span>Events</span></a>
+    <a href="directory.html"><span>⌕</span><span>Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+  </nav>
+
+  <script>
+    /* entry.html — MySpace-style single-template data-driven page.
+       Reads slug from URL hash (#slug), fetches directory-data.json,
+       and renders a full page for that entry. Drafts redirect back
+       to directory.html since they don't get full pages yet. */
+    function escapeHtml(str) { const d=document.createElement("div"); d.textContent=String(str||""); return d.innerHTML; }
+    function normalize(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
+    function cleanSummary(v) { return v && typeof v === 'object' ? (v.en || v.fr || v.shiac || '') : (v || ''); }
+    function localized(v) { return v && typeof v === 'object' ? (v.en || v.fr || v.shiac || '') : (v || ''); }
+    function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
+    function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
+    function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
+    function phoneHref(v) { const d = cleanSummary(v).replace(/[^\d+]/g, ''); return d ? `tel:${d}` : ''; }
+    function renderDetailLink(label, value) {
+      const text = cleanSummary(value); if (!text) return '';
+      const lower = String(label || '').toLowerCase();
+      if (lower === 'phone') { const h = phoneHref(text); return h ? `<a class="detail-link" href="${h}">${escapeHtml(text)}</a>` : escapeHtml(text); }
+      if (lower === 'address') { const h = mapsHref(text); return h ? `<a class="detail-link" href="${h}" target="_blank" rel="noopener">${escapeHtml(text)}</a>` : escapeHtml(text); }
+      if (lower === 'email') return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
+      if (lower === 'website') { const h = /^https?:\/\//i.test(text) ? text : `https://${text}`; return `<a class="detail-link" href="${escapeHtml(h)}" target="_blank" rel="noopener">${escapeHtml(text)}</a>`; }
+      return escapeHtml(text);
+    }
+    function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(d), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(d) }; }
+    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
+    const savedTheme = localStorage.getItem('acadie-theme');
+    if (savedTheme) applyTheme(savedTheme);
+    document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    const slug = decodeURIComponent(location.hash.slice(1)).trim();
+    if (!slug) { location.replace('directory.html'); }
+
+    async function render() {
+      const root = document.getElementById('entry-root');
+      try {
+        const [dirRes, evtRes] = await Promise.all([
+          fetch('assets/directory-data.json', { cache: 'no-store' }),
+          fetch('assets/events-data.json', { cache: 'no-store' })
+        ]);
+        const dirData = await dirRes.json();
+        const evtData = await evtRes.json();
+        const items = dirData.items || [];
+        const events = evtData.items || [];
+        const item = items.find(i => i.slug === slug);
+        if (!item) {
+          root.innerHTML = `<header class="brand-row"><a href="index.html">Acadie.sol</a><span>not found</span></header><div class="empty-msg"><h1>Entry not found</h1><p>No entry matches <code>${escapeHtml(slug)}</code>.</p><p><a href="directory.html">Back to directory</a></p></div>`;
+          return;
+        }
+        // Drafts don't get full pages — redirect to expanded card
+        if (item.draft) { location.replace(`directory.html#entry-${encodeURIComponent(item.slug)}`); return; }
+
+        document.title = `${item.title || 'Entry'} — Acadie.sol`;
+        const city = publicCity(item);
+        const description = cleanSummary(item.description || item.summary);
+        const tags = (Array.isArray(item.tags) ? item.tags : []).map(cleanSummary).filter(Boolean);
+        const detailRows = [
+          ['Address', contactValue(item, 'address')],
+          ['Hours', contactValue(item, 'hours')],
+          ['Phone', contactValue(item, 'phone')],
+          ['Email', contactValue(item, 'email')],
+          ['Website', contactValue(item, 'website')],
+        ].filter(([, v]) => cleanSummary(v));
+
+        // Related events
+        const relatedEvents = events.filter(e => {
+          const byEntry = [...(e.host_entry_ids || []), ...(e.performer_entry_ids || []), ...(e.sponsor_entry_ids || [])].includes(item.slug);
+          const byLoc = item.location_id && e.location_id === item.location_id;
+          return byEntry || byLoc;
+        }).sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')));
+
+        // Related places (share same location or cross-referenced)
+        const relatedSlugs = new Set([...(item.related_places || [])].map(s => String(s).trim().toLowerCase()));
+        const relatedPlaces = items.filter(i => i.slug !== item.slug && !i.draft && (relatedSlugs.has(normalize(i.slug)) || (item.location_id && i.location_id === item.location_id))).slice(0, 6);
+
+        const eventsHtml = relatedEvents.length ? `
+          <div class="section-label">Related events</div>
+          ${relatedEvents.map(e => {
+            const p = dateParts(e.starts_at);
+            const title = String(localized(e.title) || e.name || '').replace(/\s+Placeholder\b/i, ' Preview');
+            return `<a class="event-row" href="events.html#event-${escapeHtml(e.id)}"><span class="date-chip"><small>${escapeHtml(p.month)}</small>${escapeHtml(p.day)}</span><div><strong>${escapeHtml(title)}</strong><span>${escapeHtml(e.computed_status || '')}</span></div></a>`;
+          }).join('')}
+        ` : '';
+
+        const placesHtml = relatedPlaces.length ? `
+          <div class="section-label">Related places</div>
+          <div>${relatedPlaces.map(p => `<a class="related-place" href="entry.html#${escapeHtml(p.slug)}">${escapeHtml(p.title)}</a>`).join('')}</div>
+        ` : '';
+
+        const initial = (item.title || '?').trim().charAt(0).toUpperCase();
+
+        root.innerHTML = `
+          <header class="brand-row"><a href="index.html">Acadie.sol</a><span>${escapeHtml(city || 'entry')}</span></header>
+          <section class="poster"><span class="poster-initial">${escapeHtml(initial)}</span></section>
+          <section class="surface">
+            <h1>${escapeHtml(item.title)}</h1>
+            ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
+            ${item.category ? `<span class="entry-category">${escapeHtml(item.category)}</span>` : ''}
+            ${description ? `<p class="description" style="margin-top:10px">${escapeHtml(description)}</p>` : ''}
+            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
+            ${tags.length ? `<div style="margin-top:10px">${tags.map(t => `<span class="entry-category" style="background:#f3eadc;color:var(--muted);font-size:.66rem">#${escapeHtml(t)}</span>`).join(' ')}</div>` : ''}
+          </section>
+          ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
+          <footer class="page-footer"><p><a href="directory.html">Back to directory</a></p></footer>
+        `;
+      } catch (err) {
+        root.innerHTML = `<header class="brand-row"><a href="index.html">Acadie.sol</a><span>error</span></header><div class="empty-msg"><h1>Couldn't load entry</h1><p>${escapeHtml(err.message)}</p></div>`;
+      }
+    }
+    render();
+  </script>
+</body>
+</html>

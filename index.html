@@ -3,204 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23174b8e'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34'%3E🔥%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23f8f2e8'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23174b8e'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='22' fill='%23fffaf2'%3EA%3C/text%3E%3C/svg%3E" />
   <title>ACADIE.SOL</title>
   <style>
-    @font-face {
-      font-family: "Pokemon GB";
-      src: url("assets/fonts/PokemonGb-RAeo.ttf") format("truetype");
-      font-display: swap;
-    }
-
     :root {
-      --page-bg: #121212;
+      --bg: #f5ede1;
+      --paper: #fffaf2;
+      --paper-soft: #fbf3e7;
+      --ink: #2f261d;
+      --muted: #786c5f;
+      --line: rgba(47, 38, 29, 0.13);
       --blue: #174b8e;
       --blue-deep: #0d2f5e;
-      --gold: #f2c84b;
+      --gold: #d99b21;
       --red: #bf4a4f;
-      --text: #f8f5ea;
-      --muted: rgba(248, 245, 234, 0.76);
-      --line: rgba(248, 245, 234, 0.18);
-      --card: rgba(16, 53, 102, 0.82);
-      --shadow: rgba(5, 13, 27, 0.34);
+      --shadow: rgba(65, 47, 29, 0.14);
+      --glass: rgba(255,250,242,.64);
     }
-
+    [data-theme="dark"] {
+      --bg: #171512;
+      --paper: #25211b;
+      --paper-soft: #2d281f;
+      --ink: #fff6e8;
+      --muted: #c8b9a4;
+      --line: rgba(255, 246, 232, 0.14);
+      --blue: #5b91d9;
+      --blue-deep: #8fb9ef;
+      --gold: #f0bd4b;
+      --red: #dc6b70;
+      --shadow: rgba(0, 0, 0, 0.30);
+      --glass: rgba(37,33,27,.62);
+    }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--text);
+      color: var(--ink);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 0%, rgba(40, 114, 198, 0.32), transparent 22rem),
-        radial-gradient(circle at 95% 6%, rgba(242, 200, 75, 0.16), transparent 19rem),
-        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 48%, #0c0c0c 100%);
+        radial-gradient(circle at 20% 0%, rgba(217,155,33,.20), transparent 17rem),
+        linear-gradient(180deg, #fffaf3 0%, var(--bg) 58%, #eadcca 100%);
     }
+    [data-theme="dark"] body { background: radial-gradient(circle at 20% 0%, rgba(217,155,33,.14), transparent 17rem), linear-gradient(180deg, #1d1a16 0%, var(--bg) 68%, #0f0e0d 100%); }
     a { color: inherit; }
-    .wrap { width: min(760px, calc(100vw - 24px)); margin: 0 auto; padding: 14px 0 32px; }
-    .hero-card {
-      display: grid;
-      gap: 13px;
-      padding: clamp(16px, 4vw, 28px);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background:
-        linear-gradient(180deg, rgba(33, 98, 177, 0.52), rgba(16, 53, 102, 0.72)),
-        radial-gradient(circle at 18% 12%, rgba(242, 200, 75, 0.11), transparent 15rem);
-      box-shadow: 0 16px 34px var(--shadow);
-    }
-    .brand-mark {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 8px;
-      color: var(--gold);
-      font-size: 0.66rem;
-      font-weight: 900;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-    .brand-mark::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--gold); box-shadow: 0 0 18px rgba(242,200,75,.7); }
-    h1 {
-      margin: 0;
-      color: var(--gold);
-      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
-      font-size: clamp(2.05rem, 13vw, 3.45rem);
-      line-height: 0.95;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.22);
-    }
-    .lede { margin: 0; max-width: 54ch; color: var(--muted); font-size: clamp(0.92rem, 2.5vw, 1.04rem); line-height: 1.42; }
-    .primary-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 2px; }
-    .action-card {
-      min-height: 86px;
-      display: grid;
-      align-content: space-between;
-      gap: 7px;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: 17px;
-      color: var(--text);
-      text-decoration: none;
-      background: rgba(8, 18, 40, 0.28);
-      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
-    }
-    .action-card:hover,
-    .action-card:focus-visible { transform: translateY(-1px); border-color: rgba(242,200,75,.78); background: rgba(242,200,75,.13); outline: none; }
-    .action-card.primary { background: rgba(242, 200, 75, 0.94); color: #2f2500; border-color: var(--gold); }
-    .action-card b { font-size: 1rem; }
-    .action-card span { color: var(--muted); line-height: 1.3; font-size: .86rem; }
-    .action-card.primary span { color: rgba(47, 37, 0, 0.75); }
-    .pulse-strip { display: flex; gap: 6px; flex-wrap: wrap; color: var(--muted); font-size: .76rem; }
-    .mini-pill { border: 1px solid rgba(248,245,234,.18); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.06); }
-    .preview-panel { display: grid; gap: 8px; margin-top: 1px; padding-top: 12px; border-top: 1px solid rgba(248,245,234,.14); }
-    .preview-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-    .preview-title h2 { margin: 0; color: var(--gold); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; }
-    .preview-title a { color: var(--muted); font-size: .8rem; text-underline-offset: 3px; }
-    .event-preview-list { display: grid; gap: 6px; }
-    .event-preview {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 8px;
-      align-items: center;
-      padding: 9px;
-      border: 1px solid rgba(248,245,234,.12);
-      border-radius: 13px;
-      background: rgba(255,255,255,.05);
-      text-decoration: none;
-    }
-    .date-chip { min-width: 43px; padding: 6px; border-radius: 10px; background: rgba(191,74,79,.86); text-align: center; font-weight: 900; line-height: 1.02; font-size: .9rem; }
-    .date-chip small { display: block; font-size: .56rem; opacity: .82; text-transform: uppercase; }
-    .event-preview strong { display: block; font-size: .9rem; }
-    .event-preview span { color: var(--muted); font-size: .78rem; line-height: 1.28; }
-    @media (max-width: 620px) {
-      .wrap { width: min(100vw - 18px, 760px); padding: 9px 0 24px; }
-      .hero-card { border-radius: 18px; }
-      .primary-actions { grid-template-columns: 1fr; }
-      .action-card { min-height: 74px; }
-    }
+    .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; position: relative; }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; color: var(--muted); font-size: .74rem; letter-spacing: .10em; text-transform: uppercase; }
+    .brand-row strong { color: var(--blue-deep); }
+
+    /* The poster is intentionally outside the content card: it behaves like the
+       hero/photo surface in the mockup, nearly edge-to-edge, with title overlay. */
+    .poster-window { min-height: 312px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, rgba(13,47,94,.94), rgba(23,75,142,.72)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), #174b8e; }
+    .poster-window::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; }
+    .poster-window::after { content: ""; position: absolute; left: 24px; bottom: 22px; width: 122px; height: 86px; border-radius: 60% 60% 20px 20px; background: linear-gradient(180deg, rgba(255,250,242,.88), rgba(255,250,242,.54)); box-shadow: 132px -40px 0 -25px rgba(217,155,33,.9), 194px 4px 0 -30px rgba(191,74,79,.78); opacity: .86; }
+    .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: rgba(255,250,242,.90); color: #0d2f5e; font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .poster-title { position: absolute; left: 22px; right: 22px; bottom: 24px; color: #fffaf2; display: grid; gap: 7px; z-index: 1; }
+    h1 { margin: 0; font-size: clamp(2.15rem, 13vw, 3.8rem); line-height: .90; letter-spacing: -.045em; }
+    .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: rgba(255,250,242,.84); }
+
+    .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
+    .launch-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; text-decoration: none; }
+    .search-icon { width: 38px; height: 38px; border-radius: 15px; background: var(--blue-deep); color: var(--paper); display: grid; place-items: center; font-weight: 900; }
+    .launch-copy { display: grid; gap: 1px; }
+    .launch-copy strong { font-size: 1rem; }
+    .launch-copy span { color: var(--muted); font-size: .78rem; }
+    .chev { color: var(--muted); }
+    .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+    .section-title h2 { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
+    .section-title a { color: var(--blue-deep); font-size: .78rem; font-weight: 900; text-decoration: none; }
+    .event-preview-list { display: grid; gap: 8px; }
+    .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; }
+    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: var(--red); color: #fffaf2; display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; }
+    .date-chip small { display: block; font-size: .56rem; opacity: .84; text-transform: uppercase; }
+    .event-row strong { display: block; font-size: .88rem; }
+    .event-row span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.24; margin-top: 2px; }
+
+    .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
+    .page-footer strong { color: var(--ink); }
+    .page-footer p { margin: 0; }
+    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px rgba(65,47,29,.24); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+    .drawer-head { display: flex; align-items: start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+    .drawer-title { display: grid; gap: 2px; }
+    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+    .drawer-title span { color: var(--muted); font-size: .8rem; }
+    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
+    .drawer-nav { display: grid; gap: 8px; }
+    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+
+    .dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .dock a, .dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .dock a.active { color: var(--paper); background: var(--blue-deep); }
+    @media (min-width: 760px) { .phone-shell { padding-top: 18px; } }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero-card" aria-labelledby="site-title">
-      <div class="brand-mark">Acadie community signal</div>
-      <h1 id="site-title">ACADIE.SOL</h1>
-      <p class="lede">A small public map for Acadian places and happenings around Acadie-Bathurst — local first, simple on mobile.</p>
+  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
+  <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
+  <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-head">
+      <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
+    </div>
+    <nav class="drawer-nav">
+      <a href="directory.html">Full directory</a>
+      <a href="index.html#about">About Acadie.sol</a>
+      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+    </nav>
+  </aside>
 
-      <nav class="primary-actions" aria-label="Primary">
-        <a class="action-card primary" href="directory.html#search">
-          <b>Find local places</b>
-          <span>Search, browse, and explore the same directory from one simple path.</span>
-        </a>
-        <a class="action-card" href="events.html">
-          <b>What’s happening</b>
-          <span>Shows, meals, gatherings, pop-ups, and community dates.</span>
-        </a>
-      </nav>
+  <main class="phone-shell">
+    <header class="brand-row"><strong>Acadie.sol</strong><span>local community surface</span></header>
 
-      <div class="pulse-strip" aria-label="Site pulse">
-        <span class="mini-pill"><span id="entry-count">–</span> places</span>
-        <span class="mini-pill"><span id="event-count">–</span> events</span>
-        <span class="mini-pill">fresh snapshot #<span id="snapshot-count">–</span></span>
+    <section class="poster-window" aria-labelledby="site-title">
+      <span class="poster-label">Community OS</span>
+      <div class="poster-title">
+        <h1 id="site-title">Acadie.sol</h1>
+        <span>A local-first pocket surface for places, happenings, and Acadian signals.</span>
       </div>
-
-      <section class="preview-panel" aria-label="Event preview">
-        <div class="preview-title">
-          <h2>Next up</h2>
-          <a href="events.html">See all events</a>
-        </div>
-        <div class="event-preview-list" id="event-preview-list">
-          <div class="event-preview"><span class="date-chip">…</span><div><strong>Loading events</strong><span>Checking the public calendar.</span></div></div>
-        </div>
-      </section>
     </section>
+
+    <section class="surface" aria-label="Search launch">
+      <a class="launch-card" href="directory.html">
+        <span class="search-icon">⌕</span>
+        <span class="launch-copy"><strong>Explore Directory</strong><span>59 local entries</span></span>
+        <span class="chev">›</span>
+      </a>
+    </section>
+
+    <section class="surface" aria-label="Next events">
+      <div class="section-title"><h2>Next up</h2><a href="events.html">View all events</a></div>
+      <div class="event-preview-list" id="event-preview-list">
+        <div class="event-row"><span class="date-chip">…</span><div><strong>Loading events</strong><span>Checking the public calendar.</span></div></div>
+      </div>
+    </section>
+
+    <footer class="page-footer" id="about">
+      <p><strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.</p>
+    </footer>
   </main>
 
+  <nav class="dock" aria-label="Primary dock">
+    <a class="active" href="index.html"><span>⌂</span><span>Home</span></a>
+    <a href="events.html"><span>◷</span><span>Events</span></a>
+    <a href="directory.html"><span>⌕</span><span>Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+  </nav>
+
   <script>
-    // Homepage renderer: this page only exposes public-facing counts and a small
-    // "next up" event preview. Internal workflow labels stay out of the first impression.
-    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    // Home as OS launch surface: public data powers compact widgets; dock owns navigation.
     function escapeHtml(str) { return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
     function localized(value) { return value && typeof value === 'object' ? (value.en || value.fr || value.shiac || '') : (value || ''); }
     function publicTitle(event) { return String(localized(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
-    function publicSummary(event) {
-      const raw = String(localized(event.summary) || 'Details coming soon.');
-      return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw;
-    }
-    function dateParts(value) {
-      const date = new Date(value || '');
-      if (Number.isNaN(date.getTime())) return { month: 'TBD', day: '' };
-      return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) };
-    }
+    function publicSummary(event) { const raw = String(localized(event.summary) || 'Details coming soon.'); return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw; }
+    function dateParts(value) { const date = new Date(value || ''); if (Number.isNaN(date.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) }; }
     function renderEventPreview(events) {
       const root = document.getElementById('event-preview-list');
-      const upcoming = (events.items || [])
-        .filter(event => event.computed_status === 'active')
-        .sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')))
-        .slice(0, 2);
-      root.innerHTML = upcoming.length ? upcoming.map(event => {
-        const parts = dateParts(event.starts_at);
-        return `<a class="event-preview" href="events.html#event-${escapeHtml(event.id)}">
-          <span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span>
-          <div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div>
-        </a>`;
-      }).join('') : '<div class="event-preview"><span class="date-chip"><small>soon</small></span><div><strong>No public events yet</strong><span>Check back as the calendar fills in.</span></div></div>';
+      const upcoming = (events.items || []).filter(event => event.computed_status === 'active').sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || ''))).slice(0, 2);
+      root.innerHTML = upcoming.length ? upcoming.map(event => { const parts = dateParts(event.starts_at); return `<a class="event-row" href="events.html#event-${escapeHtml(event.id)}"><span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span><div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div></a>`; }).join('') : '<div class="event-row"><span class="date-chip"><small>soon</small></span><div><strong>No public events yet</strong><span>Check back as the calendar fills in.</span></div></div>';
     }
-    Promise.all([
-      fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()),
-      fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).catch(() => ({ event_count: 0, items: [] })),
-      fetch('assets/site-meta.json', { cache: 'no-store' }).then(res => res.json()).catch(() => ({}))
-    ]).then(([directory, events, meta]) => {
-      setText('entry-count', directory.published_count ?? 0);
-      setText('event-count', events.active_count ?? events.event_count ?? 0);
-      setText('snapshot-count', meta.snapshot_refresh_count ?? '–');
-      renderEventPreview(events);
-    }).catch(() => {
-      setText('entry-count', '–');
-      setText('event-count', '–');
-    });
+    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
+    const savedTheme = localStorage.getItem('acadie-theme');
+    if (savedTheme) applyTheme(savedTheme);
+    document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+    function updateEntryCount(count) {
+      const el = document.querySelector('.launch-copy span');
+      if (el) el.textContent = `${count} local entries`;
+    }
+    fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()).then(data => { updateEntryCount((data.items || []).length); }).catch(() => {});
+    fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).then(renderEventPreview).catch(() => renderEventPreview({ items: [] }));
   </script>
 </body>
 </html>
