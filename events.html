@@ -132,9 +132,9 @@
     .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .hero { border-radius: 28px; }
     .events-list { gap: 18px; }
-    .time-group { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 14px; align-items: stretch; }
+    .time-group { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 14px; align-items: start; }
     .time-heading { grid-column: 1 / -1; }
-    .event-card { min-height: 100%; border-radius: 24px; grid-template-columns: 64px minmax(0,1fr); padding: 14px; }
+    .event-card { border-radius: 24px; grid-template-columns: 64px minmax(0,1fr); padding: 14px; }
     .date-badge { min-width: 64px; min-height: 64px; border-radius: 19px; }
     .event-main { padding: 3px 2px; }
     .actions { gap: 6px; }
@@ -244,10 +244,11 @@
     function entryName(id) { return placeEntry(id)?.title || id; }
     function locationName(id) { return placeLocation(id)?.name || 'Location TBD'; }
     function locationEntryId(id) { return placeLocation(id)?.entry_ids?.[0] || ''; }
+    function fullEntryHref(slug) { return `entry.html#${encodeURIComponent(slug)}`; }
     function locationLink(id) {
       const name = locationName(id);
       const entryId = locationEntryId(id);
-      return entryId ? `<a href="directory.html#entry-${escapeHtml(entryId)}">${escapeHtml(name)}</a>` : escapeHtml(name);
+      return entryId ? `<a href="${fullEntryHref(entryId)}">${escapeHtml(name)}</a>` : escapeHtml(name);
     }
     function locationSummary(id) { return text(placeLocation(id)?.summary) || ''; }
     function isArchived(event) { return event.computed_status === 'archived' || event.status === 'archived'; }
@@ -267,7 +268,7 @@
     }
     function renderEvent(event) {
       const parts = dateParts(event.starts_at);
-      const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
+      const hosts = (event.host_entry_ids || []).map(id => `<a href="${fullEntryHref(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
       const icsHref = event.starts_at ? `assets/calendar/${encodeURIComponent(event.id)}.ics` : '';
       const bring = text(event.bring);
       const wayfinding = text(event.wayfinding);
@@ -290,7 +291,7 @@
           ${notes ? `<div class="event-notes">${notes}</div>` : ''}
           <div class="actions">
             ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
-            ${event.host_entry_ids?.[0] ? `<a class="action" href="directory.html#entry-${escapeHtml(event.host_entry_ids[0])}">View host</a>` : ''}
+            ${event.host_entry_ids?.[0] ? `<a class="action" href="${fullEntryHref(event.host_entry_ids[0])}">View host</a>` : ''}
           </div>
         </div>
       </article>`;
