@@ -23,6 +23,9 @@
       --link-hover: #174b8e;
       --gold: #c48f18;
       --red: #bf4a4f;
+      --calendar-red-top: #bf4a4f;
+      --calendar-red-bottom: #7b1f2a;
+      --calendar-ink: #f3c85b;
       --shadow: rgba(65, 47, 29, 0.14);
       --glass: rgba(255,250,242,.64);
     }
@@ -43,6 +46,9 @@
       --link-hover: #cfe3ff;
       --gold: #e5b44a;
       --red: #dc6b70;
+      --calendar-red-top: #bf4a4f;
+      --calendar-red-bottom: #7b1f2a;
+      --calendar-ink: #f3c85b;
       --shadow: rgba(0, 0, 0, 0.35);
       --glass: rgba(42,37,32,.72);
     }
@@ -64,8 +70,9 @@
     .brand-row strong { color: var(--blue-deep); }
 
     /* The poster is intentionally outside the content card: it behaves like the
-       hero/photo surface in the mockup, nearly edge-to-edge, with title overlay. */
-    .poster-window { min-height: 312px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); }
+       hero/photo surface in the mockup, nearly edge-to-edge, with title overlay.
+       Reduced height keeps it more banner/panorama than poster. */
+    .poster-window { min-height: 234px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); }
     .poster-window::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; }
     .poster-window::after { content: ""; position: absolute; left: 24px; bottom: 22px; width: 122px; height: 86px; border-radius: 60% 60% 20px 20px; background: linear-gradient(180deg, rgba(255,250,242,.88), rgba(255,250,242,.54)); box-shadow: 132px -40px 0 -25px color-mix(in srgb, var(--gold) 90%, #000), 194px 4px 0 -30px color-mix(in srgb, var(--red) 78%, #000); opacity: .86; }
     .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
@@ -74,21 +81,36 @@
     .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--blue-ink) 84%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    .launch-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; text-decoration: none; }
+    /* Directory banner deliberately breaks from the neutral paper containers so the
+       main browse action reads like a launch strip instead of another card. */
+    .directory-banner { position: relative; overflow: hidden; padding: 0; border-radius: 30px; background: linear-gradient(135deg, color-mix(in srgb, var(--red) 88%, #000), color-mix(in srgb, var(--gold) 82%, #000) 58%, color-mix(in srgb, var(--blue-deep) 92%, #000)); box-shadow: 0 22px 46px var(--shadow); }
+    .directory-banner::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,250,242,.22); border-radius: 22px; pointer-events: none; }
+    .banner-marquee { display: flex; gap: 20px; padding: 11px 14px 10px; overflow: hidden; border-bottom: 1px solid rgba(255,250,242,.16); color: rgba(255,250,242,.76); font-size: .66rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+    .banner-marquee-track { display: inline-flex; gap: 20px; min-width: max-content; animation: marquee-slide 16s linear infinite; }
+    .banner-marquee-track span::after { content: "✦"; margin-left: 20px; color: rgba(243,200,91,.9); }
+    .launch-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 16px 16px 17px; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; }
     .search-icon { width: 38px; height: 38px; border-radius: 15px; background: var(--blue-deep); color: var(--paper); display: grid; place-items: center; font-weight: 900; }
     .launch-copy { display: grid; gap: 1px; }
-    .launch-copy strong { font-size: 1rem; }
-    .launch-copy span { color: var(--muted); font-size: .78rem; }
-    .chev { color: var(--muted); }
+    .launch-copy strong { font-size: 1.02rem; color: #fffaf2; }
+    .launch-copy span { color: rgba(255,250,242,.82); font-size: .79rem; }
+    .chev { color: rgba(255,250,242,.82); font-size: 1.2rem; }
     .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
     .section-title h2 { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
     .section-title a { color: var(--blue-deep); font-size: .78rem; font-weight: 900; text-decoration: none; }
     .event-preview-list { display: grid; gap: 8px; }
-    .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; }
-    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: var(--red); color: var(--blue-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; }
-    .date-chip small { display: block; font-size: .56rem; opacity: .84; text-transform: uppercase; }
+    .event-row { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; }
+    /* Calendar chips stay the same in light and dark mode so event dates feel like
+       one recognizable system-wide icon language. */
+    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: linear-gradient(180deg, var(--calendar-red-top), var(--calendar-red-bottom)); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+    .date-chip small { display: block; font-size: .56rem; opacity: .92; text-transform: uppercase; letter-spacing: .08em; }
     .event-row strong { display: block; font-size: .88rem; }
     .event-row span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.24; margin-top: 2px; }
+    .event-status { justify-self: end; padding: 5px 8px; border-radius: 999px; background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--ink-strong); font-size: .67rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+
+    @keyframes marquee-slide {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
 
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer strong { color: var(--ink); }
@@ -137,7 +159,13 @@
       </div>
     </section>
 
-    <section class="surface" aria-label="Search launch">
+    <section class="directory-banner" aria-label="Directory launch banner">
+      <div class="banner-marquee" aria-hidden="true">
+        <div class="banner-marquee-track">
+          <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
+          <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
+        </div>
+      </div>
       <a class="launch-card" href="directory.html">
         <span class="search-icon">⌕</span>
         <span class="launch-copy"><strong>Explore Directory</strong><span>59 local entries</span></span>
@@ -170,11 +198,35 @@
     function localized(value) { return value && typeof value === 'object' ? (value.en || value.fr || value.shiac || '') : (value || ''); }
     function publicTitle(event) { return String(localized(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
     function publicSummary(event) { const raw = String(localized(event.summary) || 'Details coming soon.'); return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw; }
-    function dateParts(value) { const date = new Date(value || ''); if (Number.isNaN(date.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) }; }
+    function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
+    function dateParts(value) { const date = parseDate(value); if (!date) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) }; }
+    function countdownLabel(event) {
+      const now = Date.now();
+      const start = parseDate(event.starts_at)?.getTime();
+      const end = parseDate(event.ends_at || event.expires_at)?.getTime();
+      if (start && start <= now && end && end > now) {
+        const hours = Math.max(1, Math.ceil((end - now) / 3600000));
+        return `Live · ends in ${hours}h`;
+      }
+      if (start && start > now) {
+        const diff = start - now;
+        const hours = Math.ceil(diff / 3600000);
+        if (hours < 24) return `Starts in ${hours}h`;
+        const days = Math.ceil(diff / 86400000);
+        return `Starts in ${days}d`;
+      }
+      return 'Upcoming';
+    }
     function renderEventPreview(events) {
       const root = document.getElementById('event-preview-list');
-      const upcoming = (events.items || []).filter(event => event.computed_status === 'active').sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || ''))).slice(0, 2);
-      root.innerHTML = upcoming.length ? upcoming.map(event => { const parts = dateParts(event.starts_at); return `<a class="event-row" href="events.html#event-${escapeHtml(event.id)}"><span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span><div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div></a>`; }).join('') : '<div class="event-row"><span class="date-chip"><small>soon</small></span><div><strong>No public events yet</strong><span>Check back as the calendar fills in.</span></div></div>';
+      const upcoming = (events.items || [])
+        .filter(event => event.computed_status === 'active')
+        .sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')))
+        .slice(0, 6);
+      root.innerHTML = upcoming.length ? upcoming.map(event => {
+        const parts = dateParts(event.starts_at);
+        return `<a class="event-row" href="events.html#event-${escapeHtml(event.id)}"><span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span><div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div><span class="event-status">${escapeHtml(countdownLabel(event))}</span></a>`;
+      }).join('') : '<div class="event-row"><span class="date-chip"><small>soon</small></span><div><strong>No public events yet</strong><span>Check back as the calendar fills in.</span></div><span class="event-status">Waiting</span></div>';
     }
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
     const savedTheme = localStorage.getItem('acadie-theme');
