@@ -15,6 +15,9 @@
         "Big D Burger"
       ],
       "slug": "big-d-drive-in",
+      "location_id": "big-d-st-peter",
+      "region_id": "acadie-bathurst",
+      "street_id": "st-peter-ave-bathurst",
       "status": "published",
       "draft": false,
       "badge": "",
@@ -38,11 +41,11 @@
         "family"
       ],
       "contact": {
-        "phone": "506-546-3585",
-        "website": "",
+        "hours": "Mon-Sun 11:00–19:00",
         "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
         "email": "",
-        "hours": "Mon-Sun 11:00–19:00"
+        "website": "",
+        "phone": "506-546-3585"
       },
       "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -55,6 +58,7 @@
         "Hours: Mon-Sun 11:00–19:00"
       ],
       "related_places": [
+        "Bowlarama Bathurst Bowling & Arcade",
         "Bowlarama Bathurst Bowling & Arcade"
       ],
       "sources": [
@@ -75,6 +79,9 @@
         "La Louga Night Club"
       ],
       "slug": "la-louga-night-bar-resto",
+      "location_id": "la-louga-main-st",
+      "region_id": "acadie-bathurst",
+      "street_id": "main-st-bathurst",
       "status": "published",
       "draft": false,
       "badge": "",
@@ -97,11 +104,11 @@
         "live music"
       ],
       "contact": {
-        "phone": "(506) 226-6056",
-        "website": "",
+        "hours": "",
         "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "(506) 226-6056"
       },
       "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
       "hours": "",
@@ -113,6 +120,10 @@
         "Phone: (506) 226-6056"
       ],
       "related_places": [
+        "Bootlegger",
+        "District Burger",
+        "Donair Shop",
+        "Kaffeine Express Bathurst",
         "Bootlegger",
         "District Burger",
         "Donair Shop",
@@ -136,6 +147,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "13-barrels-brewing",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -154,11 +168,11 @@
         "event space"
       ],
       "contact": {
-        "phone": "(506) 546-5300",
-        "website": "",
+        "hours": "",
         "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
         "email": "13barrelsbrewing@gmail.com",
-        "hours": ""
+        "website": "",
+        "phone": "(506) 546-5300"
       },
       "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
       "hours": "",
@@ -191,6 +205,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "a-and-w",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -207,11 +224,11 @@
         "drive-thru"
       ],
       "contact": {
-        "phone": "(506) 546-4095",
-        "website": "",
+        "hours": "",
         "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "(506) 546-4095"
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -239,6 +256,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "acadie-bathurst-information-center",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -255,11 +275,11 @@
         "waterfront"
       ],
       "contact": {
-        "phone": "506-548-0418",
-        "website": "",
+        "hours": "",
         "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "506-548-0418"
       },
       "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
       "hours": "",
@@ -287,6 +307,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "apollo-cinema",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -304,11 +327,11 @@
         "movies"
       ],
       "contact": {
-        "phone": "not yet confirmed",
-        "website": "",
+        "hours": "most evenings and some matinee showings",
         "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
         "email": "not provided",
-        "hours": "most evenings and some matinee showings"
+        "website": "",
+        "phone": "not yet confirmed"
       },
       "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
       "hours": "most evenings and some matinee showings",
@@ -338,6 +361,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "atlantic-host",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -356,11 +382,11 @@
         "parking"
       ],
       "contact": {
-        "phone": "1 (800) 898-9292",
-        "website": "",
+        "hours": "",
         "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "1 (800) 898-9292"
       },
       "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
       "hours": "",
@@ -388,6 +414,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "bathurst-agricultural-society-3",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -405,11 +434,11 @@
         "farm"
       ],
       "contact": {
-        "phone": "1 (506) 548-8730",
-        "website": "",
+        "hours": "Tuesday to Saturday, 9am–12pm",
         "address": "1525 Rough Waters Dr",
         "email": "",
-        "hours": "Tuesday to Saturday, 9am–12pm"
+        "website": "",
+        "phone": "1 (506) 548-8730"
       },
       "address": "1525 Rough Waters Dr",
       "hours": "Tuesday to Saturday, 9am–12pm",
@@ -438,6 +467,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "bathurst-municipal-library",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -454,11 +486,11 @@
         "civic"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "150 St George St, Bathurst, NB E2A 1B5",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "150 St George St, Bathurst, NB E2A 1B5",
       "hours": "",
@@ -486,6 +518,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "big-deal-market",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -502,11 +537,11 @@
         "market"
       ],
       "contact": {
-        "phone": "(506) 548-8369",
-        "website": "",
+        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
         "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
         "email": "not found publicly",
-        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00"
+        "website": "",
+        "phone": "(506) 548-8369"
       },
       "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
       "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
@@ -537,6 +572,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "bootlegger",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -554,11 +592,11 @@
         "restaurant"
       ],
       "contact": {
-        "phone": "(506) 350-3350",
-        "website": "",
+        "hours": "",
         "address": "100 Main St, Bathurst, NB",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "(506) 350-3350"
       },
       "address": "100 Main St, Bathurst, NB",
       "hours": "",
@@ -587,6 +625,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "bowlorama",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -604,11 +645,11 @@
         "food"
       ],
       "contact": {
-        "phone": "(506) 546-2020",
-        "website": "",
+        "hours": "",
         "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "(506) 546-2020"
       },
       "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
       "hours": "",
@@ -638,6 +679,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "burger-king-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -654,11 +698,11 @@
         "drive-thru"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
       "hours": "",
@@ -686,6 +730,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "ccnb-bathurst-campus-725-college-st",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -702,11 +749,11 @@
         "education"
       ],
       "contact": {
-        "phone": "506-547-2145",
-        "website": "",
+        "hours": "",
         "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "506-547-2145"
       },
       "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
       "hours": "",
@@ -737,6 +784,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "ccnb-bathurst-campus-75-youghall-dr",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -754,11 +804,11 @@
         "trades"
       ],
       "contact": {
-        "phone": "506-547-2145",
-        "website": "",
+        "hours": "",
         "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "506-547-2145"
       },
       "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
       "hours": "",
@@ -789,6 +839,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "chicken-king-and-chinese-palace",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -806,11 +859,11 @@
         "fried chicken"
       ],
       "contact": {
-        "phone": "(855) 245-7827",
-        "website": "",
+        "hours": "Mon-Sun 11:00–19:00",
         "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
         "email": "not found publicly",
-        "hours": "Mon-Sun 11:00–19:00"
+        "website": "",
+        "phone": "(855) 245-7827"
       },
       "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -840,6 +893,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "dairy-queen-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -857,11 +913,11 @@
         "dessert"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "435 St. Peter Avenue, Bathurst, NB",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "435 St. Peter Avenue, Bathurst, NB",
       "hours": "",
@@ -890,6 +946,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "daly-point-nature-reserve",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -908,11 +967,11 @@
         "boardwalk"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -939,6 +998,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "dilli-delight",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -956,11 +1018,11 @@
         "st peters ave"
       ],
       "contact": {
-        "phone": "1 (506) 546-4545",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "1 (506) 546-4545"
       },
       "address": "",
       "hours": "",
@@ -990,6 +1052,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "district-burger",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1007,11 +1072,11 @@
         "main street"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -1039,6 +1104,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "donair-shop",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1056,11 +1124,11 @@
         "main street"
       ],
       "contact": {
-        "phone": "1 (506) 546-5095",
-        "website": "",
+        "hours": "",
         "address": "100 Main St.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "1 (506) 546-5095"
       },
       "address": "100 Main St.",
       "hours": "",
@@ -1091,6 +1159,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "eastside-deli",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1109,11 +1180,11 @@
         "sandwiches"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "1395 Miramichi Ave, Acadie-Bathurst",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "1395 Miramichi Ave, Acadie-Bathurst",
       "hours": "",
@@ -1140,6 +1211,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "flameo",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1157,11 +1231,11 @@
         "quick lunch"
       ],
       "contact": {
-        "phone": "1 (506) 545-2456",
-        "website": "",
+        "hours": "",
         "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "1 (506) 545-2456"
       },
       "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1191,6 +1265,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "four-rivers-brewing-co",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1209,11 +1286,11 @@
         "local"
       ],
       "contact": {
-        "phone": "(506) 350-2800",
-        "website": "",
+        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
         "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
         "email": "",
-        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm"
+        "website": "",
+        "phone": "(506) 350-2800"
       },
       "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
       "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
@@ -1243,6 +1320,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "fresco",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1260,11 +1340,11 @@
         "restaurant"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -1289,6 +1369,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "frost-bite",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1306,11 +1389,11 @@
         "dessert"
       ],
       "contact": {
-        "phone": "(506) 480-0436",
-        "website": "",
+        "hours": "seasonal / closed for winter",
         "address": "La Promenade Waterfront, Bathurst, NB",
         "email": "not provided",
-        "hours": "seasonal / closed for winter"
+        "website": "",
+        "phone": "(506) 480-0436"
       },
       "address": "La Promenade Waterfront, Bathurst, NB",
       "hours": "seasonal / closed for winter",
@@ -1344,6 +1427,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "greenhouse-lounge-marina",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1362,11 +1448,11 @@
         "marina"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
       "hours": "",
@@ -1399,6 +1485,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "greenhouse-lounge-place-bathurst-mall",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1417,11 +1506,11 @@
         "mall"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1454,6 +1543,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "house-of-lee",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1470,11 +1562,11 @@
         "restaurant"
       ],
       "contact": {
-        "phone": "1 (506) 548-3019",
-        "website": "",
+        "hours": "Open every day, at least 3pm–9pm",
         "address": "15 Main St, Bathurst, NB",
         "email": "",
-        "hours": "Open every day, at least 3pm–9pm"
+        "website": "",
+        "phone": "1 (506) 548-3019"
       },
       "address": "15 Main St, Bathurst, NB",
       "hours": "Open every day, at least 3pm–9pm",
@@ -1503,6 +1595,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "joeys-pub-and-eatery",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1520,11 +1615,11 @@
         "restaurant"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -1552,6 +1647,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "js-auto-detailing",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1568,11 +1666,11 @@
         "services"
       ],
       "contact": {
-        "phone": "1(506)480-0031",
-        "website": "",
+        "hours": "",
         "address": "399 St Paul st, Acadie-Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": "1(506)480-0031"
       },
       "address": "399 St Paul st, Acadie-Bathurst.",
       "hours": "",
@@ -1600,6 +1698,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "k-c-irving-regional-centre",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1617,11 +1718,11 @@
         "sports"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -1651,6 +1752,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "kaffeine-express-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1668,11 +1772,11 @@
         "downtown"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
       "hours": "",
@@ -1703,6 +1807,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "kings-barber-shop",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1720,11 +1827,11 @@
         "family-friendly"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Located at 714 King St.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Located at 714 King St.",
       "hours": "",
@@ -1751,6 +1858,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "kryptic",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1766,11 +1876,11 @@
         "artist"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "kylegodinn4200@gmail.com",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -1800,6 +1910,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "liberty-tax-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1817,11 +1930,11 @@
         "services"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -1852,6 +1965,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "librairie-pelagie",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1869,11 +1985,11 @@
         "retail"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
       "hours": "",
@@ -1904,6 +2020,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "mcdonalds-bathurst-620-st-peter-ave",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1921,11 +2040,11 @@
         "fries"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -1955,6 +2074,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "mcdonalds-bathurst-900-st-anne-st-walmart",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -1972,11 +2094,11 @@
         "drive-thru"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
       "hours": "",
@@ -2005,6 +2127,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "mexiglu",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2022,11 +2147,11 @@
         "st peters ave"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -2053,6 +2178,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "montys-pretzelria",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2070,11 +2198,11 @@
         "seasonal"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -2103,6 +2231,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "new-brunswick-distillery",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2120,11 +2251,11 @@
         "downtown"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
         "email": "info@nbdistillery.ca",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
       "hours": "",
@@ -2160,6 +2291,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pabineau-first-nations-mawiom",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2177,11 +2311,11 @@
         "24-7"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
       "hours": "",
@@ -2208,6 +2342,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "papa-joe-evys-restaurant",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2225,11 +2362,11 @@
         "local"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
       "hours": "",
@@ -2257,6 +2394,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "petro-canada-main-st",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2274,11 +2414,11 @@
         "fuel"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Gas station and car wash at 896 Main St.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Gas station and car wash at 896 Main St.",
       "hours": "",
@@ -2307,6 +2447,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pizza-delight-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2324,11 +2467,11 @@
         "delivery"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -2357,6 +2500,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pizza-delight-campbellton",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2374,11 +2520,11 @@
         "delivery"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
       "hours": "",
@@ -2407,6 +2553,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pizza-delight-tracadie",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2424,11 +2573,11 @@
         "delivery"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
       "hours": "",
@@ -2457,6 +2606,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pizza-pro-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2474,11 +2626,11 @@
         "st peters ave"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
       "hours": "",
@@ -2509,6 +2661,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pizza-shack-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2526,11 +2681,11 @@
         "delivery"
       ],
       "contact": {
-        "phone": "(506) 547-8080",
-        "website": "",
+        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
         "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
         "email": "not found publicly",
-        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)"
+        "website": "",
+        "phone": "(506) 547-8080"
       },
       "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
       "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
@@ -2560,6 +2715,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "pur-and-simple",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2578,11 +2736,11 @@
         "family dining"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "",
@@ -2611,6 +2769,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "robins-donuts-main-st",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2628,11 +2789,11 @@
         "gas station"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
       "hours": "",
@@ -2661,6 +2822,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "speedy-glass",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2677,11 +2841,11 @@
         "automotive service"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
       "hours": "",
@@ -2710,6 +2874,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "subway-bathurst-880-st-anne-st",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2727,11 +2894,11 @@
         "chain"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Subway location at 880 St. Anne Street, Bathurst.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Subway location at 880 St. Anne Street, Bathurst.",
       "hours": "",
@@ -2761,6 +2928,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "subway-belle-baie-beresford-730-rue-principale",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2778,11 +2948,11 @@
         "chain"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
       "hours": "",
@@ -2810,6 +2980,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "theriaults-grocers",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2832,11 +3005,11 @@
         "community"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Bridge St (exact civic address not confirmed)",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Bridge St (exact civic address not confirmed)",
       "hours": "",
@@ -2865,6 +3038,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "thru-shine-automotive-detailing-services",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2881,11 +3057,11 @@
         "automotive service"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
       "hours": "",
@@ -2915,6 +3091,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "walmart-bathurst",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2932,11 +3111,11 @@
         "retail"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "",
         "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
         "email": "",
-        "hours": ""
+        "website": "",
+        "phone": ""
       },
       "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -2967,6 +3146,9 @@
       "branch_name": "",
       "aliases": [],
       "slug": "youghall-beach",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
       "status": "draft",
       "draft": true,
       "badge": "DRAFT",
@@ -2985,11 +3167,11 @@
         "waterfront"
       ],
       "contact": {
-        "phone": "",
-        "website": "",
+        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",
         "address": "",
         "email": "",
-        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash."
+        "website": "",
+        "phone": ""
       },
       "address": "",
       "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",

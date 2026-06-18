@@ -366,6 +366,11 @@
     .detail-value { color: var(--text); font-size: 0.83rem; line-height: 1.35; overflow-wrap: anywhere; }
     .detail-link { color: #d8f2ff; text-decoration: underline; text-underline-offset: 2px; }
     .detail-link:hover { color: #ffffff; }
+    .event-badge { background: rgba(242,200,75,0.14); color: var(--gold); border: 1px solid rgba(242,200,75,0.45); }
+    .event-feed { display: grid; gap: 7px; padding: 9px 10px; border: 1px solid rgba(242,200,75,0.18); border-radius: 12px; background: rgba(242,200,75,0.06); }
+    .event-row { display: grid; gap: 2px; font-size: 0.84rem; }
+    .event-row a { color: #fff; }
+    .event-meta { color: var(--muted); font-size: 0.74rem; }
 
     .empty { border-radius: 18px; padding: 18px; color: var(--muted); }
     .empty h2 { margin: 0 0 8px; color: var(--text); font-size: 1.15rem; }
@@ -531,6 +536,10 @@
   <script>
     const state = {
       items: [],
+      events: [],
+      locations: [],
+      eventIndex: new Map(),
+      locationIndex: new Map(),
       category: 'all',
       city: 'all',
       query: '',
@@ -552,9 +561,15 @@
     ];
 
     async function loadData() {
-      const res = await fetch('assets/directory-data.json', { cache: 'no-store' });
-      if (!res.ok) throw new Error(`Failed to load data (${res.status})`);
-      return res.json();
+      const [directory, events, locations] = await Promise.all([
+        fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => {
+          if (!res.ok) throw new Error(`Failed to load directory data (${res.status})`);
+          return res.json();
+        }),
+        fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.ok ? res.json() : { items: [] }).catch(() => ({ items: [] })),
+        fetch('assets/locations-data.json', { cache: 'no-store' }).then(res => res.ok ? res.json() : { items: [] }).catch(() => ({ items: [] }))
+      ]);
+      return { directory, events, locations };
     }
 
     function escapeHtml(str) {
@@ -567,6 +582,10 @@
     }
 
     function normalize(value) { return String(value || '').toLowerCase(); }
+    function localizedText(value) {
+      if (value && typeof value === 'object') return value.en || value.fr || value.shiac || '';
+      return value || '';
+    }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
     function modifiedTs(item) {
       const numeric = Number(item?.source_modified_ts || 0);
@@ -739,11 +758,68 @@
       return notes ? `<p class="notes">${escapeHtml(notes)}</p>` : '';
     }
 
+    function parseEventDate(value) {
+      const date = new Date(value || '');
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function formatEventDate(value) {
+      const date = parseEventDate(value);
+      if (!date) return 'Date TBD';
+      return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
+    }
+
+    function relatedEventsFor(item) {
+      const slug = item.slug;
+      const locationId = item.location_id;
+      return state.events
+        .filter(event => {
+          const byEntry = [...(event.host_entry_ids || []), ...(event.performer_entry_ids || []), ...(event.sponsor_entry_ids || [])].includes(slug);
+          const byLocation = locationId && event.location_id === locationId;
+          return byEntry || byLocation;
+        })
+        .sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')));
+    }
+
+    function upcomingEventsFor(item, days = 7) {
+      const now = Date.now();
+      const horizon = now + days * 24 * 60 * 60 * 1000;
+      return relatedEventsFor(item).filter(event => {
+        const start = parseEventDate(event.starts_at);
+        return start && start.getTime() >= now && start.getTime() <= horizon && event.computed_status === 'active';
+      });
+    }
+
+    function renderEventFeed(item) {
+      const related = relatedEventsFor(item);
+      if (!related.length) return '';
+      return `<div class="event-feed">
+        <div class="detail-label">Event feed</div>
+        ${related.map(event => `<div class="event-row">
+          <div><a href="events.html#event-${escapeHtml(event.id)}">${escapeHtml(localizedText(event.title) || event.name)}</a></div>
+          <div class="event-meta">${escapeHtml(formatEventDate(event.starts_at))} · ${escapeHtml(event.status)} · ${escapeHtml(event.computed_status || '')}</div>
+        </div>`).join('')}
+      </div>`;
+    }
+
+    function renderLocationContext(item) {
+      const location = state.locationIndex.get(item.location_id);
+      if (!location) return '';
+      return `<div class="detail-row"><div class="detail-label">Location</div><div class="detail-value">${escapeHtml(location.name)}${location.street_id ? ` · ${escapeHtml(location.street_id)}` : ''}</div></div>`;
+    }
+
+    function renderUpcomingBadge(item) {
+      const count = upcomingEventsFor(item).length;
+      return count ? `<span class="badge event-badge">${count} event${count === 1 ? '' : 's'} next 7 days</span>` : '';
+    }
+
     function renderCard(item) {
       const description = cleanSummary(item.description || item.summary);
       const notes = cleanSummary(item.notes);
       const tags = derivedTags(item);
       const city = publicCity(item);
+      const locationContext = renderLocationContext(item);
+      const eventFeed = renderEventFeed(item);
       const detailRows = [
         ['Address', contactValue(item, 'address')],
         ['Hours', contactValue(item, 'hours')],
@@ -757,6 +833,7 @@
             <div class="card-top">
               <h3 class="card-title">${escapeHtml(item.title)}</h3>
               ${item.draft ? '<span class="badge">preview</span>' : ''}
+              ${renderUpcomingBadge(item)}
             </div>
             <div class="meta-line">
               ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
@@ -766,7 +843,8 @@
           <div class="card-body">
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
             ${renderNoteBlock(item, notes)}
-            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}</div>` : ''}
+            ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
+            ${eventFeed}
           </div>
         </details>`;
     }
@@ -999,12 +1077,18 @@
     }
 
     loadData().then(data => {
-      state.items = data.items || [];
-      updateStats(data);
+      const directory = data.directory || {};
+      state.items = directory.items || [];
+      state.events = data.events?.items || [];
+      state.locations = data.locations?.items || [];
+      state.eventIndex = new Map(state.events.map(event => [event.id, event]));
+      state.locationIndex = new Map(state.locations.map(location => [location.id, location]));
+      updateStats(directory);
       renderControls();
       renderRecent();
       bindEvents();
       renderResults();
+      if (window.location.hash === '#search') openSearchTool();
       if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
       document.getElementById('entry-stat').textContent = '!';

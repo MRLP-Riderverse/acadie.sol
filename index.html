@@ -14,20 +14,15 @@
     :root {
       --page-bg: #121212;
       --acadian-blue: #1f4f95;
-      --acadian-blue-deep: #16396d;
       --acadian-yellow: #f2c84b;
       --acadian-red: #bf4a4f;
       --soft-white: #f4f2ec;
+      --muted: rgba(244, 242, 236, 0.76);
       --panel-shadow: rgba(8, 18, 40, 0.28);
       --panel-bg: rgba(18, 63, 122, 0.54);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       display: grid;
@@ -39,15 +34,9 @@
       color: var(--soft-white);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
-
-    main {
-      width: min(92vw, 520px);
-      display: grid;
-      justify-items: center;
-      gap: 18px;
-    }
-
+    main { width: min(92vw, 620px); display: grid; justify-items: center; gap: 18px; }
     .menu-shell {
+      width: 100%;
       background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
       border: 4px solid var(--acadian-red);
       border-radius: 18px;
@@ -56,7 +45,7 @@
       text-align: center;
       backdrop-filter: blur(3px);
     }
-
+    .title-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 12px; }
     h1 {
       color: var(--acadian-yellow);
       font-family: "Pokemon GB", "Trebuchet MS", "Verdana", sans-serif;
@@ -64,96 +53,80 @@
       line-height: 1.35;
       letter-spacing: 0.12rem;
       text-transform: uppercase;
-      margin-bottom: 22px;
       text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
     }
-
-    nav {
-      border: 2px solid rgba(244, 242, 236, 0.24);
-      border-radius: 12px;
-      background: var(--panel-bg);
-      padding: 14px;
+    .activity-led {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: #41d66f;
+      box-shadow: 0 0 0 3px rgba(65,214,111,.16), 0 0 16px rgba(65,214,111,.75);
+      flex: 0 0 auto;
     }
-
-    ul {
-      list-style: none;
-      display: grid;
-      gap: 12px;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--soft-white);
-      font-size: clamp(1.12rem, 2.8vw, 1.38rem);
-      letter-spacing: 0.04rem;
-      padding: 14px 18px;
-      border: 2px solid rgba(244, 242, 236, 0.22);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
+    .activity-led.yellow { background: #f2c84b; box-shadow: 0 0 0 3px rgba(242,200,75,.16), 0 0 16px rgba(242,200,75,.75); }
+    .activity-led.red { background: #bf4a4f; box-shadow: 0 0 0 3px rgba(191,74,79,.16), 0 0 16px rgba(191,74,79,.75); }
+    .status-strip { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 0 0 16px; color: var(--muted); font-size: .78rem; }
+    .mini-pill { border: 1px solid rgba(244,242,236,.18); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.05); }
+    nav { border: 2px solid rgba(244, 242, 236, 0.24); border-radius: 12px; background: var(--panel-bg); padding: 14px; }
+    ul { list-style: none; display: grid; gap: 12px; }
+    a.menu-link {
+      display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--soft-white);
+      font-size: clamp(1.12rem, 2.8vw, 1.38rem); letter-spacing: 0.04rem; padding: 14px 18px;
+      border: 2px solid rgba(244, 242, 236, 0.22); border-radius: 10px; background: rgba(255, 255, 255, 0.04);
       transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
     }
-
-    .menu-icon {
-      width: 1.4em;
-      text-align: center;
-      flex: 0 0 1.4em;
-    }
-
-    .menu-label {
-      flex: 1;
-      text-align: left;
-    }
-
-    a:hover,
-    a:focus-visible {
-      transform: translateY(-1px);
-      background: rgba(242, 200, 75, 0.12);
-      border-color: var(--acadian-yellow);
-      box-shadow: 0 0 0 3px rgba(242, 200, 75, 0.1);
-      outline: none;
-    }
-
-    .tagline {
-      color: rgba(244, 242, 236, 0.88);
-      font-size: 1rem;
-      letter-spacing: 0.04rem;
-      text-align: center;
-      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22);
-    }
-
-    @media (max-width: 480px) {
-      .menu-shell {
-        padding: 24px 18px;
-      }
-
-      nav {
-        padding: 10px;
-      }
-
-      a {
-        padding: 13px 14px;
-      }
-    }
+    .menu-icon { width: 1.4em; text-align: center; flex: 0 0 1.4em; }
+    .menu-label { flex: 1; text-align: left; }
+    .menu-link:hover, .menu-link:focus-visible { transform: translateY(-1px); background: rgba(242, 200, 75, 0.12); border-color: var(--acadian-yellow); box-shadow: 0 0 0 3px rgba(242, 200, 75, 0.1); outline: none; }
+    .tagline { color: rgba(244, 242, 236, 0.88); font-size: 1rem; letter-spacing: 0.04rem; text-align: center; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.22); }
+    .float-search { position: fixed; right: 18px; bottom: 18px; border-radius: 999px; padding: 13px 16px; color: #2b2100; background: var(--acadian-yellow); text-decoration: none; font-weight: 800; box-shadow: 0 12px 32px rgba(0,0,0,.28); }
+    @media (max-width: 480px) { .menu-shell { padding: 24px 18px; } nav { padding: 10px; } a.menu-link { padding: 13px 14px; } }
   </style>
 </head>
 <body>
   <main>
     <section class="menu-shell" aria-labelledby="site-title">
-      <h1 id="site-title">ACADIE.SOL</h1>
+      <div class="title-row">
+        <h1 id="site-title">ACADIE.SOL</h1>
+        <span id="activity-led" class="activity-led" aria-hidden="true"></span>
+      </div>
+      <div class="status-strip" aria-label="Site pulse">
+        <span class="mini-pill"><span id="entry-count">–</span> entries</span>
+        <span class="mini-pill"><span id="event-count">–</span> events</span>
+        <span class="mini-pill">snapshot #<span id="snapshot-count">–</span></span>
+      </div>
       <nav aria-label="Primary">
         <ul>
-          <li><a href="directory.html"><span class="menu-icon" aria-hidden="true">📁</span><span class="menu-label">Directory</span></a></li>
-          <li><a href="#events"><span class="menu-icon" aria-hidden="true">📅</span><span class="menu-label">Events</span></a></li>
-          <li><a href="#contact"><span class="menu-icon" aria-hidden="true">✉️</span><span class="menu-label">Contact us</span></a></li>
-          <li><a href="#about"><span class="menu-icon" aria-hidden="true">⭐</span><span class="menu-label">About us</span></a></li>
+          <li><a class="menu-link" href="events.html"><span class="menu-icon" aria-hidden="true">🔥</span><span class="menu-label">What’s Happening</span></a></li>
+          <li><a class="menu-link" href="directory.html"><span class="menu-icon" aria-hidden="true">📁</span><span class="menu-label">Directory</span></a></li>
+          <li><a class="menu-link" href="events.html"><span class="menu-icon" aria-hidden="true">📅</span><span class="menu-label">Events</span></a></li>
+          <li><a class="menu-link" href="directory.html"><span class="menu-icon" aria-hidden="true">🗺️</span><span class="menu-label">Explore Region</span></a></li>
         </ul>
       </nav>
     </section>
     <p class="tagline">Our Signal Fire 🔥 Acadien Style</p>
   </main>
+  <a class="float-search" href="directory.html#search">Search</a>
+
+  <script>
+    // Homepage pulse renderer. The LED is intentionally unexplained in the UI:
+    // green/yellow/red is derived from the most recent data modification timestamp.
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    Promise.all([
+      fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()),
+      fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).catch(() => ({ event_count: 0 })),
+      fetch('assets/site-meta.json', { cache: 'no-store' }).then(res => res.json()).catch(() => ({}))
+    ]).then(([directory, events, meta]) => {
+      setText('entry-count', directory.published_count ?? 0);
+      setText('event-count', events.event_count ?? 0);
+      setText('snapshot-count', meta.snapshot_refresh_count ?? '–');
+      const led = document.getElementById('activity-led');
+      const color = meta.activity_led?.color || 'green';
+      led.classList.toggle('yellow', color === 'yellow');
+      led.classList.toggle('red', color === 'red');
+    }).catch(() => {
+      document.getElementById('activity-led')?.classList.add('red');
+    });
+  </script>
 </body>
 </html>
-

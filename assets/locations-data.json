@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
+  "location_count": 4,
+  "items": [
+    {
+      "id": "big-d-st-peter",
+      "status": "published",
+      "kind": "venue",
+      "title": {
+        "en": "Big D St Peter Avenue",
+        "fr": "Big D, avenue St Peter",
+        "shiac": "Le Big D sur St Peter"
+      },
+      "name": "Big D St Peter Avenue",
+      "summary": {
+        "en": "Physical drive-in location for Big D Drive-In on St Peter Ave.",
+        "fr": "Lieu physique du Big D Drive-In sur l’avenue St Peter.",
+        "shiac": "Le spot Big D sur St Peter, burger pis toute."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "st-peter-ave-bathurst",
+      "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "big-d-drive-in"
+      ],
+      "nearby_location_ids": [
+        "st-peter-ave-bathurst"
+      ],
+      "tags": [
+        "drive-in",
+        "food",
+        "family"
+      ],
+      "path": "locations/big-d-st-peter/location.md",
+      "source_modified_at": "2026-06-18T16:19:58.389170Z",
+      "source_modified_ts": 1781799598
+    },
+    {
+      "id": "downtown-main-st-bathurst",
+      "status": "published",
+      "kind": "corridor",
+      "title": {
+        "en": "Downtown Main Street Bathurst",
+        "fr": "Centre-ville de Bathurst, rue Main",
+        "shiac": "Downtown Bathurst sur Main"
+      },
+      "name": "Downtown Main Street Bathurst",
+      "summary": {
+        "en": "A corridor location for downtown Main Street adjacency and event routing.",
+        "fr": "Un corridor pour les liens de proximité et les événements de la rue Main.",
+        "shiac": "Le coin downtown pour relier les spots ensemble."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "main-st-bathurst",
+      "address": "",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "la-louga-night-bar-resto"
+      ],
+      "nearby_location_ids": [
+        "la-louga-main-st"
+      ],
+      "tags": [
+        "downtown",
+        "corridor"
+      ],
+      "path": "locations/downtown-main-st-bathurst/location.md",
+      "source_modified_at": "2026-06-18T16:20:15.330775Z",
+      "source_modified_ts": 1781799615
+    },
+    {
+      "id": "la-louga-main-st",
+      "status": "published",
+      "kind": "venue",
+      "title": {
+        "en": "La Louga Main Street",
+        "fr": "La Louga, rue Main",
+        "shiac": "Le spot du Louga sur Main"
+      },
+      "name": "La Louga Main Street",
+      "summary": {
+        "en": "Physical location for La Louga Night Bar - Resto in downtown Bathurst.",
+        "fr": "Lieu physique pour La Louga Night Bar - Resto au centre-ville de Bathurst.",
+        "shiac": "Le spot physique du Louga downtown Bathurst."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "main-st-bathurst",
+      "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "la-louga-night-bar-resto"
+      ],
+      "nearby_location_ids": [
+        "downtown-main-st-bathurst"
+      ],
+      "tags": [
+        "downtown",
+        "nightlife",
+        "venue"
+      ],
+      "path": "locations/la-louga-main-st/location.md",
+      "source_modified_at": "2026-06-18T16:19:58.356170Z",
+      "source_modified_ts": 1781799598
+    },
+    {
+      "id": "st-peter-ave-bathurst",
+      "status": "published",
+      "kind": "corridor",
+      "title": {
+        "en": "St Peter Avenue Bathurst",
+        "fr": "Avenue St Peter, Bathurst",
+        "shiac": "St Peter Ave à Bathurst"
+      },
+      "name": "St Peter Avenue Bathurst",
+      "summary": {
+        "en": "A corridor location for St Peter Avenue adjacency and route logic.",
+        "fr": "Un corridor pour la proximité et les routes de l’avenue St Peter.",
+        "shiac": "La run St Peter pour trouver les spots proches."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "st-peter-ave-bathurst",
+      "address": "",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "big-d-drive-in"
+      ],
+      "nearby_location_ids": [
+        "big-d-st-peter"
+      ],
+      "tags": [
+        "corridor",
+        "food",
+        "route"
+      ],
+      "path": "locations/st-peter-ave-bathurst/location.md",
+      "source_modified_at": "2026-06-18T16:20:15.298190Z",
+      "source_modified_ts": 1781799615
+    }
+  ]
+}

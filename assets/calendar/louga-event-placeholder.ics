@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Acadie.sol//Events V1//EN
+BEGIN:VEVENT
+UID:louga-event-placeholder@acadie.sol
+DTSTAMP:20260618T163940Z
+DTSTART:20260713T000000Z
+DTEND:20260713T040000Z
+SUMMARY:Louga Event Placeholder
+DESCRIPTION:A non-public placeholder for testing how venue event feeds\, search badges\, and calendar links render.
+LOCATION:125 Main St\, Bathurst\, NB E2A 1A6\, Canada
+END:VEVENT
+END:VCALENDAR

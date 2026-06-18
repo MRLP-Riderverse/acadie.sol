@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "item_count": 8,
+  "items": [
+    {
+      "type": "entry",
+      "id": "big-d-drive-in",
+      "title": "Big D Drive-In",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-big-d-drive-in",
+      "terms": [
+        "Big D Drive-In",
+        "food",
+        "Acadie-Bathurst",
+        "Home of the Big D Burger.",
+        "drive-in",
+        "burger",
+        "restaurant",
+        "picnic",
+        "family",
+        "Big D Burger"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "la-louga-night-bar-resto",
+      "title": "La Louga Night Bar - Resto",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-la-louga-night-bar-resto",
+      "terms": [
+        "La Louga Night Bar - Resto",
+        "business",
+        "Acadie-Bathurst",
+        "Bathurst night bar and resto with a strong French-language social presence.",
+        "bar",
+        "nightlife",
+        "restaurant",
+        "downtown",
+        "live music",
+        "La Louga Night Club"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "louga-event-placeholder",
+      "title": "Louga Event Placeholder",
+      "subtitle": "active · 2026-07-12T21:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "music",
+        "nightlife"
+      ],
+      "url": "events.html#event-louga-event-placeholder",
+      "terms": [
+        "Louga Event Placeholder",
+        "A non-public placeholder for testing how venue event feeds, search badges, and calendar links render.",
+        "2026-07-12T21:00:00-03:00",
+        "music",
+        "nightlife",
+        "placeholder",
+        "la-louga-night-bar-resto"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "big-d-community-placeholder",
+      "title": "Big D Community Placeholder",
+      "subtitle": "active · 2026-07-19T12:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "food",
+        "family"
+      ],
+      "url": "events.html#event-big-d-community-placeholder",
+      "terms": [
+        "Big D Community Placeholder",
+        "A non-public placeholder for testing family/food venue event rendering.",
+        "2026-07-19T12:00:00-03:00",
+        "food",
+        "family",
+        "placeholder",
+        "big-d-drive-in"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "big-d-st-peter",
+      "title": "Big D St Peter Avenue",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-big-d-st-peter",
+      "terms": [
+        "Big D St Peter Avenue",
+        "Physical drive-in location for Big D Drive-In on St Peter Ave.",
+        "st-peter-ave-bathurst",
+        "drive-in",
+        "food",
+        "family"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "downtown-main-st-bathurst",
+      "title": "Downtown Main Street Bathurst",
+      "subtitle": "corridor · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "corridor"
+      ],
+      "url": "events.html#location-downtown-main-st-bathurst",
+      "terms": [
+        "Downtown Main Street Bathurst",
+        "A corridor location for downtown Main Street adjacency and event routing.",
+        "main-st-bathurst",
+        "downtown",
+        "corridor"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "la-louga-main-st",
+      "title": "La Louga Main Street",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-la-louga-main-st",
+      "terms": [
+        "La Louga Main Street",
+        "Physical location for La Louga Night Bar - Resto in downtown Bathurst.",
+        "main-st-bathurst",
+        "downtown",
+        "nightlife",
+        "venue"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "st-peter-ave-bathurst",
+      "title": "St Peter Avenue Bathurst",
+      "subtitle": "corridor · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "corridor"
+      ],
+      "url": "events.html#location-st-peter-ave-bathurst",
+      "terms": [
+        "St Peter Avenue Bathurst",
+        "A corridor location for St Peter Avenue adjacency and route logic.",
+        "st-peter-ave-bathurst",
+        "corridor",
+        "food",
+        "route"
+      ]
+    }
+  ]
+}

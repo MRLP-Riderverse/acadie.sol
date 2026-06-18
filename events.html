@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACADIE.SOL Events</title>
+  <style>
+    :root {
+      --page-bg: #121212;
+      --blue: #174b8e;
+      --blue2: #0d2f5e;
+      --gold: #f2c84b;
+      --red: #bf4a4f;
+      --text: #f8f5ea;
+      --muted: rgba(248, 245, 234, 0.72);
+      --line: rgba(248, 245, 234, 0.18);
+      --card: rgba(16, 53, 102, 0.84);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Verdana", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(40,114,198,.26), transparent 26rem),
+        radial-gradient(circle at 95% 8%, rgba(242,200,75,.14), transparent 22rem),
+        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 48%, #0e0e0e 100%);
+    }
+    a { color: #fff; text-underline-offset: 3px; }
+    .wrap { width: min(1040px, calc(100vw - 28px)); margin: 0 auto; padding: 28px 0 44px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+    .brand { color: var(--gold); font-weight: 900; letter-spacing: .12em; text-decoration: none; }
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; background: rgba(255,255,255,.06); color: var(--text); text-decoration: none; font-size: .88rem; }
+    .pill:hover { border-color: var(--gold); background: rgba(242,200,75,.12); }
+    .hero, .event-card, .empty, .location-card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(33,98,177,.66), var(--card));
+      box-shadow: 0 18px 42px rgba(5,13,27,.28);
+    }
+    .hero { padding: clamp(18px, 4vw, 34px); display: grid; gap: 12px; margin-bottom: 18px; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 900; }
+    h1 { margin: 0; font-size: clamp(2rem, 7vw, 4rem); line-height: .95; }
+    .lede { color: var(--muted); max-width: 72ch; line-height: 1.5; margin: 0; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+    button.pill { cursor: pointer; font: inherit; }
+    button.pill.active { background: var(--gold); border-color: var(--gold); color: #2a2000; }
+    .grid { display: grid; gap: 14px; }
+    .event-card { padding: 18px; display: grid; gap: 12px; }
+    .event-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .event-card h2 { margin: 0; font-size: clamp(1.18rem, 3vw, 1.65rem); }
+    .meta { display: flex; gap: 7px; flex-wrap: wrap; color: var(--muted); font-size: .84rem; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.07); }
+    .badge.placeholder { border-color: rgba(242,200,75,.48); color: var(--gold); }
+    .description { color: var(--muted); margin: 0; line-height: 1.48; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .action { border: 1px solid var(--line); border-radius: 12px; padding: 9px 11px; background: rgba(255,255,255,.07); text-decoration: none; color: var(--text); }
+    .action.primary { background: rgba(242,200,75,.16); border-color: rgba(242,200,75,.62); color: var(--gold); }
+    .split { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 14px; align-items: start; }
+    .location-card { padding: 15px; display: grid; gap: 8px; }
+    .location-card h3 { margin: 0; font-size: 1rem; color: var(--gold); }
+    .small { color: var(--muted); font-size: .86rem; line-height: 1.45; }
+    .empty { padding: 22px; color: var(--muted); }
+    @media (max-width: 760px) { .split { grid-template-columns: 1fr; } .event-top { display: grid; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="index.html">ACADIE.SOL</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="pill" href="directory.html">Directory</a>
+        <a class="pill" href="index.html">Pause menu</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">What’s happening</div>
+      <h1>Events</h1>
+      <p class="lede">A static event layer fed by the directory repo. Events point to hosts and reusable locations, so venue pages, region pages, calendar files, and archive recaps can all render the same source record.</p>
+    </section>
+
+    <div class="filters" aria-label="Event filters">
+      <button class="pill active" data-filter="active">Active / Upcoming</button>
+      <button class="pill" data-filter="all">All</button>
+      <button class="pill" data-filter="archived">Archive</button>
+      <button class="pill" data-filter="placeholder">Placeholders</button>
+    </div>
+
+    <main class="split">
+      <section id="events" class="grid" aria-live="polite"></section>
+      <aside id="locations" class="grid" aria-label="Known locations"></aside>
+    </main>
+  </div>
+
+  <script>
+    // Events page renderer. It intentionally reads static JSON only; the directory
+    // repo remains the data source and the site stays a disposable public mirror.
+    const state = { events: [], entries: [], locations: [], filter: 'active' };
+
+    function escapeHtml(str) {
+      return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+    }
+    function text(value) {
+      if (value && typeof value === 'object') return value.en || value.fr || value.shiac || '';
+      return value || '';
+    }
+    function formatDate(value) {
+      if (!value) return 'Date TBD';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
+    }
+    function entryName(id) {
+      return state.entries.find(entry => entry.slug === id)?.title || id;
+    }
+    function locationName(id) {
+      return state.locations.find(location => location.id === id)?.name || id || 'Location TBD';
+    }
+    function eventMatches(event) {
+      if (state.filter === 'all') return true;
+      if (state.filter === 'archived') return event.computed_status === 'archived' || event.status === 'archived';
+      if (state.filter === 'placeholder') return event.status === 'placeholder';
+      return event.computed_status === 'active' && event.status !== 'placeholder';
+    }
+    function renderEvents() {
+      const root = document.getElementById('events');
+      const events = state.events.filter(eventMatches);
+      root.innerHTML = events.length ? events.map(event => {
+        const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
+        const icsHref = event.starts_at ? `assets/calendar/${encodeURIComponent(event.id)}.ics` : '';
+        return `<article class="event-card" id="event-${escapeHtml(event.id)}">
+          <div class="event-top">
+            <div>
+              <h2>${escapeHtml(text(event.title) || event.name)}</h2>
+              <div class="meta">
+                <span class="badge ${event.status === 'placeholder' ? 'placeholder' : ''}">${escapeHtml(event.status)}</span>
+                <span class="badge">${escapeHtml(event.computed_status || 'active')}</span>
+                <span class="badge">${escapeHtml(formatDate(event.starts_at))}</span>
+              </div>
+            </div>
+          </div>
+          <p class="description">${escapeHtml(text(event.summary) || 'Details coming soon.')}</p>
+          <div class="meta">
+            <span>Host: ${hosts || 'TBD'}</span>
+            <span>Location: <a href="#location-${escapeHtml(event.location_id)}">${escapeHtml(locationName(event.location_id))}</a></span>
+          </div>
+          <div class="actions">
+            ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
+            ${hosts ? `<a class="action" href="directory.html#entry-${escapeHtml((event.host_entry_ids || [])[0])}">Open host profile</a>` : ''}
+          </div>
+        </article>`;
+      }).join('') : '<div class="empty">No matching events yet. Placeholder events stay hidden from the default public view.</div>';
+    }
+    function renderLocations() {
+      const root = document.getElementById('locations');
+      root.innerHTML = state.locations.map(location => `<section class="location-card" id="location-${escapeHtml(location.id)}">
+        <h3>${escapeHtml(location.name)}</h3>
+        <div class="small">${escapeHtml(text(location.summary))}</div>
+        <div class="meta"><span class="badge">${escapeHtml(location.kind)}</span><span class="badge">${escapeHtml(location.street_id || 'no street id')}</span></div>
+      </section>`).join('');
+    }
+    function bindFilters() {
+      document.querySelectorAll('[data-filter]').forEach(button => {
+        button.addEventListener('click', () => {
+          state.filter = button.dataset.filter;
+          document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.toggle('active', btn === button));
+          renderEvents();
+        });
+      });
+    }
+    Promise.all([
+      fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()),
+      fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()),
+      fetch('assets/locations-data.json', { cache: 'no-store' }).then(res => res.json())
+    ]).then(([events, directory, locations]) => {
+      state.events = events.items || [];
+      state.entries = directory.items || [];
+      state.locations = locations.items || [];
+      bindFilters();
+      renderEvents();
+      renderLocations();
+    }).catch(error => {
+      document.getElementById('events').innerHTML = `<div class="empty">Events failed to load: ${escapeHtml(error.message)}</div>`;
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
