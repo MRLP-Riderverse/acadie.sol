@@ -118,9 +118,10 @@
       <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
     </div>
     <nav class="drawer-nav">
-      <a href="directory.html">Full directory</a>
-      <a href="index.html#about">About Acadie.sol</a>
+      <a href="directory.html" id="entry-menu-directory">Full directory</a>
+      <a href="index.html#about" id="entry-menu-about">About Acadie.sol</a>
       <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
   </aside>
 
@@ -130,10 +131,10 @@
   </main>
 
   <nav class="dock" aria-label="Primary dock">
-    <a href="index.html"><span>⌂</span><span>Home</span></a>
-    <a href="events.html"><span>◷</span><span>Events</span></a>
-    <a href="directory.html"><span>⌕</span><span>Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+    <a href="index.html"><span>⌂</span><span id="entry-dock-home">Home</span></a>
+    <a href="events.html"><span>◷</span><span id="entry-dock-events">Events</span></a>
+    <a href="directory.html"><span>⌕</span><span id="entry-dock-search">Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span id="entry-dock-menu">Menu</span></label>
   </nav>
 
   <script>
@@ -141,10 +142,21 @@
        Reads slug from URL hash (#slug), fetches directory-data.json,
        and renders a full page for that entry. Drafts redirect back
        to directory.html since they don't get full pages yet. */
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+    }
     function escapeHtml(str) { const d=document.createElement("div"); d.textContent=String(str||""); return d.innerHTML; }
     function normalize(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
-    function cleanSummary(v) { return v && typeof v === 'object' ? (v.en || v.fr || v.shiac || '') : (v || ''); }
-    function localized(v) { return v && typeof v === 'object' ? (v.en || v.fr || v.shiac || '') : (v || ''); }
+    function cleanSummary(v) {
+      if (v && typeof v === 'object') {
+        const lang = currentLang();
+        return v[lang] || v.en || v.fr || v.shiac || '';
+      }
+      return v || '';
+    }
+    function localized(v) { return cleanSummary(v); }
     function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
     function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
     function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
@@ -163,6 +175,26 @@
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+    document.getElementById('lang-toggle')?.addEventListener('click', () => {
+      const next = currentLang() === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('acadie-lang', next);
+      document.documentElement.lang = next;
+      updateChromeCopy();
+      render();
+    });
+    function updateChromeCopy() {
+      const fr = currentLang() === 'fr';
+      document.getElementById('entry-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
+      document.getElementById('entry-menu-about').textContent = fr ? 'À propos d’Acadie.sol' : 'About Acadie.sol';
+      document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
+      document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
+      document.getElementById('entry-dock-home').textContent = fr ? 'Accueil' : 'Home';
+      document.getElementById('entry-dock-events').textContent = fr ? 'Événements' : 'Events';
+      document.getElementById('entry-dock-search').textContent = fr ? 'Recherche' : 'Search';
+      document.getElementById('entry-dock-menu').textContent = 'Menu';
+    }
+    document.documentElement.lang = currentLang();
+    updateChromeCopy();
 
     const slug = decodeURIComponent(location.hash.slice(1)).trim();
     if (!slug) { location.replace('directory.html'); }
@@ -186,9 +218,10 @@
         // Drafts don't get full pages — redirect to expanded card
         if (item.draft) { location.replace(`directory.html#entry-${encodeURIComponent(item.slug)}`); return; }
 
-        document.title = `${item.title || 'Entry'} — Acadie.sol`;
+        const itemTitle = cleanSummary(item.title_localized) || item.title || 'Entry';
+        document.title = `${itemTitle} — Acadie.sol`;
         const city = publicCity(item);
-        const description = cleanSummary(item.description || item.summary);
+        const description = cleanSummary(item.description_localized || item.description || item.summary);
         const tags = (Array.isArray(item.tags) ? item.tags : []).map(cleanSummary).filter(Boolean);
         const detailRows = [
           ['Address', contactValue(item, 'address')],
@@ -220,16 +253,16 @@
 
         const placesHtml = relatedPlaces.length ? `
           <div class="section-label">Related places</div>
-          <div>${relatedPlaces.map(p => `<a class="related-place" href="entry.html#${escapeHtml(p.slug)}">${escapeHtml(p.title)}</a>`).join('')}</div>
+          <div>${relatedPlaces.map(p => `<a class="related-place" href="entry.html#${escapeHtml(p.slug)}">${escapeHtml(cleanSummary(p.title_localized) || p.title)}</a>`).join('')}</div>
         ` : '';
 
-        const initial = (item.title || '?').trim().charAt(0).toUpperCase();
+        const initial = (itemTitle || '?').trim().charAt(0).toUpperCase();
 
         root.innerHTML = `
           <header class="brand-row"><a href="index.html">Acadie.sol</a><span>${escapeHtml(city || 'entry')}</span></header>
           <section class="poster"><span class="poster-initial">${escapeHtml(initial)}</span></section>
           <section class="surface">
-            <h1>${escapeHtml(item.title)}</h1>
+            <h1>${escapeHtml(itemTitle)}</h1>
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
             ${item.category ? `<span class="entry-category">${escapeHtml(item.category)}</span>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${escapeHtml(description)}</p>` : ''}

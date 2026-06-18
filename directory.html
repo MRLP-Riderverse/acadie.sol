@@ -585,9 +585,10 @@
       <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
     </div>
     <nav class="drawer-nav">
-      <a href="directory.html">Full directory</a>
-      <a href="index.html#about">About Acadie.sol</a>
+      <a href="directory.html" id="dir-menu-directory">Full directory</a>
+      <a href="index.html#about" id="dir-menu-about">About Acadie.sol</a>
       <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
   </aside>
   <header class="top-nav" id="top-nav">
@@ -703,10 +704,10 @@
   </div>
 
   <nav class="site-dock" aria-label="Primary dock">
-    <a href="index.html"><span>⌂</span><span>Home</span></a>
-    <a href="events.html"><span>◷</span><span>Events</span></a>
-    <a class="active" href="directory.html"><span>⌕</span><span>Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+    <a href="index.html"><span>⌂</span><span id="dir-dock-home">Home</span></a>
+    <a href="events.html"><span>◷</span><span id="dir-dock-events">Events</span></a>
+    <a class="active" href="directory.html"><span>⌕</span><span id="dir-dock-search">Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span id="dir-dock-menu">Menu</span></label>
   </nav>
 
   <script>
@@ -727,6 +728,32 @@
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+    /* Language toggle — shared with events.html and entry.html */
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+    }
+    document.getElementById('lang-toggle')?.addEventListener('click', () => {
+      const next = currentLang() === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('acadie-lang', next);
+      document.documentElement.lang = next;
+      updateDirCopy();
+      renderDirectory();
+    });
+    function updateDirCopy() {
+      const fr = currentLang() === 'fr';
+      document.getElementById('dir-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
+      document.getElementById('dir-menu-about').textContent = fr ? 'À propos d\'Acadie.sol' : 'About Acadie.sol';
+      document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
+      document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
+      document.getElementById('dir-dock-home').textContent = fr ? 'Accueil' : 'Home';
+      document.getElementById('dir-dock-events').textContent = fr ? 'Événements' : 'Events';
+      document.getElementById('dir-dock-search').textContent = fr ? 'Recherche' : 'Search';
+      document.getElementById('dir-dock-menu').textContent = 'Menu';
+    }
+    document.documentElement.lang = currentLang();
+    updateDirCopy();
 
     const lensTerms = {
       food: ['food', 'restaurant', 'cafe', 'coffee', 'pizza', 'breakfast', 'brunch', 'donut', 'burger', 'deli', 'ice cream', 'treat', 'grocery'],
@@ -763,7 +790,10 @@
 
     function normalize(value) { return String(value || '').toLowerCase(); }
     function localizedText(value) {
-      if (value && typeof value === 'object') return value.en || value.fr || value.shiac || '';
+      if (value && typeof value === 'object') {
+        const lang = currentLang();
+        return value[lang] || value.en || value.fr || value.shiac || '';
+      }
       return value || '';
     }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
@@ -919,7 +949,7 @@
             const stamp = modifiedTs(item);
             return `<li class="recent-item">
               <div>
-                <a class="recent-link" href="#entry-${escapeHtml(item.slug)}">${escapeHtml(item.title)}</a>
+                <a class="recent-link" href="#entry-${escapeHtml(item.slug)}">${escapeHtml(localizedText(item.title_localized) || item.title)}</a>
                 <div class="recent-meta">
                   ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
                   ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
@@ -997,7 +1027,8 @@
     }
 
     function renderCard(item) {
-      const description = cleanSummary(item.description || item.summary);
+      const displayTitle = localizedText(item.title_localized) || item.title;
+      const description = localizedText(item.description_localized) || cleanSummary(item.description || item.summary);
       const notes = cleanSummary(item.notes);
       const tags = derivedTags(item);
       const city = publicCity(item);
@@ -1016,7 +1047,7 @@
           <summary>
             <span class="card-main">
               <span class="card-top">
-                <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                <h3 class="card-title">${escapeHtml(displayTitle)}</h3>
                 ${item.draft ? '<span class="badge">preview</span>' : ''}
                 ${renderUpcomingBadge(item)}
               </span>
@@ -1028,7 +1059,7 @@
             </span>
           </summary>
           <div class="card-body">
-            <div class="expanded-thumb">${escapeHtml((item.title || '?').trim().charAt(0).toUpperCase())}</div>
+            <div class="expanded-thumb">${escapeHtml((displayTitle || '?').trim().charAt(0).toUpperCase())}</div>
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}${locationContext}</div>` : ''}

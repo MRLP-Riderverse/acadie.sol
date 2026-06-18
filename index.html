@@ -145,70 +145,98 @@
       <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
     </div>
     <nav class="drawer-nav">
-      <a href="directory.html">Full directory</a>
-      <a href="index.html#about">About Acadie.sol</a>
+      <a href="directory.html" id="menu-directory-link">Full directory</a>
+      <a href="index.html#about" id="menu-about-link">About Acadie.sol</a>
       <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
+      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
   </aside>
 
   <main class="phone-shell">
-    <header class="brand-row"><strong>Acadie.sol</strong><span>local community surface</span></header>
+    <header class="brand-row"><strong>Acadie.sol</strong><span id="brand-subtitle">local community surface</span></header>
 
     <section class="poster-window" aria-labelledby="site-title">
-      <span class="poster-label">Community OS</span>
+      <span class="poster-label" id="poster-label">Community OS</span>
       <div class="poster-title">
         <h1 id="site-title">Acadie.sol</h1>
-        <span>A local-first pocket surface for places, happenings, and Acadian signals.</span>
+        <span id="poster-subtitle">A local-first pocket surface for places, happenings, and Acadian signals.</span>
       </div>
     </section>
 
     <section class="directory-banner" aria-label="Directory launch banner">
       <a class="banner-link" href="directory.html">
         <div class="banner-marquee" aria-hidden="true">
-          <div class="banner-marquee-track">
+          <div class="banner-marquee-track" id="banner-marquee-track">
             <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
             <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
           </div>
         </div>
         <div class="banner-body">
           <span class="search-icon">⌕</span>
-          <span class="launch-copy"><strong>Explore Directory</strong><span>59 local entries</span></span>
+          <span class="launch-copy"><strong id="directory-cta-title">Explore Directory</strong><span id="directory-cta-count">59 local entries</span></span>
           <span class="chev">›</span>
         </div>
       </a>
     </section>
 
     <section class="surface" aria-label="Next events">
-      <div class="section-title"><h2>Next up</h2><a href="events.html">View all events</a></div>
+      <div class="section-title"><h2 id="next-up-title">Next up</h2><a href="events.html" id="view-events-link">View all events</a></div>
       <div class="event-preview-list" id="event-preview-list">
-        <div class="event-row"><span class="date-chip">…</span><div><strong>Loading events</strong><span>Checking the public calendar.</span></div></div>
+        <div class="event-row"><span class="date-chip">…</span><div><strong id="loading-events-title">Loading events</strong><span id="loading-events-copy">Checking the public calendar.</span></div></div>
       </div>
     </section>
 
     <footer class="page-footer" id="about">
-      <p><strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.</p>
+      <p id="about-copy"><strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.</p>
     </footer>
   </main>
 
   <nav class="dock" aria-label="Primary dock">
-    <a class="active" href="index.html"><span>⌂</span><span>Home</span></a>
-    <a href="events.html"><span>◷</span><span>Events</span></a>
-    <a href="directory.html"><span>⌕</span><span>Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span>Menu</span></label>
+    <a class="active" href="index.html"><span>⌂</span><span id="dock-home">Home</span></a>
+    <a href="events.html"><span>◷</span><span id="dock-events">Events</span></a>
+    <a href="directory.html"><span>⌕</span><span id="dock-search">Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span id="dock-menu">Menu</span></label>
   </nav>
 
   <script>
     // Home as OS launch surface: public data powers compact widgets; dock owns navigation.
-    function escapeHtml(str) { return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
-    function localized(value) { return value && typeof value === 'object' ? (value.en || value.fr || value.shiac || '') : (value || ''); }
-    function publicTitle(event) { return String(localized(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
-    function publicSummary(event) { const raw = String(localized(event.summary) || 'Details coming soon.'); return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw; }
-    function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
-    function dateParts(value) { const date = parseDate(value); if (!date) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) }; }
-    function isFrenchUi() {
-      const lang = document.documentElement.lang || navigator.language || '';
-      return /^fr\b/i.test(lang);
+    const HOME_COPY = {
+      en: {
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
+        brandSubtitle: 'local community surface', posterLabel: 'Community OS', posterSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
+        ctaTitle: 'Explore Directory', ctaCount: count => `${count} local entries`, nextUp: 'Next up', viewEvents: 'View all events',
+        about: '<strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.',
+        dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu', loadingTitle: 'Loading events', loadingCopy: 'Checking the public calendar.',
+        detailsSoon: 'Details coming soon.', previewSummary: 'Preview listing while the public calendar format is being shaped.', noEventsTitle: 'No public events yet', noEventsCopy: 'Check back as the calendar fills in.', waiting: 'Waiting', soon: 'soon'
+      },
+      fr: {
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
+        brandSubtitle: 'surface communautaire locale', posterLabel: 'OS communautaire', posterSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
+        ctaTitle: 'Explorer le répertoire', ctaCount: count => `${count} entrées locales`, nextUp: 'À venir', viewEvents: 'Voir tous les événements',
+        about: '<strong>Construit d’abord en local.</strong> Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst. Simple pour l’instant, plus riche à mesure que les fiches grandissent.',
+        dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu', loadingTitle: 'Chargement des événements', loadingCopy: 'Vérification du calendrier public.',
+        detailsSoon: 'Détails à venir.', previewSummary: 'Aperçu provisoire pendant que le format public du calendrier prend forme.', noEventsTitle: 'Aucun événement public pour le moment', noEventsCopy: 'Revenez voir quand le calendrier sera mieux rempli.', waiting: 'En attente', soon: 'bientôt'
+      }
+    };
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
+    function copy() { return HOME_COPY[currentLang()] || HOME_COPY.en; }
+    function escapeHtml(str) { return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    function localized(value) {
+      if (value && typeof value === 'object') {
+        const lang = currentLang();
+        return value[lang] || value.en || value.fr || value.shiac || '';
+      }
+      return value || '';
+    }
+    function publicTitle(event) { return String(localized(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
+    function publicSummary(event) { const raw = String(localized(event.summary) || copy().detailsSoon); return /placeholder|non-public/i.test(raw) ? copy().previewSummary : raw; }
+    function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
+    function dateParts(value) { const date = parseDate(value); if (!date) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(currentLang(), { month: 'short' }).format(date), day: new Intl.DateTimeFormat(currentLang(), { day: 'numeric' }).format(date) }; }
+    function isFrenchUi() { return currentLang() === 'fr'; }
     function countdownLabel(event) {
       const now = Date.now();
       const start = parseDate(event.starts_at)?.getTime();
@@ -236,16 +264,46 @@
       root.innerHTML = upcoming.length ? upcoming.map(event => {
         const parts = dateParts(event.starts_at);
         return `<a class="event-row" href="events.html#event-${escapeHtml(event.id)}"><span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span><div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div><span class="event-status">${escapeHtml(countdownLabel(event))}</span></a>`;
-      }).join('') : '<div class="event-row"><span class="date-chip"><small>soon</small></span><div><strong>No public events yet</strong><span>Check back as the calendar fills in.</span></div><span class="event-status">Waiting</span></div>';
+      }).join('') : `<div class="event-row"><span class="date-chip"><small>${escapeHtml(copy().soon)}</small></span><div><strong>${escapeHtml(copy().noEventsTitle)}</strong><span>${escapeHtml(copy().noEventsCopy)}</span></div><span class="event-status">${escapeHtml(copy().waiting)}</span></div>`;
     }
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-    function updateEntryCount(count) {
-      const el = document.querySelector('.launch-copy span');
-      if (el) el.textContent = `${count} local entries`;
+    document.getElementById('lang-toggle')?.addEventListener('click', () => {
+      const next = currentLang() === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('acadie-lang', next);
+      document.documentElement.lang = next;
+      updateStaticCopy();
+      fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()).then(data => { updateEntryCount((data.items || []).length); }).catch(() => {});
+      fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).then(renderEventPreview).catch(() => renderEventPreview({ items: [] }));
+    });
+    function updateStaticCopy() {
+      const c = copy();
+      document.getElementById('menu-directory-link').textContent = c.menuDirectory;
+      document.getElementById('menu-about-link').textContent = c.menuAbout;
+      document.getElementById('theme-toggle').textContent = c.theme;
+      document.getElementById('lang-toggle').textContent = c.lang;
+      document.getElementById('brand-subtitle').textContent = c.brandSubtitle;
+      document.getElementById('poster-label').textContent = c.posterLabel;
+      document.getElementById('poster-subtitle').textContent = c.posterSubtitle;
+      document.getElementById('directory-cta-title').textContent = c.ctaTitle;
+      document.getElementById('next-up-title').textContent = c.nextUp;
+      document.getElementById('view-events-link').textContent = c.viewEvents;
+      document.getElementById('about-copy').innerHTML = c.about;
+      document.getElementById('dock-home').textContent = c.dockHome;
+      document.getElementById('dock-events').textContent = c.dockEvents;
+      document.getElementById('dock-search').textContent = c.dockSearch;
+      document.getElementById('dock-menu').textContent = c.dockMenu;
+      document.getElementById('loading-events-title').textContent = c.loadingTitle;
+      document.getElementById('loading-events-copy').textContent = c.loadingCopy;
     }
+    function updateEntryCount(count) {
+      const el = document.getElementById('directory-cta-count');
+      if (el) el.textContent = copy().ctaCount(count);
+    }
+    document.documentElement.lang = currentLang();
+    updateStaticCopy();
     fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()).then(data => { updateEntryCount((data.items || []).length); }).catch(() => {});
     fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).then(renderEventPreview).catch(() => renderEventPreview({ items: [] }));
   </script>
