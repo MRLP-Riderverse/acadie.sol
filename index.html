@@ -37,19 +37,17 @@
         linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 48%, #0c0c0c 100%);
     }
     a { color: inherit; }
-    .wrap { width: min(960px, calc(100vw - 28px)); margin: 0 auto; padding: 24px 0 42px; }
+    .wrap { width: min(760px, calc(100vw - 24px)); margin: 0 auto; padding: 14px 0 32px; }
     .hero-card {
-      min-height: calc(100svh - 48px);
       display: grid;
-      align-content: center;
-      gap: 18px;
-      padding: clamp(20px, 5vw, 42px);
+      gap: 13px;
+      padding: clamp(16px, 4vw, 28px);
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 22px;
       background:
-        linear-gradient(180deg, rgba(33, 98, 177, 0.62), var(--card)),
-        radial-gradient(circle at 18% 12%, rgba(242, 200, 75, 0.14), transparent 18rem);
-      box-shadow: 0 24px 58px var(--shadow);
+        linear-gradient(180deg, rgba(33, 98, 177, 0.52), rgba(16, 53, 102, 0.72)),
+        radial-gradient(circle at 18% 12%, rgba(242, 200, 75, 0.11), transparent 15rem);
+      box-shadow: 0 16px 34px var(--shadow);
     }
     .brand-mark {
       display: inline-flex;
@@ -57,32 +55,32 @@
       align-items: center;
       gap: 8px;
       color: var(--gold);
-      font-size: 0.74rem;
+      font-size: 0.66rem;
       font-weight: 900;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
     .brand-mark::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--gold); box-shadow: 0 0 18px rgba(242,200,75,.7); }
     h1 {
       margin: 0;
       color: var(--gold);
-      font-family: "Pokemon GB", "Trebuchet MS", "Verdana", sans-serif;
-      font-size: clamp(2rem, 10vw, 4.6rem);
-      line-height: 1.15;
-      letter-spacing: 0.08em;
+      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
+      font-size: clamp(2.05rem, 13vw, 3.45rem);
+      line-height: 0.95;
+      letter-spacing: 0.025em;
       text-transform: uppercase;
-      text-shadow: 0 3px 0 rgba(0, 0, 0, 0.24);
+      text-shadow: 0 2px 0 rgba(0, 0, 0, 0.22);
     }
-    .lede { margin: 0; max-width: 58ch; color: var(--muted); font-size: clamp(1rem, 2.7vw, 1.18rem); line-height: 1.5; }
-    .primary-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 4px; }
+    .lede { margin: 0; max-width: 54ch; color: var(--muted); font-size: clamp(0.92rem, 2.5vw, 1.04rem); line-height: 1.42; }
+    .primary-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 2px; }
     .action-card {
-      min-height: 118px;
+      min-height: 86px;
       display: grid;
       align-content: space-between;
-      gap: 10px;
-      padding: 17px;
+      gap: 7px;
+      padding: 13px;
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 17px;
       color: var(--text);
       text-decoration: none;
       background: rgba(8, 18, 40, 0.28);
@@ -91,36 +89,36 @@
     .action-card:hover,
     .action-card:focus-visible { transform: translateY(-1px); border-color: rgba(242,200,75,.78); background: rgba(242,200,75,.13); outline: none; }
     .action-card.primary { background: rgba(242, 200, 75, 0.94); color: #2f2500; border-color: var(--gold); }
-    .action-card b { font-size: 1.18rem; }
-    .action-card span { color: var(--muted); line-height: 1.38; }
+    .action-card b { font-size: 1rem; }
+    .action-card span { color: var(--muted); line-height: 1.3; font-size: .86rem; }
     .action-card.primary span { color: rgba(47, 37, 0, 0.75); }
-    .pulse-strip { display: flex; gap: 8px; flex-wrap: wrap; color: var(--muted); font-size: .84rem; }
-    .mini-pill { border: 1px solid rgba(248,245,234,.18); border-radius: 999px; padding: 6px 9px; background: rgba(255,255,255,.06); }
-    .preview-panel { display: grid; gap: 10px; margin-top: 4px; padding-top: 16px; border-top: 1px solid rgba(248,245,234,.14); }
+    .pulse-strip { display: flex; gap: 6px; flex-wrap: wrap; color: var(--muted); font-size: .76rem; }
+    .mini-pill { border: 1px solid rgba(248,245,234,.18); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.06); }
+    .preview-panel { display: grid; gap: 8px; margin-top: 1px; padding-top: 12px; border-top: 1px solid rgba(248,245,234,.14); }
     .preview-title { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-    .preview-title h2 { margin: 0; color: var(--gold); font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; }
-    .preview-title a { color: var(--muted); font-size: .88rem; text-underline-offset: 3px; }
-    .event-preview-list { display: grid; gap: 8px; }
+    .preview-title h2 { margin: 0; color: var(--gold); font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; }
+    .preview-title a { color: var(--muted); font-size: .8rem; text-underline-offset: 3px; }
+    .event-preview-list { display: grid; gap: 6px; }
     .event-preview {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
-      padding: 11px;
+      padding: 9px;
       border: 1px solid rgba(248,245,234,.12);
-      border-radius: 15px;
+      border-radius: 13px;
       background: rgba(255,255,255,.05);
       text-decoration: none;
     }
-    .date-chip { min-width: 52px; padding: 7px; border-radius: 12px; background: rgba(191,74,79,.86); text-align: center; font-weight: 900; line-height: 1.05; }
-    .date-chip small { display: block; font-size: .66rem; opacity: .82; text-transform: uppercase; }
-    .event-preview strong { display: block; }
-    .event-preview span { color: var(--muted); font-size: .86rem; }
+    .date-chip { min-width: 43px; padding: 6px; border-radius: 10px; background: rgba(191,74,79,.86); text-align: center; font-weight: 900; line-height: 1.02; font-size: .9rem; }
+    .date-chip small { display: block; font-size: .56rem; opacity: .82; text-transform: uppercase; }
+    .event-preview strong { display: block; font-size: .9rem; }
+    .event-preview span { color: var(--muted); font-size: .78rem; line-height: 1.28; }
     @media (max-width: 620px) {
-      .wrap { width: min(100vw - 22px, 960px); padding: 11px 0 32px; }
-      .hero-card { min-height: calc(100svh - 22px); border-radius: 22px; }
+      .wrap { width: min(100vw - 18px, 760px); padding: 9px 0 24px; }
+      .hero-card { border-radius: 18px; }
       .primary-actions { grid-template-columns: 1fr; }
-      .action-card { min-height: 96px; }
+      .action-card { min-height: 74px; }
     }
   </style>
 </head>
@@ -129,7 +127,7 @@
     <section class="hero-card" aria-labelledby="site-title">
       <div class="brand-mark">Acadie community signal</div>
       <h1 id="site-title">ACADIE.SOL</h1>
-      <p class="lede">A small public map for Acadian places, people, and happenings around Acadie-Bathurst — built to feel local first, not platform first.</p>
+      <p class="lede">A small public map for Acadian places and happenings around Acadie-Bathurst — local first, simple on mobile.</p>
 
       <nav class="primary-actions" aria-label="Primary">
         <a class="action-card primary" href="directory.html#search">

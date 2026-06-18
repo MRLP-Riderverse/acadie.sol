@@ -30,106 +30,72 @@
         linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 50%, #0e0e0e 100%);
     }
     a { color: inherit; text-underline-offset: 3px; }
-    .wrap { width: min(1040px, calc(100vw - 28px)); margin: 0 auto; padding: 24px 0 46px; }
-    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-    .brand { color: var(--gold); font-weight: 900; letter-spacing: .12em; text-decoration: none; }
-    .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; background: rgba(255,255,255,.06); color: var(--text); text-decoration: none; font-size: .88rem; }
+    .wrap { width: min(860px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 36px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+    .brand { color: var(--gold); font-weight: 900; letter-spacing: .11em; text-decoration: none; font-size: .9rem; }
+    .nav { display: flex; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: rgba(255,255,255,.06); color: var(--text); text-decoration: none; font-size: .8rem; }
     .pill:hover, button.pill.active { border-color: var(--gold); background: rgba(242,200,75,.95); color: #302400; }
     button.pill { cursor: pointer; font: inherit; }
     .hero {
       display: grid;
-      gap: 12px;
-      margin-bottom: 18px;
-      padding: clamp(20px, 4vw, 34px);
+      gap: 9px;
+      margin-bottom: 14px;
+      padding: clamp(16px, 4vw, 26px);
       border: 1px solid var(--line);
       border-radius: 26px;
       background: linear-gradient(180deg, rgba(33,98,177,.64), var(--card));
       box-shadow: 0 18px 42px var(--shadow);
     }
-    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 900; }
-    h1 { margin: 0; font-size: clamp(2.25rem, 10vw, 4.8rem); line-height: .95; }
-    .lede { color: var(--muted); max-width: 66ch; line-height: 1.5; margin: 0; }
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 20px; }
-    .events-list { display: grid; gap: 16px; }
-    .time-group { display: grid; gap: 10px; }
-    .time-heading { margin: 8px 0 0; color: var(--gold); font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .14em; font-size: .66rem; font-weight: 900; }
+    h1 { margin: 0; font-size: clamp(1.8rem, 8vw, 3rem); line-height: 1; }
+    .lede { color: var(--muted); max-width: 58ch; line-height: 1.42; margin: 0; font-size: .92rem; }
+    .filters { display: flex; gap: 7px; flex-wrap: wrap; margin: 11px 0 15px; }
+    .events-list { display: grid; gap: 12px; }
+    .time-group { display: grid; gap: 8px; }
+    .time-heading { margin: 5px 0 0; color: var(--gold); font-size: .72rem; letter-spacing: .13em; text-transform: uppercase; }
     .event-card {
       display: grid;
       grid-template-columns: auto 1fr;
-      gap: 14px;
-      padding: 16px;
+      gap: 11px;
+      padding: 12px;
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: 18px;
       background: linear-gradient(180deg, rgba(33,98,177,.56), rgba(16,53,102,.86));
       box-shadow: 0 16px 36px var(--shadow);
     }
     .date-badge {
-      min-width: 66px;
+      min-width: 52px;
       align-self: start;
       display: grid;
-      gap: 2px;
+      gap: 1px;
       justify-items: center;
-      padding: 10px 8px;
-      border-radius: 18px;
+      padding: 8px 7px;
+      border-radius: 14px;
       color: #fff;
       background: linear-gradient(180deg, rgba(191,74,79,.98), rgba(126,35,42,.98));
       box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
       font-weight: 900;
     }
-    .date-badge small { font-size: .67rem; opacity: .82; text-transform: uppercase; letter-spacing: .08em; }
-    .date-badge b { font-size: 1.45rem; line-height: 1; }
-    .event-main { display: grid; gap: 11px; min-width: 0; }
-    .event-main h2 { margin: 0; font-size: clamp(1.22rem, 4vw, 1.75rem); line-height: 1.08; }
-    .event-subline, .description, .side-note { color: var(--muted); line-height: 1.45; }
-    .event-subline { display: flex; gap: 7px; flex-wrap: wrap; font-size: .91rem; }
-    .description { margin: 0; }
-    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.07); }
-    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .action { border: 1px solid var(--line); border-radius: 13px; padding: 9px 11px; background: rgba(255,255,255,.07); text-decoration: none; color: var(--text); }
+    .date-badge small { font-size: .56rem; opacity: .82; text-transform: uppercase; letter-spacing: .08em; }
+    .date-badge b { font-size: 1.16rem; line-height: 1; }
+    .event-main { display: grid; gap: 8px; min-width: 0; }
+    .event-main h2 { margin: 0; font-size: clamp(1.02rem, 4vw, 1.32rem); line-height: 1.1; }
+    .event-subline, .description, .side-note { color: var(--muted); line-height: 1.38; }
+    .event-subline { display: flex; gap: 6px; flex-wrap: wrap; font-size: .8rem; }
+    .description { margin: 0; font-size: .86rem; }
+    .badge { border: 1px solid var(--line); border-radius: 999px; padding: 4px 7px; background: rgba(255,255,255,.07); }
+    .actions { display: flex; gap: 7px; flex-wrap: wrap; }
+    .action { border: 1px solid var(--line); border-radius: 11px; padding: 8px 9px; background: rgba(255,255,255,.07); text-decoration: none; color: var(--text); font-size: .82rem; }
     .action.primary { background: rgba(242,200,75,.95); border-color: var(--gold); color: #302400; font-weight: 800; }
-    .related-inline {
-      display: grid;
-      gap: 8px;
-      margin-top: 3px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(248,245,234,.18);
-    }
-    .related-title { color: var(--gold); font-size: .72rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 900; }
-    .related-grid { display: grid; gap: 8px; }
-    .related-row {
-      display: grid;
-      gap: 3px;
-      padding: 10px;
-      border-left: 3px solid rgba(242,200,75,.62);
-      border-radius: 12px;
-      background: rgba(8,18,40,.28);
-    }
-    .related-row strong { font-size: .94rem; }
-    .related-row span { color: var(--muted); font-size: .84rem; line-height: 1.35; }
-    .locations-panel {
-      margin-top: 26px;
-      padding-top: 22px;
-      border-top: 2px solid rgba(242,200,75,.42);
-    }
-    .locations-head { display: grid; gap: 4px; margin-bottom: 12px; }
-    .locations-head h2 { margin: 0; color: var(--gold); font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; }
-    .location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
-    .location-card {
-      padding: 13px;
-      border: 1px dashed rgba(248,245,234,.22);
-      border-radius: 18px;
-      background: rgba(255,255,255,.035);
-    }
-    .location-card h3 { margin: 0 0 5px; font-size: 1rem; }
-    .empty { padding: 22px; border: 1px solid var(--line); border-radius: 20px; color: var(--muted); background: rgba(255,255,255,.05); }
+    .empty { padding: 18px; border: 1px solid var(--line); border-radius: 17px; color: var(--muted); background: rgba(255,255,255,.05); }
     @media (max-width: 620px) {
-      .wrap { width: min(100vw - 22px, 1040px); padding-top: 16px; }
+      .wrap { width: min(100vw - 18px, 860px); padding-top: 12px; }
       .top { align-items: flex-start; }
-      .nav { gap: 6px; }
-      .hero { border-radius: 22px; }
-      .event-card { grid-template-columns: 1fr; border-radius: 21px; }
-      .date-badge { width: 74px; grid-template-columns: 1fr; }
+      .nav { gap: 5px; }
+      .hero { border-radius: 18px; }
+      .event-card { grid-template-columns: auto 1fr; border-radius: 16px; }
+      .date-badge { width: 52px; grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -156,14 +122,6 @@
     </div>
 
     <main id="events" class="events-list" aria-live="polite"></main>
-
-    <aside class="locations-panel" aria-label="Related places">
-      <div class="locations-head">
-        <h2>Related places</h2>
-        <p class="side-note">Reusable venue/location context lives down here so it does not look like another event.</p>
-      </div>
-      <div id="locations" class="location-grid"></div>
-    </aside>
   </div>
 
   <script>
@@ -209,18 +167,6 @@
       if (diffDays <= 31) return 'Coming up';
       return 'Later';
     }
-    function renderRelated(event) {
-      const hosts = (event.host_entry_ids || []).map(id => placeEntry(id)).filter(Boolean);
-      const loc = placeLocation(event.location_id);
-      if (!hosts.length && !loc) return '';
-      return `<div class="related-inline">
-        <div class="related-title">Linked place${hosts.length + (loc ? 1 : 0) === 1 ? '' : 's'}</div>
-        <div class="related-grid">
-          ${hosts.map(host => `<a class="related-row" href="directory.html#entry-${escapeHtml(host.slug)}"><strong>${escapeHtml(host.title)}</strong><span>${escapeHtml(host.category || 'Host profile')}</span></a>`).join('')}
-          ${loc ? `<a class="related-row" href="#location-${escapeHtml(loc.id)}"><strong>${escapeHtml(loc.name)}</strong><span>${escapeHtml(text(loc.summary) || loc.kind || 'Location')}</span></a>` : ''}
-        </div>
-      </div>`;
-    }
     function renderEvent(event) {
       const parts = dateParts(event.starts_at);
       const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
@@ -237,7 +183,6 @@
             </div>
           </div>
           <p class="description">${escapeHtml(publicSummary(event))}</p>
-          ${renderRelated(event)}
           <div class="actions">
             ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
             ${event.host_entry_ids?.[0] ? `<a class="action" href="directory.html#entry-${escapeHtml(event.host_entry_ids[0])}">View host</a>` : ''}
@@ -260,13 +205,6 @@
       });
       root.innerHTML = [...groups.entries()].map(([label, items]) => `<section class="time-group"><h2 class="time-heading">${escapeHtml(label)}</h2>${items.map(renderEvent).join('')}</section>`).join('');
     }
-    function renderLocations() {
-      const root = document.getElementById('locations');
-      root.innerHTML = state.locations.map(item => `<section class="location-card" id="location-${escapeHtml(item.id)}">
-        <h3>${escapeHtml(item.name)}</h3>
-        <p class="side-note">${escapeHtml(text(item.summary) || item.kind || '')}</p>
-      </section>`).join('');
-    }
     function bindFilters() {
       document.querySelectorAll('[data-filter]').forEach(button => {
         button.addEventListener('click', () => {
@@ -286,7 +224,6 @@
       state.locations = locations.items || [];
       bindFilters();
       renderEvents();
-      renderLocations();
     }).catch(error => {
       document.getElementById('events').innerHTML = `<div class="empty">Events failed to load: ${escapeHtml(error.message)}</div>`;
       console.error(error);
