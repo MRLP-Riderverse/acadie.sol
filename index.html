@@ -81,17 +81,18 @@
     .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--blue-ink) 84%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Directory banner is one single clickable launch strip: marquee + label + arrow
-       live inside the same anchor so the CTA does not feel like two stacked surfaces. */
+    /* Directory banner stays one unified launch surface: the moving copy becomes a
+       low-contrast texture behind the CTA body instead of a separate top strip. */
     .directory-banner { position: relative; overflow: hidden; padding: 0; border-radius: 30px; background: linear-gradient(135deg, color-mix(in srgb, var(--red) 88%, #000), color-mix(in srgb, var(--gold) 82%, #000) 58%, color-mix(in srgb, var(--blue-deep) 92%, #000)); box-shadow: 0 22px 46px var(--shadow); }
     .directory-banner::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,250,242,.22); border-radius: 22px; pointer-events: none; }
-    .banner-link { display: grid; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; }
-    .banner-marquee { display: flex; gap: 20px; padding: 11px 14px 10px; overflow: hidden; border-bottom: 1px solid rgba(255,250,242,.16); color: rgba(255,250,242,.76); font-size: .66rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
-    .banner-marquee-track { display: inline-flex; gap: 20px; min-width: max-content; animation: marquee-slide 16s linear infinite; }
-    .banner-marquee-track span::after { content: "✦"; margin-left: 20px; color: rgba(243,200,91,.9); }
-    .banner-body { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 16px 16px 17px; }
-    .search-icon { width: 38px; height: 38px; border-radius: 15px; background: var(--blue-deep); color: var(--paper); display: grid; place-items: center; font-weight: 900; }
-    .launch-copy { display: grid; gap: 1px; }
+    .banner-link { display: grid; min-height: 108px; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; isolation: isolate; }
+    .banner-marquee { position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; color: rgba(255,250,242,.13); font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
+    .banner-marquee::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(126,35,42,.42), transparent 18%, transparent 82%, rgba(26,47,79,.34)); }
+    .banner-marquee-track { display: inline-flex; gap: 22px; min-width: max-content; padding-left: 16px; animation: marquee-slide 18s linear infinite; }
+    .banner-marquee-track span::after { content: "✦"; margin-left: 22px; color: rgba(243,200,91,.26); }
+    .banner-body { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 22px 16px 21px; }
+    .search-icon { width: 38px; height: 38px; border-radius: 15px; background: color-mix(in srgb, var(--blue-deep) 86%, #000); color: var(--paper); display: grid; place-items: center; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.16); }
+    .launch-copy { display: grid; gap: 2px; }
     .launch-copy strong { font-size: 1.02rem; color: #fffaf2; }
     .launch-copy span { color: rgba(255,250,242,.82); font-size: .79rem; }
     .chev { color: rgba(255,250,242,.82); font-size: 1.2rem; }
@@ -204,22 +205,27 @@
     function publicSummary(event) { const raw = String(localized(event.summary) || 'Details coming soon.'); return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw; }
     function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
     function dateParts(value) { const date = parseDate(value); if (!date) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date) }; }
+    function isFrenchUi() {
+      const lang = document.documentElement.lang || navigator.language || '';
+      return /^fr\b/i.test(lang);
+    }
     function countdownLabel(event) {
       const now = Date.now();
       const start = parseDate(event.starts_at)?.getTime();
       const end = parseDate(event.ends_at || event.expires_at)?.getTime();
+      const fr = isFrenchUi();
       if (start && start <= now && end && end > now) {
         const hours = Math.max(1, Math.ceil((end - now) / 3600000));
-        return `Live · ends in ${hours}h`;
+        return fr ? `EN ${hours} H` : `IN ${hours}H`;
       }
       if (start && start > now) {
         const diff = start - now;
         const hours = Math.ceil(diff / 3600000);
-        if (hours < 24) return `Starts in ${hours}h`;
+        if (hours < 24) return fr ? `EN ${hours} H` : `IN ${hours}H`;
         const days = Math.ceil(diff / 86400000);
-        return `Starts in ${days}d`;
+        return fr ? `EN ${days} J` : `IN ${days}D`;
       }
-      return 'Upcoming';
+      return fr ? 'À VENIR' : 'UPCOMING';
     }
     function renderEventPreview(events) {
       const root = document.getElementById('event-preview-list');
