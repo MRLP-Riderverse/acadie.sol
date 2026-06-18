@@ -6,17 +6,48 @@
   <title>Fresh Drafts · ACADIE.SOL Directory</title>
   <style>
     :root {
-      --page-bg: #121212;
-      --card: rgba(16, 53, 102, 0.84);
-      --card-strong: rgba(33, 98, 177, 0.72);
-      --line: rgba(244, 242, 236, 0.17);
-      --line-strong: rgba(244, 242, 236, 0.34);
-      --text: #f8f5ea;
-      --muted: rgba(248, 245, 234, 0.74);
-      --soft: rgba(248, 245, 234, 0.58);
-      --gold: #f2c84b;
-      --gold-ink: #322600;
-      --shadow: rgba(5, 13, 27, 0.28);
+      --page-bg: #f5ede1;
+      --card: #fffaf2;
+      --card-strong: #fffdf8;
+      --paper: #fffaf2;
+      --paper-soft: #fbf3e7;
+      --ink: #2f261d;
+      --ink-strong: #1a1410;
+      --text: var(--ink);
+      --muted: #5f5247;
+      --soft: #766a5b;
+      --link: #0d2f5e;
+      --link-hover: #174b8e;
+      --line: rgba(47, 38, 29, 0.16);
+      --line-strong: rgba(47, 38, 29, 0.26);
+      --blue: #174b8e;
+      --blue-deep: #0d2f5e;
+      --blue-ink: #fffaf2;
+      --gold: #b57910;
+      --gold-ink: #1a1410;
+      --shadow: rgba(65, 47, 29, 0.10);
+    }
+    [data-theme="dark"] {
+      --page-bg: #1e1a15;
+      --card: #2a2520;
+      --card-strong: #332e27;
+      --paper: #2a2520;
+      --paper-soft: #332e27;
+      --ink: #f2eadf;
+      --ink-strong: #fff8ec;
+      --text: var(--ink);
+      --muted: #d1c2ad;
+      --soft: #b8a995;
+      --link: #9fc7ff;
+      --link-hover: #cfe3ff;
+      --line: rgba(242, 234, 223, 0.16);
+      --line-strong: rgba(242, 234, 223, 0.28);
+      --blue: #6da3e0;
+      --blue-deep: #9fc7ff;
+      --blue-ink: #0d2f5e;
+      --gold: #f0c866;
+      --gold-ink: #1a1410;
+      --shadow: rgba(0,0,0,.36);
     }
     * { box-sizing: border-box; }
     body {
@@ -25,11 +56,18 @@
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 0%, rgba(40, 114, 198, 0.25), transparent 24rem),
-        radial-gradient(circle at 92% 4%, rgba(242, 200, 75, 0.12), transparent 21rem),
-        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 38%, #0e0e0e 100%);
+        radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--blue) 18%, transparent), transparent 24rem),
+        radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 21rem),
+        linear-gradient(180deg, var(--paper) 0%, var(--page-bg) 55%, color-mix(in srgb, var(--page-bg) 82%, var(--gold)) 100%);
     }
-    a { color: #fff; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    [data-theme="dark"] body {
+      background:
+        radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--blue) 18%, transparent), transparent 24rem),
+        radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 21rem),
+        linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 90%, #000) 0%, var(--page-bg) 55%, color-mix(in srgb, var(--page-bg) 60%, #000) 100%);
+    }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
     .wrap { width: min(980px, calc(100vw - 28px)); margin: 0 auto; padding: 22px 0 42px; }
     .hero { padding: 6px 0 16px; border-bottom: 1px solid rgba(248,245,234,0.1); display: grid; gap: 12px; }
     .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.72rem; color: var(--gold); font-weight: 800; }
@@ -67,10 +105,10 @@
     .badge { border-radius: 999px; padding: 4px 7px; background: var(--gold); color: var(--gold-ink); font-size: 0.62rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap; }
     .meta { display: flex; gap: 6px; flex-wrap: wrap; }
     .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 4px 7px; color: var(--muted); font-size: 0.72rem; }
-    .desc { margin: 0; color: rgba(248,245,234,0.92); line-height: 1.45; font-size: 0.9rem; }
+    .desc { margin: 0; color: var(--ink); line-height: 1.45; font-size: 0.9rem; }
     .date { color: var(--soft); font-size: 0.8rem; }
     .empty { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: linear-gradient(180deg, var(--card-strong), var(--card)); color: var(--muted); }
-    .footer { margin-top: 18px; color: rgba(248,245,234,0.66); font-size: 0.87rem; line-height: 1.45; }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 0.87rem; line-height: 1.45; }
     @media (max-width: 650px) {
       .wrap { width: min(100vw - 16px, 980px); padding-top: 12px; }
       .card-top { display: grid; gap: 8px; }
@@ -100,6 +138,8 @@
   </div>
 
   <script>
+    const savedTheme = localStorage.getItem('acadie-theme') || 'light';
+    document.documentElement.dataset.theme = savedTheme;
     const state = { drafts: [], visible: 20 };
 
     async function loadData() {

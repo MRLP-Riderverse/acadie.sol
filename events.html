@@ -19,6 +19,8 @@
       --blue: #174b8e;
       --blue-deep: #0d2f5e;
       --blue-ink: #fffaf2;
+      --link: #0d2f5e;
+      --link-hover: #174b8e;
       --gold: #c48f18;
       --red: #bf4a4f;
       --shadow: rgba(65, 47, 29, 0.14);
@@ -37,6 +39,8 @@
       --blue: #6da3e0;
       --blue-deep: #8db8f0;
       --blue-ink: #0d2f5e;
+      --link: #9fc7ff;
+      --link-hover: #cfe3ff;
       --gold: #e5b44a;
       --red: #dc6b70;
       --shadow: rgba(0, 0, 0, 0.35);
@@ -53,7 +57,8 @@
         linear-gradient(180deg, var(--paper) 0%, var(--bg) 55%, color-mix(in srgb, var(--bg) 80%, var(--gold)) 100%);
     }
     [data-theme="dark"] body { background: radial-gradient(circle at 16% 0%, rgba(216,155,32,.10), transparent 18rem), linear-gradient(180deg, color-mix(in srgb, var(--bg) 90%, #000) 0%, var(--bg) 65%, color-mix(in srgb, var(--bg) 60%, #000) 100%); }
-    a { color: inherit; text-underline-offset: 3px; }
+    a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    a:hover { color: var(--link-hover); }
     .wrap { width: min(860px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 36px; }
     .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
     .brand { color: var(--blue-deep); font-weight: 900; letter-spacing: .11em; text-decoration: none; font-size: .9rem; }

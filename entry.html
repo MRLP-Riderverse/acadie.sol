@@ -19,6 +19,8 @@
       --blue: #174b8e;
       --blue-deep: #0d2f5e;
       --blue-ink: #fffaf2;
+      --link: #0d2f5e;
+      --link-hover: #174b8e;
       --gold: #c48f18;
       --red: #bf4a4f;
       --shadow: rgba(65, 47, 29, 0.14);
@@ -37,6 +39,8 @@
       --blue: #6da3e0;
       --blue-deep: #8db8f0;
       --blue-ink: #0d2f5e;
+      --link: #9fc7ff;
+      --link-hover: #cfe3ff;
       --gold: #e5b44a;
       --red: #dc6b70;
       --shadow: rgba(0, 0, 0, 0.35);
@@ -53,13 +57,14 @@
         linear-gradient(180deg, var(--paper) 0%, var(--bg) 58%, color-mix(in srgb, var(--bg) 80%, var(--gold)) 100%);
     }
     [data-theme="dark"] body { background: radial-gradient(circle at 20% 0%, rgba(217,155,33,.14), transparent 17rem), linear-gradient(180deg, color-mix(in srgb, var(--bg) 90%, #000) 0%, var(--bg) 68%, color-mix(in srgb, var(--bg) 60%, #000) 100%); }
-    a { color: inherit; }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; }
     .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; color: var(--muted); font-size: .74rem; letter-spacing: .10em; text-transform: uppercase; }
     .brand-row a { color: var(--blue-deep); font-weight: 900; text-decoration: none; }
     .poster { position: relative; min-height: 260px; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); display: grid; place-items: center; }
     .poster::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; pointer-events: none; }
-    .poster-initial { font-size: 4.5rem; font-weight: 900; color: rgba(255,250,242,.88); text-shadow: 0 4px 24px rgba(0,0,0,.24); }
+    .poster-initial { font-size: 4.5rem; font-weight: 900; color: color-mix(in srgb, var(--blue-ink) 88%, transparent); text-shadow: 0 4px 24px rgba(0,0,0,.24); }
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
     h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.1; }
     .entry-city { color: var(--muted); font-size: .82rem; margin-top: 4px; }
