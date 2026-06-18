@@ -81,14 +81,15 @@
     .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--blue-ink) 84%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Directory banner deliberately breaks from the neutral paper containers so the
-       main browse action reads like a launch strip instead of another card. */
+    /* Directory banner is one single clickable launch strip: marquee + label + arrow
+       live inside the same anchor so the CTA does not feel like two stacked surfaces. */
     .directory-banner { position: relative; overflow: hidden; padding: 0; border-radius: 30px; background: linear-gradient(135deg, color-mix(in srgb, var(--red) 88%, #000), color-mix(in srgb, var(--gold) 82%, #000) 58%, color-mix(in srgb, var(--blue-deep) 92%, #000)); box-shadow: 0 22px 46px var(--shadow); }
     .directory-banner::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,250,242,.22); border-radius: 22px; pointer-events: none; }
+    .banner-link { display: grid; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; }
     .banner-marquee { display: flex; gap: 20px; padding: 11px 14px 10px; overflow: hidden; border-bottom: 1px solid rgba(255,250,242,.16); color: rgba(255,250,242,.76); font-size: .66rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
     .banner-marquee-track { display: inline-flex; gap: 20px; min-width: max-content; animation: marquee-slide 16s linear infinite; }
     .banner-marquee-track span::after { content: "✦"; margin-left: 20px; color: rgba(243,200,91,.9); }
-    .launch-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 16px 16px 17px; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; }
+    .banner-body { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 16px 16px 17px; }
     .search-icon { width: 38px; height: 38px; border-radius: 15px; background: var(--blue-deep); color: var(--paper); display: grid; place-items: center; font-weight: 900; }
     .launch-copy { display: grid; gap: 1px; }
     .launch-copy strong { font-size: 1.02rem; color: #fffaf2; }
@@ -102,9 +103,10 @@
     /* Calendar chips stay the same in light and dark mode so event dates feel like
        one recognizable system-wide icon language. */
     .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: linear-gradient(180deg, var(--calendar-red-top), var(--calendar-red-bottom)); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+    .date-chip, .date-chip * { color: var(--calendar-ink); }
     .date-chip small { display: block; font-size: .56rem; opacity: .92; text-transform: uppercase; letter-spacing: .08em; }
     .event-row strong { display: block; font-size: .88rem; }
-    .event-row span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.24; margin-top: 2px; }
+    .event-row > div span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.24; margin-top: 2px; }
     .event-status { justify-self: end; padding: 5px 8px; border-radius: 999px; background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--ink-strong); font-size: .67rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
 
     @keyframes marquee-slide {
@@ -160,16 +162,18 @@
     </section>
 
     <section class="directory-banner" aria-label="Directory launch banner">
-      <div class="banner-marquee" aria-hidden="true">
-        <div class="banner-marquee-track">
-          <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
-          <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
+      <a class="banner-link" href="directory.html">
+        <div class="banner-marquee" aria-hidden="true">
+          <div class="banner-marquee-track">
+            <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
+            <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
+          </div>
         </div>
-      </div>
-      <a class="launch-card" href="directory.html">
-        <span class="search-icon">⌕</span>
-        <span class="launch-copy"><strong>Explore Directory</strong><span>59 local entries</span></span>
-        <span class="chev">›</span>
+        <div class="banner-body">
+          <span class="search-icon">⌕</span>
+          <span class="launch-copy"><strong>Explore Directory</strong><span>59 local entries</span></span>
+          <span class="chev">›</span>
+        </div>
       </a>
     </section>
 
