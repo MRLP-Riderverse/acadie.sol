@@ -1,7 +1,32 @@
 {
   "schema_version": 1,
-  "item_count": 10,
+  "item_count": 11,
   "items": [
+    {
+      "type": "entry",
+      "id": "bathurst-municipal-library",
+      "title": "Bathurst Municipal Library",
+      "subtitle": "civic · Acadie-Bathurst",
+      "badges": [
+        "civic",
+        "1 event next 7 days"
+      ],
+      "url": "directory.html#entry-bathurst-municipal-library",
+      "terms": [
+        "Bathurst Municipal Library",
+        "civic",
+        "Acadie-Bathurst",
+        "Public library serving Bathurst and the surrounding parish.",
+        "library",
+        "public service",
+        "civic",
+        "community venue",
+        "events",
+        "Bathurst Public Library",
+        "Bibliothèque publique de Bathurst",
+        "Bibliothèque municipale de Bathurst"
+      ]
+    },
     {
       "type": "entry",
       "id": "big-d-drive-in",
@@ -66,7 +91,8 @@
         "library",
         "literature",
         "free",
-        "family"
+        "family",
+        "bathurst-municipal-library"
       ]
     },
     {

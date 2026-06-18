@@ -487,13 +487,13 @@
     .wrap { padding-top: 76px; }
     @media (max-width: 720px) { .wrap { width: min(100vw - 18px, 1120px); } .choice-actions { grid-template-columns: 1fr; } }
     /* OS-shaped search screen pass: compact app shell, visual rows, bottom dock. */
-    .top-nav { left: 50%; right: auto; width: min(430px, 100vw); transform: translateX(-50%); padding: 10px 14px; background: transparent; border-bottom: 0; box-shadow: none; backdrop-filter: none; }
+    .top-nav { left: 50%; right: auto; width: min(1120px, calc(100vw - 28px)); transform: translateX(-50%); padding: 10px 14px; background: var(--glass); border-bottom: 0; box-shadow: 0 10px 28px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); }
     .top-nav.nav-hidden { transform: translate(-50%, -100%); }
     .nav-brand strong { letter-spacing: .08em; }
     .nav-brand span { display: none; }
-    .nav-actions { display: none; }
+    .nav-actions { display: flex; }
     .nav-action { padding: 8px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(65,47,29,.08); }
-    .wrap { width: min(430px, 100vw); padding: 66px 14px 86px; }
+    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 76px 0 56px; }
     .control-panel { margin-top: 0; border-radius: 28px; overflow: visible; }
     .control-body { padding: 14px; border-top: 0; gap: 12px; }
     .control-intro { padding: 3px 2px 0; }
@@ -513,7 +513,7 @@
     .city-section { border: 0; background: transparent; }
     .city-section > summary { padding: 8px 2px; }
     .city-heading strong { font-size: .88rem; }
-    .results-grid { gap: 8px; }
+    .results-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 12px; }
     .directory-card { border-radius: 21px; background: color-mix(in srgb, var(--card) 94%, transparent); color: var(--ink); }
     .directory-card > summary { padding: 9px; color: var(--ink); }
     .card-main { min-width: 0; display: grid; gap: 6px; }
@@ -526,7 +526,7 @@
     .full-page-link:hover { color: var(--blue-ink); filter: brightness(1.06); }
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
-    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock { display: none; }
     .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
     .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
@@ -542,6 +542,13 @@
     .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
     .drawer-nav a:hover, .theme-button:hover { color: var(--blue-ink); background: var(--blue-deep); }
     .city-pill { background: var(--blue-deep); color: var(--blue-ink); }
+    @media (max-width: 720px) {
+      .top-nav { width: min(430px, 100vw); background: transparent; box-shadow: none; backdrop-filter: none; }
+      .nav-actions { display: none; }
+      .wrap { width: min(430px, 100vw); padding: 66px 14px 86px; }
+      .results-grid { grid-template-columns: 1fr; gap: 8px; }
+      .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    }
     [data-theme="dark"] {
       --page-bg: #1e1a15;
       --panel: #2a2520;

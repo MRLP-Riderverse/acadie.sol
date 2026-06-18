@@ -125,29 +125,21 @@
     .action { border: 1px solid var(--line); border-radius: 11px; padding: 8px 9px; background: var(--paper-soft); text-decoration: none; color: var(--ink); font-size: .82rem; }
     .action.primary { background: var(--blue-deep); border-color: var(--blue-deep); color: var(--blue-ink); font-weight: 800; }
     .empty { padding: 18px; border: 1px solid var(--line); border-radius: 17px; color: var(--muted); background: color-mix(in srgb, var(--paper) 90%, transparent); }
-    @media (max-width: 620px) {
-      .wrap { width: min(100vw - 18px, 860px); padding-top: 12px; }
-      .top { align-items: flex-start; }
-      .nav { gap: 5px; }
-      .hero { border-radius: 18px; }
-      .event-card { grid-template-columns: auto 1fr; border-radius: 16px; }
-      .date-badge { width: 52px; grid-template-columns: 1fr; }
-    }
-    /* OS-shaped calendar surface: same compact shell as home/search, not a website header. */
-    .wrap { width: min(430px, 100vw); padding: 14px 14px 86px; }
-    .top { margin-bottom: 12px; }
+    /* Full-screen first: tablet/desktop use the available canvas instead of being trapped in the mobile shell. */
+    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 20px 0 52px; }
     .brand { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-deep); }
     .brand::before { content: "A"; width: 22px; height: 22px; border-radius: 8px; display: grid; place-items: center; background: var(--blue-deep); color: var(--blue-ink); font-size: .72rem; }
-    .hero { border-radius: 28px; padding: 16px; }
-    .event-card { border-radius: 22px; grid-template-columns: 54px minmax(0,1fr); padding: 9px; }
-    .date-badge { min-width: 54px; min-height: 54px; border-radius: 17px; }
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .hero { border-radius: 28px; }
+    .events-list { gap: 18px; }
+    .time-group { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 14px; align-items: stretch; }
+    .time-heading { grid-column: 1 / -1; }
+    .event-card { min-height: 100%; border-radius: 24px; grid-template-columns: 64px minmax(0,1fr); padding: 14px; }
+    .date-badge { min-width: 64px; min-height: 64px; border-radius: 19px; }
     .event-main { padding: 3px 2px; }
     .actions { gap: 6px; }
     .action { border-radius: 14px; }
-    .events-list { gap: 8px; }
-    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
-    .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
+    .site-dock { display: none; }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
     .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
     .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
@@ -159,6 +151,20 @@
     .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
     .drawer-nav { display: grid; gap: 8px; }
     .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    @media (max-width: 720px) {
+      /* Phone keeps the OS-shaped compact shell and bottom dock. */
+      .wrap { width: min(430px, 100vw); padding: 14px 14px 86px; }
+      .top { align-items: center; margin-bottom: 12px; }
+      .nav { display: none; }
+      .hero { border-radius: 28px; padding: 16px; }
+      .events-list { gap: 8px; }
+      .time-group { grid-template-columns: 1fr; gap: 8px; }
+      .event-card { border-radius: 22px; grid-template-columns: 54px minmax(0,1fr); padding: 9px; }
+      .date-badge { min-width: 54px; min-height: 54px; border-radius: 17px; }
+      .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+      .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+      .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
+    }
   </style>
 </head>
 <body>
@@ -237,6 +243,12 @@
     function placeLocation(id) { return state.locations.find(item => item.id === id); }
     function entryName(id) { return placeEntry(id)?.title || id; }
     function locationName(id) { return placeLocation(id)?.name || 'Location TBD'; }
+    function locationEntryId(id) { return placeLocation(id)?.entry_ids?.[0] || ''; }
+    function locationLink(id) {
+      const name = locationName(id);
+      const entryId = locationEntryId(id);
+      return entryId ? `<a href="directory.html#entry-${escapeHtml(entryId)}">${escapeHtml(name)}</a>` : escapeHtml(name);
+    }
     function locationSummary(id) { return text(placeLocation(id)?.summary) || ''; }
     function isArchived(event) { return event.computed_status === 'archived' || event.status === 'archived'; }
     function eventMatches(event) {
@@ -271,7 +283,7 @@
             <div class="event-subline">
               <span>${escapeHtml(parts.full)}</span>
               ${hosts ? `<span>Hosted by ${hosts}</span>` : ''}
-              <span>${escapeHtml(locationName(event.location_id))}</span>
+              <span>At ${locationLink(event.location_id)}</span>
             </div>
           </div>
           <p class="description">${escapeHtml(publicSummary(event))}</p>
