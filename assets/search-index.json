@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 8,
+  "item_count": 10,
   "items": [
     {
       "type": "entry",
@@ -48,6 +48,29 @@
     },
     {
       "type": "event",
+      "id": "socialite-reading-marc-chamberlain-bathurst-library",
+      "title": "Reading of ‘Socialite’ by Marc Chamberlain",
+      "subtitle": "active · 2026-06-24T11:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "reading",
+        "library"
+      ],
+      "url": "events.html#event-socialite-reading-marc-chamberlain-bathurst-library",
+      "terms": [
+        "Reading of ‘Socialite’ by Marc Chamberlain",
+        "A free one-hour reading of ‘Socialite’ by Marc Chamberlain at the Bathurst Municipal Library.",
+        "2026-06-24T11:00:00-03:00",
+        "reading",
+        "library",
+        "literature",
+        "free",
+        "family"
+      ]
+    },
+    {
+      "type": "event",
       "id": "louga-event-placeholder",
       "title": "Louga Event Placeholder",
       "subtitle": "active · 2026-07-12T21:00:00-03:00",
@@ -88,6 +111,26 @@
         "family",
         "placeholder",
         "big-d-drive-in"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "bathurst-municipal-library",
+      "title": "Bathurst Municipal Library",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-bathurst-municipal-library",
+      "terms": [
+        "Bathurst Municipal Library",
+        "Public library serving Bathurst and the surrounding parish.",
+        "st-george-st-bathurst",
+        "library",
+        "public-service",
+        "civic",
+        "venue"
       ]
     },
     {

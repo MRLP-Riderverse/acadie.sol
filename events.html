@@ -116,6 +116,10 @@
     .side-note { color: var(--muted); line-height: 1.38; font-weight: 650; }
     .event-subline { display: flex; gap: 6px; flex-wrap: wrap; font-size: .8rem; }
     .description { margin: 0; font-size: .86rem; color: var(--ink); line-height: 1.38; }
+    /* Public event notes: pulls optional bring/wayfinding fields from the data record so practical details stay with the event source. */
+    .event-notes { display: grid; gap: 4px; padding: 8px 9px; border: 1px solid var(--line); border-radius: 14px; background: color-mix(in srgb, var(--paper-soft) 78%, transparent); }
+    .event-note { margin: 0; color: var(--ink); font-size: .82rem; line-height: 1.36; }
+    .event-note strong { color: var(--ink-strong); }
     .badge { border: 1px solid var(--line); border-radius: 999px; padding: 4px 7px; background: rgba(255,255,255,.07); }
     .actions { display: flex; gap: 7px; flex-wrap: wrap; }
     .action { border: 1px solid var(--line); border-radius: 11px; padding: 8px 9px; background: var(--paper-soft); text-decoration: none; color: var(--ink); font-size: .82rem; }
@@ -253,6 +257,12 @@
       const parts = dateParts(event.starts_at);
       const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
       const icsHref = event.starts_at ? `assets/calendar/${encodeURIComponent(event.id)}.ics` : '';
+      const bring = text(event.bring);
+      const wayfinding = text(event.wayfinding);
+      const notes = [
+        bring ? `<p class="event-note"><strong>Bring:</strong> ${escapeHtml(bring)}</p>` : '',
+        wayfinding ? `<p class="event-note"><strong>Where:</strong> ${escapeHtml(wayfinding)}</p>` : ''
+      ].filter(Boolean).join('');
       return `<article class="event-card" id="event-${escapeHtml(event.id)}">
         <div class="date-badge"><small>${escapeHtml(parts.month)}</small><b>${escapeHtml(parts.day)}</b></div>
         <div class="event-main">
@@ -265,6 +275,7 @@
             </div>
           </div>
           <p class="description">${escapeHtml(publicSummary(event))}</p>
+          ${notes ? `<div class="event-notes">${notes}</div>` : ''}
           <div class="actions">
             ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
             ${event.host_entry_ids?.[0] ? `<a class="action" href="directory.html#entry-${escapeHtml(event.host_entry_ids[0])}">View host</a>` : ''}

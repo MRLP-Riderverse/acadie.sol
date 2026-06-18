@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Acadie.sol//Events V1//EN
+BEGIN:VEVENT
+UID:socialite-reading-marc-chamberlain-bathurst-library@acadie.sol
+DTSTAMP:20260618T205059Z
+DTSTART:20260624T140000Z
+DTEND:20260624T150000Z
+SUMMARY:Reading of ‘Socialite’ by Marc Chamberlain
+DESCRIPTION:A free one-hour reading of ‘Socialite’ by Marc Chamberlain at the Bathurst Municipal Library.
+LOCATION:150 St George St\, Bathurst\, NB E2A 1B5\, Canada
+END:VEVENT
+END:VCALENDAR

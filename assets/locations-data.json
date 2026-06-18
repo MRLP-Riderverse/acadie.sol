@@ -1,8 +1,42 @@
 {
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "location_count": 4,
+  "location_count": 5,
   "items": [
+    {
+      "id": "bathurst-municipal-library",
+      "status": "published",
+      "kind": "venue",
+      "title": {
+        "en": "Bathurst Municipal Library",
+        "fr": "Bibliothèque municipale de Bathurst",
+        "shiac": "La bibliothèque à Bathurst"
+      },
+      "name": "Bathurst Municipal Library",
+      "summary": {
+        "en": "Public library serving Bathurst and the surrounding parish.",
+        "fr": "Bibliothèque publique servant Bathurst et les environs.",
+        "shiac": "La bibliothèque publique pour Bathurst pis les alentours."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "st-george-st-bathurst",
+      "address": "150 St George St, Bathurst, NB E2A 1B5, Canada",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [],
+      "nearby_location_ids": [
+        "downtown-main-st-bathurst"
+      ],
+      "tags": [
+        "library",
+        "public-service",
+        "civic",
+        "venue"
+      ],
+      "path": "locations/bathurst-municipal-library/location.md",
+      "source_modified_at": "2026-06-18T20:49:47.607690Z",
+      "source_modified_ts": 1781815787
+    },
     {
       "id": "big-d-st-peter",
       "status": "published",
