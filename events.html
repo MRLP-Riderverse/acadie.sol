@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23174b8e'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34'%3E🔥%3C/text%3E%3C/svg%3E" />
   <title>ACADIE.SOL Events</title>
   <style>
     :root {
       --page-bg: #121212;
       --blue: #174b8e;
-      --blue2: #0d2f5e;
+      --blue-deep: #0d2f5e;
       --gold: #f2c84b;
       --red: #bf4a4f;
       --text: #f8f5ea;
-      --muted: rgba(248, 245, 234, 0.72);
+      --muted: rgba(248, 245, 234, 0.74);
       --line: rgba(248, 245, 234, 0.18);
       --card: rgba(16, 53, 102, 0.84);
+      --shadow: rgba(5, 13, 27, 0.30);
     }
     * { box-sizing: border-box; }
     body {
@@ -23,47 +25,112 @@
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 8% 0%, rgba(40,114,198,.26), transparent 26rem),
-        radial-gradient(circle at 95% 8%, rgba(242,200,75,.14), transparent 22rem),
-        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 48%, #0e0e0e 100%);
+        radial-gradient(circle at 8% 0%, rgba(40,114,198,.28), transparent 26rem),
+        radial-gradient(circle at 96% 6%, rgba(242,200,75,.14), transparent 22rem),
+        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 50%, #0e0e0e 100%);
     }
-    a { color: #fff; text-underline-offset: 3px; }
-    .wrap { width: min(1040px, calc(100vw - 28px)); margin: 0 auto; padding: 28px 0 44px; }
-    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+    a { color: inherit; text-underline-offset: 3px; }
+    .wrap { width: min(1040px, calc(100vw - 28px)); margin: 0 auto; padding: 24px 0 46px; }
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
     .brand { color: var(--gold); font-weight: 900; letter-spacing: .12em; text-decoration: none; }
     .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .pill { border: 1px solid var(--line); border-radius: 999px; padding: 8px 11px; background: rgba(255,255,255,.06); color: var(--text); text-decoration: none; font-size: .88rem; }
-    .pill:hover { border-color: var(--gold); background: rgba(242,200,75,.12); }
-    .hero, .event-card, .empty, .location-card {
+    .pill:hover, button.pill.active { border-color: var(--gold); background: rgba(242,200,75,.95); color: #302400; }
+    button.pill { cursor: pointer; font: inherit; }
+    .hero {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: clamp(20px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(33,98,177,.64), var(--card));
+      box-shadow: 0 18px 42px var(--shadow);
+    }
+    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 900; }
+    h1 { margin: 0; font-size: clamp(2.25rem, 10vw, 4.8rem); line-height: .95; }
+    .lede { color: var(--muted); max-width: 66ch; line-height: 1.5; margin: 0; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 20px; }
+    .events-list { display: grid; gap: 16px; }
+    .time-group { display: grid; gap: 10px; }
+    .time-heading { margin: 8px 0 0; color: var(--gold); font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; }
+    .event-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      padding: 16px;
       border: 1px solid var(--line);
       border-radius: 24px;
-      background: linear-gradient(180deg, rgba(33,98,177,.66), var(--card));
-      box-shadow: 0 18px 42px rgba(5,13,27,.28);
+      background: linear-gradient(180deg, rgba(33,98,177,.56), rgba(16,53,102,.86));
+      box-shadow: 0 16px 36px var(--shadow);
     }
-    .hero { padding: clamp(18px, 4vw, 34px); display: grid; gap: 12px; margin-bottom: 18px; }
-    .eyebrow { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 900; }
-    h1 { margin: 0; font-size: clamp(2rem, 7vw, 4rem); line-height: .95; }
-    .lede { color: var(--muted); max-width: 72ch; line-height: 1.5; margin: 0; }
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
-    button.pill { cursor: pointer; font: inherit; }
-    button.pill.active { background: var(--gold); border-color: var(--gold); color: #2a2000; }
-    .grid { display: grid; gap: 14px; }
-    .event-card { padding: 18px; display: grid; gap: 12px; }
-    .event-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
-    .event-card h2 { margin: 0; font-size: clamp(1.18rem, 3vw, 1.65rem); }
-    .meta { display: flex; gap: 7px; flex-wrap: wrap; color: var(--muted); font-size: .84rem; }
+    .date-badge {
+      min-width: 66px;
+      align-self: start;
+      display: grid;
+      gap: 2px;
+      justify-items: center;
+      padding: 10px 8px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(180deg, rgba(191,74,79,.98), rgba(126,35,42,.98));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+      font-weight: 900;
+    }
+    .date-badge small { font-size: .67rem; opacity: .82; text-transform: uppercase; letter-spacing: .08em; }
+    .date-badge b { font-size: 1.45rem; line-height: 1; }
+    .event-main { display: grid; gap: 11px; min-width: 0; }
+    .event-main h2 { margin: 0; font-size: clamp(1.22rem, 4vw, 1.75rem); line-height: 1.08; }
+    .event-subline, .description, .side-note { color: var(--muted); line-height: 1.45; }
+    .event-subline { display: flex; gap: 7px; flex-wrap: wrap; font-size: .91rem; }
+    .description { margin: 0; }
     .badge { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; background: rgba(255,255,255,.07); }
-    .badge.placeholder { border-color: rgba(242,200,75,.48); color: var(--gold); }
-    .description { color: var(--muted); margin: 0; line-height: 1.48; }
     .actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    .action { border: 1px solid var(--line); border-radius: 12px; padding: 9px 11px; background: rgba(255,255,255,.07); text-decoration: none; color: var(--text); }
-    .action.primary { background: rgba(242,200,75,.16); border-color: rgba(242,200,75,.62); color: var(--gold); }
-    .split { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 14px; align-items: start; }
-    .location-card { padding: 15px; display: grid; gap: 8px; }
-    .location-card h3 { margin: 0; font-size: 1rem; color: var(--gold); }
-    .small { color: var(--muted); font-size: .86rem; line-height: 1.45; }
-    .empty { padding: 22px; color: var(--muted); }
-    @media (max-width: 760px) { .split { grid-template-columns: 1fr; } .event-top { display: grid; } }
+    .action { border: 1px solid var(--line); border-radius: 13px; padding: 9px 11px; background: rgba(255,255,255,.07); text-decoration: none; color: var(--text); }
+    .action.primary { background: rgba(242,200,75,.95); border-color: var(--gold); color: #302400; font-weight: 800; }
+    .related-inline {
+      display: grid;
+      gap: 8px;
+      margin-top: 3px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(248,245,234,.18);
+    }
+    .related-title { color: var(--gold); font-size: .72rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 900; }
+    .related-grid { display: grid; gap: 8px; }
+    .related-row {
+      display: grid;
+      gap: 3px;
+      padding: 10px;
+      border-left: 3px solid rgba(242,200,75,.62);
+      border-radius: 12px;
+      background: rgba(8,18,40,.28);
+    }
+    .related-row strong { font-size: .94rem; }
+    .related-row span { color: var(--muted); font-size: .84rem; line-height: 1.35; }
+    .locations-panel {
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 2px solid rgba(242,200,75,.42);
+    }
+    .locations-head { display: grid; gap: 4px; margin-bottom: 12px; }
+    .locations-head h2 { margin: 0; color: var(--gold); font-size: 1.05rem; letter-spacing: .08em; text-transform: uppercase; }
+    .location-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+    .location-card {
+      padding: 13px;
+      border: 1px dashed rgba(248,245,234,.22);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+    }
+    .location-card h3 { margin: 0 0 5px; font-size: 1rem; }
+    .empty { padding: 22px; border: 1px solid var(--line); border-radius: 20px; color: var(--muted); background: rgba(255,255,255,.05); }
+    @media (max-width: 620px) {
+      .wrap { width: min(100vw - 22px, 1040px); padding-top: 16px; }
+      .top { align-items: flex-start; }
+      .nav { gap: 6px; }
+      .hero { border-radius: 22px; }
+      .event-card { grid-template-columns: 1fr; border-radius: 21px; }
+      .date-badge { width: 74px; grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -71,95 +138,133 @@
     <header class="top">
       <a class="brand" href="index.html">ACADIE.SOL</a>
       <nav class="nav" aria-label="Primary">
-        <a class="pill" href="directory.html">Directory</a>
-        <a class="pill" href="index.html">Pause menu</a>
+        <a class="pill" href="directory.html#search">Find places</a>
+        <a class="pill" href="index.html">Home</a>
       </nav>
     </header>
 
     <section class="hero">
-      <div class="eyebrow">What’s happening</div>
-      <h1>Events</h1>
-      <p class="lede">A static event layer fed by the directory repo. Events point to hosts and reusable locations, so venue pages, region pages, calendar files, and archive recaps can all render the same source record.</p>
+      <div class="eyebrow">Community calendar</div>
+      <h1>What’s happening</h1>
+      <p class="lede">Shows, meals, gatherings, pop-ups, and community dates around Acadie. Event cards link back to their host places so the calendar and directory stay connected.</p>
     </section>
 
     <div class="filters" aria-label="Event filters">
-      <button class="pill active" data-filter="active">Active / Upcoming</button>
+      <button class="pill active" data-filter="upcoming">Upcoming</button>
       <button class="pill" data-filter="all">All</button>
-      <button class="pill" data-filter="archived">Archive</button>
-      <button class="pill" data-filter="placeholder">Placeholders</button>
+      <button class="pill" data-filter="archive">Archive</button>
     </div>
 
-    <main class="split">
-      <section id="events" class="grid" aria-live="polite"></section>
-      <aside id="locations" class="grid" aria-label="Known locations"></aside>
-    </main>
+    <main id="events" class="events-list" aria-live="polite"></main>
+
+    <aside class="locations-panel" aria-label="Related places">
+      <div class="locations-head">
+        <h2>Related places</h2>
+        <p class="side-note">Reusable venue/location context lives down here so it does not look like another event.</p>
+      </div>
+      <div id="locations" class="location-grid"></div>
+    </aside>
   </div>
 
   <script>
-    // Events page renderer. It intentionally reads static JSON only; the directory
-    // repo remains the data source and the site stays a disposable public mirror.
-    const state = { events: [], entries: [], locations: [], filter: 'active' };
-
-    function escapeHtml(str) {
-      return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+    // Events renderer: event cards are the primary public experience. Related
+    // place/location context is visually separated and repeated inside cards only
+    // where it helps the reader understand the event quickly.
+    const state = { events: [], entries: [], locations: [], filter: 'upcoming' };
+    function escapeHtml(str) { return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    function text(value) { return value && typeof value === 'object' ? (value.en || value.fr || value.shiac || '') : (value || ''); }
+    function publicTitle(event) { return String(text(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
+    function publicSummary(event) {
+      const raw = String(text(event.summary) || 'Details coming soon.');
+      return /placeholder|non-public/i.test(raw) ? 'Preview listing while the public calendar format is being shaped.' : raw;
     }
-    function text(value) {
-      if (value && typeof value === 'object') return value.en || value.fr || value.shiac || '';
-      return value || '';
+    function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
+    function dateParts(value) {
+      const date = parseDate(value);
+      if (!date) return { month: 'TBD', day: '', time: 'Time TBD', full: 'Date TBD' };
+      return {
+        month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(date),
+        day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(date),
+        time: new Intl.DateTimeFormat(undefined, { weekday: 'short', hour: 'numeric', minute: '2-digit' }).format(date),
+        full: new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date)
+      };
     }
-    function formatDate(value) {
-      if (!value) return 'Date TBD';
-      const date = new Date(value);
-      if (Number.isNaN(date.getTime())) return value;
-      return new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
-    }
-    function entryName(id) {
-      return state.entries.find(entry => entry.slug === id)?.title || id;
-    }
-    function locationName(id) {
-      return state.locations.find(location => location.id === id)?.name || id || 'Location TBD';
-    }
+    function placeEntry(id) { return state.entries.find(item => item.slug === id); }
+    function placeLocation(id) { return state.locations.find(item => item.id === id); }
+    function entryName(id) { return placeEntry(id)?.title || id; }
+    function locationName(id) { return placeLocation(id)?.name || 'Location TBD'; }
+    function locationSummary(id) { return text(placeLocation(id)?.summary) || ''; }
+    function isArchived(event) { return event.computed_status === 'archived' || event.status === 'archived'; }
     function eventMatches(event) {
       if (state.filter === 'all') return true;
-      if (state.filter === 'archived') return event.computed_status === 'archived' || event.status === 'archived';
-      if (state.filter === 'placeholder') return event.status === 'placeholder';
-      return event.computed_status === 'active' && event.status !== 'placeholder';
+      if (state.filter === 'archive') return isArchived(event);
+      return !isArchived(event);
+    }
+    function groupLabel(event) {
+      const start = parseDate(event.starts_at);
+      if (!start) return 'Date to confirm';
+      const now = new Date();
+      const diffDays = Math.floor((start.setHours(0,0,0,0) - new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()) / 86400000);
+      if (diffDays <= 7) return 'Next up';
+      if (diffDays <= 31) return 'Coming up';
+      return 'Later';
+    }
+    function renderRelated(event) {
+      const hosts = (event.host_entry_ids || []).map(id => placeEntry(id)).filter(Boolean);
+      const loc = placeLocation(event.location_id);
+      if (!hosts.length && !loc) return '';
+      return `<div class="related-inline">
+        <div class="related-title">Linked place${hosts.length + (loc ? 1 : 0) === 1 ? '' : 's'}</div>
+        <div class="related-grid">
+          ${hosts.map(host => `<a class="related-row" href="directory.html#entry-${escapeHtml(host.slug)}"><strong>${escapeHtml(host.title)}</strong><span>${escapeHtml(host.category || 'Host profile')}</span></a>`).join('')}
+          ${loc ? `<a class="related-row" href="#location-${escapeHtml(loc.id)}"><strong>${escapeHtml(loc.name)}</strong><span>${escapeHtml(text(loc.summary) || loc.kind || 'Location')}</span></a>` : ''}
+        </div>
+      </div>`;
+    }
+    function renderEvent(event) {
+      const parts = dateParts(event.starts_at);
+      const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
+      const icsHref = event.starts_at ? `assets/calendar/${encodeURIComponent(event.id)}.ics` : '';
+      return `<article class="event-card" id="event-${escapeHtml(event.id)}">
+        <div class="date-badge"><small>${escapeHtml(parts.month)}</small><b>${escapeHtml(parts.day)}</b></div>
+        <div class="event-main">
+          <div>
+            <h2>${escapeHtml(publicTitle(event))}</h2>
+            <div class="event-subline">
+              <span>${escapeHtml(parts.full)}</span>
+              ${hosts ? `<span>Hosted by ${hosts}</span>` : ''}
+              <span>${escapeHtml(locationName(event.location_id))}</span>
+            </div>
+          </div>
+          <p class="description">${escapeHtml(publicSummary(event))}</p>
+          ${renderRelated(event)}
+          <div class="actions">
+            ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
+            ${event.host_entry_ids?.[0] ? `<a class="action" href="directory.html#entry-${escapeHtml(event.host_entry_ids[0])}">View host</a>` : ''}
+          </div>
+        </div>
+      </article>`;
     }
     function renderEvents() {
       const root = document.getElementById('events');
-      const events = state.events.filter(eventMatches);
-      root.innerHTML = events.length ? events.map(event => {
-        const hosts = (event.host_entry_ids || []).map(id => `<a href="directory.html#entry-${escapeHtml(id)}">${escapeHtml(entryName(id))}</a>`).join(', ');
-        const icsHref = event.starts_at ? `assets/calendar/${encodeURIComponent(event.id)}.ics` : '';
-        return `<article class="event-card" id="event-${escapeHtml(event.id)}">
-          <div class="event-top">
-            <div>
-              <h2>${escapeHtml(text(event.title) || event.name)}</h2>
-              <div class="meta">
-                <span class="badge ${event.status === 'placeholder' ? 'placeholder' : ''}">${escapeHtml(event.status)}</span>
-                <span class="badge">${escapeHtml(event.computed_status || 'active')}</span>
-                <span class="badge">${escapeHtml(formatDate(event.starts_at))}</span>
-              </div>
-            </div>
-          </div>
-          <p class="description">${escapeHtml(text(event.summary) || 'Details coming soon.')}</p>
-          <div class="meta">
-            <span>Host: ${hosts || 'TBD'}</span>
-            <span>Location: <a href="#location-${escapeHtml(event.location_id)}">${escapeHtml(locationName(event.location_id))}</a></span>
-          </div>
-          <div class="actions">
-            ${icsHref ? `<a class="action primary" href="${icsHref}" download>Add to calendar</a>` : ''}
-            ${hosts ? `<a class="action" href="directory.html#entry-${escapeHtml((event.host_entry_ids || [])[0])}">Open host profile</a>` : ''}
-          </div>
-        </article>`;
-      }).join('') : '<div class="empty">No matching events yet. Placeholder events stay hidden from the default public view.</div>';
+      const events = state.events.filter(eventMatches).sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')));
+      if (!events.length) {
+        root.innerHTML = '<div class="empty">No matching events yet.</div>';
+        return;
+      }
+      const groups = new Map();
+      events.forEach(event => {
+        const label = state.filter === 'archive' ? 'Archive' : groupLabel(event);
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(event);
+      });
+      root.innerHTML = [...groups.entries()].map(([label, items]) => `<section class="time-group"><h2 class="time-heading">${escapeHtml(label)}</h2>${items.map(renderEvent).join('')}</section>`).join('');
     }
     function renderLocations() {
       const root = document.getElementById('locations');
-      root.innerHTML = state.locations.map(location => `<section class="location-card" id="location-${escapeHtml(location.id)}">
-        <h3>${escapeHtml(location.name)}</h3>
-        <div class="small">${escapeHtml(text(location.summary))}</div>
-        <div class="meta"><span class="badge">${escapeHtml(location.kind)}</span><span class="badge">${escapeHtml(location.street_id || 'no street id')}</span></div>
+      root.innerHTML = state.locations.map(item => `<section class="location-card" id="location-${escapeHtml(item.id)}">
+        <h3>${escapeHtml(item.name)}</h3>
+        <p class="side-note">${escapeHtml(text(item.summary) || item.kind || '')}</p>
       </section>`).join('');
     }
     function bindFilters() {

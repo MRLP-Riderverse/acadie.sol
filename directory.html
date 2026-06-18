@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23174b8e'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34'%3E🔥%3C/text%3E%3C/svg%3E" />
   <title>ACADIE.SOL Directory</title>
   <style>
     :root {
@@ -176,6 +177,9 @@
     .control-kicker { color: var(--gold); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
     .control-panel[open] .recent-chevron { transform: rotate(180deg); }
     .control-body { border-top: 1px solid rgba(248,245,234,0.1); padding: 14px; display: grid; gap: 10px; }
+    .control-intro { display: grid; gap: 4px; margin-bottom: 2px; }
+    .control-intro strong { color: var(--gold); font-size: 1.08rem; }
+    .control-intro span { color: var(--muted); font-size: 0.9rem; line-height: 1.38; }
     .control-grid { display: grid; gap: 10px; }
     .search-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .search-action { white-space: nowrap; border-radius: 13px; }
@@ -432,8 +436,8 @@
         <span>Community directory</span>
       </a>
       <nav class="nav-actions" aria-label="Directory navigation">
-        <button class="nav-action" id="nav-search" type="button" aria-expanded="false" aria-controls="search-panel">🔎 Search</button>
-        <a class="nav-action" href="recents.html">Fresh drafts</a>
+        <button class="nav-action" id="nav-search" type="button" aria-expanded="false" aria-controls="search-panel">🔎 Find places</button>
+        <a class="nav-action" href="events.html">Events</a>
         <a class="nav-action" href="index.html">Home</a>
       </nav>
     </div>
@@ -443,8 +447,8 @@
       <section class="hero">
       <div>
         <div class="eyebrow">Acadie.sol directory</div>
-        <h1>Discover or search Acadie.sol places.</h1>
-        <p class="lede">Choose a browsing style first. Discover opens the full official directory; Search gives you a clean filter-first path into the same results.</p>
+        <h1>Find local places.</h1>
+        <p class="lede">Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.</p>
       </div>
       <aside class="mini-stats" aria-label="Directory status">
         <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> entries</button>
@@ -457,19 +461,19 @@
     <section class="choice-panel" id="choice-panel" aria-label="Choose how to use the directory">
       <div class="choice-copy">
         <strong>Start here</strong>
-        <h2>Do you want to discover or search?</h2>
-        <p>Discover is for browsing the whole directory and opening city groups at your pace. Search is for when you already have a place, area, or vibe in mind.</p>
+        <h2>One place to find things.</h2>
+        <p>No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.</p>
       </div>
       <div class="choice-actions">
         <button class="choice-button" id="choose-discover" type="button">
-          <small>Open browse</small>
-          <b>Discover</b>
-          <span>Enter the full official directory and unfold places by area.</span>
+          <small>Browse freely</small>
+          <b>Show all places</b>
+          <span>Open the full directory and unfold places by area.</span>
         </button>
         <button class="choice-button" id="choose-search" type="button">
           <small>Find directly</small>
-          <b>Search</b>
-          <span>Start with a name, area, category, or vibe before browsing results.</span>
+          <b>Use search</b>
+          <span>Start with a name, area, category, or local vibe.</span>
         </button>
       </div>
     </section>
@@ -477,11 +481,15 @@
 
     <section class="control-panel body-search" id="search-panel" hidden>
       <div class="control-body">
+        <div class="control-intro">
+          <strong>Find local places</strong>
+          <span>One path for search, browsing, and exploring — start anywhere and open what catches your eye.</span>
+        </div>
         <div class="control-grid">
-          <input id="search" class="search" type="search" placeholder="Search by name, area, category, or public note…" autocomplete="off" enterkeyhint="search" />
+          <input id="search" class="search" type="search" placeholder="Search places, food, music, areas, or notes…" autocomplete="off" enterkeyhint="search" />
           <div class="search-actions">
-            <button id="open-filters" class="search-action" type="button">Filter</button>
-            <button id="show-results" class="search-action" type="button">Search</button>
+            <button id="open-filters" class="search-action" type="button">More options</button>
+            <button id="show-results" class="search-action" type="button">Show matches</button>
             <button id="quick-clear" class="search-action" type="button">Clear</button>
           </div>
         </div>
@@ -490,12 +498,12 @@
             <span>Filter options</span>
             <button id="close-filters" type="button" aria-label="Close filters">×</button>
           </div>
-          <select id="mood-select" class="select" aria-label="Filter by mood">
-            <option value="">Mood / route</option>
-            <option value="food">Hungry — food, cafés & treats</option>
-            <option value="waterfront">Explore — waterfront route</option>
-            <option value="family">Day plan — family-friendly</option>
-            <option value="night">Evening — night out</option>
+          <select id="mood-select" class="select" aria-label="Quick lens">
+            <option value="">Any vibe</option>
+            <option value="food">Food, cafés & treats</option>
+            <option value="waterfront">Waterfront / out for a walk</option>
+            <option value="family">Family-friendly</option>
+            <option value="night">Music, drinks & night out</option>
           </select>
           <select id="category-select" class="select" aria-label="Filter by category"><option value="all">All categories</option></select>
           <select id="city-select" class="select" aria-label="Filter by city"><option value="all">All areas</option></select>
@@ -504,7 +512,7 @@
             <button id="reset-filters" type="button">Reset</button>
           </div>
         </div>
-        <div class="filter-note">Live search updates as you type. Use <strong>Filter</strong> for mood/category/area, then <strong>Search</strong> to close the keyboard and jump to matches.</div>
+        <div class="filter-note">Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.</div>
       </div>
     </section>
 
@@ -517,12 +525,12 @@
     <section class="directory-shell" id="directory-shell" hidden>
       <div class="viewbar" id="directory-results">
         <div class="view-title">
-          <h2>Directory browse</h2>
-          <span id="result-copy">Showing all entries.</span>
+          <h2>Places</h2>
+          <span id="result-copy">Showing local places.</span>
         </div>
         <div class="view-actions">
-          <button id="show-all">Show all</button>
-          <button id="view-official">View official</button>
+          <button id="show-all">All places</button>
+          <button id="view-official">Jump to list</button>
           <button id="clear-filters">Clear</button>
         </div>
       </div>
@@ -530,7 +538,7 @@
       <main id="app"></main>
     </section>
 
-    <div class="footer">Data source: generated from <code>acadie_sol_directory/entries</code> and <code>acadie_sol_directory/inbox</code>. This page is only the public renderer; the directory repo remains the source of truth.</div>
+    <div class="footer">A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.</div>
   </div>
 
   <script>
@@ -768,6 +776,9 @@
       if (!date) return 'Date TBD';
       return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
     }
+    function publicEventTitle(event) {
+      return String(localizedText(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview');
+    }
 
     function relatedEventsFor(item) {
       const slug = item.slug;
@@ -794,10 +805,10 @@
       const related = relatedEventsFor(item);
       if (!related.length) return '';
       return `<div class="event-feed">
-        <div class="detail-label">Event feed</div>
+        <div class="detail-label">Related events</div>
         ${related.map(event => `<div class="event-row">
-          <div><a href="events.html#event-${escapeHtml(event.id)}">${escapeHtml(localizedText(event.title) || event.name)}</a></div>
-          <div class="event-meta">${escapeHtml(formatEventDate(event.starts_at))} · ${escapeHtml(event.status)} · ${escapeHtml(event.computed_status || '')}</div>
+          <div><a href="events.html#event-${escapeHtml(event.id)}">${escapeHtml(publicEventTitle(event))}</a></div>
+          <div class="event-meta">${escapeHtml(formatEventDate(event.starts_at))} · linked calendar item</div>
         </div>`).join('')}
       </div>`;
     }
@@ -896,9 +907,9 @@
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
       showAllButton.classList.add('active');
-      resultCopy.textContent = filters.length ? `${items.length} official match${items.length === 1 ? '' : 'es'} for ${filters.join(' + ')}. Draft previews live on the Fresh drafts page.` : `Showing ${items.length} official entr${items.length === 1 ? 'y' : 'ies'}`;
+      resultCopy.textContent = filters.length ? `${items.length} place${items.length === 1 ? '' : 's'} matching ${filters.join(' + ')}.` : `Showing ${items.length} local place${items.length === 1 ? '' : 's'}.`;
       const sections = [
-        renderSection('official-section', 'Official entries', `${items.length} published`, items, { open: true, groupByCity: true }),
+        renderSection('official-section', 'Local places', `${items.length} in the directory`, items, { open: true, groupByCity: true }),
       ].filter(Boolean).join('');
       app.innerHTML = items.length ? sections : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
       syncHashTarget();
@@ -1088,6 +1099,7 @@
       renderRecent();
       bindEvents();
       renderResults();
+      setDirectoryMode('search', { scroll: false, focus: false });
       if (window.location.hash === '#search') openSearchTool();
       if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
