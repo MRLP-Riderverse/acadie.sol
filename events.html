@@ -213,11 +213,8 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-      <span class="drawer-close" aria-hidden="true" title="Obituaries">✟</span>
-      <div class="drawer-actions-right">
-        <a class="menu-control obituary-button" href="obituaries.html" id="menu-obituaries" aria-label="Obituaries" title="Obituaries">✝</a>
-        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
-      </div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong id="events-drawer-title">Extras</strong><span id="events-drawer-subtitle">Directory, about, display</span></div>
@@ -225,6 +222,7 @@
     <nav class="drawer-nav">
       <a href="directory.html" id="events-menu-directory">Full directory</a>
       <a href="index.html#about" id="events-menu-about">About Acadie.sol</a>
+      <a href="obituaries.html" id="events-menu-obituaries">Obituaries</a>
     </nav>
   </aside>
   <div class="wrap">
@@ -265,7 +263,7 @@
     const state = { events: [], entries: [], locations: [], filter: 'upcoming' };
     const EVENTS_COPY = {
       en: {
-        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', pageTitle: 'ACADIE.SOL Events',
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', menuObituaries: 'Obituaries', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', pageTitle: 'ACADIE.SOL Events',
         heroEyebrow: 'Community calendar', heroTitle: 'What’s happening', heroLede: 'Shows, meals, gatherings, pop-ups, and community dates around Acadie. Event cards link back to their host places so the calendar and directory stay connected.',
         findPlaces: 'Find places', home: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
         upcoming: 'Upcoming', all: 'All', archive: 'Archive', detailsSoon: 'Details coming soon.', previewSummary: 'Preview listing while the public calendar format is being shaped.',
@@ -273,7 +271,7 @@
         hostedBy: 'Hosted by', at: 'At', addToCalendar: 'Add to calendar', openEvent: 'Open event', viewHost: 'View host', noEvents: 'No matching events yet.', archiveLabel: 'Archive', loadFailed: 'Events failed to load:'
       },
       fr: {
-        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', pageTitle: 'ACADIE.SOL Événements',
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', menuObituaries: 'Avis de décès', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', pageTitle: 'ACADIE.SOL Événements',
         heroEyebrow: 'Calendrier communautaire', heroTitle: 'Ce qui se passe', heroLede: 'Spectacles, repas, rassemblements, pop-ups et dates communautaires autour de l’Acadie. Les fiches d’événements renvoient vers leurs lieux hôtes afin que le calendrier et le répertoire restent liés.',
         findPlaces: 'Trouver des lieux', home: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
         upcoming: 'À venir', all: 'Tous', archive: 'Archives', detailsSoon: 'Détails à venir.', previewSummary: 'Aperçu provisoire pendant que le format public du calendrier prend forme.',
@@ -449,6 +447,7 @@
       setText('events-drawer-subtitle', c.drawerSubtitle);
       setText('events-menu-directory', c.menuDirectory);
       setText('events-menu-about', c.menuAbout);
+      setText('events-menu-obituaries', c.menuObituaries);
       setText('events-hero-eyebrow', c.heroEyebrow);
       setText('events-hero-title', c.heroTitle);
       setText('events-hero-lede', c.heroLede);

@@ -598,11 +598,8 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-      <span class="drawer-close" aria-hidden="true" title="Obituaries">✟</span>
-      <div class="drawer-actions-right">
-        <a class="menu-control obituary-button" href="obituaries.html" id="menu-obituaries" aria-label="Obituaries" title="Obituaries">✝</a>
-        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
-      </div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong id="dir-drawer-title">Extras</strong><span id="dir-drawer-subtitle">Directory, about, display</span></div>
@@ -610,6 +607,7 @@
     <nav class="drawer-nav">
       <a href="directory.html" id="dir-menu-directory">Full directory</a>
       <a href="index.html#about" id="dir-menu-about">About Acadie.sol</a>
+      <a href="obituaries.html" id="dir-menu-obituaries">Obituaries</a>
     </nav>
   </aside>
   <header class="top-nav" id="top-nav">
@@ -747,14 +745,14 @@
     };
     const DIR_COPY = {
       en: {
-        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', brandSubtitle: 'Community directory', navSearch: '🔎 Find places', navEvents: 'Events', navHome: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', menuObituaries: 'Obituaries', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', brandSubtitle: 'Community directory', navSearch: '🔎 Find places', navEvents: 'Events', navHome: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
         eyebrow: 'Acadie.sol directory', title: 'Find local places.', lede: 'Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.', entries: 'entries', categories: 'categories', cities: 'cities', previews: 'previews',
         choiceKicker: 'Start here', choiceTitle: 'One place to find things.', choiceCopy: 'No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.', discoverKicker: 'Browse freely', discoverTitle: 'Show all places', discoverCopy: 'Open the full directory as one alphabetical stack.', searchKicker: 'Find directly', searchChoiceTitle: 'Use search', searchChoiceCopy: 'Start with a name, area, category, or local vibe.',
         searchTitle: 'Find local places', searchIntro: 'One path for search, browsing, and exploring — start anywhere and open what catches your eye.', searchPlaceholder: 'Search places, food, music, areas, or notes…', moreOptions: 'More options', showMatches: 'Show matches', clear: 'Clear', filterOptions: 'Filter options', closeFilters: 'Close filters', anyVibe: 'Any vibe', moodFood: 'Food, cafés & treats', moodWaterfront: 'Waterfront / out for a walk', moodFamily: 'Family-friendly', moodNight: 'Music, drinks & night out',
         allCategories: 'All categories', allAreas: 'All areas', done: 'Done', reset: 'Reset', filterNote: 'Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.', resultsTitle: 'Places', resultDefault: 'Showing local places.', allPlaces: 'All places', jumpToList: 'Jump to list', footer: 'A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.', timestampUnavailable: 'Timestamp unavailable', dateTbd: 'Date TBD', preview: 'preview', noRecentEntries: 'No recent entries yet.', relatedEvents: 'Related events', linkedCalendarItem: 'linked calendar item', location: 'Location', eventSingular: 'event', eventPlural: 'events', next7Days: 'next 7 days', address: 'Address', hours: 'Hours', phone: 'Phone', email: 'Email', website: 'Website', viewFullPage: 'View full page', descriptionComingSoon: 'Public description coming soon.', placeSingular: 'place', placePlural: 'places', searchLabel: 'search', matching: 'matching', showing: 'Showing', alphabetically: 'alphabetically', noMatchesTitle: 'No matches yet.', noMatchesBody: 'Clear filters or try a broader search.', loadFailed: 'Directory failed to load.'
       },
       fr: {
-        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Trouver des lieux', navEvents: 'Événements', navHome: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', menuObituaries: 'Avis de décès', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Trouver des lieux', navEvents: 'Événements', navHome: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
         eyebrow: 'Répertoire Acadie.sol', title: 'Trouver des lieux locaux.', lede: 'La recherche, la navigation et l’exploration passent par le même chemin : commencez avec un nom, un secteur, une catégorie ou une ambiance, puis ouvrez les fiches utiles.', entries: 'entrées', categories: 'catégories', cities: 'villes', previews: 'aperçus',
         choiceKicker: 'Commencez ici', choiceTitle: 'Un seul endroit pour trouver.', choiceCopy: 'Pas de modes séparés pour découvrir, chercher ou explorer. Utilisez la recherche, une lentille rapide, ou parcourez simplement les fiches.', discoverKicker: 'Parcourir librement', discoverTitle: 'Voir tous les lieux', discoverCopy: 'Ouvrir le répertoire complet en une pile alphabétique.', searchKicker: 'Chercher directement', searchChoiceTitle: 'Utiliser la recherche', searchChoiceCopy: 'Commencez avec un nom, un secteur, une catégorie ou une ambiance locale.',
         searchTitle: 'Trouver des lieux locaux', searchIntro: 'Un seul chemin pour chercher, parcourir et explorer — commencez n’importe où et ouvrez ce qui attire l’œil.', searchPlaceholder: 'Chercher des lieux, repas, musique, secteurs ou notes…', moreOptions: 'Plus d’options', showMatches: 'Afficher', clear: 'Effacer', filterOptions: 'Options de filtre', closeFilters: 'Fermer les filtres', anyVibe: 'Toute ambiance', moodFood: 'Restos, cafés et gâteries', moodWaterfront: 'Bord de l’eau / promenade', moodFamily: 'Familial', moodNight: 'Musique, sorties et soirée',
@@ -801,7 +799,7 @@
     function updateDirCopy() {
       const c = copy();
       updateMenuControls();
-      setText('dir-menu-directory', c.menuDirectory); setText('dir-menu-about', c.menuAbout);
+      setText('dir-menu-directory', c.menuDirectory); setText('dir-menu-about', c.menuAbout); setText('dir-menu-obituaries', c.menuObituaries);
       setText('dir-drawer-title', c.drawerTitle); setText('dir-drawer-subtitle', c.drawerSubtitle); setText('dir-brand-subtitle', c.brandSubtitle);
       setText('nav-search', c.navSearch); setText('dir-nav-events', c.navEvents); setText('dir-nav-home', c.navHome);
       setText('dir-eyebrow', c.eyebrow); setText('dir-title', c.title); setText('dir-lede', c.lede);

@@ -128,9 +128,9 @@
     .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
     .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
 
-    .dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .dock a, .dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
-    .dock a.active { color: var(--paper); background: var(--blue-deep); }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
     @media (min-width: 760px) { .phone-shell { padding-top: 18px; } }
   </style>
 </head>
@@ -140,11 +140,8 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-      <span class="drawer-close" aria-hidden="true" title="Obituaries">✟</span>
-      <div class="drawer-actions-right">
-        <a class="menu-control obituary-button" href="obituaries.html" id="menu-obituaries" aria-label="Obituaries" title="Obituaries">✝</a>
-        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
-      </div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
@@ -152,6 +149,7 @@
     <nav class="drawer-nav">
       <a href="directory.html" id="menu-directory-link">Full directory</a>
       <a href="index.html#about" id="menu-about-link">About Acadie.sol</a>
+      <a href="obituaries.html" id="menu-obituaries-link">Obituaries</a>
     </nav>
   </aside>
 
@@ -185,18 +183,18 @@
     </footer>
   </main>
 
-  <nav class="dock" aria-label="Primary dock">
-    <a class="active" href="index.html"><span>⌂</span><span id="dock-home">Home</span></a>
-    <a href="events.html"><span>◷</span><span id="dock-events">Events</span></a>
-    <a href="directory.html"><span>⌕</span><span id="dock-search">Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span id="dock-menu">Menu</span></label>
+  <nav class="site-dock" aria-label="Primary dock">
+  <a class="active" href="index.html"><span>⌂</span><span id="dock-home">Home</span></a>
+  <a href="events.html"><span>◷</span><span id="dock-events">Events</span></a>
+  <a href="directory.html"><span>⌕</span><span id="dock-search">Search</span></a>
+  <label for="menu-toggle"><span>☰</span><span id="dock-menu">Menu</span></label>
   </nav>
 
   <script>
     // Home as OS launch surface: public data powers compact widgets; dock owns navigation.
     const HOME_COPY = {
       en: {
-        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', menuObituaries: 'Obituaries', theme: 'Light ↔ dark mode', lang: 'Language: English',
         brandSubtitle: 'local community surface', posterLabel: 'Community OS', posterSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
         welcomeTitle: 'Welcome to Acadie.sol', welcomeCopy: 'A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.',
         welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
@@ -205,7 +203,7 @@
         dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu'
       },
       fr: {
-        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', menuObituaries: 'Avis de décès', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
         brandSubtitle: 'surface communautaire locale', posterLabel: 'OS communautaire', posterSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
         welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un guide local pour Acadie-Bathurst : lieux, rassemblements et signaux communautaires dans une surface simple.',
         welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
@@ -253,6 +251,7 @@
       const c = copy();
       setText('menu-directory-link', c.menuDirectory);
       setText('menu-about-link', c.menuAbout);
+      setText('menu-obituaries-link', c.menuObituaries);
       updateMenuControls();
       setText('brand-subtitle', c.brandSubtitle);
       setText('poster-label', c.posterLabel);

@@ -36,9 +36,11 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 16% 0%, rgba(216,155,32,.13), transparent 18rem),
+        linear-gradient(180deg, var(--paper) 0%, var(--bg) 55%, color-mix(in srgb, var(--bg) 80%, var(--gold)) 100%);
       color: var(--ink);
-      font: 17px/1.45 Georgia, "Times New Roman", Times, serif;
+      font: 17px/1.45 "Trebuchet MS", "Verdana", sans-serif;
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 4px; }
     a:hover { color: var(--link-hover); }
@@ -48,14 +50,12 @@
     .menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
     .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
     .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
-    .drawer-actions-right { margin-left: auto; display: flex; align-items: center; gap: 10px; pointer-events: none; }
     .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
     .menu-control:focus, .drawer-close:focus { outline: none; }
     .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
     .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
     :root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
     [data-theme="dark"] .theme-button { color: #111; background: var(--gold); }
-    .obituary-button { color: var(--muted); background: color-mix(in srgb, var(--paper) 84%, transparent); }
     .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; font-family: system-ui, sans-serif; }
     .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
     [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: #111; }
@@ -137,11 +137,8 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-      <span class="drawer-close" aria-hidden="true" title="Obituaries">✟</span>
-      <div class="drawer-actions-right">
-        <span class="menu-control obituary-button" aria-current="page" aria-label="Obituaries" title="Obituaries">✝</span>
-        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
-      </div>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong id="obituaries-drawer-title">Extras</strong><span id="obituaries-drawer-subtitle">Directory, about, display</span></div>
@@ -150,6 +147,7 @@
       <a href="index.html" id="obituaries-menu-home">Home</a>
       <a href="events.html" id="obituaries-menu-events">Events</a>
       <a href="directory.html" id="obituaries-menu-directory">Full directory</a>
+      <a href="obituaries.html" id="obituaries-menu-obituaries">Obituaries</a>
     </nav>
   </aside>
 
@@ -174,6 +172,7 @@
         home: 'Home',
         events: 'Events',
         directory: 'Full directory',
+        obituaries: 'Obituaries',
         search: 'Search',
         menu: 'Menu',
       },
@@ -184,6 +183,7 @@
         home: 'Accueil',
         events: 'Événements',
         directory: 'Répertoire',
+        obituaries: 'Avis de décès',
         search: 'Recherche',
         menu: 'Menu',
       },
@@ -236,6 +236,7 @@
       document.getElementById('obituaries-menu-home').textContent = c.home;
       document.getElementById('obituaries-menu-events').textContent = c.events;
       document.getElementById('obituaries-menu-directory').textContent = c.directory;
+      document.getElementById('obituaries-menu-obituaries').textContent = c.obituaries;
     }
 
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));

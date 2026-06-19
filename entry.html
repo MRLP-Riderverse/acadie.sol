@@ -104,9 +104,9 @@
     .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
     .drawer-nav { display: grid; gap: 8px; }
     .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
-    .dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .dock a, .dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
-    .dock a.active { color: var(--paper); background: var(--blue-deep); }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
   </style>
 </head>
 <body>
@@ -115,11 +115,12 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-head">
       <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
-      <span class="drawer-close" aria-hidden="true" title="Obituaries">✟</span>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
     </div>
     <nav class="drawer-nav">
       <a href="directory.html" id="entry-menu-directory">Full directory</a>
       <a href="index.html#about" id="entry-menu-about">About Acadie.sol</a>
+      <a href="obituaries.html" id="entry-menu-obituaries">Obituaries</a>
       <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
       <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
@@ -130,7 +131,7 @@
     <div class="empty-msg" id="loading">Loading entry…</div>
   </main>
 
-  <nav class="dock" aria-label="Primary dock">
+  <nav class="site-dock" aria-label="Primary dock">
     <a href="index.html"><span>⌂</span><span id="entry-dock-home">Home</span></a>
     <a href="events.html"><span>◷</span><span id="entry-dock-events">Events</span></a>
     <a href="directory.html"><span>⌕</span><span id="entry-dock-search">Search</span></a>
@@ -186,6 +187,7 @@
       const fr = currentLang() === 'fr';
       document.getElementById('entry-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
       document.getElementById('entry-menu-about').textContent = fr ? 'À propos d’Acadie.sol' : 'About Acadie.sol';
+      document.getElementById('entry-menu-obituaries').textContent = fr ? 'Avis de décès' : 'Obituaries';
       document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
       document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
       document.getElementById('entry-dock-home').textContent = fr ? 'Accueil' : 'Home';
