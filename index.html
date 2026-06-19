@@ -131,7 +131,6 @@
     .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
     .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
     .site-dock a span:first-child, .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
-    .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
     @media (min-width: 760px) { .phone-shell { padding-top: 18px; } }
   </style>
 </head>
@@ -183,11 +182,11 @@
     </footer>
   </main>
 
-  <nav class="site-dock" aria-label="Primary dock">
-  <a class="active" href="index.html"><span>⌂</span><span id="dock-home">Home</span></a>
-  <a href="events.html"><span>◷</span><span id="dock-events">Events</span></a>
-  <a href="directory.html"><span>⌕</span><span id="dock-search">Search</span></a>
-  <label for="menu-toggle"><span>☰</span><span id="dock-menu">Menu</span></label>
+    <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
+    <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
+    <a href="directory.html" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+    <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
   <script>
@@ -200,7 +199,6 @@
         welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
         calendarCopy: 'A calmer calendar view is coming here. For now, use Events in the dock.',
         about: '<strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.',
-        dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu'
       },
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
@@ -209,7 +207,6 @@
         welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
         calendarCopy: 'Un calendrier plus calme arrive ici. Pour l’instant, utilisez Événements dans le dock.',
         about: '<strong>Construit d’abord en local.</strong> Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst. Simple pour l’instant, plus riche à mesure que les fiches grandissent.',
-        dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu'
       }
     };
     function currentLang() {
@@ -263,10 +260,6 @@
       setText('calendar-link', c.calendarLink);
       setText('calendar-copy', c.calendarCopy);
       setHtml('about-copy', c.about);
-      setText('dock-home', c.dockHome);
-      setText('dock-events', c.dockEvents);
-      setText('dock-search', c.dockSearch);
-      setText('dock-menu', c.dockMenu);
     }
     document.documentElement.lang = currentLang();
     updateStaticCopy();

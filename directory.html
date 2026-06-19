@@ -529,7 +529,6 @@
     .tool-dock { display: none; }
     .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
     .site-dock a, .site-dock button, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
-    .site-dock a.active, .site-dock button.active { color: var(--blue-ink); background: var(--blue-deep); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
     /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
        above the dock. Backdrop and drawer states are separate so the backdrop never
@@ -722,11 +721,11 @@
     <div class="footer" id="dir-footer">A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.</div>
   </div>
 
-  <nav class="site-dock" aria-label="Primary dock">
-    <a href="index.html"><span>⌂</span><span id="dir-dock-home">Home</span></a>
-    <a href="events.html"><span>◷</span><span id="dir-dock-events">Events</span></a>
-    <button id="dir-dock-search" type="button"><span>⌕</span><span id="dir-dock-search-label">Search</span></button>
-    <label for="menu-toggle"><span>☰</span><span id="dir-dock-menu">Menu</span></label>
+    <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
+    <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
+    <button id="dir-dock-search" type="button" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></button>
+    <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
   <script>
@@ -745,14 +744,12 @@
     };
     const DIR_COPY = {
       en: {
-        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', brandSubtitle: 'Community directory', navSearch: '🔎 Find places', navEvents: 'Events', navHome: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
         eyebrow: 'Acadie.sol directory', title: 'Find local places.', lede: 'Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.', entries: 'entries', categories: 'categories', cities: 'cities', previews: 'previews',
         choiceKicker: 'Start here', choiceTitle: 'One place to find things.', choiceCopy: 'No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.', discoverKicker: 'Browse freely', discoverTitle: 'Show all places', discoverCopy: 'Open the full directory as one alphabetical stack.', searchKicker: 'Find directly', searchChoiceTitle: 'Use search', searchChoiceCopy: 'Start with a name, area, category, or local vibe.',
         searchTitle: 'Find local places', searchIntro: 'One path for search, browsing, and exploring — start anywhere and open what catches your eye.', searchPlaceholder: 'Search places, food, music, areas, or notes…', moreOptions: 'More options', showMatches: 'Show matches', clear: 'Clear', filterOptions: 'Filter options', closeFilters: 'Close filters', anyVibe: 'Any vibe', moodFood: 'Food, cafés & treats', moodWaterfront: 'Waterfront / out for a walk', moodFamily: 'Family-friendly', moodNight: 'Music, drinks & night out',
         allCategories: 'All categories', allAreas: 'All areas', done: 'Done', reset: 'Reset', filterNote: 'Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.', resultsTitle: 'Places', resultDefault: 'Showing local places.', allPlaces: 'All places', jumpToList: 'Jump to list', footer: 'A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.', timestampUnavailable: 'Timestamp unavailable', dateTbd: 'Date TBD', preview: 'preview', noRecentEntries: 'No recent entries yet.', relatedEvents: 'Related events', linkedCalendarItem: 'linked calendar item', location: 'Location', eventSingular: 'event', eventPlural: 'events', next7Days: 'next 7 days', address: 'Address', hours: 'Hours', phone: 'Phone', email: 'Email', website: 'Website', viewFullPage: 'View full page', descriptionComingSoon: 'Public description coming soon.', placeSingular: 'place', placePlural: 'places', searchLabel: 'search', matching: 'matching', showing: 'Showing', alphabetically: 'alphabetically', noMatchesTitle: 'No matches yet.', noMatchesBody: 'Clear filters or try a broader search.', loadFailed: 'Directory failed to load.'
       },
       fr: {
-        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Trouver des lieux', navEvents: 'Événements', navHome: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
         eyebrow: 'Répertoire Acadie.sol', title: 'Trouver des lieux locaux.', lede: 'La recherche, la navigation et l’exploration passent par le même chemin : commencez avec un nom, un secteur, une catégorie ou une ambiance, puis ouvrez les fiches utiles.', entries: 'entrées', categories: 'catégories', cities: 'villes', previews: 'aperçus',
         choiceKicker: 'Commencez ici', choiceTitle: 'Un seul endroit pour trouver.', choiceCopy: 'Pas de modes séparés pour découvrir, chercher ou explorer. Utilisez la recherche, une lentille rapide, ou parcourez simplement les fiches.', discoverKicker: 'Parcourir librement', discoverTitle: 'Voir tous les lieux', discoverCopy: 'Ouvrir le répertoire complet en une pile alphabétique.', searchKicker: 'Chercher directement', searchChoiceTitle: 'Utiliser la recherche', searchChoiceCopy: 'Commencez avec un nom, un secteur, une catégorie ou une ambiance locale.',
         searchTitle: 'Trouver des lieux locaux', searchIntro: 'Un seul chemin pour chercher, parcourir et explorer — commencez n’importe où et ouvrez ce qui attire l’œil.', searchPlaceholder: 'Chercher des lieux, repas, musique, secteurs ou notes…', moreOptions: 'Plus d’options', showMatches: 'Afficher', clear: 'Effacer', filterOptions: 'Options de filtre', closeFilters: 'Fermer les filtres', anyVibe: 'Toute ambiance', moodFood: 'Restos, cafés et gâteries', moodWaterfront: 'Bord de l’eau / promenade', moodFamily: 'Familial', moodNight: 'Musique, sorties et soirée',
@@ -810,7 +807,6 @@
       setText('dir-search-title', c.searchTitle); setText('dir-search-intro', c.searchIntro); setText('open-filters', c.moreOptions); setText('show-results', c.showMatches); setText('quick-clear', c.clear);
       setText('dir-filter-title', c.filterOptions); setText('apply-filters', c.done); setText('reset-filters', c.reset); setText('dir-filter-note', c.filterNote);
       setText('dir-results-title', c.resultsTitle); setText('result-copy', c.resultDefault); setText('show-all', c.allPlaces); setText('view-official', c.jumpToList); setText('clear-filters', c.clear); setText('dir-footer', c.footer);
-      setText('dir-dock-home', c.dockHome); setText('dir-dock-events', c.dockEvents); setText('dir-dock-search-label', c.dockSearch); setText('dir-dock-menu', c.dockMenu);
       document.getElementById('search')?.setAttribute('placeholder', c.searchPlaceholder);
       document.getElementById('close-filters')?.setAttribute('aria-label', c.closeFilters);
       const mood = document.getElementById('mood-select');

@@ -128,7 +128,6 @@
       appearance: none;
       -webkit-appearance: none;
     }
-    .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
     @media (max-width: 720px) {
       .memorial { padding: 88px 16px 102px; }
       .drawer { width: min(430px, calc(100vw - 28px)); }
@@ -158,11 +157,11 @@
     <p class="linkline" id="obituaries-linkline"><a href="https://www.elhatton.com">Elhatton</a></p>
   </main>
 
-  <nav class="site-dock" aria-label="Primary dock">
-    <a href="index.html"><span>⌂</span><span id="obituaries-dock-home">Home</span></a>
-    <a href="events.html"><span>◷</span><span id="obituaries-dock-events">Events</span></a>
-    <a href="directory.html"><span>⌕</span><span id="obituaries-dock-search">Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span id="obituaries-dock-menu">Menu</span></label>
+    <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
+    <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
+    <a href="directory.html" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+    <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
   <script>

@@ -205,7 +205,6 @@
       .event-body { padding: 0 9px 9px 72px; }
       .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
       .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
-      .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
     }
   </style>
 </head>
@@ -250,11 +249,11 @@
     <main id="events" class="events-list" aria-live="polite"></main>
   </div>
 
-  <nav class="site-dock" aria-label="Primary dock">
-    <a href="index.html"><span>⌂</span><span id="events-dock-home">Home</span></a>
-    <a class="active" href="events.html"><span>◷</span><span id="events-dock-events">Events</span></a>
-    <a href="directory.html"><span>⌕</span><span id="events-dock-search">Search</span></a>
-    <label for="menu-toggle"><span>☰</span><span id="events-dock-menu">Menu</span></label>
+    <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
+    <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
+    <a href="directory.html" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+    <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
   <script>
@@ -266,7 +265,6 @@
       en: {
         menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', pageTitle: 'ACADIE.SOL Events',
         heroEyebrow: 'Community calendar', heroTitle: 'What’s happening', heroLede: 'Shows, meals, gatherings, pop-ups, and community dates around Acadie. Event cards link back to their host places so the calendar and directory stay connected.',
-        findPlaces: 'Find places', home: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
         upcoming: 'Upcoming', all: 'All', archive: 'Archive', detailsSoon: 'Details coming soon.', previewSummary: 'Preview listing while the public calendar format is being shaped.',
         locationTbd: 'Location TBD', dateConfirm: 'Date to confirm', nextUp: 'Next up', comingUp: 'Coming up', later: 'Later', bring: 'Bring', where: 'Where',
         hostedBy: 'Hosted by', at: 'At', addToCalendar: 'Add to calendar', openEvent: 'Open event', viewHost: 'View host', noEvents: 'No matching events yet.', archiveLabel: 'Archive', loadFailed: 'Events failed to load:'
@@ -274,7 +272,6 @@
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', pageTitle: 'ACADIE.SOL Événements',
         heroEyebrow: 'Calendrier communautaire', heroTitle: 'Ce qui se passe', heroLede: 'Spectacles, repas, rassemblements, pop-ups et dates communautaires autour de l’Acadie. Les fiches d’événements renvoient vers leurs lieux hôtes afin que le calendrier et le répertoire restent liés.',
-        findPlaces: 'Trouver des lieux', home: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
         upcoming: 'À venir', all: 'Tous', archive: 'Archives', detailsSoon: 'Détails à venir.', previewSummary: 'Aperçu provisoire pendant que le format public du calendrier prend forme.',
         locationTbd: 'Lieu à confirmer', dateConfirm: 'Date à confirmer', nextUp: 'À venir', comingUp: 'Bientôt', later: 'Plus tard', bring: 'Apporter', where: 'Où',
         hostedBy: 'Animé par', at: 'À', addToCalendar: 'Ajouter au calendrier', openEvent: 'Ouvrir l’événement', viewHost: 'Voir l’hôte', noEvents: 'Aucun événement correspondant pour le moment.', archiveLabel: 'Archives', loadFailed: 'Échec du chargement des événements :'
@@ -456,10 +453,6 @@
       setText('filter-upcoming', c.upcoming);
       setText('filter-all', c.all);
       setText('filter-archive', c.archive);
-      setText('events-dock-home', c.dockHome);
-      setText('events-dock-events', c.dockEvents);
-      setText('events-dock-search', c.dockSearch);
-      setText('events-dock-menu', c.dockMenu);
     }
     document.documentElement.lang = currentLang();
     updateStaticCopy();
