@@ -28,7 +28,7 @@
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
-    .wrap { width: min(760px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 188px; }
+    .wrap { width: min(760px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 120px; }
 
     /* Search surface — no marketing copy, no initial suggestions, no card shell.
        The page exists to accept a query and then get out of the way.
@@ -39,14 +39,14 @@
       display: grid;
       align-items: end;
       text-align: center;
-      padding-bottom: 188px;
+      padding-bottom: 32px;
       transition: min-height .18s ease, padding .18s ease;
     }
     body.search-active .search-hero,
     body.search-input-focused .search-hero {
       min-height: auto;
       align-items: start;
-      padding-bottom: 0;
+      padding-bottom: 24px;
     }
     .search-surface {
       width: min(620px, 100%);
@@ -67,31 +67,22 @@
       border: 0;
     }
     .search-row { width: 100%; display: grid; gap: 12px; align-content: start; }
-    /* Active editing lane — while the visitor is typing, the results column keeps
-       a stable vertical runway even if matches drop to one, zero, or temporarily
-       none. This prevents the page from collapsing and taking the fixed search bar
-       along for the ride during typo/erase transitions like “fooo” → “food”. */
+    .search-controls-shell { order: 0; }
+    .results { order: 1; }
+    /* Active editing lane — still reserve some runway while typing, but do it in
+       normal document flow now that the page no longer owns a second fixed bar. */
     body.search-active .search-row,
     body.search-input-focused .search-row {
-      min-height: min(52svh, 420px);
+      min-height: min(44svh, 360px);
     }
-    /* Search chrome shell — keep the actual fixed layer plain. iOS/PWA Safari is
-       more likely to lose transformed fixed elements during keyboard/viewport
-       weirdness, so the shell owns the fixed positioning and the inner card just
-       behaves like a normal centered block. */
+    /* Search controls now live in normal page flow. The shared site dock remains
+       the only fixed bottom chrome on the page, which removes the iOS/PWA conflict
+       between two competing bottom-positioned systems. */
     .search-controls-shell {
-      position: fixed;
-      z-index: 35;
-      left: 0;
-      right: 0;
-      bottom: calc(var(--search-controls-rest-bottom) + env(safe-area-inset-bottom));
-      padding: 0 14px;
-      display: flex;
-      justify-content: center;
-      pointer-events: none;
+      width: 100%;
     }
     .search-controls {
-      width: min(620px, calc(100vw - 28px));
+      width: min(620px, 100%);
       display: grid;
       gap: 8px;
       padding: 10px 12px 12px;
@@ -99,15 +90,7 @@
       border: 1px solid color-mix(in srgb, #000 32%, transparent);
       border-radius: 18px;
       box-shadow: 0 -6px 22px -4px var(--shadow);
-      pointer-events: auto;
-    }
-    /* Keep only the dock out of the way while editing. The search control stays
-       in its one fixed lane instead of trying to manage a second keyboard lane. */
-    body.search-input-focused .site-dock {
-      transform: translateX(-50%) translateY(200px);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform .22s ease, opacity .18s ease;
+      margin-inline: auto;
     }
     .search-field-wrap { position: relative; }
     .search-field {
@@ -165,25 +148,24 @@
       background: color-mix(in srgb, var(--paper) 94%, transparent);
       box-shadow: 0 16px 38px var(--shadow);
     }
-.filter-menu[open] .chips {
-  position: fixed;
-  top: auto;
-  bottom: calc(140px + env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(390px, calc(100vw - 32px));
-  /* keep existing styles from .chips */
-  display: flex !important;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: color-mix(in srgb, var(--paper) 94%, transparent);
-  box-shadow: 0 16px 38px var(--shadow);
-  z-index: 40;
-}
+    .filter-menu[open] .chips {
+      position: absolute;
+      top: calc(100% + 8px);
+      bottom: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(390px, calc(100vw - 32px));
+      display: flex !important;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      box-shadow: 0 16px 38px var(--shadow);
+      z-index: 40;
+    }
     .chip.active,
     .chip:hover,
     .filter-toggle:hover,
@@ -208,8 +190,8 @@
     body.search-active .results,
     body.search-input-focused .results {
       padding-top: 18px;
-      padding-bottom: 168px;
-      min-height: clamp(180px, 34svh, 300px);
+      padding-bottom: 24px;
+      min-height: clamp(160px, 28svh, 240px);
     }
     .result-card {
       display: grid;
@@ -240,14 +222,14 @@
     }
 
     @media (max-width: 680px) {
-      .wrap { width: min(430px, 100vw); padding: 22px 14px 188px; }
-      .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 188px; }
+      .wrap { width: min(430px, 100vw); padding: 22px 14px 120px; }
+      .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 32px; }
       body.search-active .search-hero,
-      body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 188px; }
+      body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 24px; }
       body.search-active .search-row,
-      body.search-input-focused .search-row { min-height: min(48svh, 360px); }
+      body.search-input-focused .search-row { min-height: min(40svh, 300px); }
       .search-surface { gap: 16px; }
-      .search-controls { width: min(390px, calc(100vw - 28px)); }
+      .search-controls { width: min(390px, 100%); }
       .search-field { min-height: 44px; }
       .result-top { display: grid; }
       .type-pill { width: fit-content; }
