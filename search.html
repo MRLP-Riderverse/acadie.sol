@@ -75,14 +75,22 @@
     body.search-input-focused .search-row {
       min-height: min(52svh, 420px);
     }
-    /* Search chrome — fixed in one bottom lane above the dock. No scroll-hide,
-       no custom keyboard-jumping: the control should feel glued in place while
-       the results move independently behind/above it. */
-    .search-controls {
+    /* Search chrome shell — keep the actual fixed layer plain. iOS/PWA Safari is
+       more likely to lose transformed fixed elements during keyboard/viewport
+       weirdness, so the shell owns the fixed positioning and the inner card just
+       behaves like a normal centered block. */
+    .search-controls-shell {
       position: fixed;
       z-index: 35;
-      left: 50%;
+      left: 0;
+      right: 0;
       bottom: calc(var(--search-controls-rest-bottom) + env(safe-area-inset-bottom));
+      padding: 0 14px;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .search-controls {
       width: min(620px, calc(100vw - 28px));
       display: grid;
       gap: 8px;
@@ -91,8 +99,7 @@
       border: 1px solid color-mix(in srgb, #000 32%, transparent);
       border-radius: 18px;
       box-shadow: 0 -6px 22px -4px var(--shadow);
-      transform: translateX(-50%);
-      transition: transform .18s ease;
+      pointer-events: auto;
     }
     /* Keep only the dock out of the way while editing. The search control stays
        in its one fixed lane instead of trying to manage a second keyboard lane. */
@@ -256,27 +263,29 @@
         <h1 class="sr-only" id="search-title">Search Acadie.sol</h1>
         <div class="search-row">
           <section class="results" id="results" aria-live="polite"></section>
-          <div class="search-controls" id="search-controls">
-            <div class="actions" aria-label="Search actions">
-              <a class="view-all" href="directory.html" id="view-directory">View All</a>
-              <details class="filter-menu" id="filter-menu">
-                <summary class="filter-toggle" id="filter-summary">Filters</summary>
-                <div class="chips" aria-label="Search filters">
-                  <button class="chip active" type="button" data-filter="all" id="chip-all">All</button>
-                  <button class="chip" type="button" data-filter="entry" id="chip-places">Places</button>
-                  <button class="chip" type="button" data-filter="event" id="chip-events">Events</button>
-                  <button class="chip" type="button" data-filter="food" id="chip-food">Food</button>
-                  <button class="chip" type="button" data-filter="music" id="chip-music">Music</button>
-                  <button class="chip" type="button" data-filter="family" id="chip-family">Family</button>
-                  <button class="chip" type="button" data-filter="waterfront" id="chip-waterfront">Waterfront</button>
-                </div>
-              </details>
-              <span class="count" id="result-count"></span>
+          <div class="search-controls-shell">
+            <div class="search-controls" id="search-controls">
+              <div class="actions" aria-label="Search actions">
+                <a class="view-all" href="directory.html" id="view-directory">View All</a>
+                <details class="filter-menu" id="filter-menu">
+                  <summary class="filter-toggle" id="filter-summary">Filters</summary>
+                  <div class="chips" aria-label="Search filters">
+                    <button class="chip active" type="button" data-filter="all" id="chip-all">All</button>
+                    <button class="chip" type="button" data-filter="entry" id="chip-places">Places</button>
+                    <button class="chip" type="button" data-filter="event" id="chip-events">Events</button>
+                    <button class="chip" type="button" data-filter="food" id="chip-food">Food</button>
+                    <button class="chip" type="button" data-filter="music" id="chip-music">Music</button>
+                    <button class="chip" type="button" data-filter="family" id="chip-family">Family</button>
+                    <button class="chip" type="button" data-filter="waterfront" id="chip-waterfront">Waterfront</button>
+                  </div>
+                </details>
+                <span class="count" id="result-count"></span>
+              </div>
+              <label class="search-field-wrap" for="search-input">
+                <input id="search-input" class="search-field" type="search" autocomplete="off" enterkeyhint="search" placeholder="?" aria-label="Search Acadie.sol" />
+                <span class="search-glyph" aria-hidden="true">⌕</span>
+              </label>
             </div>
-            <label class="search-field-wrap" for="search-input">
-              <input id="search-input" class="search-field" type="search" autocomplete="off" enterkeyhint="search" placeholder="?" aria-label="Search Acadie.sol" />
-              <span class="search-glyph" aria-hidden="true">⌕</span>
-            </label>
           </div>
         </div>
       </div>
