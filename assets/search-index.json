@@ -1,7 +1,136 @@
 {
   "schema_version": 1,
-  "item_count": 11,
+  "item_count": 23,
   "items": [
+    {
+      "type": "entry",
+      "id": "13-barrels-brewing",
+      "title": "13 Barrels Brewing",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-13-barrels-brewing",
+      "terms": [
+        "13 Barrels Brewing",
+        "food",
+        "Acadie-Bathurst",
+        "Home of the 13 Barrels.",
+        "drinks",
+        "brewery",
+        "taproom",
+        "waterfront",
+        "family",
+        "event space",
+        "online orders",
+        ""
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "a-and-w",
+      "title": "A&W",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-a-and-w",
+      "terms": [
+        "A&W",
+        "food",
+        "Acadie-Bathurst",
+        "Classic A&W on St-Peters Ave near Place Bathurst Mall and Home Hardware.",
+        "food",
+        "fast food",
+        "drive-thru",
+        "A and W",
+        "A&W Restaurant"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "acadie-bathurst-information-center",
+      "title": "Acadie-Bathurst Information Center",
+      "subtitle": "civic · Acadie-Bathurst",
+      "badges": [
+        "civic"
+      ],
+      "url": "directory.html#entry-acadie-bathurst-information-center",
+      "terms": [
+        "Acadie-Bathurst Information Center",
+        "civic",
+        "Acadie-Bathurst",
+        "Tourism info stop at La Promenade Waterfront near Frost Bite and Monty's.",
+        "tourism",
+        "information center",
+        "waterfront",
+        "Tourism Information Center"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "apollo-cinema",
+      "title": "Apollo Cinema",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-apollo-cinema",
+      "terms": [
+        "Apollo Cinema",
+        "venue",
+        "Acadie-Bathurst",
+        "Movie theatre on St. Anne St in Bathurst.",
+        "cinema",
+        "theatre",
+        "entertainment",
+        "movies",
+        "Apollo Theatre"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "atlantic-host",
+      "title": "Atlantic Host",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-atlantic-host",
+      "terms": [
+        "Atlantic Host",
+        "business",
+        "Acadie-Bathurst",
+        "Hotel on Vanier St near the airport.",
+        "hotel",
+        "lodging",
+        "restaurant",
+        "bar",
+        "parking",
+        "Atlantic Host Hotel"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "bathurst-agricultural-society-3",
+      "title": "Bathurst Agricultural Society #3",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-bathurst-agricultural-society-3",
+      "terms": [
+        "Bathurst Agricultural Society #3",
+        "business",
+        "Acadie-Bathurst",
+        "Livestock feed and supply store in Bathurst.",
+        "livestock",
+        "feed",
+        "supply",
+        "farm",
+        "Bathurst Agricultural Society"
+      ]
+    },
     {
       "type": "entry",
       "id": "bathurst-municipal-library",
@@ -46,28 +175,154 @@
         "restaurant",
         "picnic",
         "family",
-        "Big D Burger"
+        "Big D Burger",
+        "Drive In"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "big-deal-market",
+      "title": "Big Deal Market",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-big-deal-market",
+      "terms": [
+        "Big Deal Market",
+        "food",
+        "Acadie-Bathurst",
+        "Produce market on King Ave in Bathurst.",
+        "grocery",
+        "produce",
+        "market",
+        "Big Deal Produce Market Ltd"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "bootlegger",
+      "title": "Bootlegger",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-bootlegger",
+      "terms": [
+        "Bootlegger",
+        "venue",
+        "Acadie-Bathurst",
+        "Bar and patio on Main St near La Louga Night Club and La Promenade Waterfront.",
+        "bar",
+        "patio",
+        "nightlife",
+        "restaurant",
+        "Au Bootlegger"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "burger-king-bathurst",
+      "title": "Burger King Bathurst",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-burger-king-bathurst",
+      "terms": [
+        "Burger King Bathurst",
+        "food",
+        "Acadie-Bathurst",
+        "Fast-food Burger King on 725 St Peter Ave in Bathurst.",
+        "fast food",
+        "burger",
+        "drive-thru",
+        "Burger King"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "ccnb-bathurst-campus-725-college-st",
+      "title": "CCNB Bathurst Campus — 725 College St",
+      "subtitle": "educator · Acadie-Bathurst",
+      "badges": [
+        "educator"
+      ],
+      "url": "directory.html#entry-ccnb-bathurst-campus-725-college-st",
+      "terms": [
+        "CCNB Bathurst Campus — 725 College St",
+        "educator",
+        "Acadie-Bathurst",
+        "Main CCNB Bathurst campus at 725 College St.",
+        "college",
+        "campus",
+        "education",
+        "CCNB Bathurst Campus",
+        "Campus de Bathurst"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "ccnb-bathurst-campus-75-youghall-dr",
+      "title": "CCNB Bathurst Campus — 75 Youghall Dr",
+      "subtitle": "educator · Acadie-Bathurst",
+      "badges": [
+        "educator"
+      ],
+      "url": "directory.html#entry-ccnb-bathurst-campus-75-youghall-dr",
+      "terms": [
+        "CCNB Bathurst Campus — 75 Youghall Dr",
+        "educator",
+        "Acadie-Bathurst",
+        "CCNB Bathurst / Campus Youghall at 75 Youghall Dr.",
+        "college",
+        "campus",
+        "education",
+        "trades",
+        "CCNB Bathurst Campus",
+        "Campus Youghall"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "chicken-king-and-chinese-palace",
+      "title": "Chicken King & Chinese Palace Restaurant",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-chicken-king-and-chinese-palace",
+      "terms": [
+        "Chicken King & Chinese Palace Restaurant",
+        "food",
+        "Acadie-Bathurst",
+        "Restaurant with chicken and Chinese takeout on Miramichi Ave.",
+        "restaurant",
+        "chinese",
+        "takeout",
+        "fried chicken",
+        "Chicken King and Chinese Palace Restaurant"
       ]
     },
     {
       "type": "entry",
       "id": "la-louga-night-bar-resto",
       "title": "La Louga Night Bar - Resto",
-      "subtitle": "business · Acadie-Bathurst",
+      "subtitle": "venue · Acadie-Bathurst",
       "badges": [
-        "business"
+        "venue"
       ],
       "url": "directory.html#entry-la-louga-night-bar-resto",
       "terms": [
         "La Louga Night Bar - Resto",
-        "business",
+        "venue",
         "Acadie-Bathurst",
-        "Bathurst night bar and resto with a strong French-language social presence.",
+        "Bathurst Dance Club with a strong Francophone social presence.",
         "bar",
         "nightlife",
-        "restaurant",
         "downtown",
         "live music",
+        "dance",
         "La Louga Night Club"
       ]
     },
