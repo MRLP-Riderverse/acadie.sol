@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Obituaries — Acadie.sol</title>
+  <style>
+    :root {
+      --bg: #f3ede3;
+      --paper: #fffaf2;
+      --paper-soft: #f6eee1;
+      --ink: #2f271e;
+      --ink-strong: #1d1812;
+      --muted: #6f6255;
+      --line: rgba(95, 77, 56, .18);
+      --gold: #d8a43b;
+      --blue-deep: #22345d;
+      --link: #254b7a;
+      --link-hover: #143861;
+      --shadow: rgba(65, 47, 29, 0.14);
+      --glass: rgba(255,250,242,.64);
+    }
+    [data-theme="dark"] {
+      --bg: #1e1a15;
+      --paper: #2a2520;
+      --paper-soft: #332e27;
+      --ink: #f5ece1;
+      --ink-strong: #fff8ef;
+      --muted: #b4a799;
+      --line: rgba(217, 200, 180, .15);
+      --gold: #d9a321;
+      --blue-deep: #3b578f;
+      --link: #a9c3ff;
+      --link-hover: #d8e4ff;
+      --shadow: rgba(0, 0, 0, .35);
+      --glass: rgba(41,36,31,.76);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(217,155,33,.12), transparent 18rem),
+        linear-gradient(180deg, var(--paper) 0%, var(--bg) 55%, color-mix(in srgb, var(--bg) 82%, var(--gold)) 100%);
+      color: var(--ink);
+      font: 16px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
+    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(26, 20, 16, .38); backdrop-filter: blur(5px) saturate(.92); -webkit-backdrop-filter: blur(5px) saturate(.92); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; width: min(390px, calc(100vw - 28px)); min-height: 218px; padding: 58px 14px 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); -webkit-backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 8px) scale(.98); transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
+    .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+    .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
+    .drawer-actions-right { margin-left: auto; display: flex; align-items: center; gap: 10px; pointer-events: none; }
+    .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
+    .menu-control:focus, .drawer-close:focus { outline: none; }
+    .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
+    :root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
+    [data-theme="dark"] .theme-button { color: #111; background: var(--gold); }
+    .obituary-button { color: var(--muted); background: color-mix(in srgb, var(--paper-soft) 80%, transparent); }
+    .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; }
+    .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
+    [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
+    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; background: color-mix(in srgb, var(--paper-soft) 78%, transparent); }
+    .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
+    .drawer-title { display: grid; gap: 2px; }
+    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+    .drawer-title span { color: var(--muted); font-size: .8rem; }
+    .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
+    .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
+    .page-shell { width: min(860px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 96px; display: grid; gap: 14px; }
+    .card { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 82%, transparent); box-shadow: 0 16px 40px var(--shadow); backdrop-filter: blur(14px) saturate(1.25); }
+    .hero { padding: 22px 18px; display: grid; gap: 10px; }
+    .eyebrow { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; font-weight: 800; }
+    h1 { margin: 0; font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1.04; }
+    .lede { margin: 0; color: var(--muted); font-size: 1.03rem; max-width: 56ch; }
+    .sources { padding: 18px; display: grid; gap: 12px; }
+    .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .section-title h2 { margin: 0; font-size: 1.02rem; }
+    .section-title span { color: var(--muted); font-size: .9rem; }
+    .link-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .link-list a { display: inline-flex; align-items: center; min-height: 48px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--paper-soft) 86%, transparent); text-decoration: none; font-weight: 800; }
+    .link-list a:hover { background: color-mix(in srgb, var(--paper) 92%, transparent); }
+    .quiet-note { color: var(--muted); font-size: .92rem; }
+    .page-footer { color: var(--muted); font-size: .88rem; text-align: center; padding: 2px 4px; }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
+    @media (max-width: 720px) {
+      .page-shell { width: min(430px, 100vw); padding: 14px 14px 92px; }
+      .hero, .sources { border-radius: 26px; }
+      .drawer { width: min(430px, calc(100vw - 28px)); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu shell — keeps this page reachable without making grief feel loud. -->
+  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
+  <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
+  <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-controls" aria-label="Display and language controls">
+      <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">×</label>
+      <div class="drawer-actions-right">
+        <span class="menu-control obituary-button" aria-current="page" aria-label="Obituaries" title="Obituaries">✝</span>
+        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
+      </div>
+    </div>
+    <div class="drawer-head">
+      <div class="drawer-title"><strong id="obituaries-drawer-title">Extras</strong><span id="obituaries-drawer-subtitle">Directory, about, display</span></div>
+    </div>
+    <nav class="drawer-nav">
+      <a href="index.html" id="obituaries-menu-home">Home</a>
+      <a href="events.html" id="obituaries-menu-events">Events</a>
+      <a href="directory.html" id="obituaries-menu-directory">Full directory</a>
+    </nav>
+  </aside>
+
+  <!-- Content column — one calm heading, then a quiet list of links. -->
+  <main class="page-shell">
+    <section class="hero card" aria-labelledby="obituaries-title">
+      <div class="eyebrow" id="obituaries-eyebrow">Quiet connections</div>
+      <h1 id="obituaries-title">Lost but not forgotten</h1>
+      <p class="lede" id="obituaries-lede">A gentle index of local obituary sources — simple, respectful, and easy to reach when it matters.</p>
+      <p class="quiet-note" id="obituaries-note">When the time comes, this page stays calm on purpose.</p>
+    </section>
+
+    <section class="sources card" aria-labelledby="sources-title">
+      <div class="section-title">
+        <h2 id="sources-title">Local obituary sources</h2>
+        <span id="sources-subtitle">One name per line</span>
+      </div>
+      <ul class="link-list" id="obituaries-list" aria-label="Local obituary links"></ul>
+    </section>
+
+    <div class="page-footer" id="obituaries-footer">A small, sensitive directory for the moments that need it.</div>
+  </main>
+
+  <nav class="site-dock" aria-label="Primary dock">
+    <a href="index.html"><span>⌂</span><span id="obituaries-dock-home">Home</span></a>
+    <a href="events.html"><span>◷</span><span id="obituaries-dock-events">Events</span></a>
+    <a href="directory.html"><span>⌕</span><span id="obituaries-dock-search">Search</span></a>
+    <label for="menu-toggle"><span>☰</span><span id="obituaries-dock-menu">Menu</span></label>
+  </nav>
+
+  <script>
+    const COPY = {
+      en: {
+        drawerTitle: 'Extras',
+        drawerSubtitle: 'Directory, about, display',
+        title: 'Lost but not forgotten',
+        eyebrow: 'Quiet connections',
+        lede: 'A gentle index of local obituary sources — simple, respectful, and easy to reach when it matters.',
+        note: 'When the time comes, this page stays calm on purpose.',
+        sourcesTitle: 'Local obituary sources',
+        sourcesSubtitle: 'One name per line',
+        footer: 'A small, sensitive directory for the moments that need it.',
+        home: 'Home',
+        events: 'Events',
+        directory: 'Full directory',
+        search: 'Search',
+        menu: 'Menu',
+        links: [{ name: 'Elhatton', href: 'https://www.elhatton.com' }],
+      },
+      fr: {
+        drawerTitle: 'Extras',
+        drawerSubtitle: 'Répertoire, à propos, affichage',
+        title: 'On se souvient',
+        eyebrow: 'Liens discrets',
+        lede: 'Un index délicat de ressources locales pour les avis de décès — simple, respectueux, facile à trouver au bon moment.',
+        note: 'Quand le moment arrive, cette page reste volontairement apaisée.',
+        sourcesTitle: 'Sources locales pour avis de décès',
+        sourcesSubtitle: 'Un nom par ligne',
+        footer: 'Un petit répertoire sensible pour les moments qui en ont besoin.',
+        home: 'Accueil',
+        events: 'Événements',
+        directory: 'Répertoire',
+        search: 'Recherche',
+        menu: 'Menu',
+        links: [{ name: 'Elhatton', href: 'https://www.elhatton.com' }],
+      },
+    };
+
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+    }
+
+    function copy() { return COPY[currentLang()] || COPY.en; }
+
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('acadie-theme', theme);
+      updateMenuControls();
+    }
+
+    function updateMenuControls() {
+      document.documentElement.dataset.lang = currentLang();
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const themeButton = document.getElementById('theme-toggle');
+      if (themeButton) {
+        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        themeButton.textContent = isDark ? '☼' : '☾';
+        themeButton.setAttribute('aria-label', label);
+        themeButton.setAttribute('title', label);
+      }
+      const langButton = document.getElementById('lang-toggle');
+      if (langButton) {
+        const isFr = currentLang() === 'fr';
+        langButton.setAttribute('aria-label', isFr ? 'Switch language to English' : 'Switch language to French');
+        langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
+      }
+    }
+
+    function renderLinks() {
+      const list = document.getElementById('obituaries-list');
+      if (!list) return;
+      const items = copy().links || [];
+      list.innerHTML = items.map((item) => `<li><a href="${item.href}">${item.name}</a></li>`).join('');
+    }
+
+    function renderCopy() {
+      const c = copy();
+      document.documentElement.lang = currentLang();
+      document.title = 'Obituaries — Acadie.sol';
+      updateMenuControls();
+      const ids = {
+        'obituaries-drawer-title': c.drawerTitle,
+        'obituaries-drawer-subtitle': c.drawerSubtitle,
+        'obituaries-title': c.title,
+        'obituaries-eyebrow': c.eyebrow,
+        'obituaries-lede': c.lede,
+        'obituaries-note': c.note,
+        'sources-title': c.sourcesTitle,
+        'sources-subtitle': c.sourcesSubtitle,
+        'obituaries-footer': c.footer,
+        'obituaries-dock-home': c.home,
+        'obituaries-dock-events': c.events,
+        'obituaries-dock-search': c.search,
+        'obituaries-dock-menu': c.menu,
+        'obituaries-menu-home': c.home,
+        'obituaries-menu-events': c.events,
+        'obituaries-menu-directory': c.directory,
+      };
+      Object.entries(ids).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      });
+      renderLinks();
+    }
+
+    document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+    document.getElementById('lang-toggle')?.addEventListener('click', () => {
+      const next = currentLang() === 'fr' ? 'en' : 'fr';
+      localStorage.setItem('acadie-lang', next);
+      document.documentElement.lang = next;
+      renderCopy();
+    });
+
+    const savedTheme = localStorage.getItem('acadie-theme');
+    if (savedTheme) applyTheme(savedTheme);
+    renderCopy();
+  </script>
+</body>
+</html>
