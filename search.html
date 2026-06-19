@@ -64,7 +64,9 @@
       gap: 8px;
       padding: 10px 12px 12px;
       background: var(--page-bg);
-      border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+      border: 1px solid color-mix(in srgb, #000 32%, transparent);
+      border-top: 0;
+      border-radius: 18px 18px 0 0;
       box-shadow: 0 -6px 22px -4px var(--shadow);
       transform: translateX(-50%);
       transition: transform .24s ease, opacity .2s ease;
@@ -343,6 +345,10 @@
       const filterOpen = document.getElementById('filter-menu')?.open;
       if (delta > 12 && currentY > 24 && !filterOpen) setChromeHidden(true);
       if (delta < -12 || currentY <= 8) setChromeHidden(false);
+      /* Dismiss keyboard on significant downward scroll through results. */
+      if (delta > 32 && document.activeElement?.id === 'search-input') {
+        document.getElementById('search-input')?.blur();
+      }
       lastScrollY = currentY;
       scrollTicking = false;
     }
@@ -350,12 +356,19 @@
     /* Visual-viewport keyboard detection. When the soft keyboard opens the
        visual viewport shrinks below the layout viewport; when it closes they
        re-align. This lets us hide the dock and reposition search chrome so
-       only the search bar stacks above the keyboard — not the dock. */
+       only the search bar stacks above the keyboard — not the dock.
+       Debounced with a 200ms cooldown to prevent flicker during resize. */
+    let keyboardDetectTimer = null;
     function detectKeyboard() {
-      const vv = window.visualViewport;
-      if (!vv) return;
-      const keyboardOpen = vv.height < window.innerHeight - 80;
-      document.body.classList.toggle('keyboard-open', keyboardOpen);
+      clearTimeout(keyboardDetectTimer);
+      keyboardDetectTimer = setTimeout(() => {
+        const vv = window.visualViewport;
+        if (!vv) return;
+        const kbd = vv.height < window.innerHeight - 80;
+        document.body.classList.toggle('keyboard-open', kbd);
+        /* When keyboard closes, restore scroll chrome state to visible. */
+        if (!kbd) setChromeHidden(false);
+      }, 80);
     }
 
     function bindEvents() {
@@ -372,7 +385,6 @@
           document.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('active', chip === button));
           setText('filter-summary', filterLabel());
           document.getElementById('filter-menu')?.removeAttribute('open');
-          document.getElementById('search-input').focus();
           render();
         });
       });
@@ -381,14 +393,12 @@
           scrollTicking = true;
           requestAnimationFrame(handleScrollDirection);
         }
-        /* Scrolling results dismisses the soft keyboard like Safari. */
-        if (document.activeElement === input) input.blur();
       }, { passive: true });
       /* Visual viewport resize = keyboard open/close. Repositions chrome
-         and hides/shows dock accordingly. */
+         and hides/shows dock accordingly. Only listen to resize, not scroll —
+         the visualViewport scroll event fires erratically and can fight focus. */
       if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', detectKeyboard);
-        window.visualViewport.addEventListener('scroll', detectKeyboard);
       }
       window.addEventListener('acadie:languagechange', applyCopy);
     }
