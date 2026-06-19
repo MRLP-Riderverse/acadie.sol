@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "entry_count": 59,
-  "draft_count": 0,
+  "entry_count": 60,
+  "draft_count": 1,
   "published_count": 59,
   "items": [
     {
@@ -54,10 +54,10 @@
       ],
       "contact": {
         "email": "13barrelsbrewing@gmail.com",
-        "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
+        "hours": "Sun-Tue 12:00-18:00, Wed 12:00-20:00, Thu-Sat 12:00-23:00",
         "phone": "506-546-5300",
         "website": "https://www.13barrels.ca/",
-        "hours": "Sun-Tue 12:00-18:00, Wed 12:00-20:00, Thu-Sat 12:00-23:00"
+        "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada"
       },
       "address": "215 Cunard St, Bathurst, NB E2A 0C4, Canada",
       "hours": "Sun-Tue 12:00-18:00, Wed 12:00-20:00, Thu-Sat 12:00-23:00",
@@ -135,10 +135,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
+        "hours": "",
         "phone": "(506) 546-4095",
         "website": "",
-        "hours": ""
+        "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6"
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -202,10 +202,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
+        "hours": "",
         "phone": "506-548-0418",
         "website": "",
-        "hours": ""
+        "address": "86 Douglas Ave, Bathurst, NB E2A 7S6"
       },
       "address": "86 Douglas Ave, Bathurst, NB E2A 7S6",
       "hours": "",
@@ -273,10 +273,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
+        "hours": "most evenings and some matinee showings",
         "phone": "not yet confirmed",
         "website": "",
-        "hours": "most evenings and some matinee showings"
+        "address": "855 St. Anne St, Bathurst, NB E2A 4H7"
       },
       "address": "855 St. Anne St, Bathurst, NB E2A 4H7",
       "hours": "most evenings and some matinee showings",
@@ -345,10 +345,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
+        "hours": "",
         "phone": "1 (800) 898-9292",
         "website": "",
-        "hours": ""
+        "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7"
       },
       "address": "1450 Vanier Blvd, Bathurst, NB E2A 7B7",
       "hours": "",
@@ -414,10 +414,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1525 Rough Waters Dr",
+        "hours": "Tuesday to Saturday, 9am–12pm",
         "phone": "1 (506) 548-8730",
         "website": "",
-        "hours": "Tuesday to Saturday, 9am–12pm"
+        "address": "1525 Rough Waters Dr"
       },
       "address": "1525 Rough Waters Dr",
       "hours": "Tuesday to Saturday, 9am–12pm",
@@ -487,10 +487,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "150 St George St, Bathurst, NB E2A 1B5, Canada",
+        "hours": "",
         "phone": "",
         "website": "https://www1.gnb.ca/0003/pages/en/biblio-e.asp?Code=CN",
-        "hours": ""
+        "address": "150 St George St, Bathurst, NB E2A 1B5, Canada"
       },
       "address": "150 St George St, Bathurst, NB E2A 1B5, Canada",
       "hours": "",
@@ -561,10 +561,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
+        "hours": "Mon-Sun 11:00–19:00",
         "phone": "506-546-3585",
         "website": "",
-        "hours": "Mon-Sun 11:00–19:00"
+        "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada"
       },
       "address": "2035 St Peter Ave, Bathurst, NB E2A 7J5, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -635,10 +635,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
+        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
         "phone": "(506) 548-8369",
         "website": "",
-        "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00"
+        "address": "305 King Av, Bathurst, NB E2A 1P4, Canada"
       },
       "address": "305 King Av, Bathurst, NB E2A 1P4, Canada",
       "hours": "Mon-Fri 09:00–19:00; Sat 10:00–19:00",
@@ -706,10 +706,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "100 Main St, Bathurst, NB",
+        "hours": "",
         "phone": "(506) 350-3350",
         "website": "",
-        "hours": ""
+        "address": "100 Main St, Bathurst, NB"
       },
       "address": "100 Main St, Bathurst, NB",
       "hours": "",
@@ -770,10 +770,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
+        "hours": "",
         "phone": "(506) 546-2020",
         "website": "",
-        "hours": ""
+        "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6"
       },
       "address": "2020 St Peter Ave, Bathurst, NB E2A 7J6",
       "hours": "",
@@ -839,10 +839,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7"
       },
       "address": "725 St Peter Ave, Bathurst, NB E2A 2Z7",
       "hours": "",
@@ -908,10 +908,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
+        "hours": "",
         "phone": "506-547-2145",
         "website": "",
-        "hours": ""
+        "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2"
       },
       "address": "725, rue du Collège, C.P. 266, Bathurst, NB E2A 3Z2",
       "hours": "",
@@ -981,10 +981,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
+        "hours": "",
         "phone": "506-547-2145",
         "website": "",
-        "hours": ""
+        "address": "75 Youghall Dr, Bathurst, NB E2A 4X5"
       },
       "address": "75 Youghall Dr, Bathurst, NB E2A 4X5",
       "hours": "",
@@ -1054,10 +1054,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
+        "hours": "Mon-Sun 11:00–19:00",
         "phone": "(855) 245-7827",
         "website": "",
-        "hours": "Mon-Sun 11:00–19:00"
+        "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada"
       },
       "address": "1096 Miramichi Ave, Bathurst, NB E2A 1X8, Canada",
       "hours": "Mon-Sun 11:00–19:00",
@@ -1119,10 +1119,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "435 St. Peter Avenue, Bathurst, NB",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "435 St. Peter Avenue, Bathurst, NB"
       },
       "address": "435 St. Peter Avenue, Bathurst, NB",
       "hours": "",
@@ -1185,10 +1185,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -1248,10 +1248,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "1 (506) 546-4545",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -1314,10 +1314,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -1378,10 +1378,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "100 Main St.",
+        "hours": "",
         "phone": "1 (506) 546-5095",
         "website": "",
-        "hours": ""
+        "address": "100 Main St."
       },
       "address": "100 Main St.",
       "hours": "",
@@ -1446,10 +1446,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1395 Miramichi Ave, Acadie-Bathurst",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "1395 Miramichi Ave, Acadie-Bathurst"
       },
       "address": "1395 Miramichi Ave, Acadie-Bathurst",
       "hours": "",
@@ -1509,10 +1509,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
+        "hours": "",
         "phone": "1 (506) 545-2456",
         "website": "",
-        "hours": ""
+        "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6"
       },
       "address": "1300 St-Peters Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1576,10 +1576,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
+        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
         "phone": "(506) 350-2800",
         "website": "",
-        "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm"
+        "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada"
       },
       "address": "335 Murray Ave, Bathurst, NB E2A 1T4, Canada",
       "hours": "Mon-Thu 12-7pm; Fri 12-9pm; Sat 12-7pm; Sun 2-6pm",
@@ -1642,10 +1642,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -1703,10 +1703,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "La Promenade Waterfront, Bathurst, NB",
+        "hours": "seasonal / closed for winter",
         "phone": "(506) 480-0436",
         "website": "",
-        "hours": "seasonal / closed for winter"
+        "address": "La Promenade Waterfront, Bathurst, NB"
       },
       "address": "La Promenade Waterfront, Bathurst, NB",
       "hours": "seasonal / closed for winter",
@@ -1775,10 +1775,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4"
       },
       "address": "1555 Queen Elizabeth Drive, Bathurst, NB E2A 4Y4",
       "hours": "",
@@ -1847,10 +1847,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6"
       },
       "address": "1300 St Peter Ave, Bathurst, NB E2A 3A6",
       "hours": "",
@@ -1915,10 +1915,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "15 Main St, Bathurst, NB",
+        "hours": "Open every day, at least 3pm–9pm",
         "phone": "1 (506) 548-3019",
         "website": "",
-        "hours": "Open every day, at least 3pm–9pm"
+        "address": "15 Main St, Bathurst, NB"
       },
       "address": "15 Main St, Bathurst, NB",
       "hours": "Open every day, at least 3pm–9pm",
@@ -1980,10 +1980,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst."
       },
       "address": "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -2043,10 +2043,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "399 St Paul st, Acadie-Bathurst.",
+        "hours": "",
         "phone": "1(506)480-0031",
         "website": "",
-        "hours": ""
+        "address": "399 St Paul st, Acadie-Bathurst."
       },
       "address": "399 St Paul st, Acadie-Bathurst.",
       "hours": "",
@@ -2107,10 +2107,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2."
       },
       "address": "Public search results point to 14 Sean Couturier Avenue, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -2173,10 +2173,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6."
       },
       "address": "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
       "hours": "",
@@ -2240,10 +2240,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Located at 714 King St.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Located at 714 King St."
       },
       "address": "Located at 714 King St.",
       "hours": "",
@@ -2301,10 +2301,10 @@
       ],
       "contact": {
         "email": "kylegodinn4200@gmail.com",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -2375,10 +2375,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
+        "hours": "",
         "phone": "(506) 226-6056",
         "website": "",
-        "hours": ""
+        "address": "125 Main St, Bathurst, NB E2A 1A6, Canada"
       },
       "address": "125 Main St, Bathurst, NB E2A 1A6, Canada",
       "hours": "",
@@ -2451,10 +2451,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4."
       },
       "address": "Official page title points to 994 St. Peter Ave, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -2518,10 +2518,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6."
       },
       "address": "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
       "hours": "",
@@ -2587,10 +2587,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "McDonald's location at 620 St. Peter Avenue, Bathurst."
       },
       "address": "McDonald's location at 620 St. Peter Avenue, Bathurst.",
       "hours": "",
@@ -2655,10 +2655,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst."
       },
       "address": "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
       "hours": "",
@@ -2720,10 +2720,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -2783,10 +2783,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -2848,10 +2848,10 @@
       ],
       "contact": {
         "email": "info@nbdistillery.ca",
-        "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "112 Main St, Bathurst, NB E2A 1A4, Canada"
       },
       "address": "112 Main St, Bathurst, NB E2A 1A4, Canada",
       "hours": "",
@@ -2920,10 +2920,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst."
       },
       "address": "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
       "hours": "",
@@ -2983,10 +2983,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7."
       },
       "address": "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
       "hours": "",
@@ -3047,10 +3047,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Gas station and car wash at 896 Main St.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Gas station and car wash at 896 Main St."
       },
       "address": "Gas station and car wash at 896 Main St.",
       "hours": "",
@@ -3114,10 +3114,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4."
       },
       "address": "Public search results point to 980 St. Peter Avenue, Bathurst, NB E2A 2Z4.",
       "hours": "",
@@ -3181,10 +3181,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9."
       },
       "address": "Public search results point to 15 Sugarloaf Street, Campbellton, NB E3N 3A9.",
       "hours": "",
@@ -3248,10 +3248,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8."
       },
       "address": "Public search results point to 3410 Rue Principale, Tracadie-Sheila, NB E1X 1C8.",
       "hours": "",
@@ -3313,10 +3313,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB."
       },
       "address": "Public search results point to 755 St. Peter Ave, Bathurst, NB.",
       "hours": "",
@@ -3382,10 +3382,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
+        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
         "phone": "(506) 547-8080",
         "website": "",
-        "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)"
+        "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada"
       },
       "address": "1000 St. Peter Ave, Bathurst, NB E2A 2Z7, Canada",
       "hours": "Mon-Wed 11:00–23:00; Thu 11:00–00:00; Fri-Sat 11:00–01:00; Sun 11:00–11:00 (as published on source)",
@@ -3448,10 +3448,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": ""
       },
       "address": "",
       "hours": "",
@@ -3513,10 +3513,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Located in the same gas station as Petro-Canada at 896 Main St."
       },
       "address": "Located in the same gas station as Petro-Canada at 896 Main St.",
       "hours": "",
@@ -3577,10 +3577,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall."
       },
       "address": "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
       "hours": "",
@@ -3644,10 +3644,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Subway location at 880 St. Anne Street, Bathurst.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Subway location at 880 St. Anne Street, Bathurst."
       },
       "address": "Subway location at 880 St. Anne Street, Bathurst.",
       "hours": "",
@@ -3712,10 +3712,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7."
       },
       "address": "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
       "hours": "",
@@ -3781,10 +3781,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Bridge St (exact civic address not confirmed)",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Bridge St (exact civic address not confirmed)"
       },
       "address": "Bridge St (exact civic address not confirmed)",
       "hours": "",
@@ -3845,10 +3845,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In."
       },
       "address": "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
       "hours": "",
@@ -3911,10 +3911,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
+        "hours": "",
         "phone": "",
         "website": "",
-        "hours": ""
+        "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2."
       },
       "address": "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
       "hours": "",
@@ -3979,10 +3979,10 @@
       ],
       "contact": {
         "email": "",
-        "address": "",
+        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",
         "phone": "",
         "website": "",
-        "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash."
+        "address": ""
       },
       "address": "",
       "hours": "Summer operations on the city page: 8:00am to 8:00pm daily, free parking, lifeguards 10:00am to 5:30pm, designated swimming zone, beach sand cleaned daily 7:00am to 10:00am, floating wheelchairs available through East Coast Adventures, no overnight camping, and pets permitted on leash.",
@@ -4006,6 +4006,67 @@
       "path": "entries/youghall-beach/entry.md",
       "source_modified_at": "2026-06-19T02:32:35.555619Z",
       "source_modified_ts": 1781836355
+    },
+    {
+      "title": "Draft: Gilles Basque Car Parts",
+      "title_localized": {
+        "en": "Draft: Gilles Basque Car Parts",
+        "fr": "",
+        "shiac": ""
+      },
+      "name": "Draft: Gilles Basque Car Parts",
+      "sort_name": "Draft: Gilles Basque Car Parts",
+      "brand_name": "",
+      "branch_name": "",
+      "aliases": [],
+      "slug": "gilles-basque-car-parts",
+      "location_id": "",
+      "region_id": "acadie-bathurst",
+      "street_id": "",
+      "status": "draft",
+      "draft": true,
+      "badge": "DRAFT",
+      "category": "service",
+      "area": "Acadie-Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "description": "Local automotive consultants and parts dealers in East Bathurst.",
+      "description_localized": {
+        "en": "Local automotive consultants and parts dealers in East Bathurst.",
+        "fr": "",
+        "shiac": ""
+      },
+      "notes": "Local automotive consultants and parts dealers. In East Bathurst.",
+      "note_points": [],
+      "summary": "Local automotive consultants and parts dealers in East Bathurst. Local automotive consultants and parts dealers. In East Bathurst.",
+      "tags": [
+        "automotive",
+        "auto parts",
+        "east bathurst"
+      ],
+      "contact": {
+        "email": "",
+        "hours": "",
+        "phone": "1(506)-546-9976",
+        "website": "",
+        "address": "1967 Miramichi Ave, Bathurst, NB Canada"
+      },
+      "address": "1967 Miramichi Ave, Bathurst, NB Canada",
+      "hours": "",
+      "phone": "1(506)-546-9976",
+      "email": "",
+      "website": "",
+      "thumbnail_src": "",
+      "thumbnail_alt": "",
+      "public_data": [
+        "Address: 1967 Miramichi Ave, Bathurst, NB Canada",
+        "Phone: 1(506)-546-9976"
+      ],
+      "related_places": [],
+      "sources": [],
+      "source_type": "inbox",
+      "path": "inbox/gilles-basque-car-parts.md",
+      "source_modified_at": "2026-06-19T23:45:56.585962Z",
+      "source_modified_ts": 1781912756
     }
   ]
 }

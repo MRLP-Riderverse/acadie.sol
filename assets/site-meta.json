@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-19T23:00:18.480420Z",
-  "latest_source_modified_at": "2026-06-19T02:32:35Z",
-  "latest_source_modified_ts": 1781836355,
-  "git_commit": "1c6d5ea",
-  "git_commit_time": "2026-06-18T23:37:00-03:00",
-  "snapshot_refresh_count": 12,
+  "generated_at": "2026-06-19T23:50:28.153204Z",
+  "latest_source_modified_at": "2026-06-19T23:45:56Z",
+  "latest_source_modified_ts": 1781912756,
+  "git_commit": "68cebd7",
+  "git_commit_time": "2026-06-19T20:47:33-03:00",
+  "snapshot_refresh_count": 13,
   "activity_led": {
     "color": "green",
     "label": "active",
-    "age_days": 0.9
+    "age_days": 0.0
   }
 }
