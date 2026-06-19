@@ -4,13 +4,14 @@
    surfaces, not this shared shell. */
 
 /* Global header bar — Acadian banner. Fixed at top of every page.
-   Blue background, gold text, 20px height, full-width. */
+   Slightly taller and louder now that it carries live counts, while still
+   respecting the iPhone safe area and pushing page content below it globally. */
 .site-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: calc(20px + env(safe-area-inset-top));
+  height: calc(35px + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
   z-index: 84;
   display: flex;
@@ -18,19 +19,20 @@
   justify-content: center;
   background: var(--blue-deep);
   color: var(--gold);
-  font-size: .58rem;
+  font-size: 1rem;
   font-weight: 900;
-  letter-spacing: .18em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   white-space: nowrap;
   border-bottom: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  box-shadow: 0 6px 14px -8px var(--shadow);
 }
 [data-theme="dark"] .site-header {
   background: #0d2f5e;
   color: var(--gold);
 }
 body {
-  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-top: calc(35px + env(safe-area-inset-top));
 }
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
 
