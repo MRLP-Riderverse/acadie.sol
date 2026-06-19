@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23f8f2e8'/%3E%3Ccircle cx='32' cy='32' r='18' fill='%23174b8e'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-size='22' fill='%23fffaf2'%3EA%3C/text%3E%3C/svg%3E" />
+  <!-- Shared identity metadata: use the same avatar for the desktop tab,
+       homescreen install icon, and other PWA surfaces. -->
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#174b8e" />
   <title>ACADIE.SOL</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
@@ -29,8 +34,8 @@
        A real local maritime image now carries the Acadian/community feel; layered
        gradients keep the text readable without flattening the photograph. */
     .poster-window { min-height: 234px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); }
-    .poster-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; filter: saturate(.92) contrast(1.02) brightness(.78); }
-    .poster-window::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 20, 39, .18) 0%, rgba(7, 20, 39, .08) 28%, rgba(7, 20, 39, .58) 100%), radial-gradient(circle at 74% 18%, rgba(217,155,33,.34), transparent 10rem); z-index: 0; }
+    .poster-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 20px; filter: saturate(.98) contrast(1.04) brightness(.96); }
+    .poster-window::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 20, 39, .08) 0%, rgba(7, 20, 39, .05) 28%, rgba(7, 20, 39, .28) 100%), radial-gradient(circle at 74% 18%, rgba(217,155,33,.24), transparent 10rem); z-index: 0; }
     .poster-window::after { content: none; }
     .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
     .poster-title { position: absolute; left: 22px; right: 22px; bottom: 24px; color: var(--paper); display: grid; gap: 7px; z-index: 2; text-shadow: 0 3px 18px rgba(7, 20, 39, .38); }
@@ -67,7 +72,7 @@
     <header class="brand-row"><strong>Acadie.sol</strong><span id="brand-subtitle">local community surface</span></header>
 
     <section class="poster-window" aria-labelledby="site-title">
-      <img class="poster-image" src="assets/community-os-hero.jpg" alt="Wooden fishing boat resting on a Maritime shoreline" />
+      <img class="poster-image" src="assets/acadieDRiP_avatar.webp" alt="Geometric low-poly fox head in orange, white, and black on a dark background" />
       <span class="poster-label" id="poster-label">Community OS</span>
       <div class="poster-title">
         <h1 id="site-title">Acadie.sol</h1>
