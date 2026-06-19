@@ -26,14 +26,16 @@
 
     /* The poster is intentionally outside the content card: it behaves like the
        hero/photo surface in the mockup, nearly edge-to-edge, with title overlay.
-       Reduced height keeps it more banner/panorama than poster. */
+       A real local maritime image now carries the Acadian/community feel; layered
+       gradients keep the text readable without flattening the photograph. */
     .poster-window { min-height: 234px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); }
-    .poster-window::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; }
-    .poster-window::after { content: ""; position: absolute; left: 24px; bottom: 22px; width: 122px; height: 86px; border-radius: 60% 60% 20px 20px; background: linear-gradient(180deg, rgba(255,250,242,.88), rgba(255,250,242,.54)); box-shadow: 132px -40px 0 -25px color-mix(in srgb, var(--gold) 90%, #000), 194px 4px 0 -30px color-mix(in srgb, var(--red) 78%, #000); opacity: .86; }
-    .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .poster-title { position: absolute; left: 22px; right: 22px; bottom: 24px; color: var(--blue-ink); display: grid; gap: 7px; z-index: 1; }
+    .poster-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 58%; filter: saturate(.92) contrast(1.02) brightness(.78); }
+    .poster-window::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 20, 39, .18) 0%, rgba(7, 20, 39, .08) 28%, rgba(7, 20, 39, .58) 100%), radial-gradient(circle at 74% 18%, rgba(217,155,33,.34), transparent 10rem); z-index: 0; }
+    .poster-window::after { content: none; }
+    .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
+    .poster-title { position: absolute; left: 22px; right: 22px; bottom: 24px; color: var(--paper); display: grid; gap: 7px; z-index: 2; text-shadow: 0 3px 18px rgba(7, 20, 39, .38); }
     h1 { margin: 0; font-size: clamp(2.15rem, 13vw, 3.8rem); line-height: .90; letter-spacing: -.045em; }
-    .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--blue-ink) 84%, transparent); }
+    .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--paper) 92%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
     /* Home welcome surface replaces duplicated directory/events widgets: the dock
@@ -65,6 +67,7 @@
     <header class="brand-row"><strong>Acadie.sol</strong><span id="brand-subtitle">local community surface</span></header>
 
     <section class="poster-window" aria-labelledby="site-title">
+      <img class="poster-image" src="assets/community-os-hero.jpg" alt="Wooden fishing boat resting on a Maritime shoreline" />
       <span class="poster-label" id="poster-label">Community OS</span>
       <div class="poster-title">
         <h1 id="site-title">Acadie.sol</h1>

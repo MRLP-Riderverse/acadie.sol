@@ -88,6 +88,7 @@
     }
     /* If the keyboard is open and the input regains focus, keyboard usability
        wins over scroll-hide — the search chrome must snap back into view. */
+    body.search-input-focused .search-controls,
     body.keyboard-open.search-input-focused .search-controls {
       opacity: 1;
       pointer-events: auto;
@@ -97,6 +98,7 @@
        viewport), only the dock should duck behind the keyboard. The search
        chrome stays pinned in its normal lane while typing so results do not
        cause the input bar to drop under the keyboard. */
+    body.search-input-focused .site-dock,
     body.keyboard-open .site-dock {
       transform: translateX(-50%) translateY(200px);
       opacity: 0;
