@@ -65,14 +65,12 @@
       padding: 10px 12px 12px;
       background: var(--page-bg);
       border: 1px solid color-mix(in srgb, #000 32%, transparent);
-      border-top: 0;
-      border-radius: 18px 18px 0 0;
+      border-radius: 18px;
       box-shadow: 0 -6px 22px -4px var(--shadow);
       transform: translateX(-50%);
       transition: transform .24s ease, opacity .2s ease;
       will-change: transform, opacity;
     }
-    body.search-chrome-hidden .search-controls {
       opacity: 0;
       pointer-events: none;
       transform: translate(-50%, calc(100% + 110px));
@@ -146,7 +144,24 @@
       background: color-mix(in srgb, var(--paper) 94%, transparent);
       box-shadow: 0 16px 38px var(--shadow);
     }
-    .filter-menu[open] .chips { display: flex; }
+.filter-menu[open] .chips {
+  position: fixed;
+  bottom: calc(140px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(390px, calc(100vw - 32px));
+  /* keep existing styles from .chips */
+  display: flex !important;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  box-shadow: 0 16px 38px var(--shadow);
+  z-index: 40;
+}
     .chip.active,
     .chip:hover,
     .filter-toggle:hover,

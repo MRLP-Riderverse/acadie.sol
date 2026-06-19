@@ -30,9 +30,24 @@
 - **Bottom-up results** — `flex-direction: column-reverse` so the first/best result sits lowest, nearest the user's thumb. Single-result queries appear right above the search chrome.
 - **Enter key dismisses keyboard** — `keydown` listener on the search input blurs on Enter.
 - **Scroll dismisses keyboard** — scrolling results auto-blurs the input so the keyboard drops, matching Safari URL bar feel.
+- **Rounded pill search chrome** — search controls now fully rounded (`border-radius: 18px`) with a thin black border (`#000 32%`) for a pill-like appearance.
+- **Filter menu centered above** — filter options now appear centered horizontally above the search field (not offset) and positioned above the search controls for better thumb reach.
 
 ### Commit
-`79712f7` — `feat(search): flash-card chrome, divider results, bottom-up, keyboard handling`
+`20fcbfc` — `fix(search): focus-keyboard loop, flash-card styling`
+
+## 2025-06-20 · Search Page Redesign (final polish)
+
+**Scope:** `search.html` — resolve remaining keyboard/focus conflicts and polishing
+
+### What changed
+- **Focus-scroll bug fixed** — removed erroneous scroll-to-input behavior on focus by ensuring the search input is truly fixed-bottom and eliminating layout shifts from redundant focus calls.
+- **Keyboard conflict eliminated** — debounced visual-viewport listener, removed `visualViewport.scroll` listener, and prevented forced re-focus after filter selection. Keyboard now stays open for typing, dismisses only on Enter or deliberate downward scroll.
+- **Filter menu placement refined** — fixed-position filter menu now appears 16px above the search controls (adjusted bottom) and retains full width, ensuring it never overlaps the input or results.
+- **Visual polishing** — search glyph size adjusted to 1rem for better visual weight; result divider opacity tuned for subtle separation.
+
+### Commit
+`[upcoming]` — `fix(search): focus-scroll, keyboard stability, filter placement`
 
 ## Next Up
 - [ ] Mobile test: verify scroll hide/show feels right with soft keyboard
