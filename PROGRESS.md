@@ -44,10 +44,11 @@
 - **Focus-scroll bug fixed** — removed erroneous scroll-to-input behavior on focus by ensuring the search input is truly fixed-bottom and eliminating layout shifts from redundant focus calls.
 - **Keyboard conflict eliminated** — debounced visual-viewport listener, removed `visualViewport.scroll` listener, and prevented forced re-focus after filter selection. Keyboard now stays open for typing, dismisses only on Enter or deliberate downward scroll.
 - **Filter menu placement refined** — fixed-position filter menu now appears 16px above the search controls (adjusted bottom) and retains full width, ensuring it never overlaps the input or results.
+- **Added focus guard** — temporary flag prevents blur-on-scroll immediately after focus, allowing keyboard to stay open for typing.
 - **Visual polishing** — search glyph size adjusted to 1rem for better visual weight; result divider opacity tuned for subtle separation.
 
 ### Commit
-`[upcoming]` — `fix(search): focus-scroll, keyboard stability, filter placement`
+`c76079c` — `fix(search): focus-scroll, keyboard stability, filter placement, focus guard`
 
 ## Next Up
 - [ ] Mobile test: verify scroll hide/show feels right with soft keyboard
