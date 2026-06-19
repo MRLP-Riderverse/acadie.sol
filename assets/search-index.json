@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 23,
+  "item_count": 67,
   "items": [
     {
       "type": "entry",
@@ -222,6 +222,26 @@
     },
     {
       "type": "entry",
+      "id": "bowlorama",
+      "title": "Bowlorama Bathurst Bowling & Arcade",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-bowlorama",
+      "terms": [
+        "Bowlorama Bathurst Bowling & Arcade",
+        "venue",
+        "Acadie-Bathurst",
+        "Bowling and arcade venue on St-Peters in front of Big D Drive-In.",
+        "bowling",
+        "arcade",
+        "entertainment",
+        "food"
+      ]
+    },
+    {
+      "type": "entry",
       "id": "burger-king-bathurst",
       "title": "Burger King Bathurst",
       "subtitle": "food · Acadie-Bathurst",
@@ -306,6 +326,389 @@
     },
     {
       "type": "entry",
+      "id": "dairy-queen-bathurst",
+      "title": "Dairy Queen Bathurst",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-dairy-queen-bathurst",
+      "terms": [
+        "Dairy Queen Bathurst",
+        "food",
+        "Acadie-Bathurst",
+        "Dairy Queen Grill & Chill on St. Peter Avenue in Bathurst.",
+        "fast food",
+        "ice cream",
+        "drive-thru",
+        "dessert"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "daly-point-nature-reserve",
+      "title": "Daly Point Nature Reserve",
+      "subtitle": "venue · East Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-daly-point-nature-reserve",
+      "terms": [
+        "Daly Point Nature Reserve",
+        "venue",
+        "East Acadie-Bathurst",
+        "Nature reserve and walking trail network near East Acadie-Bathurst.",
+        "nature reserve",
+        "trail",
+        "walking",
+        "marshland",
+        "boardwalk"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "dilli-delight",
+      "title": "Dilli Delight",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-dilli-delight",
+      "terms": [
+        "Dilli Delight",
+        "food",
+        "Acadie-Bathurst",
+        "Indian cuisine spot on St-Peters Ave in Acadie-Bathurst.",
+        "indian food",
+        "restaurant",
+        "takeout",
+        "st peters ave"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "district-burger",
+      "title": "District Burger",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-district-burger",
+      "terms": [
+        "District Burger",
+        "food",
+        "Acadie-Bathurst",
+        "Restaurant inside the Best Western hotel building on Main St.",
+        "burger",
+        "restaurant",
+        "hotel dining",
+        "main street"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "donair-shop",
+      "title": "Donair Shop",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-donair-shop",
+      "terms": [
+        "Donair Shop",
+        "food",
+        "Acadie-Bathurst",
+        "Donair and takeout spot at 100 Main St.",
+        "donair",
+        "takeout",
+        "sandwiches",
+        "main street"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "eastside-deli",
+      "title": "Eastside Deli",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-eastside-deli",
+      "terms": [
+        "Eastside Deli",
+        "food",
+        "Acadie-Bathurst",
+        "Local foods restaurant on Miramichi Ave in Acadie-Bathurst.",
+        "deli",
+        "donair",
+        "steak sub",
+        "poutine",
+        "sandwiches"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "flameo",
+      "title": "Flameo",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-flameo",
+      "terms": [
+        "Flameo",
+        "food",
+        "Acadie-Bathurst",
+        "Healthy bowl and quick lunch spot inside Place Bathurst Mall.",
+        "healthy food",
+        "bowls",
+        "mall food",
+        "quick lunch"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "four-rivers-brewing-co",
+      "title": "Four Rivers Brewing Co.",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-four-rivers-brewing-co",
+      "terms": [
+        "Four Rivers Brewing Co.",
+        "business",
+        "Acadie-Bathurst",
+        "Locally owned craft brewery and taproom on Murray Ave.",
+        "brewery",
+        "taproom",
+        "craft beer",
+        "events",
+        "local"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "fresco",
+      "title": "Fresco",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-fresco",
+      "terms": [
+        "Fresco",
+        "food",
+        "Acadie-Bathurst",
+        "Fine dining style restaurant on King St in Acadie-Bathurst.",
+        "fine dining",
+        "seafood",
+        "pasta",
+        "restaurant"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "frost-bite",
+      "title": "Frost Bite",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-frost-bite",
+      "terms": [
+        "Frost Bite",
+        "food",
+        "Acadie-Bathurst",
+        "Seasonal ice cream shop at La Promenade Waterfront.",
+        "ice cream",
+        "seasonal",
+        "waterfront",
+        "dessert"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "greenhouse-lounge-marina",
+      "title": "Greenhouse Lounge - Marina",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-greenhouse-lounge-marina",
+      "terms": [
+        "Greenhouse Lounge - Marina",
+        "business",
+        "Acadie-Bathurst",
+        "Restaurant and lounge at Bathurst Marina.",
+        "venue",
+        "lounge",
+        "restaurant",
+        "bar",
+        "marina",
+        "Greenhouse Lounge - Marina"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "greenhouse-lounge-place-bathurst-mall",
+      "title": "Greenhouse Lounge - Place Bathurst Mall",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-greenhouse-lounge-place-bathurst-mall",
+      "terms": [
+        "Greenhouse Lounge - Place Bathurst Mall",
+        "business",
+        "Acadie-Bathurst",
+        "Restaurant, bar, and lounge inside Place Bathurst Mall.",
+        "venue",
+        "lounge",
+        "restaurant",
+        "bar",
+        "mall",
+        "Greenhouse Lounge - Place Bathurst Mall"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "house-of-lee",
+      "title": "House of Lee",
+      "subtitle": "food · Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-house-of-lee",
+      "terms": [
+        "House of Lee",
+        "food",
+        "Bathurst",
+        "Chinese restaurant with lunch and supper buffet options.",
+        "buffet",
+        "chinese",
+        "restaurant"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "joeys-pub-and-eatery",
+      "title": "Joey's Pub and Eatery",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-joeys-pub-and-eatery",
+      "terms": [
+        "Joey's Pub and Eatery",
+        "food",
+        "Acadie-Bathurst",
+        "Joey's Pub & Eatery at 2050 St. Peter Avenue, Bathurst.",
+        "pub",
+        "eatery",
+        "bar",
+        "restaurant"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "js-auto-detailing",
+      "title": "J’s Auto Detailing",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-js-auto-detailing",
+      "terms": [
+        "J’s Auto Detailing",
+        "business",
+        "Acadie-Bathurst",
+        "399 St Paul st, Acadie-Bathurst.",
+        "auto detailing",
+        "car wash",
+        "services"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "k-c-irving-regional-centre",
+      "title": "K.C. Irving Regional Centre",
+      "subtitle": "civic · Bathurst",
+      "badges": [
+        "civic"
+      ],
+      "url": "directory.html#entry-k-c-irving-regional-centre",
+      "terms": [
+        "K.C. Irving Regional Centre",
+        "civic",
+        "Bathurst",
+        "Arena / regional centre in Bathurst.",
+        "arena",
+        "regional centre",
+        "events",
+        "sports"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "kaffeine-express-bathurst",
+      "title": "Kaffeine Express Bathurst",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-kaffeine-express-bathurst",
+      "terms": [
+        "Kaffeine Express Bathurst",
+        "food",
+        "Acadie-Bathurst",
+        "Kaffeine Espresso Bar at 145 Main St, Bathurst, NB E2A 1A6.",
+        "coffee",
+        "café",
+        "espresso",
+        "downtown"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "kings-barber-shop",
+      "title": "King’s Barber Shop",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-kings-barber-shop",
+      "terms": [
+        "King’s Barber Shop",
+        "business",
+        "Acadie-Bathurst",
+        "By Cody Gosnell.",
+        "barber",
+        "hair",
+        "grooming",
+        "family-friendly"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "kryptic",
+      "title": "Kryptic",
+      "subtitle": "musician · Acadie-Bathurst",
+      "badges": [
+        "musician"
+      ],
+      "url": "directory.html#entry-kryptic",
+      "terms": [
+        "Kryptic",
+        "musician",
+        "Acadie-Bathurst",
+        "EDM-style live artist based in Acadie-Bathurst.",
+        "music",
+        "artist"
+      ]
+    },
+    {
+      "type": "entry",
       "id": "la-louga-night-bar-resto",
       "title": "La Louga Night Bar - Resto",
       "subtitle": "venue · Acadie-Bathurst",
@@ -324,6 +727,495 @@
         "live music",
         "dance",
         "La Louga Night Club"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "liberty-tax-bathurst",
+      "title": "Liberty Tax Bathurst",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-liberty-tax-bathurst",
+      "terms": [
+        "Liberty Tax Bathurst",
+        "business",
+        "Acadie-Bathurst",
+        "Liberty Tax office in Bathurst.",
+        "tax",
+        "accountant",
+        "office",
+        "services"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "librairie-pelagie",
+      "title": "Librairie Pélagie",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-librairie-pelagie",
+      "terms": [
+        "Librairie Pélagie",
+        "business",
+        "Acadie-Bathurst",
+        "Bookstore at 14 Douglas Ave, Bathurst, NB E2A 7S6.",
+        "bookstore",
+        "books",
+        "waterfront",
+        "retail"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "mcdonalds-bathurst-620-st-peter-ave",
+      "title": "McDonald's Bathurst — 620 St. Peter Ave",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-mcdonalds-bathurst-620-st-peter-ave",
+      "terms": [
+        "McDonald's Bathurst — 620 St. Peter Ave",
+        "food",
+        "Acadie-Bathurst",
+        "McDonald's location at 620 St. Peter Avenue, Bathurst.",
+        "fast food",
+        "burger",
+        "drive-thru",
+        "fries",
+        "McDonald's Bathurst - 620 St. Peter Ave"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "mcdonalds-bathurst-900-st-anne-st-walmart",
+      "title": "McDonald's Bathurst — 900 St. Anne St (Walmart)",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-mcdonalds-bathurst-900-st-anne-st-walmart",
+      "terms": [
+        "McDonald's Bathurst — 900 St. Anne St (Walmart)",
+        "food",
+        "Acadie-Bathurst",
+        "McDonald's inside / at Walmart, 900 St. Anne Street, Bathurst.",
+        "fast food",
+        "burger",
+        "walmart",
+        "drive-thru",
+        "McDonald's Bathurst - 900 St. Anne St (Walmart)"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "mexiglu",
+      "title": "MexiGlu",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-mexiglu",
+      "terms": [
+        "MexiGlu",
+        "food",
+        "Acadie-Bathurst",
+        "Same building as Pizza Pro on St-Peters.",
+        "mexican food",
+        "restaurant",
+        "takeout",
+        "st peters ave"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "montys-pretzelria",
+      "title": "Monty's Pretzelria",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-montys-pretzelria",
+      "terms": [
+        "Monty's Pretzelria",
+        "food",
+        "Acadie-Bathurst",
+        "Seasonal pretzel / pizza spot at La Promenade Waterfront in Bathurst.",
+        "pretzel",
+        "pizza",
+        "waterfront",
+        "seasonal"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "new-brunswick-distillery",
+      "title": "New Brunswick Distillery",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-new-brunswick-distillery",
+      "terms": [
+        "New Brunswick Distillery",
+        "business",
+        "Acadie-Bathurst",
+        "distilled spirits, craft beer",
+        "distillery",
+        "spirits",
+        "craft beer",
+        "downtown"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pabineau-first-nations-mawiom",
+      "title": "Pabineau First Nations Mawi'om",
+      "subtitle": "business · Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-pabineau-first-nations-mawiom",
+      "terms": [
+        "Pabineau First Nations Mawi'om",
+        "business",
+        "Bathurst",
+        "Gas station, convenience, and booze at 1555 Vanier Blvd in Bathurst.",
+        "gas station",
+        "convenience store",
+        "liquor",
+        "24-7"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "papa-joe-evys-restaurant",
+      "title": "Papa Joe & Evy's Restaurant",
+      "subtitle": "food · Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-papa-joe-evys-restaurant",
+      "terms": [
+        "Papa Joe & Evy's Restaurant",
+        "food",
+        "Bathurst",
+        "Family-style restaurant at 296 St George St, Bathurst, NB E2A 1B7.",
+        "restaurant",
+        "homestyle",
+        "family dining",
+        "local"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "petro-canada-main-st",
+      "title": "Petro-Canada",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-petro-canada-main-st",
+      "terms": [
+        "Petro-Canada",
+        "business",
+        "Acadie-Bathurst",
+        "Gas station and car wash at 896 Main St.",
+        "gas station",
+        "car wash",
+        "convenience store",
+        "fuel"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pizza-delight-bathurst",
+      "title": "Pizza Delight Bathurst",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pizza-delight-bathurst",
+      "terms": [
+        "Pizza Delight Bathurst",
+        "food",
+        "Acadie-Bathurst",
+        "Pizza Delight location in Bathurst.",
+        "pizza",
+        "family restaurant",
+        "takeout",
+        "delivery",
+        "Pizza Delight Bathurst"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pizza-delight-campbellton",
+      "title": "Pizza Delight Campbellton",
+      "subtitle": "food · Restigouche",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pizza-delight-campbellton",
+      "terms": [
+        "Pizza Delight Campbellton",
+        "food",
+        "Restigouche",
+        "Pizza Delight location in Campbellton.",
+        "pizza",
+        "family restaurant",
+        "takeout",
+        "delivery",
+        "Pizza Delight Campbellton"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pizza-delight-tracadie",
+      "title": "Pizza Delight Tracadie",
+      "subtitle": "food · Acadian Peninsula",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pizza-delight-tracadie",
+      "terms": [
+        "Pizza Delight Tracadie",
+        "food",
+        "Acadian Peninsula",
+        "Pizza Delight location in Tracadie.",
+        "pizza",
+        "family restaurant",
+        "takeout",
+        "delivery",
+        "Pizza Delight Tracadie"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pizza-pro-bathurst",
+      "title": "Pizza Pro Bathurst",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pizza-pro-bathurst",
+      "terms": [
+        "Pizza Pro Bathurst",
+        "food",
+        "Acadie-Bathurst",
+        "Pizza Pro location in Bathurst.",
+        "pizza",
+        "takeout",
+        "delivery",
+        "st peters ave"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pizza-shack-bathurst",
+      "title": "Pizza Shack (Bathurst location)",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pizza-shack-bathurst",
+      "terms": [
+        "Pizza Shack (Bathurst location)",
+        "food",
+        "Acadie-Bathurst",
+        "You flagged this one as part of a larger provincial chain, so this is a location draft only.",
+        "pizza",
+        "chain",
+        "takeout",
+        "delivery",
+        "Pizza Shack (Bathurst location)"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "pur-and-simple",
+      "title": "Pur and Simple",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-pur-and-simple",
+      "terms": [
+        "Pur and Simple",
+        "food",
+        "Acadie-Bathurst",
+        "On St-Anne St, behind the Walmart parking lot.",
+        "breakfast",
+        "brunch",
+        "lunch",
+        "crepes",
+        "family dining"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "robins-donuts-main-st",
+      "title": "Robin’s Donuts",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-robins-donuts-main-st",
+      "terms": [
+        "Robin’s Donuts",
+        "food",
+        "Acadie-Bathurst",
+        "Located in the same gas station as Petro-Canada at 896 Main St.",
+        "coffee",
+        "donuts",
+        "convenience",
+        "gas station"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "speedy-glass",
+      "title": "Speedy Glass",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-speedy-glass",
+      "terms": [
+        "Speedy Glass",
+        "business",
+        "Acadie-Bathurst",
+        "Automotive glass repair services at 1355 St-Peters Ave, Acadie-Bathurst, next to Place Bathurst Mall.",
+        "auto glass",
+        "repair",
+        "automotive service"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "subway-bathurst-880-st-anne-st",
+      "title": "Subway Bathurst — 880 St. Anne St",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-subway-bathurst-880-st-anne-st",
+      "terms": [
+        "Subway Bathurst — 880 St. Anne St",
+        "food",
+        "Acadie-Bathurst",
+        "Subway location at 880 St. Anne Street, Bathurst.",
+        "sandwich",
+        "fast food",
+        "takeout",
+        "chain",
+        "Subway Bathurst - 880 St. Anne St"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "subway-belle-baie-beresford-730-rue-principale",
+      "title": "Subway Belle-Baie (Beresford) — 730 Rue Principale",
+      "subtitle": "food · Belle-Baie",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-subway-belle-baie-beresford-730-rue-principale",
+      "terms": [
+        "Subway Belle-Baie (Beresford) — 730 Rue Principale",
+        "food",
+        "Belle-Baie",
+        "Subway in Beresford / Belle-Baie at 730 Rue Principale, NB E8K 2B7.",
+        "sandwich",
+        "fast food",
+        "takeout",
+        "chain",
+        "Subway Belle-Baie (Beresford) - 730 Rue Principale"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "theriaults-grocers",
+      "title": "Theriault’s Grocers",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-theriaults-grocers",
+      "terms": [
+        "Theriault’s Grocers",
+        "business",
+        "Acadie-Bathurst",
+        "Locally owned small grocery store with in-house meat butcher and processing.",
+        "grocery",
+        "butcher",
+        "local food",
+        "meat",
+        "community"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "thru-shine-automotive-detailing-services",
+      "title": "Thru-Shine Automotive Detailing Services",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-thru-shine-automotive-detailing-services",
+      "terms": [
+        "Thru-Shine Automotive Detailing Services",
+        "business",
+        "Acadie-Bathurst",
+        "2037 St-Peters Ave, after the Bowlarama and Big D Drive In.",
+        "auto detailing",
+        "car detailing",
+        "automotive service"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "walmart-bathurst",
+      "title": "Walmart Bathurst",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-walmart-bathurst",
+      "terms": [
+        "Walmart Bathurst",
+        "business",
+        "Acadie-Bathurst",
+        "Walmart Supercentre at 900 St Anne St, Bathurst, NB E2A 6X2.",
+        "big box",
+        "department store",
+        "grocery",
+        "retail"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "youghall-beach",
+      "title": "Youghall Beach",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-youghall-beach",
+      "terms": [
+        "Youghall Beach",
+        "venue",
+        "Acadie-Bathurst",
+        "Youghall Beach park north of Acadie-Bathurst near Gowen Brae and the CCNB Youghall Campus.",
+        "beach",
+        "park",
+        "boardwalk",
+        "swimming",
+        "waterfront"
       ]
     },
     {

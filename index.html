@@ -81,39 +81,20 @@
     .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--blue-ink) 84%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Directory banner stays one unified launch surface: the moving copy becomes a
-       low-contrast texture behind the CTA body instead of a separate top strip. */
-    .directory-banner { position: relative; overflow: hidden; padding: 0; border-radius: 30px; background: linear-gradient(135deg, color-mix(in srgb, var(--red) 88%, #000), color-mix(in srgb, var(--gold) 82%, #000) 58%, color-mix(in srgb, var(--blue-deep) 92%, #000)); box-shadow: 0 22px 46px var(--shadow); }
-    .directory-banner::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(255,250,242,.22); border-radius: 22px; pointer-events: none; }
-    .banner-link { display: grid; min-height: 108px; text-decoration: none; color: #fffaf2; position: relative; z-index: 1; isolation: isolate; }
-    .banner-marquee { position: absolute; inset: 0; display: flex; align-items: center; overflow: hidden; color: rgba(255,250,242,.13); font-size: .72rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; pointer-events: none; }
-    .banner-marquee::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(126,35,42,.42), transparent 18%, transparent 82%, rgba(26,47,79,.34)); }
-    .banner-marquee-track { display: inline-flex; gap: 22px; min-width: max-content; padding-left: 16px; animation: marquee-slide 18s linear infinite; }
-    .banner-marquee-track span::after { content: "✦"; margin-left: 22px; color: rgba(243,200,91,.26); }
-    .banner-body { position: relative; z-index: 1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 22px 16px 21px; }
-    .search-icon { width: 38px; height: 38px; border-radius: 15px; background: color-mix(in srgb, var(--blue-deep) 86%, #000); color: var(--paper); display: grid; place-items: center; font-weight: 900; box-shadow: inset 0 1px 0 rgba(255,255,255,.16); }
-    .launch-copy { display: grid; gap: 2px; }
-    .launch-copy strong { font-size: 1.02rem; color: #fffaf2; }
-    .launch-copy span { color: rgba(255,250,242,.82); font-size: .79rem; }
-    .chev { color: rgba(255,250,242,.82); font-size: 1.2rem; }
+    /* Home welcome surface replaces duplicated directory/events widgets: the dock
+       owns navigation, while the home card explains the system in one calmer step. */
+    .welcome-card { display: grid; gap: 10px; }
+    .welcome-card h2 { margin: 0; font-size: 1.13rem; color: var(--ink-strong); letter-spacing: -.015em; }
+    .welcome-card p, .calendar-teaser p { margin: 0; color: var(--muted); line-height: 1.42; }
+    .home-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .home-action { padding: 11px 12px; border-radius: 17px; background: var(--paper-soft); border: 1px solid var(--line); color: var(--blue-deep); font-weight: 900; text-align: center; text-decoration: none; }
+    .home-action:hover { color: var(--link-hover); border-color: var(--line-strong); }
+    /* Calendar teaser reserves homepage space for the future calendar without
+       rendering a second event list under the persistent Events dock item. */
+    .calendar-teaser { display: grid; gap: 8px; }
     .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
     .section-title h2 { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
     .section-title a { color: var(--blue-deep); font-size: .78rem; font-weight: 900; text-decoration: none; }
-    .event-preview-list { display: grid; gap: 8px; }
-    .event-row { display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; }
-    /* Calendar chips stay the same in light and dark mode so event dates feel like
-       one recognizable system-wide icon language. */
-    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: linear-gradient(180deg, var(--calendar-red-top), var(--calendar-red-bottom)); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
-    .date-chip, .date-chip * { color: var(--calendar-ink); }
-    .date-chip small { display: block; font-size: .56rem; opacity: .92; text-transform: uppercase; letter-spacing: .08em; }
-    .event-row strong { display: block; font-size: .88rem; }
-    .event-row > div span { display: block; color: var(--muted); font-size: .75rem; line-height: 1.24; margin-top: 2px; }
-    .event-status { justify-self: end; padding: 5px 8px; border-radius: 999px; background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--ink-strong); font-size: .67rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
-
-    @keyframes marquee-slide {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
 
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer strong { color: var(--ink); }
@@ -163,27 +144,18 @@
       </div>
     </section>
 
-    <section class="directory-banner" aria-label="Directory launch banner">
-      <a class="banner-link" href="directory.html">
-        <div class="banner-marquee" aria-hidden="true">
-          <div class="banner-marquee-track" id="banner-marquee-track">
-            <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
-            <span>Explore directory</span><span>local places</span><span>community signals</span><span>search by mood</span>
-          </div>
-        </div>
-        <div class="banner-body">
-          <span class="search-icon">⌕</span>
-          <span class="launch-copy"><strong id="directory-cta-title">Explore Directory</strong><span id="directory-cta-count">59 local entries</span></span>
-          <span class="chev">›</span>
-        </div>
-      </a>
+    <section class="surface welcome-card" aria-labelledby="welcome-title">
+      <h2 id="welcome-title">Welcome to Acadie.sol</h2>
+      <p id="welcome-copy">A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.</p>
+      <div class="home-actions" aria-label="Primary home actions">
+        <a class="home-action" href="events.html" id="welcome-events-link">See events</a>
+        <a class="home-action" href="directory.html" id="welcome-directory-link">Search places</a>
+      </div>
     </section>
 
-    <section class="surface" aria-label="Next events">
-      <div class="section-title"><h2 id="next-up-title">Next up</h2><a href="events.html" id="view-events-link">View all events</a></div>
-      <div class="event-preview-list" id="event-preview-list">
-        <div class="event-row"><span class="date-chip">…</span><div><strong id="loading-events-title">Loading events</strong><span id="loading-events-copy">Checking the public calendar.</span></div></div>
-      </div>
+    <section class="surface calendar-teaser" aria-label="Community calendar">
+      <div class="section-title"><h2 id="calendar-title">Community calendar</h2><a href="events.html" id="calendar-link">Open calendar</a></div>
+      <p id="calendar-copy">A calmer calendar view is coming here. For now, use Events in the dock.</p>
     </section>
 
     <footer class="page-footer" id="about">
@@ -204,18 +176,20 @@
       en: {
         menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
         brandSubtitle: 'local community surface', posterLabel: 'Community OS', posterSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
-        ctaTitle: 'Explore Directory', ctaCount: count => `${count} local entries`, nextUp: 'Next up', viewEvents: 'View all events',
+        welcomeTitle: 'Welcome to Acadie.sol', welcomeCopy: 'A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.',
+        welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
+        calendarCopy: 'A calmer calendar view is coming here. For now, use Events in the dock.',
         about: '<strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.',
-        dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu', loadingTitle: 'Loading events', loadingCopy: 'Checking the public calendar.',
-        detailsSoon: 'Details coming soon.', previewSummary: 'Preview listing while the public calendar format is being shaped.', noEventsTitle: 'No public events yet', noEventsCopy: 'Check back as the calendar fills in.', waiting: 'Waiting', soon: 'soon'
+        dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu'
       },
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
         brandSubtitle: 'surface communautaire locale', posterLabel: 'OS communautaire', posterSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
-        ctaTitle: 'Explorer le répertoire', ctaCount: count => `${count} entrées locales`, nextUp: 'À venir', viewEvents: 'Voir tous les événements',
+        welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un guide local pour Acadie-Bathurst : lieux, rassemblements et signaux communautaires dans une surface simple.',
+        welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
+        calendarCopy: 'Un calendrier plus calme arrive ici. Pour l’instant, utilisez Événements dans le dock.',
         about: '<strong>Construit d’abord en local.</strong> Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst. Simple pour l’instant, plus riche à mesure que les fiches grandissent.',
-        dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu', loadingTitle: 'Chargement des événements', loadingCopy: 'Vérification du calendrier public.',
-        detailsSoon: 'Détails à venir.', previewSummary: 'Aperçu provisoire pendant que le format public du calendrier prend forme.', noEventsTitle: 'Aucun événement public pour le moment', noEventsCopy: 'Revenez voir quand le calendrier sera mieux rempli.', waiting: 'En attente', soon: 'bientôt'
+        dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu'
       }
     };
     function currentLang() {
@@ -224,48 +198,8 @@
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
     function copy() { return HOME_COPY[currentLang()] || HOME_COPY.en; }
-    function escapeHtml(str) { return String(str || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
-    function localized(value) {
-      if (value && typeof value === 'object') {
-        const lang = currentLang();
-        return value[lang] || value.en || value.fr || value.shiac || '';
-      }
-      return value || '';
-    }
-    function publicTitle(event) { return String(localized(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview'); }
-    function publicSummary(event) { const raw = String(localized(event.summary) || copy().detailsSoon); return /placeholder|non-public/i.test(raw) ? copy().previewSummary : raw; }
-    function parseDate(value) { const date = new Date(value || ''); return Number.isNaN(date.getTime()) ? null : date; }
-    function dateParts(value) { const date = parseDate(value); if (!date) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(currentLang(), { month: 'short' }).format(date), day: new Intl.DateTimeFormat(currentLang(), { day: 'numeric' }).format(date) }; }
-    function isFrenchUi() { return currentLang() === 'fr'; }
-    function countdownLabel(event) {
-      const now = Date.now();
-      const start = parseDate(event.starts_at)?.getTime();
-      const end = parseDate(event.ends_at || event.expires_at)?.getTime();
-      const fr = isFrenchUi();
-      if (start && start <= now && end && end > now) {
-        const hours = Math.max(1, Math.ceil((end - now) / 3600000));
-        return fr ? `EN ${hours} H` : `IN ${hours}H`;
-      }
-      if (start && start > now) {
-        const diff = start - now;
-        const hours = Math.ceil(diff / 3600000);
-        if (hours < 24) return fr ? `EN ${hours} H` : `IN ${hours}H`;
-        const days = Math.ceil(diff / 86400000);
-        return fr ? `EN ${days} J` : `IN ${days}D`;
-      }
-      return fr ? 'À VENIR' : 'UPCOMING';
-    }
-    function renderEventPreview(events) {
-      const root = document.getElementById('event-preview-list');
-      const upcoming = (events.items || [])
-        .filter(event => event.computed_status === 'active')
-        .sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')))
-        .slice(0, 6);
-      root.innerHTML = upcoming.length ? upcoming.map(event => {
-        const parts = dateParts(event.starts_at);
-        return `<a class="event-row" href="events.html#event-${escapeHtml(event.id)}"><span class="date-chip"><small>${escapeHtml(parts.month)}</small>${escapeHtml(parts.day)}</span><div><strong>${escapeHtml(publicTitle(event))}</strong><span>${escapeHtml(publicSummary(event))}</span></div><span class="event-status">${escapeHtml(countdownLabel(event))}</span></a>`;
-      }).join('') : `<div class="event-row"><span class="date-chip"><small>${escapeHtml(copy().soon)}</small></span><div><strong>${escapeHtml(copy().noEventsTitle)}</strong><span>${escapeHtml(copy().noEventsCopy)}</span></div><span class="event-status">${escapeHtml(copy().waiting)}</span></div>`;
-    }
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
@@ -275,37 +209,31 @@
       localStorage.setItem('acadie-lang', next);
       document.documentElement.lang = next;
       updateStaticCopy();
-      fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()).then(data => { updateEntryCount((data.items || []).length); }).catch(() => {});
-      fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).then(renderEventPreview).catch(() => renderEventPreview({ items: [] }));
     });
     function updateStaticCopy() {
       const c = copy();
-      document.getElementById('menu-directory-link').textContent = c.menuDirectory;
-      document.getElementById('menu-about-link').textContent = c.menuAbout;
-      document.getElementById('theme-toggle').textContent = c.theme;
-      document.getElementById('lang-toggle').textContent = c.lang;
-      document.getElementById('brand-subtitle').textContent = c.brandSubtitle;
-      document.getElementById('poster-label').textContent = c.posterLabel;
-      document.getElementById('poster-subtitle').textContent = c.posterSubtitle;
-      document.getElementById('directory-cta-title').textContent = c.ctaTitle;
-      document.getElementById('next-up-title').textContent = c.nextUp;
-      document.getElementById('view-events-link').textContent = c.viewEvents;
-      document.getElementById('about-copy').innerHTML = c.about;
-      document.getElementById('dock-home').textContent = c.dockHome;
-      document.getElementById('dock-events').textContent = c.dockEvents;
-      document.getElementById('dock-search').textContent = c.dockSearch;
-      document.getElementById('dock-menu').textContent = c.dockMenu;
-      document.getElementById('loading-events-title').textContent = c.loadingTitle;
-      document.getElementById('loading-events-copy').textContent = c.loadingCopy;
-    }
-    function updateEntryCount(count) {
-      const el = document.getElementById('directory-cta-count');
-      if (el) el.textContent = copy().ctaCount(count);
+      setText('menu-directory-link', c.menuDirectory);
+      setText('menu-about-link', c.menuAbout);
+      setText('theme-toggle', c.theme);
+      setText('lang-toggle', c.lang);
+      setText('brand-subtitle', c.brandSubtitle);
+      setText('poster-label', c.posterLabel);
+      setText('poster-subtitle', c.posterSubtitle);
+      setText('welcome-title', c.welcomeTitle);
+      setText('welcome-copy', c.welcomeCopy);
+      setText('welcome-events-link', c.welcomeEvents);
+      setText('welcome-directory-link', c.welcomeDirectory);
+      setText('calendar-title', c.calendarTitle);
+      setText('calendar-link', c.calendarLink);
+      setText('calendar-copy', c.calendarCopy);
+      setHtml('about-copy', c.about);
+      setText('dock-home', c.dockHome);
+      setText('dock-events', c.dockEvents);
+      setText('dock-search', c.dockSearch);
+      setText('dock-menu', c.dockMenu);
     }
     document.documentElement.lang = currentLang();
     updateStaticCopy();
-    fetch('assets/directory-data.json', { cache: 'no-store' }).then(res => res.json()).then(data => { updateEntryCount((data.items || []).length); }).catch(() => {});
-    fetch('assets/events-data.json', { cache: 'no-store' }).then(res => res.json()).then(renderEventPreview).catch(() => renderEventPreview({ items: [] }));
   </script>
 </body>
 </html>
