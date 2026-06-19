@@ -300,6 +300,7 @@
     let lastScrollY = 0;
     let scrollTicking = false;
     let focusGuard = false;
+    let touchStartY = null;
     function currentLang() { return window.AcadieShell?.currentLang?.() || document.documentElement.dataset.lang || 'en'; }
     function copy() { return SEARCH_COPY[currentLang()] || SEARCH_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
@@ -404,12 +405,17 @@
       const currentY = Math.max(0, window.scrollY || window.pageYOffset || 0);
       const delta = currentY - lastScrollY;
       const filterOpen = document.getElementById('filter-menu')?.open;
+      const editing = document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
+      /* While editing, ignore scroll-direction chrome mutations. iPhone keyboard
+         and layout changes can emit noisy scroll deltas that are not real intent. */
+      if (editing) {
+        setChromeHidden(false);
+        lastScrollY = currentY;
+        scrollTicking = false;
+        return;
+      }
       if (delta > 12 && currentY > 24 && !filterOpen) setChromeHidden(true);
       if (delta < -12 || currentY <= 8) setChromeHidden(false);
-      /* Dismiss keyboard on significant downward scroll through results. */
-      if (delta > 32 && document.activeElement?.id === 'search-input' && !focusGuard) {
-        document.getElementById('search-input')?.blur();
-      }
       lastScrollY = currentY;
       scrollTicking = false;
     }
@@ -442,11 +448,11 @@
       input.addEventListener('input', event => {
         state.query = event.target.value;
         document.body.classList.add('search-input-focused');
+        setChromeHidden(false);
         render();
       });
       input.addEventListener('focus', () => {
         setChromeHidden(false);
-        document.body.classList.add('keyboard-open');
         document.body.classList.add('search-input-focused');
         render();
         detectKeyboard();
@@ -455,6 +461,7 @@
       });
       /* Enter key dismisses keyboard so results become visible. */
       input.addEventListener('blur', () => {
+        touchStartY = null;
         document.body.classList.remove('search-input-focused');
         render();
         detectKeyboard();
@@ -462,7 +469,6 @@
       input.addEventListener('keydown', event => {
         if (event.key === 'Enter') {
           input.blur();
-          document.body.classList.remove('keyboard-open');
         }
       });
       document.querySelectorAll('.chip').forEach(button => {
@@ -479,6 +485,25 @@
           scrollTicking = true;
           requestAnimationFrame(handleScrollDirection);
         }
+      }, { passive: true });
+      /* Only a real touch-drag should dismiss the keyboard while editing.
+         Window scroll deltas alone are too noisy on iPhone during keyboard resize. */
+      window.addEventListener('touchstart', event => {
+        if (document.activeElement?.id === 'search-input') {
+          touchStartY = event.touches[0]?.clientY ?? null;
+        }
+      }, { passive: true });
+      window.addEventListener('touchmove', event => {
+        if (document.activeElement?.id !== 'search-input' || focusGuard || touchStartY === null) return;
+        const currentTouchY = event.touches[0]?.clientY;
+        if (typeof currentTouchY !== 'number') return;
+        if (touchStartY - currentTouchY > 32) {
+          input.blur();
+          touchStartY = null;
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', () => {
+        touchStartY = null;
       }, { passive: true });
       /* Visual viewport resize = keyboard open/close. Repositions chrome
          and hides/shows dock accordingly. Only listen to resize, not scroll —
