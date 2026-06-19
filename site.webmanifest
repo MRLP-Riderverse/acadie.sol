@@ -1,7 +1,8 @@
 {
   "name": "Acadie.sol",
   "short_name": "Acadie.sol",
-  "start_url": "/index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#f8f2e8",
   "theme_color": "#174b8e",
