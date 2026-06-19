@@ -527,8 +527,8 @@
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
     .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
-    .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
+    .site-dock a, .site-dock button, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a.active, .site-dock button.active { color: var(--blue-ink); background: var(--blue-deep); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
     /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
        above the dock. Backdrop and drawer states are separate so the backdrop never
@@ -543,7 +543,7 @@
     .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
     .menu-control:focus, .drawer-close:focus { outline: none; }
     .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
-    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; color: var(--ink-strong); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; color: var(--blue-deep); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
     [data-theme="dark"] .theme-button { color: var(--gold); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
     .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; }
     .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
@@ -723,7 +723,7 @@
   <nav class="site-dock" aria-label="Primary dock">
     <a href="index.html"><span>⌂</span><span id="dir-dock-home">Home</span></a>
     <a href="events.html"><span>◷</span><span id="dir-dock-events">Events</span></a>
-    <a class="active" href="directory.html"><span>⌕</span><span id="dir-dock-search">Search</span></a>
+    <button class="active" id="dir-dock-search" type="button"><span>⌕</span><span id="dir-dock-search-label">Search</span></button>
     <label for="menu-toggle"><span>☰</span><span id="dir-dock-menu">Menu</span></label>
   </nav>
 
@@ -808,7 +808,7 @@
       setText('dir-search-title', c.searchTitle); setText('dir-search-intro', c.searchIntro); setText('open-filters', c.moreOptions); setText('show-results', c.showMatches); setText('quick-clear', c.clear);
       setText('dir-filter-title', c.filterOptions); setText('apply-filters', c.done); setText('reset-filters', c.reset); setText('dir-filter-note', c.filterNote);
       setText('dir-results-title', c.resultsTitle); setText('result-copy', c.resultDefault); setText('show-all', c.allPlaces); setText('view-official', c.jumpToList); setText('clear-filters', c.clear); setText('dir-footer', c.footer);
-      setText('dir-dock-home', c.dockHome); setText('dir-dock-events', c.dockEvents); setText('dir-dock-search', c.dockSearch); setText('dir-dock-menu', c.dockMenu);
+      setText('dir-dock-home', c.dockHome); setText('dir-dock-events', c.dockEvents); setText('dir-dock-search-label', c.dockSearch); setText('dir-dock-menu', c.dockMenu);
       document.getElementById('search')?.setAttribute('placeholder', c.searchPlaceholder);
       document.getElementById('close-filters')?.setAttribute('aria-label', c.closeFilters);
       const mood = document.getElementById('mood-select');
@@ -1236,13 +1236,18 @@
       setDirectoryMode('search', { scroll: true, focus: true });
     }
 
+    function focusSearchTool() {
+      showHeader();
+      setDirectoryMode('search', { scroll: true, focus: true });
+    }
+
     function closeSearchTool() {
       closeFilterPopover();
       if (state.mode === 'search') setDirectoryMode('discover', { scroll: false, focus: false });
     }
 
     function toggleSearchTool() {
-      state.mode === 'search' ? closeSearchTool() : openSearchTool();
+      focusSearchTool();
     }
 
     function searchIsOpen() {
@@ -1298,12 +1303,13 @@
       document.getElementById('city-select').addEventListener('change', event => { state.city = event.target.value; renderResults(); });
       document.getElementById('show-results').addEventListener('click', showResults);
       const navSearch = document.getElementById('nav-search');
-      navSearch.addEventListener('click', toggleSearchTool);
+      navSearch.addEventListener('click', focusSearchTool);
       document.getElementById('choose-discover').addEventListener('click', () => {
         clearFilters();
         setDirectoryMode('discover', { scroll: true, focus: false });
       });
-      document.getElementById('choose-search').addEventListener('click', openSearchTool);
+      document.getElementById('choose-search').addEventListener('click', focusSearchTool);
+      document.getElementById('dir-dock-search')?.addEventListener('click', focusSearchTool);
       document.getElementById('to-top').addEventListener('click', () => {
         showHeader();
         window.scrollTo({ top: 0, behavior: 'smooth' });
