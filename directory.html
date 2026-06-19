@@ -473,11 +473,21 @@
     .directory-card { border-radius: 21px; background: color-mix(in srgb, var(--card) 94%, transparent); color: var(--ink); }
     .directory-card > summary { padding: 9px; color: var(--ink); }
     .card-main { min-width: 0; display: grid; gap: 6px; }
+    /* Quick-card media shell — collapsed cards get a small preview image when the
+       directory payload has one; expanded cards reuse the same source with the old
+       initial-letter gradient as fallback. */
+    .card-summary-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
+    .summary-thumb,
+    .expanded-thumb { border-radius: 18px; overflow: hidden; background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 92%, #000), color-mix(in srgb, var(--gold) 72%, #000)); color: var(--blue-ink); box-shadow: inset 0 0 0 1px var(--line-strong); }
+    .summary-thumb { width: 64px; height: 64px; flex: 0 0 auto; display: grid; place-items: center; }
     .card-top { display: flex; align-items: start; justify-content: space-between; gap: 7px; }
     .card-title { font-size: .95rem; letter-spacing: -.01em; }
     .meta-line { margin-top: 0; gap: 5px; overflow: hidden; }
     .meta-pill, .badge { font-size: .66rem; padding: 4px 6px; background: var(--paper-soft); color: var(--muted); border-color: var(--line); }
-    .expanded-thumb { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 92%, #000), color-mix(in srgb, var(--gold) 72%, #000)); color: var(--blue-ink); font-weight: 900; font-size: 1.28rem; box-shadow: inset 0 0 0 1px var(--line-strong); margin-bottom: 8px; }
+    .thumb-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .thumb-fallback { width: 100%; height: 100%; display: grid; place-items: center; font-weight: 900; }
+    .summary-thumb .thumb-fallback { font-size: 1.02rem; }
+    .expanded-thumb { width: 58px; height: 58px; display: grid; place-items: center; font-size: 1.28rem; margin-bottom: 8px; }
     .full-page-link { display: inline-block; margin-top: 8px; padding: 8px 14px; border-radius: 14px; background: var(--blue-deep); color: var(--blue-ink); font-size: .82rem; font-weight: 900; text-decoration: none; }
     .full-page-link:hover { color: var(--blue-ink); filter: brightness(1.06); }
     .card-body { padding: 0 12px 12px; }
@@ -927,6 +937,15 @@
       const notes = cleanSummary(item.notes);
       const tags = derivedTags(item);
       const city = publicCity(item);
+      const thumbnailSrc = cleanSummary(item.thumbnail_src);
+      const thumbnailAlt = cleanSummary(item.thumbnail_alt) || `${displayTitle || 'Entry'} photo`;
+      const thumbFallback = escapeHtml((displayTitle || '?').trim().charAt(0).toUpperCase());
+      const summaryThumb = thumbnailSrc
+        ? `<span class="summary-thumb"><img class="thumb-image" src="${escapeHtml(thumbnailSrc)}" alt="${escapeHtml(thumbnailAlt)}" loading="lazy" /></span>`
+        : `<span class="summary-thumb"><span class="thumb-fallback">${thumbFallback}</span></span>`;
+      const expandedThumb = thumbnailSrc
+        ? `<div class="expanded-thumb"><img class="thumb-image" src="${escapeHtml(thumbnailSrc)}" alt="${escapeHtml(thumbnailAlt)}" loading="lazy" /></div>`
+        : `<div class="expanded-thumb"><span class="thumb-fallback">${thumbFallback}</span></div>`;
       const locationContext = renderLocationContext(item);
       const eventFeed = renderEventFeed(item);
       const detailRows = [
@@ -940,21 +959,24 @@
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
           <summary>
-            <span class="card-main">
-              <span class="card-top">
-                <h3 class="card-title">${escapeHtml(displayTitle)}</h3>
-                ${item.draft ? `<span class="badge">${escapeHtml(copy().preview)}</span>` : ''}
-                ${renderUpcomingBadge(item)}
+            <div class="card-summary-row">
+              ${summaryThumb}
+              <span class="card-main">
+                <span class="card-top">
+                  <h3 class="card-title">${escapeHtml(displayTitle)}</h3>
+                  ${item.draft ? `<span class="badge">${escapeHtml(copy().preview)}</span>` : ''}
+                  ${renderUpcomingBadge(item)}
+                </span>
+                <span class="meta-line">
+                  ${city ? `<span class="meta-pill city-pill">${escapeHtml(city)}</span>` : ''}
+                  ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+                  ${tags.slice(0, 1).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
+                </span>
               </span>
-              <span class="meta-line">
-                ${city ? `<span class="meta-pill city-pill">${escapeHtml(city)}</span>` : ''}
-                ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
-                ${tags.slice(0, 1).map(tag => `<span class="meta-pill">#${escapeHtml(tag)}</span>`).join('')}
-              </span>
-            </span>
+            </div>
           </summary>
           <div class="card-body">
-            <div class="expanded-thumb">${escapeHtml((displayTitle || '?').trim().charAt(0).toUpperCase())}</div>
+            ${expandedThumb}
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : `<p class="description">${escapeHtml(copy().descriptionComingSoon)}</p>`}
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
