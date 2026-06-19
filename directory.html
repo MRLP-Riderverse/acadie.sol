@@ -493,7 +493,7 @@
     .nav-brand span { display: none; }
     .nav-actions { display: flex; }
     .nav-action { padding: 8px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(65,47,29,.08); }
-    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 76px 0 56px; }
+    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 76px 0 96px; }
     .control-panel { margin-top: 0; border-radius: 28px; overflow: visible; }
     .control-body { padding: 14px; border-top: 0; gap: 12px; }
     .control-intro { padding: 3px 2px 0; }
@@ -526,7 +526,7 @@
     .full-page-link:hover { color: var(--blue-ink); filter: brightness(1.06); }
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
-    .site-dock { display: none; }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
     .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
     .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
@@ -540,18 +540,23 @@
     /* Menu controls occupy the top corners while the close button remains centered,
        leaving the lower portion of the floating UI for navigation links. */
     .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; pointer-events: none; }
-    .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; }
-    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
-    .lang-button { min-width: 76px; padding: 0 12px; letter-spacing: .06em; font-size: .78rem; }
-    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; }
+    .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
+    .menu-control:focus, .drawer-close:focus { outline: none; }
+    .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; color: var(--ink-strong); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
+    [data-theme="dark"] .theme-button { color: var(--gold); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
+    .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; }
+    .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
+    [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
+    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; background: color-mix(in srgb, var(--paper-soft) 78%, transparent); }
     .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
     .drawer-title { display: grid; gap: 2px; }
     .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
     .drawer-title span { color: var(--muted); font-size: .8rem; }
     .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
     .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
-    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--blue-ink); background: var(--blue-deep); }
-    .city-pill { background: var(--blue-deep); color: var(--blue-ink); }
+    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
+    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
     @media (max-width: 720px) {
       .top-nav { width: min(430px, 100vw); background: transparent; box-shadow: none; backdrop-filter: none; }
       .nav-actions { display: none; }
@@ -593,7 +598,7 @@
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
       <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">×</label>
-      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French">EN / FR</button>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong id="dir-drawer-title">Extras</strong><span id="dir-drawer-subtitle">Directory, about, display</span></div>
@@ -765,6 +770,7 @@
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
     function updateMenuControls() {
+      document.documentElement.dataset.lang = currentLang();
       const isDark = document.documentElement.dataset.theme === 'dark';
       const themeButton = document.getElementById('theme-toggle');
       if (themeButton) {
@@ -776,7 +782,6 @@
       const langButton = document.getElementById('lang-toggle');
       if (langButton) {
         const isFr = currentLang() === 'fr';
-        langButton.textContent = 'EN / FR';
         langButton.setAttribute('aria-label', isFr ? 'Switch language to English' : 'Switch language to French');
         langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
       }
