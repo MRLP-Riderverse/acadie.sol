@@ -18,6 +18,22 @@
 ### Commit
 `b55b7b1` — `feat(search): clean entry surface, fixed low chrome, Safari-style scroll hide`
 
+## 2025-06-19 · Search Page Redesign (continued)
+
+**Scope:** `search.html` — search UX polish round 2
+
+### What changed
+- **Flash-card search chrome** — search controls now have `var(--page-bg)` background, subtle top border, and soft shadow. Results scroll behind the bar cleanly — gives a parallax/layered feel.
+- **Dock hides when keyboard opens** — visual-viewport detection toggles `keyboard-open` class on body. Dock slides away (opacity + translate), search chrome repositions to just above the bottom edge. Only the search bar stacks above the keyboard.
+- **Gap doubled** — search chrome ↔ dock gap now ~14px (was ~8px).
+- **Divider lines instead of container cards** — results separated by thin `border-bottom` dividers, no cards/borders/rounded boxes. More elegant for search.
+- **Bottom-up results** — `flex-direction: column-reverse` so the first/best result sits lowest, nearest the user's thumb. Single-result queries appear right above the search chrome.
+- **Enter key dismisses keyboard** — `keydown` listener on the search input blurs on Enter.
+- **Scroll dismisses keyboard** — scrolling results auto-blurs the input so the keyboard drops, matching Safari URL bar feel.
+
+### Commit
+`79712f7` — `feat(search): flash-card chrome, divider results, bottom-up, keyboard handling`
+
 ## Next Up
 - [ ] Mobile test: verify scroll hide/show feels right with soft keyboard
 - [ ] Dark mode: check controls contrast against dark background when fixed/visible
