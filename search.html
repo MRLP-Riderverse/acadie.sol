@@ -16,91 +16,134 @@
       min-height: 100vh;
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 14% 0%, rgba(40, 114, 198, 0.24), transparent 22rem),
-        radial-gradient(circle at 92% 10%, rgba(242, 200, 75, 0.13), transparent 19rem),
-        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 42%, #0e0e0e 100%);
+      background: var(--page-bg);
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
-    .wrap { width: min(880px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 104px; }
+    .wrap { width: min(760px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 188px; }
 
-    /* Hero search block — one obvious tap target, with the escape hatch to view
-       everything nearby so search and browsing form a closed loop. */
+    /* Search surface — no marketing copy, no initial suggestions, no card shell.
+       The page exists to accept a query and then get out of the way. */
     .search-hero {
       min-height: min(620px, calc(100svh - 120px));
       display: grid;
-      place-items: center;
+      align-items: start;
+      text-align: center;
     }
-    .search-card {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 32px;
-      padding: clamp(18px, 5vw, 36px);
-      background:
-        linear-gradient(145deg, color-mix(in srgb, var(--panel-strong) 88%, transparent), color-mix(in srgb, var(--panel) 82%, transparent)),
-        radial-gradient(circle at 24% 0%, rgba(242, 200, 75, 0.18), transparent 18rem);
-      box-shadow: 0 24px 64px var(--shadow);
-      backdrop-filter: blur(10px) saturate(1.1);
+    .search-surface {
+      width: min(620px, 100%);
       display: grid;
-      gap: 18px;
+      gap: 14px;
+      justify-items: center;
     }
-    .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .74rem; font-weight: 900; }
-    h1 { margin: 0; font-size: clamp(2.1rem, 8vw, 4.6rem); line-height: .92; letter-spacing: -.04em; color: var(--ink-strong); }
-    .lede { margin: 0; max-width: 62ch; color: var(--muted); line-height: 1.48; font-size: clamp(.96rem, 2.5vw, 1.08rem); }
-    .search-row { display: grid; gap: 10px; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .search-row { width: 100%; display: grid; gap: 12px; }
+    /* Search chrome mimics the modern mobile browser bar: anchored low near the
+       dock, then tucked away on downward scroll and restored on upward scroll. */
+    .search-controls {
+      position: fixed;
+      z-index: 35;
+      left: 50%;
+      bottom: calc(86px + env(safe-area-inset-bottom));
+      width: min(620px, calc(100vw - 28px));
+      display: grid;
+      gap: 8px;
+      transform: translateX(-50%);
+      transition: transform .24s ease, opacity .2s ease;
+      will-change: transform, opacity;
+    }
+    body.search-chrome-hidden .search-controls {
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, calc(100% + 110px));
+    }
     .search-field-wrap { position: relative; }
     .search-field {
       width: 100%;
-      min-height: 64px;
-      border: 1px solid var(--line-strong);
-      border-radius: 22px;
-      padding: 17px 48px 17px 18px;
-      background: var(--paper);
+      min-height: 44px;
+      border: 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--line-strong) 78%, transparent);
+      border-radius: 0;
+      padding: 10px 34px 9px 4px;
+      background: transparent;
       color: var(--ink);
       font: inherit;
-      font-size: 18px;
-      font-weight: 800;
+      font-size: clamp(1rem, 3.4vw, 1.15rem);
+      font-weight: 750;
+      text-align: center;
       outline: none;
-      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 6%, transparent);
+      box-shadow: none;
     }
     .search-field::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
-    .search-field:focus-visible { outline: 3px solid color-mix(in srgb, var(--gold) 38%, transparent); outline-offset: 3px; }
-    .search-glyph { position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: var(--gold); font-weight: 900; font-size: 1.35rem; pointer-events: none; }
-    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .search-field:focus-visible { outline: none; border-bottom-color: var(--gold); }
+    .search-glyph { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gold); font-weight: 900; font-size: 1rem; pointer-events: none; }
+    .actions { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .filter-menu { position: relative; }
+    .filter-toggle,
     .chip,
     .view-all {
       appearance: none;
-      border: 1px solid var(--line);
+      border: 1px solid color-mix(in srgb, var(--line) 68%, transparent);
       border-radius: 999px;
-      padding: 10px 13px;
+      padding: 9px 12px;
       color: var(--text);
-      background: color-mix(in srgb, var(--paper) 12%, transparent);
+      background: transparent;
       font: inherit;
-      font-size: .88rem;
+      font-size: .79rem;
       font-weight: 900;
       text-decoration: none;
       cursor: pointer;
+      list-style: none;
     }
+    .filter-toggle::-webkit-details-marker { display: none; }
+    .chips {
+      position: absolute;
+      z-index: 4;
+      top: calc(100% + 8px);
+      left: 50%;
+      width: min(390px, calc(100vw - 32px));
+      transform: translateX(-50%);
+      display: none;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      box-shadow: 0 16px 38px var(--shadow);
+    }
+    .filter-menu[open] .chips { display: flex; }
     .chip.active,
     .chip:hover,
+    .filter-toggle:hover,
+    .filter-menu[open] .filter-toggle,
     .view-all:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
-    .actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .view-all { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-deep); border-color: transparent; color: var(--gold); }
-    .count { color: var(--soft); font-size: .9rem; }
+    .view-all { display: inline-flex; align-items: center; gap: 8px; background: color-mix(in srgb, var(--blue-deep) 76%, transparent); border-color: transparent; color: var(--gold); }
+    .count { width: 100%; min-height: 1.25em; color: var(--soft); font-size: .9rem; }
 
-    /* Results feed — compact all-type cards.  The data shape comes from
-       assets/search-index.json so future exports can add keywords/media without
-       rewriting the page shell. */
-    .results { display: grid; gap: 10px; margin-top: 18px; }
+    /* Results appear only after the visitor asks for them. Fresh search.html stays
+       clean so the page does not steer people before they type or choose a lens. */
+    .results { display: grid; gap: 10px; margin-top: 12px; text-align: left; }
     .result-card {
       display: grid;
       gap: 8px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 15px;
-      background: linear-gradient(180deg, var(--card-strong), var(--card));
-      box-shadow: 0 14px 34px var(--shadow);
+      border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+      border-radius: 18px;
+      padding: 14px 0;
+      background: transparent;
+      border-left: 0;
+      border-right: 0;
       color: var(--text);
       text-decoration: none;
     }
@@ -110,15 +153,15 @@
     .result-subtitle { color: var(--muted); font-size: .9rem; line-height: 1.35; }
     .type-pill { flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; color: var(--gold); background: color-mix(in srgb, var(--blue-deep) 78%, transparent); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
-    .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: color-mix(in srgb, var(--paper) 12%, transparent); font-size: .75rem; font-weight: 800; }
-    .empty { border: 1px dashed var(--line); border-radius: 22px; padding: 20px; color: var(--muted); background: color-mix(in srgb, var(--paper) 10%, transparent); line-height: 1.45; }
-    .footer-note { margin: 22px auto 0; max-width: 62ch; color: var(--soft); font-size: .86rem; line-height: 1.45; text-align: center; }
+    .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: transparent; border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); font-size: .75rem; font-weight: 800; }
+    .empty { border: 1px dashed color-mix(in srgb, var(--line) 72%, transparent); border-radius: 18px; padding: 16px 0; color: var(--muted); background: transparent; line-height: 1.45; }
 
     @media (max-width: 680px) {
-      .wrap { width: min(430px, 100vw); padding: 22px 14px 96px; }
-      .search-hero { min-height: calc(100svh - 118px); align-items: start; padding-top: clamp(24px, 7svh, 64px); }
-      .search-card { border-radius: 28px; }
-      .search-field { min-height: 62px; }
+      .wrap { width: min(430px, 100vw); padding: 22px 14px 188px; }
+      .search-hero { min-height: calc(100svh - 118px); align-items: start; padding: 0; }
+      .search-surface { gap: 16px; }
+      .search-controls { bottom: calc(92px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
+      .search-field { min-height: 44px; }
       .result-top { display: grid; }
       .type-pill { width: fit-content; }
     }
@@ -129,74 +172,82 @@
   <script src="assets/site-shell.js"></script>
   <main class="wrap">
     <section class="search-hero" aria-label="Acadie.sol search">
-      <div class="search-card">
-        <div class="kicker" id="search-kicker">Acadie.sol search</div>
-        <h1 id="search-title">Find anything local.</h1>
-        <p class="lede" id="search-lede">Search places, events, categories, areas, and keywords from one calm surface. Or skip the prompt and open the full directory.</p>
+      <div class="search-surface">
+        <h1 class="sr-only" id="search-title">Search Acadie.sol</h1>
         <div class="search-row">
-          <label class="search-field-wrap" for="search-input">
-            <input id="search-input" class="search-field" type="search" autocomplete="off" enterkeyhint="search" placeholder="Try pizza, music, waterfront, Bathurst…" />
-            <span class="search-glyph" aria-hidden="true">⌕</span>
-          </label>
-          <div class="chips" aria-label="Quick filters">
-            <button class="chip active" type="button" data-filter="all" id="chip-all">All</button>
-            <button class="chip" type="button" data-filter="entry" id="chip-places">Places</button>
-            <button class="chip" type="button" data-filter="event" id="chip-events">Events</button>
-            <button class="chip" type="button" data-filter="food">Food</button>
-            <button class="chip" type="button" data-filter="music">Music</button>
-            <button class="chip" type="button" data-filter="family">Family</button>
-            <button class="chip" type="button" data-filter="waterfront">Waterfront</button>
-          </div>
-          <div class="actions">
-            <a class="view-all" href="directory.html" id="view-directory">View all directory →</a>
-            <span class="count" id="result-count">Loading local index…</span>
+          <section class="results" id="results" aria-live="polite"></section>
+          <div class="search-controls" id="search-controls">
+            <div class="actions" aria-label="Search actions">
+              <a class="view-all" href="directory.html" id="view-directory">View All</a>
+              <details class="filter-menu" id="filter-menu">
+                <summary class="filter-toggle" id="filter-summary">Filters</summary>
+                <div class="chips" aria-label="Search filters">
+                  <button class="chip active" type="button" data-filter="all" id="chip-all">All</button>
+                  <button class="chip" type="button" data-filter="entry" id="chip-places">Places</button>
+                  <button class="chip" type="button" data-filter="event" id="chip-events">Events</button>
+                  <button class="chip" type="button" data-filter="food" id="chip-food">Food</button>
+                  <button class="chip" type="button" data-filter="music" id="chip-music">Music</button>
+                  <button class="chip" type="button" data-filter="family" id="chip-family">Family</button>
+                  <button class="chip" type="button" data-filter="waterfront" id="chip-waterfront">Waterfront</button>
+                </div>
+              </details>
+              <span class="count" id="result-count"></span>
+            </div>
+            <label class="search-field-wrap" for="search-input">
+              <input id="search-input" class="search-field" type="search" autocomplete="off" enterkeyhint="search" placeholder="?" aria-label="Search Acadie.sol" />
+              <span class="search-glyph" aria-hidden="true">⌕</span>
+            </label>
           </div>
         </div>
-        <section class="results" id="results" aria-live="polite"></section>
       </div>
     </section>
-    <p class="footer-note" id="search-note">This is the new closed loop: dock search opens the finding surface; directory stays the full browse view.</p>
   </main>
 
   <script>
     const SEARCH_COPY = {
       en: {
-        kicker: 'Acadie.sol search',
-        title: 'Find anything local.',
-        lede: 'Search places, events, categories, areas, and keywords from one calm surface. Or skip the prompt and open the full directory.',
-        placeholder: 'Try pizza, music, waterfront, Bathurst…',
-        all: 'All', places: 'Places', events: 'Events', viewDirectory: 'View all directory →',
-        loading: 'Loading local index…', ready: count => `${count} searchable local signals.`,
+        title: 'Search Acadie.sol',
+        placeholder: '?',
+        filters: 'Filters', all: 'All', places: 'Places', events: 'Events', food: 'Food', music: 'Music', family: 'Family', waterfront: 'Waterfront', viewDirectory: 'View All',
+        loading: '', ready: '',
         showing: count => `${count} result${count === 1 ? '' : 's'}.`,
-        empty: 'No matches yet. Try a broader term, a category, or open the full directory.',
-        note: 'This is the new closed loop: dock search opens the finding surface; directory stays the full browse view.'
+        empty: 'No matches.',
       },
       fr: {
-        kicker: 'Recherche Acadie.sol',
-        title: 'Trouver le local.',
-        lede: 'Cherchez des lieux, événements, catégories, secteurs et mots-clés à partir d’une surface calme. Ou ouvrez le répertoire complet.',
-        placeholder: 'Essayez pizza, musique, bord de l’eau, Bathurst…',
-        all: 'Tout', places: 'Lieux', events: 'Événements', viewDirectory: 'Voir le répertoire →',
-        loading: 'Chargement de l’index local…', ready: count => `${count} signaux locaux consultables.`,
+        title: 'Recherche Acadie.sol',
+        placeholder: '?',
+        filters: 'Filtres', all: 'Tout', places: 'Lieux', events: 'Événements', food: 'Repas', music: 'Musique', family: 'Famille', waterfront: 'Bord de l’eau', viewDirectory: 'Voir tout',
+        loading: '', ready: '',
         showing: count => `${count} résultat${count === 1 ? '' : 's'}.`,
-        empty: 'Aucun résultat pour le moment. Essayez un terme plus large, une catégorie, ou ouvrez le répertoire complet.',
-        note: 'Nouvelle boucle fermée : la recherche du dock ouvre cette surface; le répertoire reste la vue complète.'
+        empty: 'Aucun résultat.',
       }
     };
 
-    const state = { items: [], query: '', filter: 'all' };
+    const state = { items: [], query: '', filter: 'all', chromeHidden: false };
+    let lastScrollY = 0;
+    let scrollTicking = false;
     function currentLang() { return window.AcadieShell?.currentLang?.() || document.documentElement.dataset.lang || 'en'; }
     function copy() { return SEARCH_COPY[currentLang()] || SEARCH_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function escapeHtml(value) { return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
     function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
 
+    function filterLabel() {
+      const c = copy();
+      const labels = { all: c.filters, entry: c.places, event: c.events, food: c.food, music: c.music, family: c.family, waterfront: c.waterfront };
+      return labels[state.filter] || c.filters;
+    }
+
     function applyCopy() {
       const c = copy();
-      setText('search-kicker', c.kicker); setText('search-title', c.title); setText('search-lede', c.lede);
+      setText('search-title', c.title);
+      setText('filter-summary', filterLabel());
       setText('chip-all', c.all); setText('chip-places', c.places); setText('chip-events', c.events);
-      setText('view-directory', c.viewDirectory); setText('search-note', c.note);
-      document.getElementById('search-input').placeholder = c.placeholder;
+      setText('chip-food', c.food); setText('chip-music', c.music); setText('chip-family', c.family); setText('chip-waterfront', c.waterfront);
+      setText('view-directory', c.viewDirectory);
+      const input = document.getElementById('search-input');
+      input.placeholder = c.placeholder;
+      input.setAttribute('aria-label', c.title);
       render();
     }
 
@@ -237,6 +288,12 @@
     function render() {
       const c = copy();
       const query = normalize(state.query.trim());
+      const hasIntent = Boolean(query) || state.filter !== 'all';
+      if (!hasIntent) {
+        setText('result-count', '');
+        document.getElementById('results').innerHTML = '';
+        return;
+      }
       const ranked = state.items
         .filter(passesFilter)
         .map(item => ({ item, score: scoreItem(item, query) }))
@@ -250,16 +307,43 @@
         : `<div class="empty">${escapeHtml(c.empty)}</div>`;
     }
 
+    /* Scroll chrome — Safari-style direction response. Downward motion hides the
+       fixed search controls so results get the canvas; upward motion or input
+       focus restores the controls for immediate editing. */
+    function setChromeHidden(hidden) {
+      state.chromeHidden = hidden;
+      document.body.classList.toggle('search-chrome-hidden', hidden);
+    }
+    function handleScrollDirection() {
+      const currentY = Math.max(0, window.scrollY || window.pageYOffset || 0);
+      const delta = currentY - lastScrollY;
+      const filterOpen = document.getElementById('filter-menu')?.open;
+      if (delta > 12 && currentY > 24 && !filterOpen) setChromeHidden(true);
+      if (delta < -12 || currentY <= 8) setChromeHidden(false);
+      lastScrollY = currentY;
+      scrollTicking = false;
+    }
+
     function bindEvents() {
-      document.getElementById('search-input').addEventListener('input', event => { state.query = event.target.value; render(); });
+      const input = document.getElementById('search-input');
+      input.addEventListener('input', event => { state.query = event.target.value; render(); });
+      input.addEventListener('focus', () => setChromeHidden(false));
       document.querySelectorAll('.chip').forEach(button => {
         button.addEventListener('click', () => {
           state.filter = button.dataset.filter || 'all';
           document.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('active', chip === button));
+          setText('filter-summary', filterLabel());
+          document.getElementById('filter-menu')?.removeAttribute('open');
           document.getElementById('search-input').focus();
           render();
         });
       });
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          scrollTicking = true;
+          requestAnimationFrame(handleScrollDirection);
+        }
+      }, { passive: true });
       window.addEventListener('acadie:languagechange', applyCopy);
     }
 
