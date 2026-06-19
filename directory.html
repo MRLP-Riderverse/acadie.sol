@@ -528,7 +528,8 @@
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
     .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .site-dock a, .site-dock button, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .site-dock a span:first-child, .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
     /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
        above the dock. Backdrop and drawer states are separate so the backdrop never
@@ -724,7 +725,7 @@
     <nav class="site-dock" aria-label="Primary dock">
     <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
     <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-    <button id="dir-dock-search" type="button" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></button>
+    <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
     <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
@@ -1315,7 +1316,6 @@
         setDirectoryMode('discover', { scroll: true, focus: false });
       });
       document.getElementById('choose-search').addEventListener('click', focusSearchTool);
-      document.getElementById('dir-dock-search')?.addEventListener('click', focusSearchTool);
       document.getElementById('to-top').addEventListener('click', () => {
         showHeader();
         window.scrollTo({ top: 0, behavior: 'smooth' });

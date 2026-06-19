@@ -45,28 +45,28 @@
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 4px; }
     a:hover { color: var(--link-hover); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
-    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(26, 20, 16, .34); backdrop-filter: blur(5px) saturate(.92); -webkit-backdrop-filter: blur(5px) saturate(.92); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(26, 20, 16, .38); backdrop-filter: blur(5px) saturate(.92); -webkit-backdrop-filter: blur(5px) saturate(.92); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
     .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; width: min(390px, calc(100vw - 28px)); min-height: 218px; padding: 58px 14px 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); -webkit-backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 8px) scale(.98); transition: transform .18s ease, opacity .18s ease; }
     .menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
     .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
-    .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; gap: 10px; pointer-events: none; }
+    .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; pointer-events: none; }
     .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
     .menu-control:focus, .drawer-close:focus { outline: none; }
     .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
     .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
     :root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
     [data-theme="dark"] .theme-button { color: #111; background: var(--gold); }
-    .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; font-family: system-ui, sans-serif; }
+    .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; }
     .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
-    [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: #111; }
-    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; background: color-mix(in srgb, var(--paper) 84%, transparent); }
+    [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
+    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; background: color-mix(in srgb, var(--paper-soft) 78%, transparent); }
     .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
     .drawer-title { display: grid; gap: 2px; }
-    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; font-family: system-ui, sans-serif; }
-    .drawer-title span { color: var(--muted); font-size: .8rem; font-family: system-ui, sans-serif; }
+    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+    .drawer-title span { color: var(--muted); font-size: .8rem; }
     .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
-    .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-family: system-ui, sans-serif; font-weight: 900; text-align: left; }
-    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--ink); background: color-mix(in srgb, var(--paper) 90%, transparent); }
+    .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
     .memorial {
       min-height: 100vh;
       display: grid;
@@ -121,13 +121,13 @@
       text-decoration: none;
       color: var(--muted);
       font-size: .68rem;
-      font-family: system-ui, sans-serif;
       font-weight: 900;
       line-height: 1;
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
     }
+    .site-dock a span:first-child, .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
     @media (max-width: 720px) {
       .memorial { padding: 88px 16px 102px; }
       .drawer { width: min(430px, calc(100vw - 28px)); }
@@ -160,7 +160,7 @@
     <nav class="site-dock" aria-label="Primary dock">
     <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
     <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-    <a href="directory.html" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+    <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
     <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
   </nav>
 
@@ -226,10 +226,6 @@
       document.getElementById('obituaries-title').textContent = c.title;
       document.getElementById('obituaries-drawer-title').textContent = c.drawerTitle;
       document.getElementById('obituaries-drawer-subtitle').textContent = c.drawerSubtitle;
-      document.getElementById('obituaries-dock-home').textContent = c.home;
-      document.getElementById('obituaries-dock-events').textContent = c.events;
-      document.getElementById('obituaries-dock-search').textContent = c.search;
-      document.getElementById('obituaries-dock-menu').textContent = c.menu;
       document.getElementById('obituaries-menu-directory').textContent = c.directory;
       document.getElementById('obituaries-menu-about').textContent = c.about;
     }
