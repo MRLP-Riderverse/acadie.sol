@@ -27,8 +27,11 @@
     .search-hero {
       min-height: min(620px, calc(100svh - 120px));
       display: grid;
-      align-items: start;
+      align-items: end;
       text-align: center;
+      /* Anchor results zone to bottom of viewport so results feel close to
+         the user's thumb when the search chrome is docked at the bottom. */
+      padding-bottom: 188px;
     }
     .search-surface {
       width: min(620px, 100%);
@@ -49,15 +52,20 @@
     }
     .search-row { width: 100%; display: grid; gap: 12px; }
     /* Search chrome mimics the modern mobile browser bar: anchored low near the
-       dock, then tucked away on downward scroll and restored on upward scroll. */
+       dock, then tucked away on downward scroll and restored on upward scroll.
+       Background gives it a flash-card feel — results scroll behind it cleanly. */
     .search-controls {
       position: fixed;
       z-index: 35;
       left: 50%;
-      bottom: calc(86px + env(safe-area-inset-bottom));
+      bottom: calc(98px + env(safe-area-inset-bottom));
       width: min(620px, calc(100vw - 28px));
       display: grid;
       gap: 8px;
+      padding: 10px 12px 12px;
+      background: var(--page-bg);
+      border-top: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+      box-shadow: 0 -6px 22px -4px var(--shadow);
       transform: translateX(-50%);
       transition: transform .24s ease, opacity .2s ease;
       will-change: transform, opacity;
@@ -66,6 +74,19 @@
       opacity: 0;
       pointer-events: none;
       transform: translate(-50%, calc(100% + 110px));
+    }
+    /* When the soft keyboard is open (visual viewport shrinks below layout
+       viewport), the dock should duck behind the keyboard rather than stacking
+       above it. Only the search chrome stacks above the keyboard. */
+    body.keyboard-open .site-dock {
+      transform: translateX(-50%) translateY(200px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .22s ease, opacity .18s ease;
+    }
+    /* When dock hides, search chrome moves down to fill the freed space. */
+    body.keyboard-open .search-controls {
+      bottom: calc(14px + env(safe-area-inset-bottom));
     }
     .search-field-wrap { position: relative; }
     .search-field {
@@ -133,34 +154,36 @@
     .count { width: 100%; min-height: 1.25em; color: var(--soft); font-size: .9rem; }
 
     /* Results appear only after the visitor asks for them. Fresh search.html stays
-       clean so the page does not steer people before they type or choose a lens. */
-    .results { display: grid; gap: 10px; margin-top: 12px; text-align: left; }
+       clean so the page does not steer people before they type or choose a lens.
+       Results use divider lines instead of container cards — more elegant for search. */
+    .results { display: flex; flex-direction: column-reverse; gap: 0; margin-top: 12px; text-align: left; }
     .result-card {
       display: grid;
-      gap: 8px;
-      border: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
-      border-radius: 18px;
-      padding: 14px 0;
+      gap: 6px;
+      border: 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent);
+      border-radius: 0;
+      padding: 12px 2px;
       background: transparent;
-      border-left: 0;
-      border-right: 0;
       color: var(--text);
       text-decoration: none;
     }
-    .result-card:hover { border-color: var(--gold); transform: translateY(-1px); }
+    .result-card:last-child { border-bottom: 0; }
+    .result-card:hover { border-color: color-mix(in srgb, var(--gold) 55%, transparent); }
     .result-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
     .result-title { margin: 0; color: var(--ink-strong); font-size: 1.08rem; line-height: 1.12; }
     .result-subtitle { color: var(--muted); font-size: .9rem; line-height: 1.35; }
     .type-pill { flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; color: var(--gold); background: color-mix(in srgb, var(--blue-deep) 78%, transparent); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
     .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: transparent; border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); font-size: .75rem; font-weight: 800; }
-    .empty { border: 1px dashed color-mix(in srgb, var(--line) 72%, transparent); border-radius: 18px; padding: 16px 0; color: var(--muted); background: transparent; line-height: 1.45; }
+    .empty { border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); padding: 12px 2px; color: var(--muted); background: transparent; line-height: 1.45; }
 
     @media (max-width: 680px) {
       .wrap { width: min(430px, 100vw); padding: 22px 14px 188px; }
-      .search-hero { min-height: calc(100svh - 118px); align-items: start; padding: 0; }
+      .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 188px; }
       .search-surface { gap: 16px; }
-      .search-controls { bottom: calc(92px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
+      .search-controls { bottom: calc(98px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
+      body.keyboard-open .search-controls { bottom: calc(14px + env(safe-area-inset-bottom)); }
       .search-field { min-height: 44px; }
       .result-top { display: grid; }
       .type-pill { width: fit-content; }
@@ -324,10 +347,25 @@
       scrollTicking = false;
     }
 
+    /* Visual-viewport keyboard detection. When the soft keyboard opens the
+       visual viewport shrinks below the layout viewport; when it closes they
+       re-align. This lets us hide the dock and reposition search chrome so
+       only the search bar stacks above the keyboard — not the dock. */
+    function detectKeyboard() {
+      const vv = window.visualViewport;
+      if (!vv) return;
+      const keyboardOpen = vv.height < window.innerHeight - 80;
+      document.body.classList.toggle('keyboard-open', keyboardOpen);
+    }
+
     function bindEvents() {
       const input = document.getElementById('search-input');
       input.addEventListener('input', event => { state.query = event.target.value; render(); });
       input.addEventListener('focus', () => setChromeHidden(false));
+      /* Enter key dismisses keyboard so results become visible. */
+      input.addEventListener('keydown', event => {
+        if (event.key === 'Enter') input.blur();
+      });
       document.querySelectorAll('.chip').forEach(button => {
         button.addEventListener('click', () => {
           state.filter = button.dataset.filter || 'all';
@@ -343,7 +381,15 @@
           scrollTicking = true;
           requestAnimationFrame(handleScrollDirection);
         }
+        /* Scrolling results dismisses the soft keyboard like Safari. */
+        if (document.activeElement === input) input.blur();
       }, { passive: true });
+      /* Visual viewport resize = keyboard open/close. Repositions chrome
+         and hides/shows dock accordingly. */
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', detectKeyboard);
+        window.visualViewport.addEventListener('scroll', detectKeyboard);
+      }
       window.addEventListener('acadie:languagechange', applyCopy);
     }
 
