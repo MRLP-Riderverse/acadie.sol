@@ -543,8 +543,9 @@
     .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease; }
     .menu-control:focus, .drawer-close:focus { outline: none; }
     .menu-control:focus-visible, .drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
-    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; color: var(--blue-deep); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
-    [data-theme="dark"] .theme-button { color: var(--gold); background: color-mix(in srgb, var(--paper-soft) 84%, transparent); }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
+    :root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
+    [data-theme="dark"] .theme-button { color: #111; background: var(--gold); }
     .lang-button { min-width: 84px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; letter-spacing: .06em; font-size: .72rem; }
     .lang-button .lang-en, .lang-button .lang-fr { color: var(--muted); }
     [data-lang="en"] .lang-button .lang-en, [data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
@@ -1223,7 +1224,7 @@
       document.getElementById('nav-search')?.classList.toggle('active', isSearch);
       document.getElementById('nav-search')?.setAttribute('aria-expanded', String(isSearch));
       if (!isSearch) closeFilterPopover();
-      if (!isIntro) renderResults();
+      if (!isIntro && options.render !== false) renderResults();
       if (options.scroll) {
         const target = isSearch ? document.getElementById('search-panel') : document.getElementById('directory-results');
         target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1233,12 +1234,16 @@
 
     function openSearchTool() {
       showHeader();
-      setDirectoryMode('search', { scroll: true, focus: true });
+      setDirectoryMode('search', { scroll: true, focus: true, render: false });
     }
 
     function focusSearchTool() {
       showHeader();
-      setDirectoryMode('search', { scroll: true, focus: true });
+      if (state.mode === 'search') {
+        document.getElementById('search-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+      setDirectoryMode('search', { scroll: true, focus: true, render: false });
     }
 
     function closeSearchTool() {
@@ -1262,9 +1267,9 @@
 
     function showResults() {
       if (document.activeElement && typeof document.activeElement.blur === 'function') document.activeElement.blur();
-      setDirectoryMode('search', { scroll: false, focus: false });
+      setDirectoryMode('search', { scroll: false, focus: false, render: false });
       renderResults();
-      document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('search-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function syncHashTarget() {
@@ -1374,7 +1379,7 @@
       renderRecent();
       bindEvents();
       renderResults();
-      setDirectoryMode('search', { scroll: false, focus: false });
+      setDirectoryMode('search', { scroll: false, focus: false, render: false });
       if (window.location.hash === '#search') openSearchTool();
       if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
