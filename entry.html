@@ -92,50 +92,15 @@
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer p { margin: 0; }
 
-    /* Universal site dock + drawer (same as other pages) */
-    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
-    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
-    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px rgba(65,47,29,.24); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
-    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-    .drawer-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    .drawer-title { display: grid; gap: 2px; }
-    .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
-    .drawer-title span { color: var(--muted); font-size: .8rem; }
-    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
-    .drawer-nav { display: grid; gap: 8px; }
-    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
-    .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
-    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; min-height: 56px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; line-height: 1; cursor: pointer; appearance: none; -webkit-appearance: none; }
   </style>
+  <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
 <body>
-  <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
-  <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
-  <aside class="drawer" aria-label="Extras menu">
-    <div class="drawer-head">
-      <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
-      <a class="drawer-close" href="obituaries.html" aria-label="Open obituaries" title="Open obituaries">✟</a>
-    </div>
-    <nav class="drawer-nav">
-      <a href="directory.html" id="entry-menu-directory">Full directory</a>
-      <a href="index.html#about" id="entry-menu-about">About Acadie.sol</a>
-      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
-      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
-    </nav>
-  </aside>
-
+  <script src="assets/site-shell.js"></script>
   <main class="phone-shell" id="entry-root">
     <header class="brand-row"><a href="index.html">Acadie.sol</a><span>entry</span></header>
     <div class="empty-msg" id="loading">Loading entry…</div>
   </main>
-
-    <nav class="site-dock" aria-label="Primary dock">
-    <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
-    <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-    <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
-    <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
-  </nav>
-
   <script>
     /* entry.html — MySpace-style single-template data-driven page.
        Reads slug from URL hash (#slug), fetches directory-data.json,
@@ -173,25 +138,11 @@
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
-    document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-    document.getElementById('lang-toggle')?.addEventListener('click', () => {
-      const next = currentLang() === 'fr' ? 'en' : 'fr';
-      localStorage.setItem('acadie-lang', next);
-      document.documentElement.lang = next;
-      updateChromeCopy();
-      render();
-    });
     function updateChromeCopy() {
-      const fr = currentLang() === 'fr';
-      document.getElementById('entry-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
-      document.getElementById('entry-menu-about').textContent = fr ? 'À propos d’Acadie.sol' : 'About Acadie.sol';
-      document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
-      document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
-      document.getElementById('entry-dock-home').textContent = fr ? 'Accueil' : 'Home';
-      document.getElementById('entry-dock-events').textContent = fr ? 'Événements' : 'Events';
-      document.getElementById('entry-dock-search').textContent = fr ? 'Recherche' : 'Search';
-      document.getElementById('entry-dock-menu').textContent = 'Menu';
+      document.documentElement.lang = currentLang();
+      window.AcadieShell?.sync?.();
     }
+    window.addEventListener('acadie:languagechange', () => { updateChromeCopy(); render(); });
     document.documentElement.lang = currentLang();
     updateChromeCopy();
 

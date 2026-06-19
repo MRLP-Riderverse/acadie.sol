@@ -1,0 +1,151 @@
+/* Global Acadie.sol shell chrome.
+   This is the single visual contract for the floating menu and bottom dock across
+   every page; page styles should change content surfaces, not this shared shell. */
+.menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+
+/* Shared floating menu overlay: the backdrop and drawer animate separately so the
+   dimmed full-screen layer never inherits the centered panel transform. */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(26, 20, 16, .38);
+  backdrop-filter: blur(5px) saturate(.92);
+  -webkit-backdrop-filter: blur(5px) saturate(.92);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+.drawer {
+  position: fixed;
+  z-index: 21;
+  left: 50%;
+  bottom: 86px;
+  width: min(390px, calc(100vw - 28px));
+  min-height: 218px;
+  padding: 58px 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--glass, color-mix(in srgb, var(--paper) 72%, transparent));
+  backdrop-filter: blur(20px) saturate(1.45);
+  -webkit-backdrop-filter: blur(20px) saturate(1.45);
+  box-shadow: 0 24px 54px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px) scale(.98);
+  transition: transform .18s ease, opacity .18s ease;
+}
+.menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
+.menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+
+/* Shared menu controls: display/language controls live in the corners; the quiet
+   remembrance cross stays centered as one icon-only global utility. */
+.drawer-controls {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+.menu-control,
+.drawer-close {
+  min-width: 44px;
+  min-height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.menu-control:focus,
+.drawer-close:focus { outline: none; }
+.menu-control:focus-visible,
+.drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
+.theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
+:root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
+.lang-button { display: inline-flex; gap: 3px; align-items: center; padding-inline: 12px; }
+.lang-button .lang-en,
+.lang-button .lang-fr { color: var(--muted); }
+[data-lang="en"] .lang-button .lang-en,
+[data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
+.drawer-close {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  color: var(--muted);
+  font-size: 1.15rem;
+  background: color-mix(in srgb, var(--paper-soft, var(--paper)) 78%, transparent);
+}
+.drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
+.drawer-title { display: grid; gap: 2px; }
+.drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+.drawer-title span { color: var(--muted); font-size: .8rem; }
+.drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
+.drawer-nav a {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--paper) 72%, transparent);
+  color: var(--ink);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 900;
+  text-align: left;
+}
+.drawer-nav a:hover,
+.menu-control:hover,
+.drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
+
+/* Shared bottom dock: permanent cross-page navigation, never page-specific chrome. */
+.site-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: min(390px, calc(100vw - 28px));
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: var(--glass, color-mix(in srgb, var(--paper) 72%, transparent));
+  box-shadow: 0 14px 38px var(--shadow);
+  backdrop-filter: blur(20px) saturate(1.45);
+  -webkit-backdrop-filter: blur(20px) saturate(1.45);
+  z-index: 22;
+}
+.site-dock a,
+.site-dock label {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  min-height: 56px;
+  padding: 8px 2px;
+  border-radius: 18px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.site-dock a span:first-child,
+.site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
+.site-dock a:hover,
+.site-dock label:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 72%, transparent); }
