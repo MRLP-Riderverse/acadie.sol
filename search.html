@@ -69,6 +69,14 @@
       border: 0;
     }
     .search-row { width: 100%; display: grid; gap: 12px; align-content: start; }
+    /* Active editing lane — while the visitor is typing, the results column keeps
+       a stable vertical runway even if matches drop to one, zero, or temporarily
+       none. This prevents the page from collapsing and taking the fixed search bar
+       along for the ride during typo/erase transitions like “fooo” → “food”. */
+    body.search-active .search-row,
+    body.search-input-focused .search-row {
+      min-height: min(52svh, 420px);
+    }
     /* Search chrome mimics the modern mobile browser bar: anchored low near the
        dock, then tucked away on downward scroll and restored on upward scroll.
        Background gives it a flash-card feel — results scroll behind it cleanly. */
@@ -220,7 +228,7 @@
     body.search-input-focused .results {
       padding-top: 18px;
       padding-bottom: 168px;
-      min-height: 96px;
+      min-height: clamp(180px, 34svh, 300px);
     }
     .result-card {
       display: grid;
@@ -242,12 +250,21 @@
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
     .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: transparent; border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); font-size: .75rem; font-weight: 800; }
     .empty { border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); padding: 12px 2px; color: var(--muted); background: transparent; line-height: 1.45; }
+    .empty.quiet {
+      min-height: clamp(150px, 28svh, 240px);
+      border-bottom-color: transparent;
+      color: transparent;
+      pointer-events: none;
+      user-select: none;
+    }
 
     @media (max-width: 680px) {
       .wrap { width: min(430px, 100vw); padding: 22px 14px 188px; }
       .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 188px; }
       body.search-active .search-hero,
       body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 188px; }
+      body.search-active .search-row,
+      body.search-input-focused .search-row { min-height: min(48svh, 360px); }
       .search-surface { gap: 16px; }
       .search-controls { width: min(390px, calc(100vw - 28px)); }
       .search-field { min-height: 44px; }
@@ -398,11 +415,14 @@
     function render() {
       const c = copy();
       const query = normalize(state.query.trim());
+      const editing = document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
       const hasIntent = Boolean(query) || state.filter !== 'all';
       setIntentState(searchFlowActive(query));
       if (!hasIntent) {
         setText('result-count', '');
-        document.getElementById('results').innerHTML = '';
+        document.getElementById('results').innerHTML = editing
+          ? '<div class="empty quiet" aria-hidden="true">.</div>'
+          : '';
         return;
       }
       const ranked = state.items
