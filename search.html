@@ -25,8 +25,6 @@
       background: var(--page-bg);
       background-attachment: fixed;
       --search-controls-rest-bottom: 98px;
-      --search-controls-keyboard-gap: 12px;
-      --keyboard-inset: 0px;
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
@@ -77,9 +75,9 @@
     body.search-input-focused .search-row {
       min-height: min(52svh, 420px);
     }
-    /* Search chrome mimics the modern mobile browser bar: anchored low near the
-       dock, then tucked away on downward scroll and restored on upward scroll.
-       Background gives it a flash-card feel — results scroll behind it cleanly. */
+    /* Search chrome — fixed in one bottom lane above the dock. No scroll-hide,
+       no custom keyboard-jumping: the control should feel glued in place while
+       the results move independently behind/above it. */
     .search-controls {
       position: fixed;
       z-index: 35;
@@ -94,35 +92,11 @@
       border-radius: 18px;
       box-shadow: 0 -6px 22px -4px var(--shadow);
       transform: translateX(-50%);
-      transition: transform .24s ease, opacity .2s ease;
-      will-change: transform, opacity;
+      transition: transform .18s ease;
     }
-    .search-chrome-hidden .search-controls {
-      opacity: 0;
-      pointer-events: none;
-      transform: translate(-50%, calc(100% + 110px));
-    }
-    /* If the keyboard is open and the input regains focus, keyboard usability
-       wins over scroll-hide — the search chrome must snap back into view. */
-    body.search-input-focused .search-controls,
-    body.keyboard-open.search-input-focused .search-controls {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(-50%);
-    }
-    /* Keyboard lane — when the iPhone keyboard is genuinely open, the search bar
-       should sit at the bottom of the visible viewport just above the keyboard,
-       not remain parked in the higher dock lane. The JS supplies --keyboard-inset
-       from visualViewport resize using a stable layout-height baseline. */
-    body.keyboard-open.search-input-focused .search-controls {
-      bottom: calc(var(--keyboard-inset) + var(--search-controls-keyboard-gap) + env(safe-area-inset-bottom));
-    }
-    /* When the soft keyboard is open (visual viewport shrinks below layout
-       viewport), only the dock should duck behind the keyboard. The search
-       chrome stays pinned in its normal lane while typing so results do not
-       cause the input bar to drop under the keyboard. */
-    body.search-input-focused .site-dock,
-    body.keyboard-open .site-dock {
+    /* Keep only the dock out of the way while editing. The search control stays
+       in its one fixed lane instead of trying to manage a second keyboard lane. */
+    body.search-input-focused .site-dock {
       transform: translateX(-50%) translateY(200px);
       opacity: 0;
       pointer-events: none;
@@ -329,29 +303,14 @@
       }
     };
 
-    const state = { items: [], query: '', filter: 'all', chromeHidden: false };
-    let lastScrollY = 0;
-    let scrollTicking = false;
+    const state = { items: [], query: '', filter: 'all' };
     let focusGuard = false;
     let touchStartY = null;
-    let layoutViewportHeight = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0);
-    let keyboardOpen = false;
     function currentLang() { return window.AcadieShell?.currentLang?.() || document.documentElement.dataset.lang || 'en'; }
     function copy() { return SEARCH_COPY[currentLang()] || SEARCH_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function escapeHtml(value) { return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
     function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
-    function setKeyboardInset(px) {
-      document.documentElement.style.setProperty('--keyboard-inset', `${Math.max(0, Math.round(px || 0))}px`);
-    }
-    function layoutViewportCandidate() {
-      const vv = window.visualViewport;
-      return Math.max(
-        window.innerHeight || 0,
-        document.documentElement.clientHeight || 0,
-        vv ? Math.round(vv.height + vv.offsetTop) : 0
-      );
-    }
 
     function filterLabel() {
       const c = copy();
@@ -438,86 +397,14 @@
         : `<div class="empty">${escapeHtml(c.empty)}</div>`;
     }
 
-    /* Scroll chrome — Safari-style direction response. Downward motion hides the
-       fixed search controls so results get the canvas; upward motion or input
-       focus restores the controls for immediate editing. */
-    function setChromeHidden(hidden) {
-      /* Search editing wins over scroll-hide. If the input is active or the
-         keyboard is open for the search field, never leave the chrome hidden. */
-      if (hidden && (document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused'))) {
-        hidden = false;
-      }
-      state.chromeHidden = hidden;
-      document.body.classList.toggle('search-chrome-hidden', hidden);
-    }
-    function handleScrollDirection() {
-      const currentY = Math.max(0, window.scrollY || window.pageYOffset || 0);
-      const delta = currentY - lastScrollY;
-      const filterOpen = document.getElementById('filter-menu')?.open;
-      const editing = document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
-      /* While editing, ignore scroll-direction chrome mutations. iPhone keyboard
-         and layout changes can emit noisy scroll deltas that are not real intent. */
-      if (editing) {
-        setChromeHidden(false);
-        lastScrollY = currentY;
-        scrollTicking = false;
-        return;
-      }
-      if (delta > 12 && currentY > 24 && !filterOpen) setChromeHidden(true);
-      if (delta < -12 || currentY <= 8) setChromeHidden(false);
-      lastScrollY = currentY;
-      scrollTicking = false;
-    }
-
-    /* Visual-viewport keyboard detection. The key detail is to compare the
-       current visible viewport against a stable layout-height baseline rather
-       than the live innerHeight, which can wobble during iPhone editing and
-       backspacing. That wobble was letting keyboard-open flip on/off and drag
-       the search bar between lanes mid-edit. */
-    let keyboardDetectTimer = null;
-    function detectKeyboard() {
-      clearTimeout(keyboardDetectTimer);
-      keyboardDetectTimer = setTimeout(() => {
-        const vv = window.visualViewport;
-        if (!vv) {
-          keyboardOpen = false;
-          document.body.classList.remove('keyboard-open');
-          setKeyboardInset(0);
-          return;
-        }
-        const inputFocused = document.activeElement?.id === 'search-input';
-        const candidate = layoutViewportCandidate();
-        if (!keyboardOpen && candidate) {
-          layoutViewportHeight = candidate;
-        }
-        const keyboardInset = Math.max(0, layoutViewportHeight - Math.round(vv.height + vv.offsetTop));
-        const kbd = inputFocused && keyboardInset > 120;
-        keyboardOpen = kbd;
-        document.body.classList.toggle('keyboard-open', kbd);
-        document.body.classList.toggle('search-input-focused', inputFocused);
-        setKeyboardInset(kbd ? keyboardInset : 0);
-        /* When the input is active, keyboard-open should force the search
-           chrome visible above it even if scroll-hide ran just before focus. */
-        if (kbd && inputFocused) setChromeHidden(false);
-        /* When keyboard closes, restore the resting lane and refresh the
-           layout baseline so orientation/address-bar changes do not stale it. */
-        if (!kbd) {
-          layoutViewportHeight = candidate || layoutViewportHeight;
-          setChromeHidden(false);
-        }
-      }, 80);
-    }
-
     function bindEvents() {
       const input = document.getElementById('search-input');
       input.addEventListener('input', event => {
         state.query = event.target.value;
         document.body.classList.add('search-input-focused');
-        setChromeHidden(false);
         render();
       });
       input.addEventListener('focus', () => {
-        setChromeHidden(false);
         document.body.classList.add('search-input-focused');
         render();
         focusGuard = true;
@@ -528,7 +415,6 @@
         touchStartY = null;
         document.body.classList.remove('search-input-focused');
         render();
-        detectKeyboard();
       });
       input.addEventListener('keydown', event => {
         if (event.key === 'Enter') {
@@ -544,12 +430,6 @@
           render();
         });
       });
-      window.addEventListener('scroll', () => {
-        if (!scrollTicking) {
-          scrollTicking = true;
-          requestAnimationFrame(handleScrollDirection);
-        }
-      }, { passive: true });
       /* Only a real touch-drag should dismiss the keyboard while editing.
          Window scroll deltas alone are too noisy on iPhone during keyboard resize. */
       window.addEventListener('touchstart', event => {
@@ -569,18 +449,10 @@
       window.addEventListener('touchend', () => {
         touchStartY = null;
       }, { passive: true });
-      /* Visual viewport resize = keyboard open/close. Repositions chrome
-         and hides/shows dock accordingly. Only listen to resize, not scroll —
-         the visualViewport scroll event fires erratically and can fight focus. */
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', detectKeyboard);
-      }
       window.addEventListener('acadie:languagechange', applyCopy);
     }
 
     async function init() {
-      setKeyboardInset(0);
-      layoutViewportHeight = layoutViewportCandidate() || layoutViewportHeight;
       applyCopy();
       bindEvents();
       const response = await fetch('assets/search-index.json', { cache: 'no-store' });
