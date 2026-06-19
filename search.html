@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23174b8e'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='34'%3E🔥%3C/text%3E%3C/svg%3E" />
+  <title>Search · ACADIE.SOL</title>
+  <link rel="stylesheet" href="assets/site-colors.css" />
+  <style>
+    /* search.html — first-class finding surface.
+       The global dock opens this page directly; directory.html stays a browse
+       surface, while this page owns cross-type search over the exported index. */
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Verdana", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 0%, rgba(40, 114, 198, 0.24), transparent 22rem),
+        radial-gradient(circle at 92% 10%, rgba(242, 200, 75, 0.13), transparent 19rem),
+        linear-gradient(180deg, #1b1b1b 0%, var(--page-bg) 42%, #0e0e0e 100%);
+    }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
+    .wrap { width: min(880px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 104px; }
+
+    /* Hero search block — one obvious tap target, with the escape hatch to view
+       everything nearby so search and browsing form a closed loop. */
+    .search-hero {
+      min-height: min(620px, calc(100svh - 120px));
+      display: grid;
+      place-items: center;
+    }
+    .search-card {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: clamp(18px, 5vw, 36px);
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--panel-strong) 88%, transparent), color-mix(in srgb, var(--panel) 82%, transparent)),
+        radial-gradient(circle at 24% 0%, rgba(242, 200, 75, 0.18), transparent 18rem);
+      box-shadow: 0 24px 64px var(--shadow);
+      backdrop-filter: blur(10px) saturate(1.1);
+      display: grid;
+      gap: 18px;
+    }
+    .kicker { color: var(--gold); text-transform: uppercase; letter-spacing: .16em; font-size: .74rem; font-weight: 900; }
+    h1 { margin: 0; font-size: clamp(2.1rem, 8vw, 4.6rem); line-height: .92; letter-spacing: -.04em; color: var(--ink-strong); }
+    .lede { margin: 0; max-width: 62ch; color: var(--muted); line-height: 1.48; font-size: clamp(.96rem, 2.5vw, 1.08rem); }
+    .search-row { display: grid; gap: 10px; }
+    .search-field-wrap { position: relative; }
+    .search-field {
+      width: 100%;
+      min-height: 64px;
+      border: 1px solid var(--line-strong);
+      border-radius: 22px;
+      padding: 17px 48px 17px 18px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      outline: none;
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--ink) 6%, transparent);
+    }
+    .search-field::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
+    .search-field:focus-visible { outline: 3px solid color-mix(in srgb, var(--gold) 38%, transparent); outline-offset: 3px; }
+    .search-glyph { position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: var(--gold); font-weight: 900; font-size: 1.35rem; pointer-events: none; }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip,
+    .view-all {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 13px;
+      color: var(--text);
+      background: color-mix(in srgb, var(--paper) 12%, transparent);
+      font: inherit;
+      font-size: .88rem;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .chip.active,
+    .chip:hover,
+    .view-all:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .view-all { display: inline-flex; align-items: center; gap: 8px; background: var(--blue-deep); border-color: transparent; color: var(--gold); }
+    .count { color: var(--soft); font-size: .9rem; }
+
+    /* Results feed — compact all-type cards.  The data shape comes from
+       assets/search-index.json so future exports can add keywords/media without
+       rewriting the page shell. */
+    .results { display: grid; gap: 10px; margin-top: 18px; }
+    .result-card {
+      display: grid;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 15px;
+      background: linear-gradient(180deg, var(--card-strong), var(--card));
+      box-shadow: 0 14px 34px var(--shadow);
+      color: var(--text);
+      text-decoration: none;
+    }
+    .result-card:hover { border-color: var(--gold); transform: translateY(-1px); }
+    .result-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+    .result-title { margin: 0; color: var(--ink-strong); font-size: 1.08rem; line-height: 1.12; }
+    .result-subtitle { color: var(--muted); font-size: .9rem; line-height: 1.35; }
+    .type-pill { flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; color: var(--gold); background: color-mix(in srgb, var(--blue-deep) 78%, transparent); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: color-mix(in srgb, var(--paper) 12%, transparent); font-size: .75rem; font-weight: 800; }
+    .empty { border: 1px dashed var(--line); border-radius: 22px; padding: 20px; color: var(--muted); background: color-mix(in srgb, var(--paper) 10%, transparent); line-height: 1.45; }
+    .footer-note { margin: 22px auto 0; max-width: 62ch; color: var(--soft); font-size: .86rem; line-height: 1.45; text-align: center; }
+
+    @media (max-width: 680px) {
+      .wrap { width: min(430px, 100vw); padding: 22px 14px 96px; }
+      .search-hero { min-height: calc(100svh - 118px); align-items: start; padding-top: clamp(24px, 7svh, 64px); }
+      .search-card { border-radius: 28px; }
+      .search-field { min-height: 62px; }
+      .result-top { display: grid; }
+      .type-pill { width: fit-content; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-shell.css" />
+</head>
+<body>
+  <script src="assets/site-shell.js"></script>
+  <main class="wrap">
+    <section class="search-hero" aria-label="Acadie.sol search">
+      <div class="search-card">
+        <div class="kicker" id="search-kicker">Acadie.sol search</div>
+        <h1 id="search-title">Find anything local.</h1>
+        <p class="lede" id="search-lede">Search places, events, categories, areas, and keywords from one calm surface. Or skip the prompt and open the full directory.</p>
+        <div class="search-row">
+          <label class="search-field-wrap" for="search-input">
+            <input id="search-input" class="search-field" type="search" autocomplete="off" enterkeyhint="search" placeholder="Try pizza, music, waterfront, Bathurst…" />
+            <span class="search-glyph" aria-hidden="true">⌕</span>
+          </label>
+          <div class="chips" aria-label="Quick filters">
+            <button class="chip active" type="button" data-filter="all" id="chip-all">All</button>
+            <button class="chip" type="button" data-filter="entry" id="chip-places">Places</button>
+            <button class="chip" type="button" data-filter="event" id="chip-events">Events</button>
+            <button class="chip" type="button" data-filter="food">Food</button>
+            <button class="chip" type="button" data-filter="music">Music</button>
+            <button class="chip" type="button" data-filter="family">Family</button>
+            <button class="chip" type="button" data-filter="waterfront">Waterfront</button>
+          </div>
+          <div class="actions">
+            <a class="view-all" href="directory.html" id="view-directory">View all directory →</a>
+            <span class="count" id="result-count">Loading local index…</span>
+          </div>
+        </div>
+        <section class="results" id="results" aria-live="polite"></section>
+      </div>
+    </section>
+    <p class="footer-note" id="search-note">This is the new closed loop: dock search opens the finding surface; directory stays the full browse view.</p>
+  </main>
+
+  <script>
+    const SEARCH_COPY = {
+      en: {
+        kicker: 'Acadie.sol search',
+        title: 'Find anything local.',
+        lede: 'Search places, events, categories, areas, and keywords from one calm surface. Or skip the prompt and open the full directory.',
+        placeholder: 'Try pizza, music, waterfront, Bathurst…',
+        all: 'All', places: 'Places', events: 'Events', viewDirectory: 'View all directory →',
+        loading: 'Loading local index…', ready: count => `${count} searchable local signals.`,
+        showing: count => `${count} result${count === 1 ? '' : 's'}.`,
+        empty: 'No matches yet. Try a broader term, a category, or open the full directory.',
+        note: 'This is the new closed loop: dock search opens the finding surface; directory stays the full browse view.'
+      },
+      fr: {
+        kicker: 'Recherche Acadie.sol',
+        title: 'Trouver le local.',
+        lede: 'Cherchez des lieux, événements, catégories, secteurs et mots-clés à partir d’une surface calme. Ou ouvrez le répertoire complet.',
+        placeholder: 'Essayez pizza, musique, bord de l’eau, Bathurst…',
+        all: 'Tout', places: 'Lieux', events: 'Événements', viewDirectory: 'Voir le répertoire →',
+        loading: 'Chargement de l’index local…', ready: count => `${count} signaux locaux consultables.`,
+        showing: count => `${count} résultat${count === 1 ? '' : 's'}.`,
+        empty: 'Aucun résultat pour le moment. Essayez un terme plus large, une catégorie, ou ouvrez le répertoire complet.',
+        note: 'Nouvelle boucle fermée : la recherche du dock ouvre cette surface; le répertoire reste la vue complète.'
+      }
+    };
+
+    const state = { items: [], query: '', filter: 'all' };
+    function currentLang() { return window.AcadieShell?.currentLang?.() || document.documentElement.dataset.lang || 'en'; }
+    function copy() { return SEARCH_COPY[currentLang()] || SEARCH_COPY.en; }
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function escapeHtml(value) { return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
+    function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+    function applyCopy() {
+      const c = copy();
+      setText('search-kicker', c.kicker); setText('search-title', c.title); setText('search-lede', c.lede);
+      setText('chip-all', c.all); setText('chip-places', c.places); setText('chip-events', c.events);
+      setText('view-directory', c.viewDirectory); setText('search-note', c.note);
+      document.getElementById('search-input').placeholder = c.placeholder;
+      render();
+    }
+
+    function itemText(item) { return [item.title, item.subtitle, ...(item.badges || []), ...(item.terms || [])].map(normalize).join(' '); }
+    function passesFilter(item) {
+      if (state.filter === 'all') return true;
+      if (state.filter === 'entry' || state.filter === 'event') return item.type === state.filter;
+      return itemText(item).includes(normalize(state.filter));
+    }
+    function scoreItem(item, query) {
+      if (!query) return item.type === 'event' ? 3 : 1;
+      const title = normalize(item.title);
+      const subtitle = normalize(item.subtitle);
+      const haystack = itemText(item);
+      let score = 0;
+      if (title === query) score += 120;
+      if (title.startsWith(query)) score += 80;
+      if (title.includes(query)) score += 55;
+      if (subtitle.includes(query)) score += 25;
+      if ((item.badges || []).some(badge => normalize(badge).includes(query))) score += 20;
+      if (haystack.includes(query)) score += 10;
+      return score;
+    }
+    function resultUrl(item) {
+      if (item.type === 'entry' && item.url && item.url.startsWith('directory.html#entry-')) {
+        return item.url.replace('directory.html#entry-', 'entry.html#');
+      }
+      return item.url || 'directory.html';
+    }
+    function renderCard(item) {
+      const typeLabel = item.type === 'event' ? copy().events : copy().places;
+      const badges = (item.badges || []).slice(0, 4).map(badge => `<span class="badge">${escapeHtml(badge)}</span>`).join('');
+      return `<a class="result-card" href="${escapeHtml(resultUrl(item))}">
+        <div class="result-top"><div><h2 class="result-title">${escapeHtml(item.title)}</h2><div class="result-subtitle">${escapeHtml(item.subtitle || '')}</div></div><span class="type-pill">${escapeHtml(typeLabel)}</span></div>
+        ${badges ? `<div class="badges">${badges}</div>` : ''}
+      </a>`;
+    }
+    function render() {
+      const c = copy();
+      const query = normalize(state.query.trim());
+      const ranked = state.items
+        .filter(passesFilter)
+        .map(item => ({ item, score: scoreItem(item, query) }))
+        .filter(row => !query || row.score > 0)
+        .sort((a, b) => b.score - a.score || String(a.item.title).localeCompare(String(b.item.title)))
+        .slice(0, query ? 24 : 12)
+        .map(row => row.item);
+      setText('result-count', state.items.length ? (query || state.filter !== 'all' ? c.showing(ranked.length) : c.ready(state.items.length)) : c.loading);
+      document.getElementById('results').innerHTML = ranked.length
+        ? ranked.map(renderCard).join('')
+        : `<div class="empty">${escapeHtml(c.empty)}</div>`;
+    }
+
+    function bindEvents() {
+      document.getElementById('search-input').addEventListener('input', event => { state.query = event.target.value; render(); });
+      document.querySelectorAll('.chip').forEach(button => {
+        button.addEventListener('click', () => {
+          state.filter = button.dataset.filter || 'all';
+          document.querySelectorAll('.chip').forEach(chip => chip.classList.toggle('active', chip === button));
+          document.getElementById('search-input').focus();
+          render();
+        });
+      });
+      window.addEventListener('acadie:languagechange', applyCopy);
+    }
+
+    async function init() {
+      applyCopy();
+      bindEvents();
+      const response = await fetch('assets/search-index.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error(`Failed to load search index (${response.status})`);
+      const payload = await response.json();
+      state.items = Array.isArray(payload.items) ? payload.items : [];
+      render();
+    }
+    init().catch(error => {
+      console.error(error);
+      document.getElementById('result-count').textContent = 'Search failed to load.';
+      document.getElementById('results').innerHTML = '<div class="empty">Search failed to load. Please open the full directory.</div>';
+    });
+  </script>
+</body>
+</html>
