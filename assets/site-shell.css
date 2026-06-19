@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: calc(35px + env(safe-area-inset-top));
+  height: calc(30px + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
   z-index: 84;
   display: flex;
@@ -19,7 +19,7 @@
   justify-content: center;
   background: var(--blue-deep);
   color: var(--gold);
-  font-size: 1rem;
+  font-size: .85rem;
   font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -32,7 +32,7 @@
   color: var(--gold);
 }
 body {
-  padding-top: calc(35px + env(safe-area-inset-top));
+  padding-top: calc(30px + env(safe-area-inset-top));
 }
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
 

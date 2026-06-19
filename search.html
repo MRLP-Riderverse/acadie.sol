@@ -36,7 +36,8 @@
       padding-bottom: 188px;
       transition: min-height .18s ease, padding .18s ease;
     }
-    body.search-active .search-hero {
+    body.search-active .search-hero,
+    body.search-input-focused .search-hero {
       min-height: auto;
       align-items: start;
       padding-bottom: 0;
@@ -198,8 +199,10 @@
       text-align: left;
       width: 100%;
     }
-    body.search-active .results {
+    body.search-active .results,
+    body.search-input-focused .results {
       padding-top: 18px;
+      min-height: 96px;
     }
     .result-card {
       display: grid;
@@ -225,7 +228,8 @@
     @media (max-width: 680px) {
       .wrap { width: min(430px, 100vw); padding: 22px 14px 188px; }
       .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 188px; }
-      body.search-active .search-hero { min-height: auto; align-items: start; padding: 0 0 188px; }
+      body.search-active .search-hero,
+      body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 188px; }
       .search-surface { gap: 16px; }
       .search-controls { bottom: calc(98px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
       .search-field { min-height: 44px; }
@@ -353,6 +357,9 @@
         ${badges ? `<div class="badges">${badges}</div>` : ''}
       </a>`;
     }
+    function searchFlowActive(query) {
+      return Boolean(query) || state.filter !== 'all' || document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
+    }
     function setIntentState(active) {
       document.body.classList.toggle('search-active', active);
     }
@@ -360,7 +367,7 @@
       const c = copy();
       const query = normalize(state.query.trim());
       const hasIntent = Boolean(query) || state.filter !== 'all';
-      setIntentState(hasIntent);
+      setIntentState(searchFlowActive(query));
       if (!hasIntent) {
         setText('result-count', '');
         document.getElementById('results').innerHTML = '';
@@ -430,11 +437,16 @@
 
     function bindEvents() {
       const input = document.getElementById('search-input');
-      input.addEventListener('input', event => { state.query = event.target.value; render(); });
+      input.addEventListener('input', event => {
+        state.query = event.target.value;
+        document.body.classList.add('search-input-focused');
+        render();
+      });
       input.addEventListener('focus', () => {
         setChromeHidden(false);
         document.body.classList.add('keyboard-open');
         document.body.classList.add('search-input-focused');
+        render();
         detectKeyboard();
         focusGuard = true;
         setTimeout(() => { focusGuard = false; }, 150);
@@ -442,6 +454,7 @@
       /* Enter key dismisses keyboard so results become visible. */
       input.addEventListener('blur', () => {
         document.body.classList.remove('search-input-focused');
+        render();
         detectKeyboard();
       });
       input.addEventListener('keydown', event => {
