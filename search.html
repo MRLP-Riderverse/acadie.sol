@@ -24,6 +24,9 @@
       color: var(--text);
       background: var(--page-bg);
       background-attachment: fixed;
+      --search-controls-rest-bottom: 98px;
+      --search-controls-keyboard-gap: 12px;
+      --keyboard-inset: 0px;
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
@@ -73,7 +76,7 @@
       position: fixed;
       z-index: 35;
       left: 50%;
-      bottom: calc(98px + env(safe-area-inset-bottom));
+      bottom: calc(var(--search-controls-rest-bottom) + env(safe-area-inset-bottom));
       width: min(620px, calc(100vw - 28px));
       display: grid;
       gap: 8px;
@@ -98,6 +101,13 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateX(-50%);
+    }
+    /* Keyboard lane — when the iPhone keyboard is genuinely open, the search bar
+       should sit at the bottom of the visible viewport just above the keyboard,
+       not remain parked in the higher dock lane. The JS supplies --keyboard-inset
+       from visualViewport resize using a stable layout-height baseline. */
+    body.keyboard-open.search-input-focused .search-controls {
+      bottom: calc(var(--keyboard-inset) + var(--search-controls-keyboard-gap) + env(safe-area-inset-bottom));
     }
     /* When the soft keyboard is open (visual viewport shrinks below layout
        viewport), only the dock should duck behind the keyboard. The search
@@ -209,6 +219,7 @@
     body.search-active .results,
     body.search-input-focused .results {
       padding-top: 18px;
+      padding-bottom: 168px;
       min-height: 96px;
     }
     .result-card {
@@ -238,7 +249,7 @@
       body.search-active .search-hero,
       body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 188px; }
       .search-surface { gap: 16px; }
-      .search-controls { bottom: calc(98px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
+      .search-controls { width: min(390px, calc(100vw - 28px)); }
       .search-field { min-height: 44px; }
       .result-top { display: grid; }
       .type-pill { width: fit-content; }
@@ -306,11 +317,24 @@
     let scrollTicking = false;
     let focusGuard = false;
     let touchStartY = null;
+    let layoutViewportHeight = Math.max(window.innerHeight || 0, document.documentElement.clientHeight || 0);
+    let keyboardOpen = false;
     function currentLang() { return window.AcadieShell?.currentLang?.() || document.documentElement.dataset.lang || 'en'; }
     function copy() { return SEARCH_COPY[currentLang()] || SEARCH_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function escapeHtml(value) { return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
     function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function setKeyboardInset(px) {
+      document.documentElement.style.setProperty('--keyboard-inset', `${Math.max(0, Math.round(px || 0))}px`);
+    }
+    function layoutViewportCandidate() {
+      const vv = window.visualViewport;
+      return Math.max(
+        window.innerHeight || 0,
+        document.documentElement.clientHeight || 0,
+        vv ? Math.round(vv.height + vv.offsetTop) : 0
+      );
+    }
 
     function filterLabel() {
       const c = copy();
@@ -425,26 +449,42 @@
       scrollTicking = false;
     }
 
-    /* Visual-viewport keyboard detection. When the soft keyboard opens the
-       visual viewport shrinks below the layout viewport; when it closes they
-       re-align. This lets us hide the dock and reposition search chrome so
-       only the search bar stacks above the keyboard — not the dock.
-       Debounced with a 200ms cooldown to prevent flicker during resize. */
+    /* Visual-viewport keyboard detection. The key detail is to compare the
+       current visible viewport against a stable layout-height baseline rather
+       than the live innerHeight, which can wobble during iPhone editing and
+       backspacing. That wobble was letting keyboard-open flip on/off and drag
+       the search bar between lanes mid-edit. */
     let keyboardDetectTimer = null;
     function detectKeyboard() {
       clearTimeout(keyboardDetectTimer);
       keyboardDetectTimer = setTimeout(() => {
         const vv = window.visualViewport;
-        if (!vv) return;
+        if (!vv) {
+          keyboardOpen = false;
+          document.body.classList.remove('keyboard-open');
+          setKeyboardInset(0);
+          return;
+        }
         const inputFocused = document.activeElement?.id === 'search-input';
-        const kbd = vv.height < window.innerHeight - 80;
+        const candidate = layoutViewportCandidate();
+        if (!keyboardOpen && candidate) {
+          layoutViewportHeight = candidate;
+        }
+        const keyboardInset = Math.max(0, layoutViewportHeight - Math.round(vv.height + vv.offsetTop));
+        const kbd = inputFocused && keyboardInset > 120;
+        keyboardOpen = kbd;
         document.body.classList.toggle('keyboard-open', kbd);
         document.body.classList.toggle('search-input-focused', inputFocused);
+        setKeyboardInset(kbd ? keyboardInset : 0);
         /* When the input is active, keyboard-open should force the search
            chrome visible above it even if scroll-hide ran just before focus. */
         if (kbd && inputFocused) setChromeHidden(false);
-        /* When keyboard closes, restore scroll chrome state to visible. */
-        if (!kbd) setChromeHidden(false);
+        /* When keyboard closes, restore the resting lane and refresh the
+           layout baseline so orientation/address-bar changes do not stale it. */
+        if (!kbd) {
+          layoutViewportHeight = candidate || layoutViewportHeight;
+          setChromeHidden(false);
+        }
       }, 80);
     }
 
@@ -460,7 +500,6 @@
         setChromeHidden(false);
         document.body.classList.add('search-input-focused');
         render();
-        detectKeyboard();
         focusGuard = true;
         setTimeout(() => { focusGuard = false; }, 150);
       });
@@ -502,7 +541,7 @@
         if (document.activeElement?.id !== 'search-input' || focusGuard || touchStartY === null) return;
         const currentTouchY = event.touches[0]?.clientY;
         if (typeof currentTouchY !== 'number') return;
-        if (touchStartY - currentTouchY > 32) {
+        if (currentTouchY - touchStartY > 32) {
           input.blur();
           touchStartY = null;
         }
@@ -520,6 +559,8 @@
     }
 
     async function init() {
+      setKeyboardInset(0);
+      layoutViewportHeight = layoutViewportCandidate() || layoutViewportHeight;
       applyCopy();
       bindEvents();
       const response = await fetch('assets/search-index.json', { cache: 'no-store' });
