@@ -13,7 +13,8 @@
       langToFr: 'Switch language to French',
       langToEn: 'Switch language to English',
       langTitleEn: 'English active — switch to French',
-      langTitleFr: 'Français actif — passer en anglais'
+      langTitleFr: 'Français actif — passer en anglais',
+      headerBanner: (entries, events) => `${entries} Entries - Vive l’Acadie! - ${events} Events`
     },
     fr: {
       drawerTitle: 'Extras',
@@ -25,7 +26,8 @@
       langToFr: 'Passer en français',
       langToEn: 'Passer en anglais',
       langTitleEn: 'English active — switch to French',
-      langTitleFr: 'Français actif — passer en anglais'
+      langTitleFr: 'Français actif — passer en anglais',
+      headerBanner: (entries, events) => `${entries} entrées - Vive l’Acadie! - ${events} événements`
     }
   };
 
@@ -34,6 +36,8 @@
     if (saved === 'fr' || saved === 'en') return saved;
     return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
   }
+
+  const SHELL_DATA = { entryCount: null, eventCount: null, loaded: false };
 
   function syncShell() {
     const lang = currentLang();
@@ -61,10 +65,18 @@
     const subtitle = document.getElementById('global-drawer-subtitle');
     const directory = document.getElementById('global-menu-directory');
     const about = document.getElementById('global-menu-about');
+    const headerText = document.getElementById('global-header-text');
     if (title) title.textContent = copy.drawerTitle;
     if (subtitle) subtitle.textContent = copy.drawerSubtitle;
     if (directory) directory.textContent = copy.menuDirectory;
     if (about) about.textContent = copy.menuAbout;
+    if (headerText) {
+      const entries = SHELL_DATA.entryCount;
+      const events = SHELL_DATA.eventCount;
+      headerText.textContent = Number.isFinite(entries) && Number.isFinite(events)
+        ? copy.headerBanner(entries, events)
+        : 'Vive l\'Acadie!';
+    }
   }
 
   function setTheme(theme) {
@@ -81,12 +93,37 @@
     window.dispatchEvent(new CustomEvent('acadie:languagechange', { detail: { lang } }));
   }
 
+  async function loadShellCounts() {
+    if (SHELL_DATA.loaded) return;
+    SHELL_DATA.loaded = true;
+    try {
+      const [directoryResponse, eventsResponse] = await Promise.all([
+        fetch('assets/directory-data.json', { cache: 'no-store' }),
+        fetch('assets/events-data.json', { cache: 'no-store' })
+      ]);
+      if (!directoryResponse.ok || !eventsResponse.ok) throw new Error('Failed to load shell counts');
+      const [directoryPayload, eventsPayload] = await Promise.all([
+        directoryResponse.json(),
+        eventsResponse.json()
+      ]);
+      SHELL_DATA.entryCount = Number(
+        directoryPayload.published_count ?? directoryPayload.entry_count ?? (Array.isArray(directoryPayload.items) ? directoryPayload.items.length : 0)
+      );
+      SHELL_DATA.eventCount = Number(
+        eventsPayload.active_count ?? eventsPayload.event_count ?? (Array.isArray(eventsPayload.items) ? eventsPayload.items.length : 0)
+      );
+      syncShell();
+    } catch (error) {
+      console.warn('Shell counts unavailable:', error);
+    }
+  }
+
   const savedTheme = localStorage.getItem('acadie-theme');
   if (savedTheme) document.documentElement.dataset.theme = savedTheme;
   document.documentElement.dataset.lang = currentLang();
 
   document.write(`
-    <header class="site-header" aria-label="Acadian banner"><span>Vive l'Acadie!</span></header>
+    <header class="site-header" aria-label="Acadian banner"><span id="global-header-text">Vive l'Acadie!</span></header>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
     <aside class="drawer" aria-label="Extras menu">
@@ -115,6 +152,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     syncShell();
+    loadShellCounts();
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
     });

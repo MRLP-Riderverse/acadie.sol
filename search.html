@@ -79,17 +79,14 @@
       transform: translate(-50%, calc(100% + 110px));
     }
     /* When the soft keyboard is open (visual viewport shrinks below layout
-       viewport), the dock should duck behind the keyboard rather than stacking
-       above it. Only the search chrome stacks above the keyboard. */
+       viewport), only the dock should duck behind the keyboard. The search
+       chrome stays pinned in its normal lane while typing so results do not
+       cause the input bar to drop under the keyboard. */
     body.keyboard-open .site-dock {
       transform: translateX(-50%) translateY(200px);
       opacity: 0;
       pointer-events: none;
       transition: transform .22s ease, opacity .18s ease;
-    }
-    /* When dock hides, search chrome moves down to fill the freed space. */
-    body.keyboard-open .search-controls {
-      bottom: calc(14px + env(safe-area-inset-bottom));
     }
     .search-field-wrap { position: relative; }
     .search-field {
@@ -204,7 +201,6 @@
       .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 188px; }
       .search-surface { gap: 16px; }
       .search-controls { bottom: calc(98px + env(safe-area-inset-bottom)); width: min(390px, calc(100vw - 28px)); }
-      body.keyboard-open .search-controls { bottom: calc(14px + env(safe-area-inset-bottom)); }
       .search-field { min-height: 44px; }
       .result-top { display: grid; }
       .type-pill { width: fit-content; }
