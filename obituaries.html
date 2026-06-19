@@ -115,6 +115,7 @@
       display: grid;
       place-items: center;
       gap: 2px;
+      min-height: 56px;
       padding: 8px 2px;
       border-radius: 18px;
       text-decoration: none;
@@ -122,7 +123,10 @@
       font-size: .68rem;
       font-family: system-ui, sans-serif;
       font-weight: 900;
+      line-height: 1;
       cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
     }
     .site-dock a.active { color: var(--paper); background: var(--blue-deep); }
     @media (max-width: 720px) {
@@ -137,16 +141,15 @@
   <aside class="drawer" aria-label="Extras menu">
     <div class="drawer-controls" aria-label="Display and language controls">
       <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">✟</label>
+      <a class="drawer-close" href="obituaries.html" aria-label="Open obituaries" title="Open obituaries">✟</a>
       <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
     </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong id="obituaries-drawer-title">Extras</strong><span id="obituaries-drawer-subtitle">Directory, about, display</span></div>
     </div>
     <nav class="drawer-nav">
-      <a href="index.html" id="obituaries-menu-home">Home</a>
-      <a href="events.html" id="obituaries-menu-events">Events</a>
       <a href="directory.html" id="obituaries-menu-directory">Full directory</a>
+      <a href="index.html#about" id="obituaries-menu-about">About Acadie.sol</a>
     </nav>
   </aside>
 
@@ -168,9 +171,8 @@
         title: 'Lost but not forgotten',
         drawerTitle: 'Extras',
         drawerSubtitle: 'Directory, about, display',
-        home: 'Home',
-        events: 'Events',
         directory: 'Full directory',
+        about: 'About Acadie.sol',
         search: 'Search',
         menu: 'Menu',
       },
@@ -178,9 +180,8 @@
         title: 'On se souvient',
         drawerTitle: 'Extras',
         drawerSubtitle: 'Répertoire, à propos, affichage',
-        home: 'Accueil',
-        events: 'Événements',
         directory: 'Répertoire',
+        about: 'À propos d’Acadie.sol',
         search: 'Recherche',
         menu: 'Menu',
       },
@@ -230,9 +231,8 @@
       document.getElementById('obituaries-dock-events').textContent = c.events;
       document.getElementById('obituaries-dock-search').textContent = c.search;
       document.getElementById('obituaries-dock-menu').textContent = c.menu;
-      document.getElementById('obituaries-menu-home').textContent = c.home;
-      document.getElementById('obituaries-menu-events').textContent = c.events;
       document.getElementById('obituaries-menu-directory').textContent = c.directory;
+      document.getElementById('obituaries-menu-about').textContent = c.about;
     }
 
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
