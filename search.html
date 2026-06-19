@@ -30,30 +30,21 @@
     a:hover { color: var(--link-hover); }
     .wrap { width: min(760px, calc(100vw - 28px)); margin: 0 auto; padding: clamp(42px, 9svh, 92px) 0 120px; }
 
-    /* Search surface — no marketing copy, no initial suggestions, no card shell.
-       The page exists to accept a query and then get out of the way.
-       Idle state keeps the input low near the thumb; active state promotes the
-       results column into a normal top-anchored reading flow. */
+    /* Search surface — stable top-native layout.
+       No bottom-lane tricks, no hero promotion state, no viewport choreography.
+       The page starts with a normal search bar at the top and results directly below. */
     .search-hero {
-      min-height: min(620px, calc(100svh - 120px));
       display: grid;
-      align-items: end;
-      text-align: center;
-      padding-bottom: 32px;
-      transition: min-height .18s ease, padding .18s ease;
-    }
-    body.search-active .search-hero,
-    body.search-input-focused .search-hero {
-      min-height: auto;
       align-items: start;
-      padding-bottom: 24px;
+      text-align: left;
+      padding: 0;
     }
     .search-surface {
       width: min(620px, 100%);
       display: grid;
       gap: 14px;
-      justify-items: center;
       align-content: start;
+      justify-items: stretch;
     }
     .sr-only {
       position: absolute;
@@ -67,20 +58,7 @@
       border: 0;
     }
     .search-row { width: 100%; display: grid; gap: 12px; align-content: start; }
-    .search-controls-shell { order: 0; }
-    .results { order: 1; }
-    /* Active editing lane — still reserve some runway while typing, but do it in
-       normal document flow now that the page no longer owns a second fixed bar. */
-    body.search-active .search-row,
-    body.search-input-focused .search-row {
-      min-height: min(44svh, 360px);
-    }
-    /* Search controls now live in normal page flow. The shared site dock remains
-       the only fixed bottom chrome on the page, which removes the iOS/PWA conflict
-       between two competing bottom-positioned systems. */
-    .search-controls-shell {
-      width: 100%;
-    }
+    .search-controls-shell { width: 100%; }
     .search-controls {
       width: min(620px, 100%);
       display: grid;
@@ -105,14 +83,14 @@
       font: inherit;
       font-size: clamp(1rem, 3.4vw, 1.15rem);
       font-weight: 750;
-      text-align: center;
+      text-align: left;
       outline: none;
       box-shadow: none;
     }
     .search-field::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
     .search-field:focus-visible { outline: none; border-bottom-color: var(--gold); }
     .search-glyph { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gold); font-weight: 900; font-size: 1rem; pointer-events: none; }
-    .actions { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .actions { display: flex; align-items: center; justify-content: flex-start; gap: 10px; flex-wrap: wrap; }
     .filter-menu { position: relative; }
     .filter-toggle,
     .chip,
@@ -183,15 +161,10 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      margin-top: 12px;
+      margin-top: 4px;
       text-align: left;
       width: 100%;
-    }
-    body.search-active .results,
-    body.search-input-focused .results {
-      padding-top: 18px;
       padding-bottom: 24px;
-      min-height: clamp(160px, 28svh, 240px);
     }
     .result-card {
       display: grid;
@@ -213,21 +186,9 @@
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
     .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: transparent; border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); font-size: .75rem; font-weight: 800; }
     .empty { border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); padding: 12px 2px; color: var(--muted); background: transparent; line-height: 1.45; }
-    .empty.quiet {
-      min-height: clamp(150px, 28svh, 240px);
-      border-bottom-color: transparent;
-      color: transparent;
-      pointer-events: none;
-      user-select: none;
-    }
 
     @media (max-width: 680px) {
       .wrap { width: min(430px, 100vw); padding: 22px 14px 120px; }
-      .search-hero { min-height: calc(100svh - 118px); align-items: end; padding: 0 0 32px; }
-      body.search-active .search-hero,
-      body.search-input-focused .search-hero { min-height: auto; align-items: start; padding: 0 0 24px; }
-      body.search-active .search-row,
-      body.search-input-focused .search-row { min-height: min(40svh, 300px); }
       .search-surface { gap: 16px; }
       .search-controls { width: min(390px, 100%); }
       .search-field { min-height: 44px; }
@@ -244,7 +205,6 @@
       <div class="search-surface">
         <h1 class="sr-only" id="search-title">Search Acadie.sol</h1>
         <div class="search-row">
-          <section class="results" id="results" aria-live="polite"></section>
           <div class="search-controls-shell">
             <div class="search-controls" id="search-controls">
               <div class="actions" aria-label="Search actions">
@@ -269,6 +229,7 @@
               </label>
             </div>
           </div>
+          <section class="results" id="results" aria-live="polite"></section>
         </div>
       </div>
     </section>
@@ -356,23 +317,13 @@
         ${badges ? `<div class="badges">${badges}</div>` : ''}
       </a>`;
     }
-    function searchFlowActive(query) {
-      return Boolean(query) || state.filter !== 'all' || document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
-    }
-    function setIntentState(active) {
-      document.body.classList.toggle('search-active', active);
-    }
     function render() {
       const c = copy();
       const query = normalize(state.query.trim());
-      const editing = document.activeElement?.id === 'search-input' || document.body.classList.contains('search-input-focused');
       const hasIntent = Boolean(query) || state.filter !== 'all';
-      setIntentState(searchFlowActive(query));
       if (!hasIntent) {
         setText('result-count', '');
-        document.getElementById('results').innerHTML = editing
-          ? '<div class="empty quiet" aria-hidden="true">.</div>'
-          : '';
+        document.getElementById('results').innerHTML = '';
         return;
       }
       const ranked = state.items
