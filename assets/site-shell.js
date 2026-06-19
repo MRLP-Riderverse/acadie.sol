@@ -86,6 +86,7 @@
   document.documentElement.dataset.lang = currentLang();
 
   document.write(`
+    <header class="site-header" aria-label="Acadian banner"><span>Vive l'Acadie!</span></header>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
     <aside class="drawer" aria-label="Extras menu">

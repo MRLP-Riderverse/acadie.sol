@@ -1,6 +1,36 @@
 /* Global Acadie.sol shell chrome.
-   This is the single visual contract for the floating menu and bottom dock across
-   every page; page styles should change content surfaces, not this shared shell. */
+   This is the single visual contract for the floating menu, bottom dock,
+   and global header across every page; page styles should change content
+   surfaces, not this shared shell. */
+
+/* Global header bar — Acadian banner. Fixed at top of every page.
+   Blue background, gold text, 20px height, full-width. */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  z-index: 84;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--blue-deep);
+  color: var(--gold);
+  font-size: .58rem;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+}
+[data-theme="dark"] .site-header {
+  background: #0d2f5e;
+  color: var(--gold);
+}
+body {
+  padding-top: 20px;
+}
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
 
 /* Shared floating menu overlay: the backdrop and drawer animate separately so the
