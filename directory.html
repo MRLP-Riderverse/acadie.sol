@@ -226,6 +226,7 @@
       font: inherit;
       outline: none;
     }
+    .search { font-size: 16px; }
     .search::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
     .select option { color: var(--ink); background: var(--paper); }
 
@@ -677,7 +678,7 @@
         <div class="filter-popover" id="filter-popover" hidden>
           <div class="filter-title">
             <span id="dir-filter-title">Filter options</span>
-            <button id="close-filters" type="button" aria-label="Close filters">×</button>
+            <button id="close-filters" type="button" aria-label="Close filters">Close</button>
           </div>
           <select id="mood-select" class="select" aria-label="Quick lens">
             <option value="">Any vibe</option>
@@ -1310,6 +1311,10 @@
       document.getElementById('show-results').addEventListener('click', showResults);
       const navSearch = document.getElementById('nav-search');
       navSearch.addEventListener('click', focusSearchTool);
+      const menuToggle = document.getElementById('menu-toggle');
+      menuToggle?.addEventListener('change', () => {
+        if (menuToggle.checked) closeFilterPopover();
+      });
       document.getElementById('choose-discover').addEventListener('click', () => {
         clearFilters();
         setDirectoryMode('discover', { scroll: true, focus: false });
