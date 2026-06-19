@@ -160,6 +160,8 @@
     .actions { gap: 6px; }
     .action { border-radius: 14px; }
     .site-dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
+    .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
+    .site-dock a span:first-child, .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
     /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
        above the dock. Backdrop and drawer states are separate so the backdrop never
@@ -222,7 +224,6 @@
     <nav class="drawer-nav">
       <a href="directory.html" id="events-menu-directory">Full directory</a>
       <a href="index.html#about" id="events-menu-about">About Acadie.sol</a>
-      <a href="obituaries.html" id="events-menu-obituaries">Obituaries</a>
     </nav>
   </aside>
   <div class="wrap">
@@ -263,7 +264,7 @@
     const state = { events: [], entries: [], locations: [], filter: 'upcoming' };
     const EVENTS_COPY = {
       en: {
-        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', menuObituaries: 'Obituaries', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', pageTitle: 'ACADIE.SOL Events',
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', pageTitle: 'ACADIE.SOL Events',
         heroEyebrow: 'Community calendar', heroTitle: 'What’s happening', heroLede: 'Shows, meals, gatherings, pop-ups, and community dates around Acadie. Event cards link back to their host places so the calendar and directory stay connected.',
         findPlaces: 'Find places', home: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
         upcoming: 'Upcoming', all: 'All', archive: 'Archive', detailsSoon: 'Details coming soon.', previewSummary: 'Preview listing while the public calendar format is being shaped.',
@@ -271,7 +272,7 @@
         hostedBy: 'Hosted by', at: 'At', addToCalendar: 'Add to calendar', openEvent: 'Open event', viewHost: 'View host', noEvents: 'No matching events yet.', archiveLabel: 'Archive', loadFailed: 'Events failed to load:'
       },
       fr: {
-        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', menuObituaries: 'Avis de décès', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', pageTitle: 'ACADIE.SOL Événements',
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', pageTitle: 'ACADIE.SOL Événements',
         heroEyebrow: 'Calendrier communautaire', heroTitle: 'Ce qui se passe', heroLede: 'Spectacles, repas, rassemblements, pop-ups et dates communautaires autour de l’Acadie. Les fiches d’événements renvoient vers leurs lieux hôtes afin que le calendrier et le répertoire restent liés.',
         findPlaces: 'Trouver des lieux', home: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
         upcoming: 'À venir', all: 'Tous', archive: 'Archives', detailsSoon: 'Détails à venir.', previewSummary: 'Aperçu provisoire pendant que le format public du calendrier prend forme.',
@@ -447,7 +448,6 @@
       setText('events-drawer-subtitle', c.drawerSubtitle);
       setText('events-menu-directory', c.menuDirectory);
       setText('events-menu-about', c.menuAbout);
-      setText('events-menu-obituaries', c.menuObituaries);
       setText('events-hero-eyebrow', c.heroEyebrow);
       setText('events-hero-title', c.heroTitle);
       setText('events-hero-lede', c.heroLede);

@@ -147,7 +147,6 @@
       <a href="index.html" id="obituaries-menu-home">Home</a>
       <a href="events.html" id="obituaries-menu-events">Events</a>
       <a href="directory.html" id="obituaries-menu-directory">Full directory</a>
-      <a href="obituaries.html" id="obituaries-menu-obituaries">Obituaries</a>
     </nav>
   </aside>
 
@@ -172,7 +171,6 @@
         home: 'Home',
         events: 'Events',
         directory: 'Full directory',
-        obituaries: 'Obituaries',
         search: 'Search',
         menu: 'Menu',
       },
@@ -183,7 +181,6 @@
         home: 'Accueil',
         events: 'Événements',
         directory: 'Répertoire',
-        obituaries: 'Avis de décès',
         search: 'Recherche',
         menu: 'Menu',
       },
@@ -236,7 +233,6 @@
       document.getElementById('obituaries-menu-home').textContent = c.home;
       document.getElementById('obituaries-menu-events').textContent = c.events;
       document.getElementById('obituaries-menu-directory').textContent = c.directory;
-      document.getElementById('obituaries-menu-obituaries').textContent = c.obituaries;
     }
 
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));

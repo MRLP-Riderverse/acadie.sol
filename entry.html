@@ -120,7 +120,6 @@
     <nav class="drawer-nav">
       <a href="directory.html" id="entry-menu-directory">Full directory</a>
       <a href="index.html#about" id="entry-menu-about">About Acadie.sol</a>
-      <a href="obituaries.html" id="entry-menu-obituaries">Obituaries</a>
       <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
       <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
@@ -187,7 +186,6 @@
       const fr = currentLang() === 'fr';
       document.getElementById('entry-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
       document.getElementById('entry-menu-about').textContent = fr ? 'À propos d’Acadie.sol' : 'About Acadie.sol';
-      document.getElementById('entry-menu-obituaries').textContent = fr ? 'Avis de décès' : 'Obituaries';
       document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
       document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
       document.getElementById('entry-dock-home').textContent = fr ? 'Accueil' : 'Home';
