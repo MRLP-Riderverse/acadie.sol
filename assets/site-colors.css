@@ -1,0 +1,94 @@
+/*
+  Acadie.sol global colour shell
+  ---------------------------------------------------------------------------
+  This file owns the site-wide light/dark palette tokens. Individual pages keep
+  their layout rules, but they should reference these variables instead of
+  redefining page-local colour schemes.
+*/
+:root {
+  color-scheme: light;
+
+  /* Foundational surfaces */
+  --page-bg: #f5ede1;
+  --bg: #f5ede1;
+  --bg2: #fffaf2;
+  --bg3: #fbf3e7;
+  --panel: #fffaf2;
+  --panel-strong: #fffdf8;
+  --card: #fffaf2;
+  --card-strong: #fffdf8;
+  --paper: #fffaf2;
+  --paper-soft: #fbf3e7;
+
+  /* Text and line system */
+  --ink: #2f261d;
+  --ink-strong: #1a1410;
+  --text: var(--ink);
+  --muted: #5f5247;
+  --soft: #766a5b;
+  --line: rgba(47, 38, 29, 0.16);
+  --line-strong: rgba(47, 38, 29, 0.26);
+
+  /* Brand/accent system */
+  --blue: #174b8e;
+  --blue-deep: #0d2f5e;
+  --blue-ink: #fffaf2;
+  --link: #0d2f5e;
+  --link-hover: #174b8e;
+  --gold: #b57910;
+  --gold-ink: #1a1410;
+  --red: #bf4a4f;
+
+  /* Shared event/date chips */
+  --calendar-red-top: #bf4a4f;
+  --calendar-red-bottom: #7b1f2a;
+  --calendar-ink: #f3c85b;
+
+  /* Depth/glass */
+  --shadow: rgba(65, 47, 29, 0.10);
+  --glass: rgba(255, 250, 242, 0.72);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Foundational surfaces */
+  --page-bg: #1e1a15;
+  --bg: #1e1a15;
+  --bg2: #2a2520;
+  --bg3: #332e27;
+  --panel: #2a2520;
+  --panel-strong: #332e27;
+  --card: #2a2520;
+  --card-strong: #332e27;
+  --paper: #2a2520;
+  --paper-soft: #332e27;
+
+  /* Text and line system */
+  --ink: #f2eadf;
+  --ink-strong: #fff8ec;
+  --text: var(--ink);
+  --muted: #d1c2ad;
+  --soft: #b8a995;
+  --line: rgba(242, 234, 223, 0.16);
+  --line-strong: rgba(242, 234, 223, 0.28);
+
+  /* Brand/accent system */
+  --blue: #6da3e0;
+  --blue-deep: #9fc7ff;
+  --blue-ink: #0d2f5e;
+  --link: #9fc7ff;
+  --link-hover: #cfe3ff;
+  --gold: #f0c866;
+  --gold-ink: #1a1410;
+  --red: #dc6b70;
+
+  /* Shared event/date chips stay brand-stable across themes. */
+  --calendar-red-top: #bf4a4f;
+  --calendar-red-bottom: #7b1f2a;
+  --calendar-ink: #f3c85b;
+
+  /* Depth/glass */
+  --shadow: rgba(0, 0, 0, 0.36);
+  --glass: rgba(42, 37, 32, 0.78);
+}
