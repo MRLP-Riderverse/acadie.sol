@@ -105,7 +105,7 @@
     <nav class="site-dock" aria-label="Primary dock">
       <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
       <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-      <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+      <a href="directory.html#search" aria-label="Search" title="Search" data-shell-search><span aria-hidden="true">⌕</span></a>
       <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
     </nav>
   `);
@@ -114,6 +114,12 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     syncShell();
+    document.querySelector('[data-shell-search]')?.addEventListener('click', event => {
+      const onDirectory = /(^|\/)directory\.html$/.test(window.location.pathname) || window.location.pathname === '/';
+      if (!onDirectory) return;
+      event.preventDefault();
+      window.dispatchEvent(new CustomEvent('acadie:searchdock'));
+    });
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
     });

@@ -1069,6 +1069,17 @@
       if (popover) popover.hidden = true;
     }
 
+    /* Search focus is a page-content behavior, but the dock button is global.
+       The shared shell dispatches this event so directory.html can focus the real
+       input without hash-jumping the page or letting the dock placement drift. */
+    function focusSearchInput(delay = 80) {
+      setTimeout(() => {
+        const input = document.getElementById('search');
+        if (!input) return;
+        input.focus({ preventScroll: true });
+      }, delay);
+    }
+
     function setDirectoryMode(mode, options = {}) {
       state.mode = mode;
       const isIntro = mode === 'intro';
@@ -1086,7 +1097,7 @@
         const target = isSearch ? document.getElementById('search-panel') : document.getElementById('directory-results');
         target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      if (isSearch && options.focus !== false) setTimeout(() => document.getElementById('search')?.focus(), 80);
+      if (isSearch && options.focus !== false) focusSearchInput();
     }
 
     function openSearchTool() {
@@ -1096,8 +1107,10 @@
 
     function focusSearchTool() {
       showHeader();
+      closeFilterPopover();
       if (state.mode === 'search') {
         document.getElementById('search-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        focusSearchInput(120);
         return;
       }
       setDirectoryMode('search', { scroll: true, focus: true, render: false });
@@ -1170,6 +1183,7 @@
       menuToggle?.addEventListener('change', () => {
         if (menuToggle.checked) closeFilterPopover();
       });
+      window.addEventListener('acadie:searchdock', focusSearchTool);
       document.getElementById('choose-discover').addEventListener('click', () => {
         clearFilters();
         setDirectoryMode('discover', { scroll: true, focus: false });
