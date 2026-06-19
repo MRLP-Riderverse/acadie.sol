@@ -530,17 +530,27 @@
     .site-dock a, .site-dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
     .site-dock a.active { color: var(--blue-ink); background: var(--blue-deep); }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
-    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
-    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
-    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-    .drawer-head { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
+       above the dock. Backdrop and drawer states are separate so the backdrop never
+       inherits the drawer's horizontal transform. */
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(26, 20, 16, .38); backdrop-filter: blur(5px) saturate(.92); -webkit-backdrop-filter: blur(5px) saturate(.92); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; width: min(390px, calc(100vw - 28px)); min-height: 218px; padding: 58px 14px 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); -webkit-backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 8px) scale(.98); transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
+    .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+    /* Menu controls occupy the top corners while the close button remains centered,
+       leaving the lower portion of the floating UI for navigation links. */
+    .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; pointer-events: none; }
+    .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
+    .lang-button { min-width: 76px; padding: 0 12px; letter-spacing: .06em; font-size: .78rem; }
+    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; }
+    .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
     .drawer-title { display: grid; gap: 2px; }
     .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
     .drawer-title span { color: var(--muted); font-size: .8rem; }
-    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
-    .drawer-nav { display: grid; gap: 8px; }
-    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
-    .drawer-nav a:hover, .theme-button:hover { color: var(--blue-ink); background: var(--blue-deep); }
+    .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
+    .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--blue-ink); background: var(--blue-deep); }
     .city-pill { background: var(--blue-deep); color: var(--blue-ink); }
     @media (max-width: 720px) {
       .top-nav { width: min(430px, 100vw); background: transparent; box-shadow: none; backdrop-filter: none; }
@@ -580,27 +590,29 @@
   <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
   <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
   <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-controls" aria-label="Display and language controls">
+      <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">×</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French">EN / FR</button>
+    </div>
     <div class="drawer-head">
-      <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
-      <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
+      <div class="drawer-title"><strong id="dir-drawer-title">Extras</strong><span id="dir-drawer-subtitle">Directory, about, display</span></div>
     </div>
     <nav class="drawer-nav">
       <a href="directory.html" id="dir-menu-directory">Full directory</a>
       <a href="index.html#about" id="dir-menu-about">About Acadie.sol</a>
-      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
-      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
   </aside>
   <header class="top-nav" id="top-nav">
     <div class="nav-row">
       <a class="nav-brand" href="directory.html" aria-label="Acadie.sol directory top">
         <strong>Acadie.sol</strong>
-        <span>Community directory</span>
+        <span id="dir-brand-subtitle">Community directory</span>
       </a>
       <nav class="nav-actions" aria-label="Directory navigation">
         <button class="nav-action" id="nav-search" type="button" aria-expanded="false" aria-controls="search-panel">🔎 Find places</button>
-        <a class="nav-action" href="events.html">Events</a>
-        <a class="nav-action" href="index.html">Home</a>
+        <a class="nav-action" href="events.html" id="dir-nav-events">Events</a>
+        <a class="nav-action" href="index.html" id="dir-nav-home">Home</a>
       </nav>
     </div>
   </header>
@@ -608,34 +620,34 @@
     <section class="splash" id="splash-panel" aria-label="Directory start">
       <section class="hero">
       <div>
-        <div class="eyebrow">Acadie.sol directory</div>
-        <h1>Find local places.</h1>
-        <p class="lede">Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.</p>
+        <div class="eyebrow" id="dir-eyebrow">Acadie.sol directory</div>
+        <h1 id="dir-title">Find local places.</h1>
+        <p class="lede" id="dir-lede">Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.</p>
       </div>
       <aside class="mini-stats" aria-label="Directory status">
-        <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> entries</button>
-        <span class="mini-stat"><strong id="category-stat">…</strong> categories</span>
-        <span class="mini-stat"><strong id="city-stat">…</strong> cities</span>
-        <a class="mini-stat" href="recents.html"><strong id="draft-stat">…</strong> previews</a>
+        <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> <span id="entry-stat-label">entries</span></button>
+        <span class="mini-stat"><strong id="category-stat">…</strong> <span id="category-stat-label">categories</span></span>
+        <span class="mini-stat"><strong id="city-stat">…</strong> <span id="city-stat-label">cities</span></span>
+        <a class="mini-stat" href="recents.html"><strong id="draft-stat">…</strong> <span id="draft-stat-label">previews</span></a>
       </aside>
     </section>
 
     <section class="choice-panel" id="choice-panel" aria-label="Choose how to use the directory">
       <div class="choice-copy">
-        <strong>Start here</strong>
-        <h2>One place to find things.</h2>
-        <p>No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.</p>
+        <strong id="dir-choice-kicker">Start here</strong>
+        <h2 id="dir-choice-title">One place to find things.</h2>
+        <p id="dir-choice-copy">No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.</p>
       </div>
       <div class="choice-actions">
         <button class="choice-button" id="choose-discover" type="button">
-          <small>Browse freely</small>
-          <b>Show all places</b>
-          <span>Open the full directory as one alphabetical stack.</span>
+          <small id="dir-discover-kicker">Browse freely</small>
+          <b id="dir-discover-title">Show all places</b>
+          <span id="dir-discover-copy">Open the full directory as one alphabetical stack.</span>
         </button>
         <button class="choice-button" id="choose-search" type="button">
-          <small>Find directly</small>
-          <b>Use search</b>
-          <span>Start with a name, area, category, or local vibe.</span>
+          <small id="dir-search-kicker">Find directly</small>
+          <b id="dir-search-choice-title">Use search</b>
+          <span id="dir-search-choice-copy">Start with a name, area, category, or local vibe.</span>
         </button>
       </div>
     </section>
@@ -644,8 +656,8 @@
     <section class="control-panel body-search" id="search-panel" hidden>
       <div class="control-body">
         <div class="control-intro">
-          <strong>Find local places</strong>
-          <span>One path for search, browsing, and exploring — start anywhere and open what catches your eye.</span>
+          <strong id="dir-search-title">Find local places</strong>
+          <span id="dir-search-intro">One path for search, browsing, and exploring — start anywhere and open what catches your eye.</span>
         </div>
         <div class="control-grid">
           <input id="search" class="search" type="search" placeholder="Search places, food, music, areas, or notes…" autocomplete="off" enterkeyhint="search" />
@@ -657,7 +669,7 @@
         </div>
         <div class="filter-popover" id="filter-popover" hidden>
           <div class="filter-title">
-            <span>Filter options</span>
+            <span id="dir-filter-title">Filter options</span>
             <button id="close-filters" type="button" aria-label="Close filters">×</button>
           </div>
           <select id="mood-select" class="select" aria-label="Quick lens">
@@ -674,7 +686,7 @@
             <button id="reset-filters" type="button">Reset</button>
           </div>
         </div>
-        <div class="filter-note">Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.</div>
+        <div class="filter-note" id="dir-filter-note">Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.</div>
       </div>
     </section>
 
@@ -687,7 +699,7 @@
     <section class="directory-shell" id="directory-shell" hidden>
       <div class="viewbar" id="directory-results">
         <div class="view-title">
-          <h2>Places</h2>
+          <h2 id="dir-results-title">Places</h2>
           <span id="result-copy">Showing local places.</span>
         </div>
         <div class="view-actions">
@@ -700,7 +712,7 @@
       <main id="app"></main>
     </section>
 
-    <div class="footer">A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.</div>
+    <div class="footer" id="dir-footer">A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.</div>
   </div>
 
   <nav class="site-dock" aria-label="Primary dock">
@@ -724,7 +736,25 @@
       mode: 'intro',
       showAll: true,
     };
-    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
+    const DIR_COPY = {
+      en: {
+        menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Directory, about, display', brandSubtitle: 'Community directory', navSearch: '🔎 Find places', navEvents: 'Events', navHome: 'Home', dockHome: 'Home', dockEvents: 'Events', dockSearch: 'Search', dockMenu: 'Menu',
+        eyebrow: 'Acadie.sol directory', title: 'Find local places.', lede: 'Search, browse, and explore are one path here: start with a name, area, category, or vibe, then open the cards that feel useful.', entries: 'entries', categories: 'categories', cities: 'cities', previews: 'previews',
+        choiceKicker: 'Start here', choiceTitle: 'One place to find things.', choiceCopy: 'No separate discover/search/explore modes. Use the search box, tap a quick lens, or just browse the cards below.', discoverKicker: 'Browse freely', discoverTitle: 'Show all places', discoverCopy: 'Open the full directory as one alphabetical stack.', searchKicker: 'Find directly', searchChoiceTitle: 'Use search', searchChoiceCopy: 'Start with a name, area, category, or local vibe.',
+        searchTitle: 'Find local places', searchIntro: 'One path for search, browsing, and exploring — start anywhere and open what catches your eye.', searchPlaceholder: 'Search places, food, music, areas, or notes…', moreOptions: 'More options', showMatches: 'Show matches', clear: 'Clear', filterOptions: 'Filter options', closeFilters: 'Close filters', anyVibe: 'Any vibe', moodFood: 'Food, cafés & treats', moodWaterfront: 'Waterfront / out for a walk', moodFamily: 'Family-friendly', moodNight: 'Music, drinks & night out',
+        allCategories: 'All categories', allAreas: 'All areas', done: 'Done', reset: 'Reset', filterNote: 'Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.', resultsTitle: 'Places', resultDefault: 'Showing local places.', allPlaces: 'All places', jumpToList: 'Jump to list', footer: 'A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.', timestampUnavailable: 'Timestamp unavailable', dateTbd: 'Date TBD', preview: 'preview', noRecentEntries: 'No recent entries yet.', relatedEvents: 'Related events', linkedCalendarItem: 'linked calendar item', location: 'Location', eventSingular: 'event', eventPlural: 'events', next7Days: 'next 7 days', address: 'Address', hours: 'Hours', phone: 'Phone', email: 'Email', website: 'Website', viewFullPage: 'View full page', descriptionComingSoon: 'Public description coming soon.', placeSingular: 'place', placePlural: 'places', searchLabel: 'search', matching: 'matching', showing: 'Showing', alphabetically: 'alphabetically', noMatchesTitle: 'No matches yet.', noMatchesBody: 'Clear filters or try a broader search.', loadFailed: 'Directory failed to load.'
+      },
+      fr: {
+        menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', drawerTitle: 'Extras', drawerSubtitle: 'Répertoire, à propos, affichage', brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Trouver des lieux', navEvents: 'Événements', navHome: 'Accueil', dockHome: 'Accueil', dockEvents: 'Événements', dockSearch: 'Recherche', dockMenu: 'Menu',
+        eyebrow: 'Répertoire Acadie.sol', title: 'Trouver des lieux locaux.', lede: 'La recherche, la navigation et l’exploration passent par le même chemin : commencez avec un nom, un secteur, une catégorie ou une ambiance, puis ouvrez les fiches utiles.', entries: 'entrées', categories: 'catégories', cities: 'villes', previews: 'aperçus',
+        choiceKicker: 'Commencez ici', choiceTitle: 'Un seul endroit pour trouver.', choiceCopy: 'Pas de modes séparés pour découvrir, chercher ou explorer. Utilisez la recherche, une lentille rapide, ou parcourez simplement les fiches.', discoverKicker: 'Parcourir librement', discoverTitle: 'Voir tous les lieux', discoverCopy: 'Ouvrir le répertoire complet en une pile alphabétique.', searchKicker: 'Chercher directement', searchChoiceTitle: 'Utiliser la recherche', searchChoiceCopy: 'Commencez avec un nom, un secteur, une catégorie ou une ambiance locale.',
+        searchTitle: 'Trouver des lieux locaux', searchIntro: 'Un seul chemin pour chercher, parcourir et explorer — commencez n’importe où et ouvrez ce qui attire l’œil.', searchPlaceholder: 'Chercher des lieux, repas, musique, secteurs ou notes…', moreOptions: 'Plus d’options', showMatches: 'Afficher', clear: 'Effacer', filterOptions: 'Options de filtre', closeFilters: 'Fermer les filtres', anyVibe: 'Toute ambiance', moodFood: 'Restos, cafés et gâteries', moodWaterfront: 'Bord de l’eau / promenade', moodFamily: 'Familial', moodNight: 'Musique, sorties et soirée',
+        allCategories: 'Toutes les catégories', allAreas: 'Tous les secteurs', done: 'Terminé', reset: 'Réinitialiser', filterNote: 'Tapez pour affiner le répertoire. Les options sont là au besoin, mais la navigation et la recherche mènent aux mêmes fiches.', resultsTitle: 'Lieux', resultDefault: 'Affichage des lieux locaux.', allPlaces: 'Tous les lieux', jumpToList: 'Aller à la liste', footer: 'Un petit miroir public du répertoire Acadie.sol — d’abord pensé pour une navigation mobile rapide.', timestampUnavailable: 'Horodatage indisponible', dateTbd: 'Date à confirmer', preview: 'aperçu', noRecentEntries: 'Aucune entrée récente pour le moment.', relatedEvents: 'Événements liés', linkedCalendarItem: 'élément de calendrier lié', location: 'Lieu', eventSingular: 'événement', eventPlural: 'événements', next7Days: 'dans les 7 prochains jours', address: 'Adresse', hours: 'Heures', phone: 'Téléphone', email: 'Courriel', website: 'Site web', viewFullPage: 'Voir la fiche complète', descriptionComingSoon: 'Description publique à venir.', placeSingular: 'lieu', placePlural: 'lieux', searchLabel: 'recherche', matching: 'correspondant à', showing: 'Affichage de', alphabetically: 'par ordre alphabétique', noMatchesTitle: 'Aucun résultat pour le moment.', noMatchesBody: 'Effacez les filtres ou essayez une recherche plus large.', loadFailed: 'Échec du chargement du répertoire.'
+      }
+    };
+    function copy() { return DIR_COPY[currentLang()] || DIR_COPY.en; }
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); updateMenuControls(); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
@@ -734,6 +764,24 @@
       if (saved === 'fr' || saved === 'en') return saved;
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
+    function updateMenuControls() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const themeButton = document.getElementById('theme-toggle');
+      if (themeButton) {
+        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        themeButton.textContent = isDark ? '☼' : '☾';
+        themeButton.setAttribute('aria-label', label);
+        themeButton.setAttribute('title', label);
+      }
+      const langButton = document.getElementById('lang-toggle');
+      if (langButton) {
+        const isFr = currentLang() === 'fr';
+        langButton.textContent = 'EN / FR';
+        langButton.setAttribute('aria-label', isFr ? 'Switch language to English' : 'Switch language to French');
+        langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
+      }
+    }
+    function renderDirectory() { renderControls(); renderRecent(); renderResults(); }
     document.getElementById('lang-toggle')?.addEventListener('click', () => {
       const next = currentLang() === 'fr' ? 'en' : 'fr';
       localStorage.setItem('acadie-lang', next);
@@ -742,15 +790,24 @@
       renderDirectory();
     });
     function updateDirCopy() {
-      const fr = currentLang() === 'fr';
-      document.getElementById('dir-menu-directory').textContent = fr ? 'Répertoire complet' : 'Full directory';
-      document.getElementById('dir-menu-about').textContent = fr ? 'À propos d\'Acadie.sol' : 'About Acadie.sol';
-      document.getElementById('theme-toggle').textContent = fr ? 'Mode clair ↔ sombre' : 'Light ↔ dark mode';
-      document.getElementById('lang-toggle').textContent = fr ? 'Langue : Français' : 'Language: English';
-      document.getElementById('dir-dock-home').textContent = fr ? 'Accueil' : 'Home';
-      document.getElementById('dir-dock-events').textContent = fr ? 'Événements' : 'Events';
-      document.getElementById('dir-dock-search').textContent = fr ? 'Recherche' : 'Search';
-      document.getElementById('dir-dock-menu').textContent = 'Menu';
+      const c = copy();
+      updateMenuControls();
+      setText('dir-menu-directory', c.menuDirectory); setText('dir-menu-about', c.menuAbout);
+      setText('dir-drawer-title', c.drawerTitle); setText('dir-drawer-subtitle', c.drawerSubtitle); setText('dir-brand-subtitle', c.brandSubtitle);
+      setText('nav-search', c.navSearch); setText('dir-nav-events', c.navEvents); setText('dir-nav-home', c.navHome);
+      setText('dir-eyebrow', c.eyebrow); setText('dir-title', c.title); setText('dir-lede', c.lede);
+      setText('entry-stat-label', c.entries); setText('category-stat-label', c.categories); setText('city-stat-label', c.cities); setText('draft-stat-label', c.previews);
+      setText('dir-choice-kicker', c.choiceKicker); setText('dir-choice-title', c.choiceTitle); setText('dir-choice-copy', c.choiceCopy);
+      setText('dir-discover-kicker', c.discoverKicker); setText('dir-discover-title', c.discoverTitle); setText('dir-discover-copy', c.discoverCopy);
+      setText('dir-search-kicker', c.searchKicker); setText('dir-search-choice-title', c.searchChoiceTitle); setText('dir-search-choice-copy', c.searchChoiceCopy);
+      setText('dir-search-title', c.searchTitle); setText('dir-search-intro', c.searchIntro); setText('open-filters', c.moreOptions); setText('show-results', c.showMatches); setText('quick-clear', c.clear);
+      setText('dir-filter-title', c.filterOptions); setText('apply-filters', c.done); setText('reset-filters', c.reset); setText('dir-filter-note', c.filterNote);
+      setText('dir-results-title', c.resultsTitle); setText('result-copy', c.resultDefault); setText('show-all', c.allPlaces); setText('view-official', c.jumpToList); setText('clear-filters', c.clear); setText('dir-footer', c.footer);
+      setText('dir-dock-home', c.dockHome); setText('dir-dock-events', c.dockEvents); setText('dir-dock-search', c.dockSearch); setText('dir-dock-menu', c.dockMenu);
+      document.getElementById('search')?.setAttribute('placeholder', c.searchPlaceholder);
+      document.getElementById('close-filters')?.setAttribute('aria-label', c.closeFilters);
+      const mood = document.getElementById('mood-select');
+      if (mood) [c.anyVibe, c.moodFood, c.moodWaterfront, c.moodFamily, c.moodNight].forEach((label, index) => { if (mood.options[index]) mood.options[index].textContent = label; });
     }
     document.documentElement.lang = currentLang();
     updateDirCopy();
@@ -805,8 +862,8 @@
     }
     function formatTimestamp(value) {
       const numeric = Number(value || 0);
-      if (!Number.isFinite(numeric) || numeric <= 0) return 'Timestamp unavailable';
-      return new Intl.DateTimeFormat(undefined, {
+      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
+      return new Intl.DateTimeFormat(currentLang(), {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
@@ -822,22 +879,21 @@
       const query = encodeURIComponent(cleanSummary(value));
       return query ? `https://www.google.com/maps/search/?api=1&query=${query}` : '';
     }
-    function renderDetailValue(label, value) {
+    function renderDetailValue(type, value) {
       const text = cleanSummary(value);
       if (!text) return '';
-      const lower = String(label || '').toLowerCase();
-      if (lower === 'phone') {
+      if (type === 'phone') {
         const href = phoneHref(text);
         return href ? `<a class="detail-link" href="${href}">${escapeHtml(text)}</a>` : escapeHtml(text);
       }
-      if (lower === 'address') {
+      if (type === 'address') {
         const href = mapsHref(text);
         return href ? `<a class="detail-link" href="${href}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>` : escapeHtml(text);
       }
-      if (lower === 'email') {
+      if (type === 'email') {
         return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
       }
-      if (lower === 'website') {
+      if (type === 'website') {
         const href = /^https?:\/\//i.test(text) ? text : `https://${text}`;
         return `<a class="detail-link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
       }
@@ -931,11 +987,11 @@
       const cities = [...new Set(state.items.map(publicCity).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
       const categorySelect = document.getElementById('category-select');
-      categorySelect.innerHTML = '<option value="all">All categories</option>' +
+      categorySelect.innerHTML = `<option value="all">${escapeHtml(copy().allCategories)}</option>` +
         categories.map(cat => `<option value="${escapeHtml(normalize(cat))}">${escapeHtml(cat)}</option>`).join('');
 
       const citySelect = document.getElementById('city-select');
-      citySelect.innerHTML = '<option value="all">All areas</option>' +
+      citySelect.innerHTML = `<option value="all">${escapeHtml(copy().allAreas)}</option>` +
         cities.map(city => `<option value="${escapeHtml(normalize(city))}">${escapeHtml(city)}</option>`).join('');
     }
 
@@ -953,13 +1009,13 @@
                 <div class="recent-meta">
                   ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
                   ${city ? `<span class="meta-pill">${escapeHtml(city)}</span>` : ''}
-                  ${item.draft ? '<span class="meta-pill">preview</span>' : ''}
+                  ${item.draft ? `<span class="meta-pill">${escapeHtml(copy().preview)}</span>` : ''}
                 </div>
               </div>
               <div class="recent-date">${escapeHtml(formatTimestamp(stamp))}</div>
             </li>`;
           }).join('')
-        : '<li class="recent-item"><div>No recent entries yet.</div></li>';
+        : `<li class="recent-item"><div>${escapeHtml(copy().noRecentEntries)}</div></li>`;
     }
 
     function renderNoteBlock(item, notes) {
@@ -975,8 +1031,8 @@
 
     function formatEventDate(value) {
       const date = parseEventDate(value);
-      if (!date) return 'Date TBD';
-      return new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
+      if (!date) return copy().dateTbd;
+      return new Intl.DateTimeFormat(currentLang(), { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(date);
     }
     function publicEventTitle(event) {
       return String(localizedText(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview');
@@ -1007,10 +1063,10 @@
       const related = relatedEventsFor(item);
       if (!related.length) return '';
       return `<div class="event-feed">
-        <div class="detail-label">Related events</div>
+        <div class="detail-label">${escapeHtml(copy().relatedEvents)}</div>
         ${related.map(event => `<div class="event-row">
           <div><a href="events.html#event-${escapeHtml(event.id)}">${escapeHtml(publicEventTitle(event))}</a></div>
-          <div class="event-meta">${escapeHtml(formatEventDate(event.starts_at))} · linked calendar item</div>
+          <div class="event-meta">${escapeHtml(formatEventDate(event.starts_at))} · ${escapeHtml(copy().linkedCalendarItem)}</div>
         </div>`).join('')}
       </div>`;
     }
@@ -1018,12 +1074,12 @@
     function renderLocationContext(item) {
       const location = state.locationIndex.get(item.location_id);
       if (!location) return '';
-      return `<div class="detail-row"><div class="detail-label">Location</div><div class="detail-value">${escapeHtml(location.name)}${location.street_id ? ` · ${escapeHtml(location.street_id)}` : ''}</div></div>`;
+      return `<div class="detail-row"><div class="detail-label">${escapeHtml(copy().location)}</div><div class="detail-value">${escapeHtml(location.name)}${location.street_id ? ` · ${escapeHtml(location.street_id)}` : ''}</div></div>`;
     }
 
     function renderUpcomingBadge(item) {
       const count = upcomingEventsFor(item).length;
-      return count ? `<span class="badge event-badge">${count} event${count === 1 ? '' : 's'} next 7 days</span>` : '';
+      return count ? `<span class="badge event-badge">${count} ${escapeHtml(count === 1 ? copy().eventSingular : copy().eventPlural)} ${escapeHtml(copy().next7Days)}</span>` : '';
     }
 
     function renderCard(item) {
@@ -1035,20 +1091,20 @@
       const locationContext = renderLocationContext(item);
       const eventFeed = renderEventFeed(item);
       const detailRows = [
-        ['Address', contactValue(item, 'address')],
-        ['Hours', contactValue(item, 'hours')],
-        ['Phone', contactValue(item, 'phone')],
-        ['Email', contactValue(item, 'email')],
-        ...(item.draft ? [['Website', contactValue(item, 'website')]] : []),
-      ].filter(([, value]) => cleanSummary(value));
-      const entryLink = !item.draft ? `<a class="full-page-link" href="entry.html#${escapeHtml(item.slug)}">View full page</a>` : '';
+        ['address', copy().address, contactValue(item, 'address')],
+        ['hours', copy().hours, contactValue(item, 'hours')],
+        ['phone', copy().phone, contactValue(item, 'phone')],
+        ['email', copy().email, contactValue(item, 'email')],
+        ...(item.draft ? [['website', copy().website, contactValue(item, 'website')]] : []),
+      ].filter(([, , value]) => cleanSummary(value));
+      const entryLink = !item.draft ? `<a class="full-page-link" href="entry.html#${escapeHtml(item.slug)}">${escapeHtml(copy().viewFullPage)}</a>` : '';
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
           <summary>
             <span class="card-main">
               <span class="card-top">
                 <h3 class="card-title">${escapeHtml(displayTitle)}</h3>
-                ${item.draft ? '<span class="badge">preview</span>' : ''}
+                ${item.draft ? `<span class="badge">${escapeHtml(copy().preview)}</span>` : ''}
                 ${renderUpcomingBadge(item)}
               </span>
               <span class="meta-line">
@@ -1060,9 +1116,9 @@
           </summary>
           <div class="card-body">
             <div class="expanded-thumb">${escapeHtml((displayTitle || '?').trim().charAt(0).toUpperCase())}</div>
-            ${description ? `<p class="description">${escapeHtml(description)}</p>` : '<p class="description">Public description coming soon.</p>'}
+            ${description ? `<p class="description">${escapeHtml(description)}</p>` : `<p class="description">${escapeHtml(copy().descriptionComingSoon)}</p>`}
             ${renderNoteBlock(item, notes)}
-            ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(label, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
+            ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
             ${eventFeed}
             ${entryLink}
           </div>
@@ -1082,7 +1138,7 @@
       const groups = [...groupByCity(items).entries()].sort(([a], [b]) => a.localeCompare(b));
       return groups.map(([city, cityItems]) => `<details class="city-section">
         <summary>
-          <div class="city-heading"><strong>${escapeHtml(city)}</strong><span>${cityItems.length} place${cityItems.length === 1 ? '' : 's'}</span></div>
+          <div class="city-heading"><strong>${escapeHtml(city)}</strong><span>${cityItems.length} ${escapeHtml(cityItems.length === 1 ? copy().placeSingular : copy().placePlural)}</span></div>
           <span class="section-chevron" aria-hidden="true">▾</span>
         </summary>
         <div class="results-grid">${cityItems.map(renderCard).join('')}</div>
@@ -1110,16 +1166,16 @@
       const allMatches = filteredItems();
       const items = allMatches;
       const filters = [];
-      if (state.query) filters.push(`search “${state.query}”`);
+      if (state.query) filters.push(`${copy().searchLabel} “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
       if (state.category !== 'all') filters.push(document.getElementById('category-select').selectedOptions[0]?.textContent || state.category);
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
       showAllButton.classList.add('active');
-      resultCopy.textContent = filters.length ? `${items.length} place${items.length === 1 ? '' : 's'} matching ${filters.join(' + ')}.` : `Showing ${items.length} local place${items.length === 1 ? '' : 's'} alphabetically.`;
+      resultCopy.textContent = filters.length ? `${items.length} ${items.length === 1 ? copy().placeSingular : copy().placePlural} ${copy().matching} ${filters.join(' + ')}.` : `${copy().showing} ${items.length} ${items.length === 1 ? copy().placeSingular : copy().placePlural} ${copy().alphabetically}.`;
       app.innerHTML = items.length
         ? `<div class="flat-results results-grid">${items.map(renderCard).join('')}</div>`
-        : '<div class="empty"><h2>No matches yet.</h2><p>Clear filters or try a broader search.</p></div>';
+        : `<div class="empty"><h2>${escapeHtml(copy().noMatchesTitle)}</h2><p>${escapeHtml(copy().noMatchesBody)}</p></div>`;
       syncHashTarget();
     }
 
@@ -1312,7 +1368,7 @@
       if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
       document.getElementById('entry-stat').textContent = '!';
-      document.getElementById('app').innerHTML = `<div class="empty"><h2>Directory failed to load.</h2><p>${escapeHtml(err.message)}</p></div>`;
+      document.getElementById('app').innerHTML = `<div class="empty"><h2>${escapeHtml(copy().loadFailed)}</h2><p>${escapeHtml(err.message)}</p></div>`;
       console.error(err);
     });
   </script>

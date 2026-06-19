@@ -100,17 +100,29 @@
     .page-footer strong { color: var(--ink); }
     .page-footer p { margin: 0; }
     .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
-    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(47,38,29,.16); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
-    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; transform: translate(-50%, 8px) scale(.98); width: min(390px, calc(100vw - 28px)); padding: 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px rgba(65,47,29,.24); opacity: 0; pointer-events: none; transition: transform .18s ease, opacity .18s ease; }
-    .menu-toggle:checked ~ .drawer-backdrop, .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
-    .drawer-head { display: flex; align-items: start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+    /* Floating menu overlay: backdrop dims/blurs the page; the panel stays centered
+       above the dock. Backdrop and drawer states are separate so the backdrop never
+       inherits the drawer's horizontal transform. */
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 20; background: rgba(26, 20, 16, .38); backdrop-filter: blur(5px) saturate(.92); -webkit-backdrop-filter: blur(5px) saturate(.92); opacity: 0; pointer-events: none; transition: opacity .18s ease; }
+    .drawer { position: fixed; z-index: 21; left: 50%; bottom: 86px; width: min(390px, calc(100vw - 28px)); min-height: 218px; padding: 58px 14px 14px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); backdrop-filter: blur(20px) saturate(1.45); -webkit-backdrop-filter: blur(20px) saturate(1.45); box-shadow: 0 24px 54px var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 8px) scale(.98); transition: transform .18s ease, opacity .18s ease; }
+    .menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
+    .menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+    /* Menu controls occupy the top corners while the close button remains centered,
+       leaving the lower portion of the floating UI for navigation links. */
+    .drawer-controls { position: absolute; top: 12px; left: 14px; right: 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; pointer-events: none; }
+    .menu-control, .drawer-close { min-width: 44px; min-height: 40px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; pointer-events: auto; }
+    .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
+    .lang-button { min-width: 76px; padding: 0 12px; letter-spacing: .06em; font-size: .78rem; }
+    .drawer-close { position: absolute; left: 50%; transform: translateX(-50%); width: 44px; color: var(--muted); font-size: 1.15rem; }
+    .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
     .drawer-title { display: grid; gap: 2px; }
     .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
     .drawer-title span { color: var(--muted); font-size: .8rem; }
-    .drawer-close { cursor: pointer; font-size: 1.25rem; color: var(--muted); }
-    .drawer-nav { display: grid; gap: 8px; }
-    .drawer-nav a, .theme-button { width: 100%; padding: 12px 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
+    .drawer-nav a { width: 100%; padding: 13px; border: 1px solid var(--line); border-radius: 17px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--ink); text-decoration: none; font: inherit; font-weight: 900; text-align: left; }
+    .drawer-nav a:hover, .menu-control:hover, .drawer-close:hover { color: var(--blue-ink); background: var(--blue-deep); }
 
+    .dock {
     .dock { position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%); width: min(390px, calc(100vw - 28px)); display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 7px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: 0 14px 38px rgba(65,47,29,.18); backdrop-filter: blur(20px) saturate(1.45); z-index: 22; }
     .dock a, .dock label { display: grid; place-items: center; gap: 2px; padding: 8px 2px; border-radius: 18px; text-decoration: none; color: var(--muted); font-size: .68rem; font-weight: 900; cursor: pointer; }
     .dock a.active { color: var(--paper); background: var(--blue-deep); }
@@ -121,15 +133,17 @@
   <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
   <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
   <aside class="drawer" aria-label="Extras menu">
+    <div class="drawer-controls" aria-label="Display and language controls">
+      <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
+      <label class="drawer-close" for="menu-toggle" aria-label="Close menu" title="Close menu">×</label>
+      <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French">EN / FR</button>
+    </div>
     <div class="drawer-head">
       <div class="drawer-title"><strong>Extras</strong><span>Directory, about, display</span></div>
-      <label class="drawer-close" for="menu-toggle" aria-label="Close menu">×</label>
     </div>
     <nav class="drawer-nav">
       <a href="directory.html" id="menu-directory-link">Full directory</a>
       <a href="index.html#about" id="menu-about-link">About Acadie.sol</a>
-      <button class="theme-button" type="button" id="theme-toggle">Light ↔ dark mode</button>
-      <button class="theme-button" type="button" id="lang-toggle">Language: English</button>
     </nav>
   </aside>
 
@@ -200,7 +214,24 @@
     function copy() { return HOME_COPY[currentLang()] || HOME_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
-    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
+    function updateMenuControls() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      const themeButton = document.getElementById('theme-toggle');
+      if (themeButton) {
+        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+        themeButton.textContent = isDark ? '☼' : '☾';
+        themeButton.setAttribute('aria-label', label);
+        themeButton.setAttribute('title', label);
+      }
+      const langButton = document.getElementById('lang-toggle');
+      if (langButton) {
+        const isFr = currentLang() === 'fr';
+        langButton.textContent = 'EN / FR';
+        langButton.setAttribute('aria-label', isFr ? 'Switch language to English' : 'Switch language to French');
+        langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
+      }
+    }
+    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); updateMenuControls(); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     document.getElementById('theme-toggle')?.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
@@ -214,8 +245,7 @@
       const c = copy();
       setText('menu-directory-link', c.menuDirectory);
       setText('menu-about-link', c.menuAbout);
-      setText('theme-toggle', c.theme);
-      setText('lang-toggle', c.lang);
+      updateMenuControls();
       setText('brand-subtitle', c.brandSubtitle);
       setText('poster-label', c.posterLabel);
       setText('poster-subtitle', c.posterSubtitle);
