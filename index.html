@@ -28,14 +28,18 @@
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; position: relative; }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Home is now a minimal landing surface: no hero image, just one calm card
-       that can later absorb richer landing-page modules without undoing a poster. */
+    /* Home is now a minimal landing surface: keep the top copy focused on welcome
+       + identity, then push the operational/value bullets lower where they can grow
+       without overloading the first glance. */
     .welcome-card { display: grid; gap: 10px; }
     .welcome-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .welcome-card h1 { margin: 0; font-size: clamp(2.15rem, 13vw, 3.8rem); line-height: .90; letter-spacing: -.045em; color: var(--ink-strong); }
+    .welcome-card h1 { margin: 0; font-size: clamp(1.55rem, 9vw, 2.4rem); line-height: .96; letter-spacing: -.035em; color: var(--ink-strong); }
     .welcome-subtitle { max-width: 27ch; font-size: .92rem; line-height: 1.4; color: var(--muted); }
-    .welcome-card h2 { margin: 0; font-size: 1.13rem; color: var(--ink-strong); letter-spacing: -.015em; }
     .welcome-card p, .calendar-teaser p { margin: 0; color: var(--muted); line-height: 1.42; }
+    /* Primary actions get their own surface so the landing copy reads as one block
+       and navigation reads as a separate choice layer immediately below it. */
+    .home-actions-card { display: grid; gap: 10px; }
+    .home-actions-title { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
     .home-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
     .home-action { padding: 11px 12px; border-radius: 17px; background: var(--paper-soft); border: 1px solid var(--line); color: var(--blue-deep); font-weight: 900; text-align: center; text-decoration: none; }
     .home-action:hover { color: var(--link-hover); border-color: var(--line-strong); }
@@ -49,6 +53,8 @@
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer strong { color: var(--ink); }
     .page-footer p { margin: 0; }
+    .page-footer ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+    .page-footer li { color: var(--muted); }
 
     @media (min-width: 760px) { .phone-shell { padding-top: 18px; } }
   </style>
@@ -59,10 +65,13 @@
   <main class="phone-shell">
     <section class="surface welcome-card" aria-labelledby="welcome-title">
       <span class="welcome-kicker" id="welcome-kicker">Community OS</span>
-      <h1 id="site-title">Acadie.sol</h1>
-      <p class="welcome-subtitle" id="welcome-subtitle">A local-first pocket surface for places, happenings, and Acadian signals.</p>
-      <h2 id="welcome-title">Welcome to Acadie.sol</h2>
-      <p id="welcome-copy">A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.</p>
+      <h1 id="welcome-title">Welcome to Acadie.sol</h1>
+      <p class="welcome-subtitle" id="welcome-subtitle">Places, happenings, and Acadian signals gathered into one calmer public surface.</p>
+      <p id="welcome-copy">A simple landing point for Acadie-Bathurst that stays readable now and leaves room for richer local layers later.</p>
+    </section>
+
+    <section class="surface home-actions-card" aria-labelledby="home-actions-title">
+      <h2 class="home-actions-title" id="home-actions-title">Start here</h2>
       <div class="home-actions" aria-label="Primary home actions">
         <a class="home-action" href="events.html" id="welcome-events-link">See events</a>
         <a class="home-action" href="directory.html" id="welcome-directory-link">Search places</a>
@@ -75,7 +84,12 @@
     </section>
 
     <footer class="page-footer" id="about">
-      <p id="about-copy"><strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.</p>
+      <p id="about-copy"><strong>Built local first.</strong></p>
+      <ul id="about-points">
+        <li>Public layer for Acadian places and gatherings around Acadie-Bathurst.</li>
+        <li>Simple now, richer as entries, calendars, and media grow.</li>
+        <li>Meant to stay readable, respectful, and easy to build upon.</li>
+      </ul>
     </footer>
   </main>
   <script>
@@ -83,19 +97,31 @@
     const HOME_COPY = {
       en: {
         menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
-        welcomeKicker: 'Community OS', welcomeSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
-        welcomeTitle: 'Welcome to Acadie.sol', welcomeCopy: 'A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.',
+        welcomeKicker: 'Community OS',
+        welcomeTitle: 'Welcome to Acadie.sol', welcomeSubtitle: 'Places, happenings, and Acadian signals gathered into one calmer public surface.', welcomeCopy: 'A simple landing point for Acadie-Bathurst that stays readable now and leaves room for richer local layers later.',
+        homeActionsTitle: 'Start here',
         welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
         calendarCopy: 'A calmer calendar view is coming here. For now, use Events in the dock.',
-        about: '<strong>Built local first.</strong> A public layer for Acadian places and gatherings around Acadie-Bathurst. Simple now, smarter as entries get richer.',
+        about: '<strong>Built local first.</strong>',
+        aboutPoints: [
+          'Public layer for Acadian places and gatherings around Acadie-Bathurst.',
+          'Simple now, richer as entries, calendars, and media grow.',
+          'Meant to stay readable, respectful, and easy to build upon.'
+        ],
       },
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
-        welcomeKicker: 'OS communautaire', welcomeSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
-        welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un guide local pour Acadie-Bathurst : lieux, rassemblements et signaux communautaires dans une surface simple.',
+        welcomeKicker: 'OS communautaire', welcomeSubtitle: 'Lieux, activités et signaux acadiens réunis dans une surface publique plus calme.',
+        welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un point d’entrée simple pour Acadie-Bathurst, lisible dès maintenant et prêt pour des couches locales plus riches plus tard.',
+        homeActionsTitle: 'Commencer ici',
         welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
         calendarCopy: 'Un calendrier plus calme arrive ici. Pour l’instant, utilisez Événements dans le dock.',
-        about: '<strong>Construit d’abord en local.</strong> Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst. Simple pour l’instant, plus riche à mesure que les fiches grandissent.',
+        about: '<strong>Construit d’abord en local.</strong>',
+        aboutPoints: [
+          'Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst.',
+          'Simple pour l’instant, plus riche à mesure que les fiches, calendriers et médias grandissent.',
+          'Pensé pour rester lisible, respectueux et facile à développer.'
+        ],
       }
     };
     function currentLang() {
@@ -106,6 +132,11 @@
     function copy() { return HOME_COPY[currentLang()] || HOME_COPY.en; }
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
+    function setList(id, items) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = (items || []).map(item => `<li>${item}</li>`).join('');
+    }
     function updateMenuControls() {
       document.documentElement.dataset.lang = currentLang();
       const isDark = document.documentElement.dataset.theme === 'dark';
@@ -133,12 +164,14 @@
       setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
       setText('welcome-copy', c.welcomeCopy);
+      setText('home-actions-title', c.homeActionsTitle);
       setText('welcome-events-link', c.welcomeEvents);
       setText('welcome-directory-link', c.welcomeDirectory);
       setText('calendar-title', c.calendarTitle);
       setText('calendar-link', c.calendarLink);
       setText('calendar-copy', c.calendarCopy);
       setHtml('about-copy', c.about);
+      setList('about-points', c.aboutPoints);
     }
     window.addEventListener('acadie:languagechange', updateStaticCopy);
     document.documentElement.lang = currentLang();
