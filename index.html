@@ -28,27 +28,21 @@
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; position: relative; }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Home is now a minimal landing surface: keep the top copy focused on welcome
-       + identity, then push the operational/value bullets lower where they can grow
-       without overloading the first glance. */
+    /* Landing page should read like a clean banner + action strip, not a product
+       explainer. Keep the identity block short, then move the heavier framing into
+       the footer bullets where it stays available without crowding the welcome. */
     .welcome-card { display: grid; gap: 10px; }
     .welcome-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .welcome-card h1 { margin: 0; font-size: clamp(1.55rem, 9vw, 2.4rem); line-height: .96; letter-spacing: -.035em; color: var(--ink-strong); }
-    .welcome-subtitle { max-width: 27ch; font-size: .92rem; line-height: 1.4; color: var(--muted); }
+    .welcome-card h1 { margin: 0; font-size: clamp(1.22rem, 6.3vw, 1.7rem); line-height: 1.02; letter-spacing: -.03em; color: var(--ink-strong); }
+    .welcome-title-prefix { margin: 0; font-size: .88rem; line-height: 1.2; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .welcome-subtitle { max-width: 27ch; font-size: .84rem; line-height: 1.38; color: var(--muted); }
     .welcome-card p, .calendar-teaser p { margin: 0; color: var(--muted); line-height: 1.42; }
     /* Primary actions get their own surface so the landing copy reads as one block
        and navigation reads as a separate choice layer immediately below it. */
     .home-actions-card { display: grid; gap: 10px; }
-    .home-actions-title { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
     .home-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
     .home-action { padding: 11px 12px; border-radius: 17px; background: var(--paper-soft); border: 1px solid var(--line); color: var(--blue-deep); font-weight: 900; text-align: center; text-decoration: none; }
     .home-action:hover { color: var(--link-hover); border-color: var(--line-strong); }
-    /* Calendar teaser reserves homepage space for the future calendar without
-       rendering a second event list under the persistent Events dock item. */
-    .calendar-teaser { display: grid; gap: 8px; }
-    .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
-    .section-title h2 { margin: 0; font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .11em; }
-    .section-title a { color: var(--blue-deep); font-size: .78rem; font-weight: 900; text-decoration: none; }
 
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer strong { color: var(--ink); }
@@ -65,30 +59,24 @@
   <main class="phone-shell">
     <section class="surface welcome-card" aria-labelledby="welcome-title">
       <span class="welcome-kicker" id="welcome-kicker">Community OS</span>
-      <h1 id="welcome-title">Welcome to Acadie.sol</h1>
-      <p class="welcome-subtitle" id="welcome-subtitle">Places, happenings, and Acadian signals gathered into one calmer public surface.</p>
-      <p id="welcome-copy">A simple landing point for Acadie-Bathurst that stays readable now and leaves room for richer local layers later.</p>
+      <p class="welcome-title-prefix" id="welcome-title-prefix">Welcome to</p>
+      <h1 id="welcome-title">Acadie.sol</h1>
+      <p class="welcome-subtitle" id="welcome-subtitle">For Acadians, By Acadians.</p>
     </section>
 
-    <section class="surface home-actions-card" aria-labelledby="home-actions-title">
-      <h2 class="home-actions-title" id="home-actions-title">Start here</h2>
+    <section class="surface home-actions-card" aria-label="Primary home actions">
       <div class="home-actions" aria-label="Primary home actions">
         <a class="home-action" href="events.html" id="welcome-events-link">See events</a>
         <a class="home-action" href="directory.html" id="welcome-directory-link">Search places</a>
       </div>
     </section>
 
-    <section class="surface calendar-teaser" aria-label="Community calendar">
-      <div class="section-title"><h2 id="calendar-title">Community calendar</h2><a href="events.html" id="calendar-link">Open calendar</a></div>
-      <p id="calendar-copy">A calmer calendar view is coming here. For now, use Events in the dock.</p>
-    </section>
-
     <footer class="page-footer" id="about">
-      <p id="about-copy"><strong>Built local first.</strong></p>
+      <p id="about-copy"><strong>Built Locally.</strong></p>
       <ul id="about-points">
-        <li>Public layer for Acadian places and gatherings around Acadie-Bathurst.</li>
-        <li>Simple now, richer as entries, calendars, and media grow.</li>
-        <li>Meant to stay readable, respectful, and easy to build upon.</li>
+        <li>Acadian Pocket Companion</li>
+        <li>Let’s Discover What’s Around Us!</li>
+        <li>Let’s Connect!</li>
       </ul>
     </footer>
   </main>
@@ -98,29 +86,24 @@
       en: {
         menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
         welcomeKicker: 'Community OS',
-        welcomeTitle: 'Welcome to Acadie.sol', welcomeSubtitle: 'Places, happenings, and Acadian signals gathered into one calmer public surface.', welcomeCopy: 'A simple landing point for Acadie-Bathurst that stays readable now and leaves room for richer local layers later.',
-        homeActionsTitle: 'Start here',
+        welcomeTitlePrefix: 'Welcome to', welcomeTitle: 'Acadie.sol', welcomeSubtitle: 'For Acadians, By Acadians.',
         welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
-        calendarCopy: 'A calmer calendar view is coming here. For now, use Events in the dock.',
-        about: '<strong>Built local first.</strong>',
+        about: '<strong>Built Locally.</strong>',
         aboutPoints: [
-          'Public layer for Acadian places and gatherings around Acadie-Bathurst.',
-          'Simple now, richer as entries, calendars, and media grow.',
-          'Meant to stay readable, respectful, and easy to build upon.'
+          'Acadian Pocket Companion',
+          'Let’s Discover What’s Around Us!',
+          'Let’s Connect!'
         ],
       },
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
-        welcomeKicker: 'OS communautaire', welcomeSubtitle: 'Lieux, activités et signaux acadiens réunis dans une surface publique plus calme.',
-        welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un point d’entrée simple pour Acadie-Bathurst, lisible dès maintenant et prêt pour des couches locales plus riches plus tard.',
-        homeActionsTitle: 'Commencer ici',
+        welcomeKicker: 'OS communautaire', welcomeTitlePrefix: 'Bienvenue à', welcomeTitle: 'Acadie.sol', welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
         welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
-        calendarCopy: 'Un calendrier plus calme arrive ici. Pour l’instant, utilisez Événements dans le dock.',
-        about: '<strong>Construit d’abord en local.</strong>',
+        about: '<strong>Construit ici.</strong>',
         aboutPoints: [
-          'Une couche publique pour les lieux et rassemblements acadiens autour d’Acadie-Bathurst.',
-          'Simple pour l’instant, plus riche à mesure que les fiches, calendriers et médias grandissent.',
-          'Pensé pour rester lisible, respectueux et facile à développer.'
+          'Compagnon acadien de poche',
+          'Découvrons ce qu’il y a autour de nous!',
+          'Connectons-nous!'
         ],
       }
     };
@@ -161,15 +144,11 @@
       const c = copy();
       updateMenuControls();
       setText('welcome-kicker', c.welcomeKicker);
+      setText('welcome-title-prefix', c.welcomeTitlePrefix);
       setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
-      setText('welcome-copy', c.welcomeCopy);
-      setText('home-actions-title', c.homeActionsTitle);
       setText('welcome-events-link', c.welcomeEvents);
       setText('welcome-directory-link', c.welcomeDirectory);
-      setText('calendar-title', c.calendarTitle);
-      setText('calendar-link', c.calendarLink);
-      setText('calendar-copy', c.calendarCopy);
       setHtml('about-copy', c.about);
       setList('about-points', c.aboutPoints);
     }
