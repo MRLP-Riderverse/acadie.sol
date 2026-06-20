@@ -26,26 +26,14 @@
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; position: relative; }
-    .brand-row { display: flex; align-items: center; justify-content: space-between; padding: 0 2px; color: var(--muted); font-size: .74rem; letter-spacing: .10em; text-transform: uppercase; }
-    .brand-row strong { color: var(--blue-deep); }
-
-    /* The poster is intentionally outside the content card: it behaves like the
-       hero/photo surface in the mockup, nearly edge-to-edge, with title overlay.
-       A real local maritime image now carries the Acadian/community feel; layered
-       gradients keep the text readable without flattening the photograph. */
-    .poster-window { min-height: 234px; position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); }
-    .poster-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 20px; filter: saturate(.98) contrast(1.04) brightness(.96); }
-    .poster-window::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 20, 39, .08) 0%, rgba(7, 20, 39, .05) 28%, rgba(7, 20, 39, .28) 100%), radial-gradient(circle at 74% 18%, rgba(217,155,33,.24), transparent 10rem); z-index: 0; }
-    .poster-window::after { content: none; }
-    .poster-label { position: absolute; left: 20px; top: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; z-index: 2; }
-    .poster-title { position: absolute; left: 22px; right: 22px; bottom: 24px; color: var(--paper); display: grid; gap: 7px; z-index: 2; text-shadow: 0 3px 18px rgba(7, 20, 39, .38); }
-    h1 { margin: 0; font-size: clamp(2.15rem, 13vw, 3.8rem); line-height: .90; letter-spacing: -.045em; }
-    .poster-title span { max-width: 27ch; font-size: .88rem; line-height: 1.34; color: color-mix(in srgb, var(--paper) 92%, transparent); }
 
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Home welcome surface replaces duplicated directory/events widgets: the dock
-       owns navigation, while the home card explains the system in one calmer step. */
+    /* Home is now a minimal landing surface: no hero image, just one calm card
+       that can later absorb richer landing-page modules without undoing a poster. */
     .welcome-card { display: grid; gap: 10px; }
+    .welcome-kicker { display: inline-flex; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: color-mix(in srgb, var(--paper) 90%, transparent); color: var(--blue-deep); font-size: .70rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .welcome-card h1 { margin: 0; font-size: clamp(2.15rem, 13vw, 3.8rem); line-height: .90; letter-spacing: -.045em; color: var(--ink-strong); }
+    .welcome-subtitle { max-width: 27ch; font-size: .92rem; line-height: 1.4; color: var(--muted); }
     .welcome-card h2 { margin: 0; font-size: 1.13rem; color: var(--ink-strong); letter-spacing: -.015em; }
     .welcome-card p, .calendar-teaser p { margin: 0; color: var(--muted); line-height: 1.42; }
     .home-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
@@ -69,18 +57,10 @@
 <body>
   <script src="assets/site-shell.js"></script>
   <main class="phone-shell">
-    <header class="brand-row"><strong>Acadie.sol</strong><span id="brand-subtitle">local community surface</span></header>
-
-    <section class="poster-window" aria-labelledby="site-title">
-      <img class="poster-image" src="assets/acadieDRiP_avatar.webp" alt="Geometric low-poly fox head in orange, white, and black on a dark background" />
-      <span class="poster-label" id="poster-label">Community OS</span>
-      <div class="poster-title">
-        <h1 id="site-title">Acadie.sol</h1>
-        <span id="poster-subtitle">A local-first pocket surface for places, happenings, and Acadian signals.</span>
-      </div>
-    </section>
-
     <section class="surface welcome-card" aria-labelledby="welcome-title">
+      <span class="welcome-kicker" id="welcome-kicker">Community OS</span>
+      <h1 id="site-title">Acadie.sol</h1>
+      <p class="welcome-subtitle" id="welcome-subtitle">A local-first pocket surface for places, happenings, and Acadian signals.</p>
       <h2 id="welcome-title">Welcome to Acadie.sol</h2>
       <p id="welcome-copy">A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.</p>
       <div class="home-actions" aria-label="Primary home actions">
@@ -103,7 +83,7 @@
     const HOME_COPY = {
       en: {
         menuDirectory: 'Full directory', menuAbout: 'About Acadie.sol', theme: 'Light ↔ dark mode', lang: 'Language: English',
-        brandSubtitle: 'local community surface', posterLabel: 'Community OS', posterSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
+        welcomeKicker: 'Community OS', welcomeSubtitle: 'A local-first pocket surface for places, happenings, and Acadian signals.',
         welcomeTitle: 'Welcome to Acadie.sol', welcomeCopy: 'A local-first pocket guide for Acadie-Bathurst: places, gatherings, and community signals in one simple surface.',
         welcomeEvents: 'See events', welcomeDirectory: 'Search places', calendarTitle: 'Community calendar', calendarLink: 'Open calendar',
         calendarCopy: 'A calmer calendar view is coming here. For now, use Events in the dock.',
@@ -111,7 +91,7 @@
       },
       fr: {
         menuDirectory: 'Répertoire complet', menuAbout: 'À propos d’Acadie.sol', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
-        brandSubtitle: 'surface communautaire locale', posterLabel: 'OS communautaire', posterSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
+        welcomeKicker: 'OS communautaire', welcomeSubtitle: 'Une surface locale pour les lieux, les activités et les signaux acadiens.',
         welcomeTitle: 'Bienvenue sur Acadie.sol', welcomeCopy: 'Un guide local pour Acadie-Bathurst : lieux, rassemblements et signaux communautaires dans une surface simple.',
         welcomeEvents: 'Voir les événements', welcomeDirectory: 'Chercher des lieux', calendarTitle: 'Calendrier communautaire', calendarLink: 'Ouvrir le calendrier',
         calendarCopy: 'Un calendrier plus calme arrive ici. Pour l’instant, utilisez Événements dans le dock.',
@@ -149,9 +129,8 @@
     function updateStaticCopy() {
       const c = copy();
       updateMenuControls();
-      setText('brand-subtitle', c.brandSubtitle);
-      setText('poster-label', c.posterLabel);
-      setText('poster-subtitle', c.posterSubtitle);
+      setText('welcome-kicker', c.welcomeKicker);
+      setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
       setText('welcome-copy', c.welcomeCopy);
       setText('welcome-events-link', c.welcomeEvents);

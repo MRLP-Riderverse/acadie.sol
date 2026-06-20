@@ -2,13 +2,13 @@
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
   "event_count": 3,
-  "active_count": 3,
-  "archived_count": 0,
+  "active_count": 2,
+  "archived_count": 1,
   "items": [
     {
       "id": "socialite-reading-marc-chamberlain-bathurst-library",
-      "status": "published",
-      "computed_status": "active",
+      "status": "archived",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "Reading of ‘Socialite’ by Marc Chamberlain",

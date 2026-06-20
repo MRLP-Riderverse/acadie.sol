@@ -26,8 +26,7 @@
     a { color: var(--link); text-underline-offset: 3px; text-decoration-thickness: 1px; }
     a:hover { color: var(--link-hover); }
     .wrap { width: min(860px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 36px; }
-    .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
-    .brand { color: var(--blue-deep); font-weight: 900; letter-spacing: .11em; text-decoration: none; font-size: .9rem; }
+    .top { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-bottom: 14px; }
     .nav { display: none; }
     .pill { border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: color-mix(in srgb, var(--paper) 78%, transparent); color: var(--ink); text-decoration: none; font-size: .8rem; }
     .pill:hover, button.pill.active { border-color: var(--blue-deep); background: var(--blue-deep); color: var(--blue-ink); }
@@ -105,8 +104,6 @@
     .empty { padding: 18px; border: 1px solid var(--line); border-radius: 17px; color: var(--muted); background: color-mix(in srgb, var(--paper) 90%, transparent); }
     /* Full-screen first: tablet/desktop use the available canvas instead of being trapped in the mobile shell. */
     .wrap { width: min(1120px, calc(100vw - 40px)); padding: 20px 0 96px; }
-    .brand { display: inline-flex; align-items: center; gap: 8px; color: var(--blue-deep); }
-    .brand::before { content: "A"; width: 22px; height: 22px; border-radius: 8px; display: grid; place-items: center; background: var(--blue-deep); color: var(--blue-ink); font-size: .72rem; }
     .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
     .hero { border-radius: 28px; }
     .events-list { gap: 18px; }
@@ -137,8 +134,9 @@
 <body>
   <script src="assets/site-shell.js"></script>
   <div class="wrap">
+    <!-- The hero owns page identity now; the top rail stays as light navigation
+         utility without repeating the site wordmark in the corner. -->
     <header class="top">
-      <a class="brand" href="index.html">ACADIE.SOL</a>
       <nav class="nav" aria-label="Primary">
         <a class="pill" href="search.html" id="events-find-places">Find places</a>
         <a class="pill" href="index.html" id="events-home-link">Home</a>

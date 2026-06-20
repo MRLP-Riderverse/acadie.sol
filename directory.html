@@ -48,6 +48,9 @@
     }
     .top-nav.nav-hidden { transform: translateY(-100%); }
     .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    /* Utility-only top rail: once the corner wordmark is removed, this variant keeps
+       the remaining nav actions anchored to the right edge instead of floating left. */
+    .nav-row-actions-only { justify-content: flex-end; }
     .nav-brand { display: grid; gap: 2px; text-decoration: none; color: var(--text); line-height: 1.05; }
     .nav-brand strong { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
     .nav-brand span { color: var(--muted); font-size: 0.74rem; }
@@ -472,13 +475,12 @@
     .results-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 12px; align-items: start; }
     .directory-card { border-radius: 21px; background: color-mix(in srgb, var(--card) 94%, transparent); color: var(--ink); }
     .directory-card > summary { padding: 9px; color: var(--ink); }
-    .card-main { min-width: 0; display: grid; gap: 6px; }
-    /* Quick-card media shell — collapsed cards get a small preview image when the
-       directory payload has one; expanded cards reuse the same source with the old
-       initial-letter gradient as fallback. */
+    /* Quick-card media preview: keep the square thumbnail/logo only in the summary
+       rail so expanded cards spend their space on description + details instead of
+       repeating the same asset. The same summary slot also owns the initial-letter
+       gradient fallback when no thumbnail is available. */
     .card-summary-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
-    .summary-thumb,
-    .expanded-thumb { border-radius: 18px; overflow: hidden; background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 92%, #000), color-mix(in srgb, var(--gold) 72%, #000)); color: var(--blue-ink); box-shadow: inset 0 0 0 1px var(--line-strong); }
+    .summary-thumb { border-radius: 18px; overflow: hidden; background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 92%, #000), color-mix(in srgb, var(--gold) 72%, #000)); color: var(--blue-ink); box-shadow: inset 0 0 0 1px var(--line-strong); }
     .summary-thumb { width: 64px; height: 64px; flex: 0 0 auto; display: grid; place-items: center; }
     .card-top { display: flex; align-items: start; justify-content: space-between; gap: 7px; }
     .card-title { font-size: .95rem; letter-spacing: -.01em; }
@@ -487,7 +489,6 @@
     .thumb-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
     .thumb-fallback { width: 100%; height: 100%; display: grid; place-items: center; font-weight: 900; }
     .summary-thumb .thumb-fallback { font-size: 1.02rem; }
-    .expanded-thumb { width: 58px; height: 58px; display: grid; place-items: center; font-size: 1.28rem; margin-bottom: 8px; }
     .full-page-link { display: inline-block; margin-top: 8px; padding: 8px 14px; border-radius: 14px; background: var(--blue-deep); color: var(--blue-ink); font-size: .82rem; font-weight: 900; text-decoration: none; }
     .full-page-link:hover { color: var(--blue-ink); filter: brightness(1.06); }
     .card-body { padding: 0 12px 12px; }
@@ -504,11 +505,9 @@
 <body>
   <script src="assets/site-shell.js"></script>
   <header class="top-nav" id="top-nav">
-    <div class="nav-row">
-      <a class="nav-brand" href="directory.html" aria-label="Acadie.sol directory top">
-        <strong>Acadie.sol</strong>
-        <span id="dir-brand-subtitle">Community directory</span>
-      </a>
+    <!-- The top rail now behaves as pure utility chrome. The page title lives in the
+         hero/content layer, so the corner wordmark is removed. -->
+    <div class="nav-row nav-row-actions-only">
       <nav class="nav-actions" aria-label="Directory navigation">
         <a class="nav-action" id="nav-search" href="search.html">🔎 Search</a>
         <a class="nav-action" href="events.html" id="dir-nav-events">Events</a>
@@ -943,9 +942,6 @@
       const summaryThumb = thumbnailSrc
         ? `<span class="summary-thumb"><img class="thumb-image" src="${escapeHtml(thumbnailSrc)}" alt="${escapeHtml(thumbnailAlt)}" loading="lazy" /></span>`
         : `<span class="summary-thumb"><span class="thumb-fallback">${thumbFallback}</span></span>`;
-      const expandedThumb = thumbnailSrc
-        ? `<div class="expanded-thumb"><img class="thumb-image" src="${escapeHtml(thumbnailSrc)}" alt="${escapeHtml(thumbnailAlt)}" loading="lazy" /></div>`
-        : `<div class="expanded-thumb"><span class="thumb-fallback">${thumbFallback}</span></div>`;
       const locationContext = renderLocationContext(item);
       const eventFeed = renderEventFeed(item);
       const detailRows = [
@@ -976,7 +972,6 @@
             </div>
           </summary>
           <div class="card-body">
-            ${expandedThumb}
             ${description ? `<p class="description">${escapeHtml(description)}</p>` : `<p class="description">${escapeHtml(copy().descriptionComingSoon)}</p>`}
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
