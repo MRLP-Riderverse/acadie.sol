@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 69,
+  "item_count": 71,
   "items": [
     {
       "type": "entry",
@@ -148,6 +148,28 @@
         "venue",
         "community events",
         "darts"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "bathurst-hospitality-days",
+      "title": "Bathurst Hospitality Days",
+      "subtitle": "community · Acadie-Bathurst",
+      "badges": [
+        "community"
+      ],
+      "url": "directory.html#entry-bathurst-hospitality-days",
+      "terms": [
+        "Bathurst Hospitality Days",
+        "community",
+        "Acadie-Bathurst",
+        "Public page for Bathurst Hospitality Days.",
+        "hospitality",
+        "festival",
+        "community",
+        "events",
+        "Hospitality Days",
+        "Bathurst Hospitality"
       ]
     },
     {
@@ -1326,6 +1348,28 @@
         "family",
         "placeholder",
         "big-d-drive-in"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "after-block-party-2026",
+      "title": "After Block Party 2026",
+      "subtitle": "active · 2026-07-31T21:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "music",
+        "nightlife"
+      ],
+      "url": "events.html#event-after-block-party-2026",
+      "terms": [
+        "After Block Party 2026",
+        "Event in Bathurst by La Louga on Friday, July 31, 2026.",
+        "2026-07-31T21:00:00-03:00",
+        "music",
+        "nightlife",
+        "concert",
+        "la-louga-night-bar-resto"
       ]
     },
     {
