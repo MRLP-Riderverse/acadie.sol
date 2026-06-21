@@ -148,8 +148,8 @@
     .chip:hover,
     .filter-toggle:hover,
     .filter-menu[open] .filter-toggle,
-    .view-all:hover { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
-    .view-all { display: inline-flex; align-items: center; gap: 8px; background: color-mix(in srgb, var(--blue-deep) 76%, transparent); border-color: transparent; color: var(--gold); }
+    .view-all:hover { background: var(--button-bg-hover); border-color: var(--button-border); color: var(--button-fg); }
+    .view-all { display: inline-flex; align-items: center; gap: 8px; background: var(--button-bg); border-color: var(--button-border); color: var(--button-fg); }
     .count { width: 100%; min-height: 1.25em; color: var(--soft); font-size: .9rem; }
 
     /* Results appear only after the visitor asks for them. Fresh search.html stays
@@ -182,9 +182,9 @@
     .result-top { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
     .result-title { margin: 0; color: var(--ink-strong); font-size: 1.08rem; line-height: 1.12; }
     .result-subtitle { color: var(--muted); font-size: .9rem; line-height: 1.35; }
-    .type-pill { flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; color: var(--gold); background: color-mix(in srgb, var(--blue-deep) 78%, transparent); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .type-pill { flex: 0 0 auto; border-radius: 999px; padding: 5px 8px; color: var(--button-fg); background: var(--button-bg); border: 1px solid var(--button-border); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
     .badges { display: flex; gap: 6px; flex-wrap: wrap; }
-    .badge { border-radius: 999px; padding: 5px 8px; color: var(--soft); background: transparent; border: 1px solid color-mix(in srgb, var(--line) 55%, transparent); font-size: .75rem; font-weight: 800; }
+    .badge { border-radius: 999px; padding: 5px 8px; color: var(--ink); background: color-mix(in srgb, var(--paper-soft) 82%, transparent); border: 1px solid var(--line); font-size: .75rem; font-weight: 800; }
     .empty { border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); padding: 12px 2px; color: var(--muted); background: transparent; line-height: 1.45; }
 
     @media (max-width: 680px) {

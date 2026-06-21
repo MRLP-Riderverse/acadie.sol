@@ -34,20 +34,33 @@
     .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
     h1 { margin: 0; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.1; }
     .entry-city { color: var(--muted); font-size: .82rem; margin-top: 4px; }
-    .entry-category { display: inline-block; padding: 4px 8px; border-radius: 999px; background: var(--blue-deep); color: var(--blue-ink); font-size: .68rem; font-weight: 900; margin-top: 6px; }
+    .entry-category {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--button-bg);
+      border: 1px solid var(--button-border);
+      color: var(--button-fg);
+      font-size: .68rem;
+      font-weight: 900;
+      margin-top: 6px;
+    }
+    .entry-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .entry-tag { margin-top: 0; font-size: .66rem; }
     .description { margin: 0; font-size: .92rem; line-height: 1.42; color: var(--ink); }
     .detail-grid { display: grid; gap: 8px; margin-top: 12px; }
     .detail-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
     .detail-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 900; white-space: nowrap; }
     .detail-value { font-size: .88rem; word-break: break-word; }
-    .detail-link { color: var(--blue-deep); text-decoration: none; }
+    .detail-link { color: var(--link); text-decoration: underline; text-underline-offset: 2px; font-weight: 800; }
     .section-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: var(--muted); font-weight: 900; margin-top: 12px; margin-bottom: 6px; }
     .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; margin-top: 6px; }
     .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: var(--calendar-red-top); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; font-size: .78rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
     .date-chip small { display: block; font-size: .56rem; opacity: .92; text-transform: uppercase; letter-spacing: .08em; }
     .event-row strong { display: block; font-size: .88rem; }
     .event-row span { display: block; color: var(--muted); font-size: .75rem; }
-    .related-place { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper-soft); color: var(--ink); text-decoration: none; font-size: .82rem; font-weight: 900; margin: 4px 4px 4px 0; }
+    .related-place { display: inline-flex; align-items: center; padding: 6px 12px; border: 1px solid var(--button-border); border-radius: 14px; background: var(--button-bg); color: var(--button-fg); text-decoration: none; font-size: .82rem; font-weight: 900; margin: 4px 4px 4px 0; }
     .empty-msg { padding: 28px; text-align: center; color: var(--muted); }
     .page-footer { padding: 16px 4px 0; color: var(--muted); font-size: .82rem; line-height: 1.45; border-top: 1px solid var(--line); margin-top: 4px; }
     .page-footer p { margin: 0; }
@@ -177,7 +190,7 @@
             ${item.category ? `<span class="entry-category">${escapeHtml(item.category)}</span>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${escapeHtml(description)}</p>` : ''}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
-            ${tags.length ? `<div style="margin-top:10px">${tags.map(t => `<span class="entry-category" style="background:#f3eadc;color:var(--muted);font-size:.66rem">#${escapeHtml(t)}</span>`).join(' ')}</div>` : ''}
+            ${tags.length ? `<div class="entry-tags">${tags.map(t => `<span class="entry-category entry-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
           <footer class="page-footer"><p><a href="directory.html">Back to directory</a></p></footer>
