@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 67,
+  "item_count": 68,
   "items": [
     {
       "type": "entry",
@@ -129,6 +129,25 @@
         "supply",
         "farm",
         "Bathurst Agricultural Society"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "bathurst-city-dart-hall",
+      "title": "Bathurst City Dart Hall",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue"
+      ],
+      "url": "directory.html#entry-bathurst-city-dart-hall",
+      "terms": [
+        "Bathurst City Dart Hall",
+        "venue",
+        "Acadie-Bathurst",
+        "A local nonprofit community hall bringing people together for darts, events, and good times!",
+        "venue",
+        "community events",
+        "darts"
       ]
     },
     {
