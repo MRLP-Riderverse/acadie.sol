@@ -1,7 +1,17 @@
 /* Global Acadie.sol shell renderer.
    Pages call this one script instead of carrying their own dock/menu markup. The
-   script owns only shared chrome state; content pages still own their page data. */
+   script owns only shared chrome state; content pages still own their page data.
+
+   Header count caching: entry/event counts only change on "export to site".  The
+   shell reads cached values from localStorage first (instant render, no flicker),
+   then revalidates in the background.  If the fetch 304s or the counts match the
+   cache, nothing changes visually.  An explicit version key
+   (acadie-shell-counts-v) lets the export step bump the cache so the next load
+   picks up new numbers without a full app restart.                               */
 (function () {
+  const CACHE_KEY = 'acadie-shell-counts';
+  const CACHE_VERSION_KEY = 'acadie-shell-counts-v';
+
   const COPY = {
     en: {
       drawerTitle: 'Menu',
@@ -15,7 +25,7 @@
       langToEn: 'Switch language to English',
       langTitleEn: 'English active — switch to French',
       langTitleFr: 'Français actif — passer en anglais',
-      headerBanner: (entries, events) => `${entries} Entries - Vive l’Acadie! - ${events} Events`
+      headerBanner: (entries, events) => `${entries} Entries - Vive l'Acadie! - ${events} Events`
     },
     fr: {
       drawerTitle: 'Menu',
@@ -29,7 +39,7 @@
       langToEn: 'Passer en anglais',
       langTitleEn: 'English active — switch to French',
       langTitleFr: 'Français actif — passer en anglais',
-      headerBanner: (entries, events) => `${entries} entrées - Vive l’Acadie! - ${events} événements`
+      headerBanner: (entries, events) => `${entries} entrées - Vive l'Acadie! - ${events} événements`
     }
   };
 
@@ -37,6 +47,30 @@
     const saved = localStorage.getItem('acadie-lang');
     if (saved === 'fr' || saved === 'en') return saved;
     return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+  }
+
+  /* ── Count caching ── */
+
+  function readCachedCounts() {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (Number.isFinite(data.entryCount) && Number.isFinite(data.eventCount)) {
+        return data;
+      }
+    } catch (_) { /* corrupted cache — ignore */ }
+    return null;
+  }
+
+  function writeCachedCounts(entryCount, eventCount) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        entryCount,
+        eventCount,
+        ts: Date.now()
+      }));
+    } catch (_) { /* storage full or unavailable */ }
   }
 
   const SHELL_DATA = { entryCount: null, eventCount: null, loaded: false };
@@ -74,9 +108,9 @@
     if (about) about.textContent = copy.menuAbout;
     if (headerText) {
       const entries = SHELL_DATA.entryCount;
-      const events = SHELL_DATA.eventCount;
-      headerText.textContent = Number.isFinite(entries) && Number.isFinite(events)
-        ? copy.headerBanner(entries, events)
+      const evts = SHELL_DATA.eventCount;
+      headerText.textContent = Number.isFinite(entries) && Number.isFinite(evts)
+        ? copy.headerBanner(entries, evts)
         : 'Vive l\'Acadie!';
     }
   }
@@ -95,10 +129,22 @@
     window.dispatchEvent(new CustomEvent('acadie:languagechange', { detail: { lang } }));
   }
 
+  /* Load counts: read cache first, then revalidate in background.
+     The cached version key lets "export to site" force a refresh. */
   async function loadShellCounts() {
-    if (SHELL_DATA.loaded) return;
-    SHELL_DATA.loaded = true;
+    /* 1. Apply cached counts immediately (zero flicker). */
+    const cached = readCachedCounts();
+    if (cached) {
+      SHELL_DATA.entryCount = cached.entryCount;
+      SHELL_DATA.eventCount = cached.eventCount;
+      SHELL_DATA.loaded = true;
+      syncShell();
+    }
+
+    /* 2. Revalidate in background. If the fetch confirms the same numbers the
+       DOM never shifts. If they differ we update and re-cache. */
     try {
+      const cachedVersion = localStorage.getItem(CACHE_VERSION_KEY) || '0';
       const [directoryResponse, eventsResponse] = await Promise.all([
         fetch('assets/directory-data.json', { cache: 'no-store' }),
         fetch('assets/events-data.json', { cache: 'no-store' })
@@ -108,15 +154,27 @@
         directoryResponse.json(),
         eventsResponse.json()
       ]);
-      SHELL_DATA.entryCount = Number(
+      const freshEntries = Number(
         directoryPayload.published_count ?? directoryPayload.entry_count ?? (Array.isArray(directoryPayload.items) ? directoryPayload.items.length : 0)
       );
-      SHELL_DATA.eventCount = Number(
+      const freshEvents = Number(
         eventsPayload.active_count ?? eventsPayload.event_count ?? (Array.isArray(eventsPayload.items) ? eventsPayload.items.length : 0)
       );
-      syncShell();
+
+      /* Only update DOM if numbers actually changed (or first load had no cache). */
+      if (SHELL_DATA.entryCount !== freshEntries || SHELL_DATA.eventCount !== freshEvents) {
+        SHELL_DATA.entryCount = freshEntries;
+        SHELL_DATA.eventCount = freshEvents;
+        writeCachedCounts(freshEntries, freshEvents);
+        syncShell();
+      } else if (!cached) {
+        /* First-ever load with no cache: persist these counts. */
+        writeCachedCounts(freshEntries, freshEvents);
+      }
+      SHELL_DATA.loaded = true;
     } catch (error) {
       console.warn('Shell counts unavailable:', error);
+      /* Cached values (if any) remain in place — graceful degradation. */
     }
   }
 
@@ -149,7 +207,7 @@
     </nav>
   `);
 
-  window.AcadieShell = { currentLang, setTheme, setLang, sync: syncShell };
+  window.AcadieShell = { currentLang, setTheme, setLang, sync: syncShell, loadShellCounts };
 
   document.addEventListener('DOMContentLoaded', () => {
     syncShell();

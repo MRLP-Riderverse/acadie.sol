@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Shared identity metadata: use the same avatar for the desktop tab,
-       homescreen install icon, and other PWA surfaces. -->
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
@@ -59,6 +57,34 @@
       justify-items: center;
     }
 
+    .welcome-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 10px;
+    }
+
+    .welcome-label-pill {
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink-strong);
+      padding: 3px 10px;
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-family: "Pokemon GB", ui-monospace, monospace;
+      flex: 0 0 auto;
+    }
+
+    [data-theme="dark"] .welcome-label-pill {
+      background: var(--button-bg);
+      color: var(--button-fg);
+      border-color: var(--button-border);
+    }
+
     .welcome-card h1 {
       margin: 0;
       font-size: clamp(1.08rem, 5.8vw, 1.48rem);
@@ -93,22 +119,6 @@
 
     .welcome-card p { margin: 0; color: var(--muted); line-height: 1.42; }
 
-    .home-divider {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1;
-      letter-spacing: .08em;
-      text-align: center;
-    }
-
-    .welcome-meta-title {
-      margin: 0;
-      color: var(--ink);
-      font-size: .86rem;
-      line-height: 1.3;
-    }
-
     .action-grid-card {
       padding: 0;
     }
@@ -119,7 +129,6 @@
       gap: 10px;
     }
 
-    /* Light-mode tiles: paper surface, ink text, subtle border */
     .action-tile {
       min-height: 84px;
       border-radius: 18px;
@@ -141,7 +150,6 @@
       color: var(--ink-strong);
     }
 
-    /* Dark-mode overrides: brand blue bg, yellow text */
     [data-theme="dark"] .action-tile {
       background: var(--button-bg);
       color: var(--button-fg);
@@ -173,6 +181,17 @@
       font-size: .68rem;
       line-height: 1.25;
       color: var(--muted);
+    }
+
+    /* Section divider — plain text on page, no wrapper */
+    .section-divider {
+      margin: 0;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1;
+      letter-spacing: .08em;
+      text-align: center;
+      padding: 2px 0;
     }
 
     /* Media gallery — swipeable, no arrows, no dots */
@@ -340,18 +359,26 @@
   <script src="assets/site-shell.js"></script>
   <main class="phone-shell">
     <section class="surface welcome-card" aria-labelledby="welcome-title">
+      <div class="welcome-card-header">
+        <span class="welcome-label-pill" id="welcome-label-pill">Community OS</span>
+      </div>
       <p class="welcome-title-prefix" id="welcome-title-prefix">Welcome to</p>
       <h1 id="welcome-title">Acadie.sol ⭐️</h1>
       <p class="welcome-subtitle" id="welcome-subtitle">For Acadians, By Acadians.</p>
-      <p class="home-divider" aria-hidden="true">✧❅✦❅✧</p>
-      <p class="welcome-meta-title" id="about-copy">Community OS</p>
+    </section>
+
+    <!-- Media gallery up top, 2×2 below -->
+    <section class="media-gallery-section" aria-label="Media gallery">
+      <div class="media-gallery" id="home-gallery">
+        <div class="media-gallery-track" id="gallery-track"></div>
+      </div>
     </section>
 
     <section class="action-grid-card" aria-label="Primary home actions">
       <div class="action-grid">
         <a class="action-tile" href="directory.html#browse" id="action-directory-link">
           <span class="action-icon" aria-hidden="true">⌕</span>
-          <span class="action-label" id="action-directory-label">Search Directory</span>
+          <span class="action-label" id="action-directory-label">View Everyone</span>
           <span class="action-meta" id="action-directory-meta">Browse all listings.</span>
         </a>
         <a class="action-tile" href="events.html" id="action-events-link">
@@ -372,11 +399,8 @@
       </div>
     </section>
 
-    <section class="media-gallery-section" aria-label="Media gallery">
-      <div class="media-gallery" id="home-gallery">
-        <div class="media-gallery-track" id="gallery-track"></div>
-      </div>
-    </section>
+    <!-- Divider between 2×2 and updates -->
+    <p class="section-divider" aria-hidden="true">✧❅✦❅✧</p>
 
     <section class="updates-section" id="home-updates" aria-label="Recent updates">
       <div class="updates-header">
@@ -389,15 +413,12 @@
   <script>
     const HOME_COPY = {
       en: {
-        menuDirectory: 'View Everyone',
-        menuAbout: 'About us',
         welcomeTitlePrefix: 'Welcome to',
         welcomeTitle: 'Acadie.sol ⭐️',
         welcomeSubtitle: 'For Acadians, By Acadians.',
-        about: 'Community OS',
-        aboutPoints: [],
+        labelPill: 'Community OS',
         actions: {
-          directory: { label: 'Search Directory', meta: 'Browse all listings.' },
+          directory: { label: 'View Everyone', meta: 'Browse all listings.' },
           events: { label: 'Events', meta: 'See what\'s happening.' },
           support: { label: 'Support', meta: 'Help keep it going.' },
           about: { label: 'About Us', meta: 'What this project is.' }
@@ -419,15 +440,12 @@
         emptyUpdates: 'No recent updates.'
       },
       fr: {
-        menuDirectory: 'Voir tout le monde',
-        menuAbout: 'À propos de nous',
         welcomeTitlePrefix: 'Bienvenue à',
         welcomeTitle: 'Acadie.sol ⭐️',
         welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
-        about: 'Community OS',
-        aboutPoints: [],
+        labelPill: 'Community OS',
         actions: {
-          directory: { label: 'Chercher le répertoire', meta: 'Parcourir toutes les fiches.' },
+          directory: { label: 'Voir tout le monde', meta: 'Parcourir toutes les fiches.' },
           events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
           support: { label: 'Soutien', meta: 'Aider le projet à continuer.' },
           about: { label: 'À propos', meta: 'Ce qu\'est ce projet.' }
@@ -472,11 +490,6 @@
       if (el) el.textContent = value;
     }
 
-    function setHtml(id, value) {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = value;
-    }
-
     function escapeHtml(value) {
       return String(value || '')
         .replaceAll('&', '&')
@@ -502,18 +515,6 @@
       if (Number.isFinite(numeric) && numeric > 0) return numeric;
       const parsed = Date.parse(item?.source_modified_at || '');
       return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
-    }
-
-    function formatTimestamp(ts) {
-      const numeric = Number(ts || 0);
-      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
-      return new Intl.DateTimeFormat(currentLang(), {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit'
-      }).format(new Date(numeric * 1000));
     }
 
     function relativeUpdatedLabel(ts) {
@@ -663,41 +664,13 @@
       }).join('');
     }
 
-    function updateMenuControls() {
-      document.documentElement.dataset.lang = currentLang();
-      const isDark = document.documentElement.dataset.theme === 'dark';
-      const themeButton = document.getElementById('theme-toggle');
-      if (themeButton) {
-        const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
-        themeButton.textContent = isDark ? '☼' : '☾';
-        themeButton.setAttribute('aria-label', label);
-        themeButton.setAttribute('title', label);
-      }
-      const langButton = document.getElementById('lang-toggle');
-      if (langButton) {
-        const isFr = currentLang() === 'fr';
-        langButton.setAttribute('aria-label', isFr ? 'Switch language to English' : 'Switch language to French');
-        langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
-      }
-    }
-
-    function applyTheme(theme) {
-      document.documentElement.dataset.theme = theme;
-      localStorage.setItem('acadie-theme', theme);
-      updateMenuControls();
-    }
-
-    const savedTheme = localStorage.getItem('acadie-theme');
-    if (savedTheme) applyTheme(savedTheme);
-
     function updateStaticCopy() {
       const c = copy();
       document.title = 'ACADIE.SOL';
-      updateMenuControls();
       setText('welcome-title-prefix', c.welcomeTitlePrefix);
       setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
-      setHtml('about-copy', c.about);
+      setText('welcome-label-pill', c.labelPill);
       setText('action-directory-label', c.actions.directory.label);
       setText('action-directory-meta', c.actions.directory.meta);
       setText('action-events-label', c.actions.events.label);
