@@ -32,8 +32,6 @@
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
 
-    /* Home stays a compact OS-style launch surface: one banner card, then one
-       action block, then one live block. This keeps the first screen calm. */
     .phone-shell {
       width: min(430px, 100vw);
       min-height: 100svh;
@@ -53,8 +51,6 @@
       padding: 14px;
     }
 
-    /* Welcome banner carries the identity copy only. Routes and live progress move
-       into their own blocks so the intro does not become a busy dashboard. */
     .welcome-card {
       display: grid;
       gap: 10px;
@@ -123,12 +119,13 @@
       gap: 10px;
     }
 
+    /* Light-mode tiles: paper surface, ink text, subtle border */
     .action-tile {
       min-height: 84px;
       border-radius: 18px;
-      border: 1px solid var(--button-border);
-      background: var(--button-bg);
-      color: var(--button-fg);
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink-strong);
       text-decoration: none;
       box-shadow: 0 12px 24px var(--shadow);
       padding: 10px 11px;
@@ -140,6 +137,18 @@
     }
 
     .action-tile:hover {
+      background: var(--paper-soft);
+      color: var(--ink-strong);
+    }
+
+    /* Dark-mode overrides: brand blue bg, yellow text */
+    [data-theme="dark"] .action-tile {
+      background: var(--button-bg);
+      color: var(--button-fg);
+      border-color: var(--button-border);
+    }
+
+    [data-theme="dark"] .action-tile:hover {
       background: var(--button-bg-hover);
       color: var(--button-fg);
     }
@@ -154,7 +163,7 @@
       font-size: .82rem;
       font-weight: 900;
       line-height: 1.2;
-      color: var(--ink-strong);
+      color: inherit;
       text-decoration: underline;
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
@@ -166,159 +175,159 @@
       color: var(--muted);
     }
 
-    .live-card {
-      padding: 0;
-    }
-
-    .carousel {
-      display: grid;
-      gap: 10px;
-    }
-
-    .carousel-window {
+    /* Media gallery — swipeable, no arrows, no dots */
+    .media-gallery {
       position: relative;
       overflow: hidden;
       border-radius: 20px;
       border: 1px solid var(--line);
       background: color-mix(in srgb, var(--paper-soft) 88%, transparent);
-      min-height: 178px;
+      min-height: 180px;
     }
 
-    .carousel-track {
+    .media-gallery-track {
       display: flex;
       transition: transform 360ms ease;
       will-change: transform;
     }
 
-    .carousel-slide {
+    .media-gallery-slide {
       min-width: 100%;
-      padding: 14px 18px;
-      display: grid;
-      gap: 8px;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .carousel-slide:hover { color: inherit; }
-
-    .slide-top {
+      aspect-ratio: 16/9;
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .slide-badge {
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: .78rem;
+      text-align: center;
+      padding: 20px;
+      background: color-mix(in srgb, var(--ink) 4%, var(--paper-soft));
+    }
+
+    .gallery-placeholder-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      opacity: .45;
+    }
+
+    /* Updates feed — no visible container wrapper, compact rows */
+    .updates-section {
+      padding: 0;
+    }
+
+    .updates-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .updates-title {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: .86rem;
+      font-weight: 900;
+    }
+
+    .updates-pill {
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
+      color: var(--ink-strong);
+      padding: 4px 12px;
+      font-size: .68rem;
+      font-weight: 700;
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      border-radius: 999px;
-      border: 1px solid var(--button-border);
+      gap: 4px;
+      box-shadow: 0 4px 10px var(--shadow);
+      transition: background 180ms ease;
+    }
+
+    .updates-pill:hover {
+      background: var(--paper-soft);
+    }
+
+    [data-theme="dark"] .updates-pill {
       background: var(--button-bg);
       color: var(--button-fg);
-      padding: 5px 9px;
-      font-size: .68rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      flex: 0 0 auto;
+      border-color: var(--button-border);
     }
 
-    .slide-time {
-      color: var(--muted);
-      font-size: .74rem;
-      white-space: nowrap;
+    [data-theme="dark"] .updates-pill:hover {
+      background: var(--button-bg-hover);
     }
 
-    .slide-title {
-      margin: 0;
-      color: var(--ink-strong);
-      font-size: .92rem;
-      line-height: 1.28;
-    }
-
-    .slide-summary {
-      margin: 0;
-      color: var(--ink);
-      font-size: .76rem;
-      line-height: 1.38;
-    }
-
-    .slide-footer {
+    .update-row {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      align-items: baseline;
       gap: 10px;
-      margin-top: auto;
+      padding: 11px 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
+      text-decoration: none;
+      color: inherit;
     }
 
-    .slide-context {
-      color: var(--muted);
-      font-size: .7rem;
-      line-height: 1.35;
-    }
+    .update-row:last-child { border-bottom: none; }
+    .update-row:hover { color: var(--link); }
 
-    .slide-cta {
-      color: var(--link);
-      font-size: .72rem;
-      font-weight: 900;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      white-space: nowrap;
-    }
-
-    .carousel-controls {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding-top: 14px;
-    }
-
-    .carousel-arrow {
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--button-border);
+    .update-badge {
+      flex: 0 0 auto;
       border-radius: 999px;
-      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      border: 1px solid var(--line-strong);
+      background: var(--paper);
       color: var(--ink-strong);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 8px 16px var(--shadow);
+      padding: 2px 8px;
+      font-size: .6rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
-    .carousel-arrow:hover {
-      background: color-mix(in srgb, var(--paper) 96%, transparent);
+    [data-theme="dark"] .update-badge {
+      background: var(--button-bg);
+      color: var(--button-fg);
+      border-color: var(--button-border);
     }
 
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
+    .update-content {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      border: 0;
-      padding: 0;
-      background: color-mix(in srgb, var(--ink) 18%, transparent);
-      cursor: pointer;
-    }
-
-    .carousel-dot[aria-current="true"] {
-      background: var(--gold);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 20%, transparent);
-    }
-
-    .carousel-empty {
-      padding: 16px;
-      color: var(--muted);
+    .update-name {
+      color: var(--ink-strong);
       font-size: .8rem;
-      line-height: 1.45;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .update-desc {
+      color: var(--muted);
+      font-size: .68rem;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .update-time {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: .64rem;
+      white-space: nowrap;
     }
 
     @media (min-width: 760px) {
@@ -348,7 +357,7 @@
         <a class="action-tile" href="events.html" id="action-events-link">
           <span class="action-icon" aria-hidden="true">◷</span>
           <span class="action-label" id="action-events-label">Events</span>
-          <span class="action-meta" id="action-events-meta">See what’s happening.</span>
+          <span class="action-meta" id="action-events-meta">See what's happening.</span>
         </a>
         <a class="action-tile" href="support.html" id="action-support-link">
           <span class="action-icon" aria-hidden="true">✦</span>
@@ -363,23 +372,21 @@
       </div>
     </section>
 
-    <section class="live-card" aria-label="Homepage live feed">
-      <div class="carousel" id="home-carousel">
-        <div class="carousel-window">
-          <div class="carousel-track" id="carousel-track" aria-live="polite"></div>
-          <div class="carousel-empty" id="carousel-empty">Loading latest entries and events…</div>
-        </div>
-        <div class="carousel-controls" aria-label="Carousel controls">
-          <button class="carousel-arrow prev" id="carousel-prev" type="button" aria-label="Previous slide">‹</button>
-          <div class="carousel-dots" id="carousel-dots" aria-label="Live progress slides"></div>
-          <button class="carousel-arrow next" id="carousel-next" type="button" aria-label="Next slide">›</button>
-        </div>
+    <section class="media-gallery-section" aria-label="Media gallery">
+      <div class="media-gallery" id="home-gallery">
+        <div class="media-gallery-track" id="gallery-track"></div>
       </div>
+    </section>
+
+    <section class="updates-section" id="home-updates" aria-label="Recent updates">
+      <div class="updates-header">
+        <h2 class="updates-title" id="updates-title">Updates</h2>
+        <a class="updates-pill" href="home-feed.html" id="updates-pill">View Updates ↗</a>
+      </div>
+      <div id="updates-list"></div>
     </section>
   </main>
   <script>
-    // Home copy stays lean and route-focused. The live block is the only moving
-    // homepage element and feeds into home-feed.html for the longer archive view.
     const HOME_COPY = {
       en: {
         menuDirectory: 'View Everyone',
@@ -391,17 +398,13 @@
         aboutPoints: [],
         actions: {
           directory: { label: 'Search Directory', meta: 'Browse all listings.' },
-          events: { label: 'Events', meta: 'See what’s happening.' },
+          events: { label: 'Events', meta: 'See what\'s happening.' },
           support: { label: 'Support', meta: 'Help keep it going.' },
           about: { label: 'About Us', meta: 'What this project is.' }
         },
-        liveTitle: 'Live progress',
-        liveNote: 'Swipe or tap a dot to browse.',
-        liveLoading: 'Loading latest progress…',
-        liveStatus: count => `${count} recent additions in rotation`,
-        liveFallback: 'No recent activity yet. New entries and events will appear here automatically.',
-        openFeed: 'Open home feed ↗',
-        slideAria: index => `Go to slide ${index}`,
+        updatesTitle: 'Updates',
+        viewUpdates: 'View Updates ↗',
+        galleryPlaceholder: index => `Gallery ${index + 1}`,
         types: { entry: 'Entry', event: 'Event', draft: 'Draft' },
         entryFallback: 'Entry details coming soon.',
         eventFallback: 'Event details coming soon.',
@@ -412,7 +415,8 @@
           draft: item => `${item.category || 'Draft'} · preview`,
           entry: item => `${item.category || 'Entry'} · ${item.area || 'Local'}`,
           event: item => `${item.statusLabel || 'Event'} · ${item.whenLabel || 'Date TBD'}`
-        }
+        },
+        emptyUpdates: 'No recent updates.'
       },
       fr: {
         menuDirectory: 'Voir tout le monde',
@@ -426,36 +430,31 @@
           directory: { label: 'Chercher le répertoire', meta: 'Parcourir toutes les fiches.' },
           events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
           support: { label: 'Soutien', meta: 'Aider le projet à continuer.' },
-          about: { label: 'À propos', meta: 'Ce qu’est ce projet.' }
+          about: { label: 'À propos', meta: 'Ce qu\'est ce projet.' }
         },
-        liveTitle: 'Progrès en direct',
-        liveNote: 'Glissez ou touchez un point.',
-        liveLoading: 'Chargement des derniers progrès…',
-        liveStatus: count => `${count} ajouts récents en rotation`,
-        liveFallback: 'Aucune activité récente pour le moment. Les nouvelles entrées et événements apparaîtront ici automatiquement.',
-        openFeed: 'Ouvrir le fil d’accueil ↗',
-        slideAria: index => `Aller à la diapositive ${index}`,
+        updatesTitle: 'Mises à jour',
+        viewUpdates: 'Voir les mises à jour ↗',
+        galleryPlaceholder: index => `Galerie ${index + 1}`,
         types: { entry: 'Entrée', event: 'Événement', draft: 'Brouillon' },
-        entryFallback: 'Détails de l’entrée à venir.',
-        eventFallback: 'Détails de l’événement à venir.',
+        entryFallback: 'Détails de l\'entrée à venir.',
+        eventFallback: 'Détails de l\'événement à venir.',
         timestampUnavailable: 'Horodatage indisponible',
-        updatedNow: 'Mis à jour à l’instant',
+        updatedNow: 'Mis à jour à l\'instant',
         updatedAgo: mins => mins < 60 ? `Il y a ${mins} min` : `Il y a ${Math.round(mins / 60)} h`,
         contexts: {
           draft: item => `${item.category || 'Brouillon'} · aperçu`,
           entry: item => `${item.category || 'Entrée'} · ${item.area || 'Local'}`,
           event: item => `${item.statusLabel || 'Événement'} · ${item.whenLabel || 'Date à confirmer'}`
-        }
+        },
+        emptyUpdates: 'Aucune mise à jour récente.'
       }
     };
 
     const state = {
       items: [],
-      carouselIndex: 0,
-      carouselTimer: null,
-      carouselBound: false,
-      touchStartX: 0,
-      touchDeltaX: 0
+      galleryIndex: 0,
+      galleryTouchStartX: 0,
+      galleryTouchDeltaX: 0
     };
 
     function currentLang() {
@@ -478,18 +477,12 @@
       if (el) el.innerHTML = value;
     }
 
-    function setList(id, items) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.innerHTML = (items || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
-    }
-
     function escapeHtml(value) {
       return String(value || '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
+        .replaceAll('&', '&')
+        .replaceAll('<', '<')
+        .replaceAll('>', '>')
+        .replaceAll('"', '"')
         .replaceAll("'", '&#39;');
     }
 
@@ -546,10 +539,8 @@
       return {
         type: item.draft ? 'draft' : 'entry',
         id: item.slug,
-        anchorId: `activity-entry-${item.slug}`,
         title: localizedValue(item.title_localized) || item.title,
         summary: localizedValue(item.description_localized) || cleanSummary(item.summary || item.description || item.notes) || copy().entryFallback,
-        href: `home-feed.html#activity-entry-${encodeURIComponent(item.slug)}`,
         detailHref: item.draft ? `directory.html#entry-${encodeURIComponent(item.slug)}` : `entry.html#${encodeURIComponent(item.slug)}`,
         badge: item.draft ? copy().types.draft : copy().types.entry,
         statusLabel: item.draft ? copy().types.draft : copy().types.entry,
@@ -564,10 +555,8 @@
       return {
         type: 'event',
         id: item.id,
-        anchorId: `activity-event-${item.id}`,
         title: localizedValue(item.title) || item.name,
         summary: localizedValue(item.summary) || cleanSummary(item.name) || copy().eventFallback,
-        href: `home-feed.html#activity-event-${encodeURIComponent(item.id)}`,
         detailHref: `events.html#event-${encodeURIComponent(item.id)}`,
         badge: copy().types.event,
         statusLabel: localizedValue({ en: item.computed_status || item.status || 'event', fr: item.computed_status === 'archived' ? 'archivé' : item.computed_status === 'active' ? 'actif' : 'événement' }),
@@ -591,144 +580,87 @@
         directoryResponse.json(),
         eventsResponse.json()
       ]);
-      let metaPayload = {};
-      try {
-        const metaResponse = await fetch('assets/site-meta.json', { cache: 'no-store' });
-        if (metaResponse.ok) metaPayload = await metaResponse.json();
-      } catch (error) {
-        console.warn('Homepage site meta unavailable:', error);
-      }
       const items = [
         ...(Array.isArray(directoryPayload.items) ? directoryPayload.items.map(normalizeEntry) : []),
         ...(Array.isArray(eventsPayload.items) ? eventsPayload.items.map(normalizeEvent) : [])
       ].sort((a, b) => b.source_modified_ts - a.source_modified_ts || String(a.title || '').localeCompare(String(b.title || '')));
-      return { items, meta: metaPayload || {} };
+      return { items };
     }
 
-    function slideContext(item) {
-      if (item.type === 'draft') return copy().contexts.draft(item);
-      if (item.type === 'entry') return copy().contexts.entry(item);
-      return copy().contexts.event(item);
+    /* --- Media Gallery Carousel (swipe-only, no arrows/dots) --- */
+
+    const GALLERY_COUNT = 3;
+
+    function renderGallery() {
+      const track = document.getElementById('gallery-track');
+      if (!track) return;
+      const c = copy();
+      track.innerHTML = Array.from({ length: GALLERY_COUNT }, (_, i) => `
+        <div class="media-gallery-slide">
+          <div class="gallery-placeholder">
+            <span class="gallery-placeholder-icon" aria-hidden="true"> ◒ </span>
+            <span>${escapeHtml(c.galleryPlaceholder(i))}</span>
+          </div>
+        </div>
+      `).join('');
+      state.galleryIndex = 0;
+      updateGallery();
+      bindGalleryTouch();
     }
 
-    function renderCarousel(items) {
-      const track = document.getElementById('carousel-track');
-      const dots = document.getElementById('carousel-dots');
-      const empty = document.getElementById('carousel-empty');
-      if (!track || !dots || !empty) return;
+    function updateGallery() {
+      const track = document.getElementById('gallery-track');
+      if (!track) return;
+      track.style.transform = `translateX(-${state.galleryIndex * 100}%)`;
+    }
 
+    function bindGalleryTouch() {
+      const gallery = document.getElementById('home-gallery');
+      if (!gallery || gallery.dataset.bound) return;
+      gallery.dataset.bound = '1';
+      gallery.addEventListener('touchstart', e => {
+        state.galleryTouchStartX = e.touches[0]?.clientX || 0;
+        state.galleryTouchDeltaX = 0;
+      }, { passive: true });
+      gallery.addEventListener('touchmove', e => {
+        state.galleryTouchDeltaX = (e.touches[0]?.clientX || 0) - state.galleryTouchStartX;
+      }, { passive: true });
+      gallery.addEventListener('touchend', () => {
+        if (Math.abs(state.galleryTouchDeltaX) > 28) {
+          const next = state.galleryIndex + (state.galleryTouchDeltaX < 0 ? 1 : -1);
+          state.galleryIndex = Math.max(0, Math.min(GALLERY_COUNT - 1, next));
+          updateGallery();
+        }
+        state.galleryTouchStartX = 0;
+        state.galleryTouchDeltaX = 0;
+      });
+    }
+
+    /* --- Updates feed (top-10 rows, scroll for more) --- */
+
+    function renderUpdates(items) {
+      const list = document.getElementById('updates-list');
+      if (!list) return;
+      const c = copy();
       if (!items.length) {
-        track.innerHTML = '';
-        dots.innerHTML = '';
-        empty.hidden = false;
-        empty.textContent = copy().liveFallback;
-        stopCarousel();
+        list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(c.emptyUpdates)}</p>`;
         return;
       }
-
-      empty.hidden = true;
-      track.innerHTML = items.map(item => `
-        <a class="carousel-slide" href="${escapeHtml(item.href)}" data-anchor="${escapeHtml(item.anchorId)}">
-          <div class="slide-top">
-            <span class="slide-badge">${escapeHtml(item.badge)}</span>
-            <span class="slide-time">${escapeHtml(formatTimestamp(item.source_modified_ts))}</span>
-          </div>
-          <h3 class="slide-title">${escapeHtml(item.title)}</h3>
-          <p class="slide-summary">${escapeHtml(item.summary)}</p>
-          <div class="slide-footer">
-            <span class="slide-context">${escapeHtml(slideContext(item))}</span>
-            <span class="slide-cta">${escapeHtml(copy().openFeed)}</span>
-          </div>
-        </a>
-      `).join('');
-
-      dots.innerHTML = items.map((item, index) => `
-        <button class="carousel-dot" type="button" aria-label="${escapeHtml(copy().slideAria(index + 1))}" data-index="${index}" ${index === 0 ? 'aria-current="true"' : ''}></button>
-      `).join('');
-
-      dots.querySelectorAll('.carousel-dot').forEach(button => {
-        button.addEventListener('click', () => {
-          moveToSlide(Number(button.dataset.index || 0));
-          restartCarousel();
-        });
-      });
-
-      if (!state.carouselBound) {
-        const carousel = document.getElementById('home-carousel');
-        const prev = document.getElementById('carousel-prev');
-        const next = document.getElementById('carousel-next');
-        prev?.addEventListener('click', () => {
-          moveToSlide(state.carouselIndex - 1);
-          restartCarousel();
-        });
-        next?.addEventListener('click', () => {
-          moveToSlide(state.carouselIndex + 1);
-          restartCarousel();
-        });
-        carousel?.addEventListener('mouseenter', stopCarousel);
-        carousel?.addEventListener('mouseleave', startCarousel);
-        carousel?.addEventListener('focusin', stopCarousel);
-        carousel?.addEventListener('focusout', startCarousel);
-        carousel?.addEventListener('touchstart', event => {
-          state.touchStartX = event.touches[0]?.clientX || 0;
-          state.touchDeltaX = 0;
-          stopCarousel();
-        }, { passive: true });
-        carousel?.addEventListener('touchmove', event => {
-          state.touchDeltaX = (event.touches[0]?.clientX || 0) - state.touchStartX;
-        }, { passive: true });
-        carousel?.addEventListener('touchend', () => {
-          if (Math.abs(state.touchDeltaX) > 28) {
-            moveToSlide(state.carouselIndex + (state.touchDeltaX < 0 ? 1 : -1));
-          }
-          state.touchStartX = 0;
-          state.touchDeltaX = 0;
-          startCarousel();
-        });
-        state.carouselBound = true;
-      }
-
-      state.items = items;
-      state.carouselIndex = 0;
-      updateCarousel();
-      restartCarousel();
-    }
-
-    function updateCarousel() {
-      const track = document.getElementById('carousel-track');
-      if (!track || !state.items.length) return;
-      const index = ((state.carouselIndex % state.items.length) + state.items.length) % state.items.length;
-      state.carouselIndex = index;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((dot, dotIndex) => {
-        if (dotIndex === index) dot.setAttribute('aria-current', 'true');
-        else dot.removeAttribute('aria-current');
-      });
-    }
-
-    function moveToSlide(index) {
-      state.carouselIndex = index;
-      updateCarousel();
-    }
-
-    function stopCarousel() {
-      if (state.carouselTimer) {
-        clearInterval(state.carouselTimer);
-        state.carouselTimer = null;
-      }
-    }
-
-    function startCarousel() {
-      if (!state.items.length || state.carouselTimer) return;
-      state.carouselTimer = setInterval(() => {
-        state.carouselIndex = (state.carouselIndex + 1) % state.items.length;
-        updateCarousel();
-      }, 4000);
-    }
-
-    function restartCarousel() {
-      stopCarousel();
-      startCarousel();
+      const rows = items.slice(0, 10);
+      list.innerHTML = rows.map(item => {
+        const badge = escapeHtml(item.badge);
+        const name = escapeHtml(item.title);
+        const desc = escapeHtml(item.summary.substring(0, 60));
+        const time = escapeHtml(relativeUpdatedLabel(item.source_modified_ts));
+        return `<a class="update-row" href="${escapeHtml(item.detailHref)}">
+          <span class="update-badge">${badge}</span>
+          <span class="update-content">
+            <span class="update-name">${name}</span>
+            <span class="update-desc">${desc}</span>
+          </span>
+          <span class="update-time">${time}</span>
+        </a>`;
+      }).join('');
     }
 
     function updateMenuControls() {
@@ -766,7 +698,6 @@
       setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
       setHtml('about-copy', c.about);
-      setList('about-points', c.aboutPoints);
       setText('action-directory-label', c.actions.directory.label);
       setText('action-directory-meta', c.actions.directory.meta);
       setText('action-events-label', c.actions.events.label);
@@ -775,40 +706,34 @@
       setText('action-support-meta', c.actions.support.meta);
       setText('action-about-label', c.actions.about.label);
       setText('action-about-meta', c.actions.about.meta);
-      setText('live-title', c.liveTitle);
-      setText('live-note', c.liveNote);
-      if (!state.items.length) setText('live-status-copy', c.liveLoading);
+      setText('updates-title', c.updatesTitle);
+      setText('updates-pill', c.viewUpdates);
     }
 
-    async function initHomeLive() {
+    async function initHome() {
+      renderGallery();
       try {
         const payload = await loadActivity();
-        const slides = payload.items.slice(0, 3);
-        renderCarousel(slides);
-        setText('live-status-copy', copy().liveStatus(slides.length || payload.items.length));
-        const latestTs = Number(payload.meta.latest_source_modified_ts || slides[0]?.source_modified_ts || 0);
-        if (latestTs > 0) {
-          setText('live-status-copy', `${copy().liveStatus(slides.length || payload.items.length)} · ${relativeUpdatedLabel(latestTs)}`);
-        }
+        state.items = payload.items;
+        renderUpdates(payload.items);
       } catch (error) {
-        console.warn('Home live carousel unavailable:', error);
-        const empty = document.getElementById('carousel-empty');
-        if (empty) {
-          empty.hidden = false;
-          empty.textContent = copy().liveFallback;
+        console.warn('Home updates unavailable:', error);
+        const list = document.getElementById('updates-list');
+        if (list) {
+          list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(copy().emptyUpdates)}</p>`;
         }
-        setText('live-status-copy', copy().timestampUnavailable);
       }
     }
 
     window.addEventListener('acadie:languagechange', () => {
       updateStaticCopy();
-      initHomeLive();
+      renderGallery();
+      if (state.items.length) renderUpdates(state.items);
     });
 
     document.documentElement.lang = currentLang();
     updateStaticCopy();
-    initHomeLive();
+    initHome();
   </script>
 </body>
 </html>
