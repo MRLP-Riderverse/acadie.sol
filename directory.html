@@ -541,36 +541,36 @@
               <button class="search-clear" id="search-clear" type="button" aria-label="Clear search" hidden>×</button>
             </div>
           </div>
-          <div class="filter-popover" id="filter-popover" hidden>
-            <div class="filter-backdrop" id="filter-backdrop" aria-hidden="true"></div>
-            <div class="filter-sheet" role="dialog" aria-modal="true" aria-label="Filters">
-              <div class="filter-title">
-                <span>Filters</span>
-                <button id="close-filters" type="button" aria-label="Close filters">✕</button>
-              </div>
-              <div class="control-grid">
-                <select id="mood-select" class="select" aria-label="Mood">
-                  <option value="">Any vibe</option>
-                  <option value="food">Food, cafés & treats</option>
-                  <option value="waterfront">Waterfront / out for a walk</option>
-                  <option value="family">Family-friendly</option>
-                  <option value="night">Music, drinks & night out</option>
-                </select>
-                <select id="category-select" class="select" aria-label="Category">
-                  <option value="all">All categories</option>
-                </select>
-                <select id="city-select" class="select" aria-label="Area">
-                  <option value="all">All areas</option>
-                </select>
-              </div>
-              <div class="filter-actions">
-                <button type="button" id="reset-filters">Reset</button>
-                <button type="button" id="apply-filters">Done</button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
+      <div class="filter-popover" id="filter-popover" hidden>
+        <div class="filter-backdrop" id="filter-backdrop" aria-hidden="true"></div>
+        <div class="filter-sheet" role="dialog" aria-modal="true" aria-label="Filters">
+          <div class="filter-title">
+            <span>Filters</span>
+            <button id="close-filters" type="button" aria-label="Close filters">✕</button>
+          </div>
+          <div class="control-grid">
+            <select id="mood-select" class="select" aria-label="Mood">
+              <option value="">Any vibe</option>
+              <option value="food">Food, cafés & treats</option>
+              <option value="waterfront">Waterfront / out for a walk</option>
+              <option value="family">Family-friendly</option>
+              <option value="night">Music, drinks & night out</option>
+            </select>
+            <select id="category-select" class="select" aria-label="Category">
+              <option value="all">All categories</option>
+            </select>
+            <select id="city-select" class="select" aria-label="Area">
+              <option value="all">All areas</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="reset-filters">Reset</button>
+            <button type="button" id="apply-filters">Done</button>
+          </div>
+        </div>
+      </div>
     </section>
     
     <!-- Search now lives in this page; the directory shell handles browse + filter in one place. -->
@@ -1115,10 +1115,12 @@
       document.documentElement.classList.remove('filters-open');
     }
 
-    function openFilterPopover() {
+    function toggleFilterPopover(forceOpen) {
       const popover = document.getElementById('filter-popover');
-      if (popover) popover.hidden = false;
-      document.documentElement.classList.add('filters-open');
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : !!popover?.hidden;
+      if (popover) popover.hidden = !shouldOpen;
+      document.documentElement.classList.toggle('filters-open', shouldOpen);
+      return shouldOpen;
     }
     function setSearchSurfaceVisible(visible) {
       const surface = document.getElementById('search-surface');
@@ -1233,9 +1235,12 @@
         history.replaceState(null, '', '#browse');
         setDirectoryIntent('browse', { scroll: true, focus: false });
       });
-      document.getElementById('open-filters')?.addEventListener('click', () => { openFilterPopover(); });
+      document.getElementById('open-filters')?.addEventListener('click', () => { toggleFilterPopover(); });
       document.getElementById('close-filters')?.addEventListener('click', closeFilterPopover);
       document.getElementById('filter-backdrop')?.addEventListener('click', closeFilterPopover);
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeFilterPopover();
+      });
       document.getElementById('apply-filters')?.addEventListener('click', () => {
         closeFilterPopover();
         renderResults();
