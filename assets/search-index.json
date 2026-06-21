@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 71,
+  "item_count": 72,
   "items": [
     {
       "type": "entry",
@@ -154,20 +154,22 @@
       "type": "entry",
       "id": "bathurst-hospitality-days",
       "title": "Bathurst Hospitality Days",
-      "subtitle": "community · Acadie-Bathurst",
+      "subtitle": "hospitality · Acadie-Bathurst",
       "badges": [
-        "community"
+        "hospitality"
       ],
       "url": "directory.html#entry-bathurst-hospitality-days",
       "terms": [
         "Bathurst Hospitality Days",
-        "community",
+        "hospitality",
         "Acadie-Bathurst",
-        "Public page for Bathurst Hospitality Days.",
+        "Organizer, venue, and event hub at 100 Main St, Bathurst.",
         "hospitality",
         "festival",
         "community",
-        "events",
+        "venue",
+        "event organizer",
+        "business",
         "Hospitality Days",
         "Bathurst Hospitality"
       ]
@@ -1354,7 +1356,7 @@
       "type": "event",
       "id": "after-block-party-2026",
       "title": "After Block Party 2026",
-      "subtitle": "active · 2026-07-31T21:00:00-03:00",
+      "subtitle": "active · 2026-07-31T22:00:00-03:00",
       "badges": [
         "event",
         "active",
@@ -1364,12 +1366,33 @@
       "url": "events.html#event-after-block-party-2026",
       "terms": [
         "After Block Party 2026",
-        "Event in Bathurst by La Louga on Friday, July 31, 2026.",
-        "2026-07-31T21:00:00-03:00",
+        "After-party event in Bathurst by La Louga on Friday, July 31, 2026 at 10 PM.",
+        "2026-07-31T22:00:00-03:00",
         "music",
         "nightlife",
         "concert",
+        "afterparty",
         "la-louga-night-bar-resto"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "bathurst-hospitality-days",
+      "title": "Bathurst Hospitality Days",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-bathurst-hospitality-days",
+      "terms": [
+        "Bathurst Hospitality Days",
+        "Venue and organizer hub at 100 Main St in Bathurst.",
+        "main-st-bathurst",
+        "hospitality",
+        "festival",
+        "community",
+        "venue"
       ]
     },
     {

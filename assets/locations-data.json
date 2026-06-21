@@ -1,8 +1,45 @@
 {
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "location_count": 5,
+  "location_count": 6,
   "items": [
+    {
+      "id": "bathurst-hospitality-days",
+      "status": "published",
+      "kind": "venue",
+      "title": {
+        "en": "Bathurst Hospitality Days",
+        "fr": "Bathurst Hospitality Days",
+        "shiac": "Bathurst Hospitality Days"
+      },
+      "name": "Bathurst Hospitality Days",
+      "summary": {
+        "en": "Venue and organizer hub at 100 Main St in Bathurst.",
+        "fr": "Lieu et point d’appui organisateur au 100 Main St à Bathurst.",
+        "shiac": "Venue and organizer hub at 100 Main St in Bathurst."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "main-st-bathurst",
+      "address": "100 Main St, Bathurst, NB E2A 1A4, Canada",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "bathurst-hospitality-days"
+      ],
+      "nearby_location_ids": [
+        "downtown-main-st-bathurst",
+        "la-louga-main-st"
+      ],
+      "tags": [
+        "hospitality",
+        "festival",
+        "community",
+        "venue"
+      ],
+      "path": "locations/bathurst-hospitality-days/location.md",
+      "source_modified_at": "2026-06-21T19:39:56.012087Z",
+      "source_modified_ts": 1782070796
+    },
     {
       "id": "bathurst-municipal-library",
       "status": "published",

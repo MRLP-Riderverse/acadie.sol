@@ -149,7 +149,8 @@
     .choice-button.active span { color: color-mix(in srgb, var(--blue-ink) 76%, transparent); }
     .choice-button:hover small,
     .choice-button.active small { color: color-mix(in srgb, var(--blue-ink) 78%, transparent); }
-    .body-search { margin-top: 14px; position: relative; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    .body-search { margin-top: 8px; position: relative; }
     .body-search[hidden],
     .directory-shell[hidden] { display: none; }
     html.route-pending .splash,
@@ -161,7 +162,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 0 0 8px;
+      margin: 0 0 4px;
+      padding: 0 2px;
     }
     .search-pill {
       border-radius: 999px;
@@ -171,10 +173,11 @@
       min-height: 0;
       white-space: nowrap;
     }
-    .control-body { padding: 14px; display: grid; gap: 10px; }
+    .control-body { padding: 12px; display: grid; gap: 10px; }
     .control-grid { display: grid; gap: 10px; }
-    .search-shell { display: grid; gap: 7px; }
-    .search-field { position: relative; }
+    .search-shell { display: grid; gap: 7px; width: 100%; }
+    .control-grid.search-shell { grid-template-columns: minmax(0, 1fr); }
+    .search-field { position: relative; width: 100%; }
     .search-action {
       white-space: nowrap;
       border-radius: 999px;
@@ -228,9 +231,10 @@
       background: rgba(8, 18, 40, 0.3);
       color: var(--text);
       font: inherit;
+      font-size: 16px;
       outline: none;
     }
-    .search { font-size: 16px; padding-right: 44px; }
+    .search { padding-right: 44px; }
     .search::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
     .select option { color: var(--ink); background: var(--paper); }
 
@@ -510,8 +514,8 @@
     .thumb-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
     .thumb-fallback { width: 100%; height: 100%; display: grid; place-items: center; font-weight: 900; }
     .summary-thumb .thumb-fallback { font-size: 1.02rem; }
-    .full-page-link { display: inline-block; margin-top: 8px; padding: 8px 14px; border-radius: 14px; background: var(--button-bg); color: var(--button-fg); border: 1px solid var(--button-border); font-size: .82rem; font-weight: 900; text-decoration: none; }
-    .full-page-link:hover { color: var(--button-fg); background: var(--button-bg-hover); }
+    .full-page-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 0; background: transparent; color: var(--link); border: 0; font-size: .86rem; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+    .full-page-link:hover { color: var(--link-hover); background: transparent; }
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
     @media (max-width: 720px) {
@@ -1037,7 +1041,7 @@
         ['email', copy().email, contactValue(item, 'email')],
         ...(item.draft ? [['website', copy().website, contactValue(item, 'website')]] : []),
       ].filter(([, , value]) => cleanSummary(value));
-      const entryLink = !item.draft ? `<a class="full-page-link" href="entry.html#${escapeHtml(item.slug)}">${escapeHtml(copy().viewFullPage)}</a>` : '';
+      const entryLink = !item.draft ? `<a class="full-page-link" href="entry.html#${escapeHtml(item.slug)}" target="_top" rel="noopener noreferrer">${escapeHtml(copy().viewFullPage)} ↗</a>` : '';
       return `
         <details class="directory-card" id="entry-${escapeHtml(item.slug)}">
           <summary>
