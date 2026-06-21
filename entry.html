@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#174b8e" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
   <title>Acadie.sol — Entry</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
@@ -20,7 +21,6 @@
       background: var(--page-bg);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
-    [data-theme="dark"] body { background: var(--page-bg); }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; }
@@ -97,13 +97,23 @@
     function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
     function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
     function phoneHref(v) { const d = cleanSummary(v).replace(/[^\d+]/g, ''); return d ? `tel:${d}` : ''; }
+    function safeImageSrc(value) {
+      const raw = String(value || '').trim();
+      if (!raw || raw.startsWith('//')) return '';
+      try {
+        const url = new URL(raw, document.baseURI);
+        return (url.protocol === 'http:' || url.protocol === 'https:') ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
     function renderDetailLink(label, value) {
       const text = cleanSummary(value); if (!text) return '';
       const lower = String(label || '').toLowerCase();
       if (lower === 'phone') { const h = phoneHref(text); return h ? `<a class="detail-link" href="${h}">${escapeHtml(text)}</a>` : escapeHtml(text); }
-      if (lower === 'address') { const h = mapsHref(text); return h ? `<a class="detail-link" href="${h}" target="_blank" rel="noopener">${escapeHtml(text)}</a>` : escapeHtml(text); }
+      if (lower === 'address') { const h = mapsHref(text); return h ? `<a class="detail-link" href="${h}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>` : escapeHtml(text); }
       if (lower === 'email') return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
-      if (lower === 'website') { const h = /^https?:\/\//i.test(text) ? text : `https://${text}`; return `<a class="detail-link" href="${escapeHtml(h)}" target="_blank" rel="noopener">${escapeHtml(text)}</a>`; }
+      if (lower === 'website') { const h = /^https?:\/\//i.test(text) ? text : `https://${text}`; return `<a class="detail-link" href="${escapeHtml(h)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`; }
       return escapeHtml(text);
     }
     function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(d), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(d) }; }
@@ -118,7 +128,11 @@
     document.documentElement.lang = currentLang();
     updateChromeCopy();
 
-    const slug = decodeURIComponent(location.hash.slice(1)).trim();
+    function safeHashFragment() {
+      try { return decodeURIComponent(location.hash.slice(1)).trim(); }
+      catch { return ''; }
+    }
+    const slug = safeHashFragment();
     if (!slug) { location.replace('directory.html'); }
 
     async function render() {
@@ -179,7 +193,7 @@
         ` : '';
 
         const initial = (itemTitle || '?').trim().charAt(0).toUpperCase();
-        const thumbnailSrc = String(item.thumbnail_src || '').trim();
+        const thumbnailSrc = safeImageSrc(item.thumbnail_src);
         const thumbnailAlt = String(item.thumbnail_alt || itemTitle || 'Entry photo').trim();
 
         root.innerHTML = `

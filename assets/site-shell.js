@@ -122,7 +122,7 @@
   if (savedTheme) document.documentElement.dataset.theme = savedTheme;
   document.documentElement.dataset.lang = currentLang();
 
-  document.write(`
+  document.body.insertAdjacentHTML('afterbegin', `
     <header class="site-header" aria-label="Acadian banner"><span id="global-header-text">Vive l'Acadie!</span></header>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>

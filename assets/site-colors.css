@@ -35,6 +35,7 @@
   --blue-ink: #fffaf2;
   --link: #0d2f5e;
   --link-hover: #174b8e;
+  --label-accent: #0d2f5e;
   --gold: #b57910;
   --acadian-yellow: #f3c85b;
   --button-bg: var(--blue-deep);
@@ -63,11 +64,11 @@
   --bg2: #10213a;
   --bg3: #152845;
   --panel: #10213a;
-  --panel-strong: #173055;
+  --panel-strong: #17365f;
   --card: #10213a;
-  --card-strong: #173055;
+  --card-strong: #17365f;
   --paper: #10213a;
-  --paper-soft: #173055;
+  --paper-soft: #17365f;
 
   /* Text and line system */
   --ink: #f0f6ff;
@@ -75,8 +76,8 @@
   --text: var(--ink);
   --muted: #bfd2ea;
   --soft: #9fb6cf;
-  --line: rgba(159, 194, 233, 0.18);
-  --line-strong: rgba(159, 194, 233, 0.30);
+  --line: rgba(159, 194, 233, 0.20);
+  --line-strong: rgba(159, 194, 233, 0.34);
 
   /* Brand/accent system */
   --blue: #7fb2ef;
@@ -84,6 +85,7 @@
   --blue-ink: #f7fbff;
   --link: #9bc8ff;
   --link-hover: #d2e6ff;
+  --label-accent: #f3c85b;
   --gold: #f0c866;
   --acadian-yellow: #f3c85b;
   --button-bg: rgba(10, 43, 87, 0.72);
@@ -100,5 +102,5 @@
 
   /* Depth/glass */
   --shadow: rgba(0, 0, 0, 0.38);
-  --glass: rgba(10, 43, 87, 0.72);
+  --glass: rgba(8, 31, 61, 0.74);
 }

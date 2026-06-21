@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#174b8e" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
   <title>ACADIE.SOL Directory</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
@@ -185,8 +186,8 @@
       padding: 14px;
       border: 1px solid var(--line-strong);
       border-radius: 16px;
-      background: var(--paper);
-      box-shadow: 0 16px 36px rgba(5,13,27,0.38);
+      background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
+      box-shadow: 0 16px 36px var(--shadow);
     }
     .filter-popover[hidden] { display: none; }
     .filter-title { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--gold); font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; }
@@ -425,7 +426,7 @@
       background: var(--page-bg);
     }
     .top-nav { background: var(--glass); border-bottom-color: var(--line); box-shadow: 0 10px 28px var(--shadow); }
-    .nav-brand strong, .eyebrow, .control-kicker, .control-intro strong, .choice-copy strong, .mini-stat strong { color: var(--blue-deep); }
+    .nav-brand strong, .eyebrow, .control-kicker, .control-intro strong, .choice-copy strong, .mini-stat strong { color: var(--label-accent); }
     .nav-action, button, .mini-stat { background: var(--paper); color: var(--ink); }
     .nav-action:hover, .nav-action.active, button:hover, button.active { background: var(--blue-deep); border-color: var(--blue-deep); color: var(--blue-ink); }
     .choice-panel, .control-panel, .recent-panel, .directory-card, .empty { background: color-mix(in srgb, var(--paper) 88%, transparent); border-color: var(--line); box-shadow: 0 14px 32px var(--shadow); }
@@ -435,7 +436,7 @@
     .choice-button.active span, .choice-button:hover span, .choice-button.active small, .choice-button:hover small { color: color-mix(in srgb, var(--blue-ink) 78%, transparent); }
     .search, .select { background: var(--panel-strong); color: var(--ink); border-color: var(--line-strong); }
     .search::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
-    .filter-popover { background: var(--paper); color: var(--ink); box-shadow: 0 16px 36px var(--shadow); }
+    .filter-popover { background: color-mix(in srgb, var(--panel-strong) 92%, transparent); color: var(--ink); box-shadow: 0 16px 36px var(--shadow); }
     .mini-stats { display: none; }
     .splash { min-height: auto; padding: 12px 0 20px; }
     .wrap { padding-top: 76px; }
@@ -475,7 +476,7 @@
        repeating the same asset. The same summary slot also owns the initial-letter
        gradient fallback when no thumbnail is available. */
     .card-summary-row { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; }
-    .summary-thumb { border-radius: 18px; overflow: hidden; background: var(--paper); color: var(--blue-ink); box-shadow: inset 0 0 0 1px var(--line-strong); }
+    .summary-thumb { border-radius: 18px; overflow: hidden; background: var(--paper); color: var(--label-accent); box-shadow: inset 0 0 0 1px var(--line-strong); }
     .summary-thumb { width: 64px; height: 64px; flex: 0 0 auto; display: grid; place-items: center; }
     .card-top { display: flex; align-items: start; justify-content: space-between; gap: 7px; }
     .card-title { font-size: .95rem; letter-spacing: -.01em; }
@@ -692,6 +693,16 @@
       return value || '';
     }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function safeImageSrc(value) {
+      const raw = String(value || '').trim();
+      if (!raw || raw.startsWith('//')) return '';
+      try {
+        const url = new URL(raw, document.baseURI);
+        return (url.protocol === 'http:' || url.protocol === 'https:') ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
     function modifiedTs(item) {
       const numeric = Number(item?.source_modified_ts || 0);
       if (Number.isFinite(numeric) && numeric > 0) return numeric;
@@ -930,7 +941,7 @@
       const notes = cleanSummary(item.notes);
       const tags = derivedTags(item);
       const city = publicCity(item);
-      const thumbnailSrc = cleanSummary(item.thumbnail_src);
+      const thumbnailSrc = safeImageSrc(item.thumbnail_src);
       const thumbnailAlt = cleanSummary(item.thumbnail_alt) || `${displayTitle || 'Entry'} photo`;
       const thumbFallback = escapeHtml((displayTitle || '?').trim().charAt(0).toUpperCase());
       const summaryThumb = thumbnailSrc
@@ -1073,7 +1084,11 @@
     function syncHashTarget() {
       const hash = window.location.hash;
       if (!hash.startsWith('#entry-')) return;
-      const target = document.querySelector(hash);
+      let targetId = '';
+      try { targetId = decodeURIComponent(hash.slice(1)).trim(); }
+      catch { return; }
+      if (!targetId) return;
+      const target = document.getElementById(targetId);
       if (!target) return;
       openParentDetails(target);
       target.open = true;

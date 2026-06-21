@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#174b8e" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
   <title>Fresh Drafts · ACADIE.SOL Directory</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
@@ -48,13 +49,13 @@
     .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 10px; flex-wrap: wrap; }
     .toolbar span { color: var(--muted); font-size: 0.88rem; }
     .draft-list { display: grid; gap: 10px; }
-    .card {
+    .draft-card {
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 14px;
       background: var(--card-strong);
       box-shadow: 0 14px 28px var(--shadow);
-    }
+      display: grid;
       gap: 9px;
     }
     .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }

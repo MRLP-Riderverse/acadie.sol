@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#174b8e" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
   <title>Search · ACADIE.SOL</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
@@ -64,8 +65,8 @@
       display: grid;
       gap: 8px;
       padding: 10px 12px 12px;
-      background: var(--page-bg);
-      border: 1px solid color-mix(in srgb, #000 32%, transparent);
+      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      border: 1px solid var(--line-strong);
       border-radius: 18px;
       box-shadow: 0 -6px 22px -4px var(--shadow);
       margin-inline: auto;
@@ -123,7 +124,7 @@
       padding: 10px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
       box-shadow: 0 16px 38px var(--shadow);
     }
     .filter-menu[open] .chips {
@@ -140,7 +141,7 @@
       padding: 10px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      background: color-mix(in srgb, var(--panel-strong) 92%, transparent);
       box-shadow: 0 16px 38px var(--shadow);
       z-index: 40;
     }
@@ -263,6 +264,16 @@
     function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
     function escapeHtml(value) { return String(value || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;'); }
     function normalize(value) { return String(value || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function safeHref(value) {
+      const raw = String(value || '').trim();
+      if (!raw || raw.startsWith('//')) return '';
+      try {
+        const url = new URL(raw, document.baseURI);
+        return (url.protocol === 'http:' || url.protocol === 'https:') ? url.href : '';
+      } catch {
+        return '';
+      }
+    }
 
     function filterLabel() {
       const c = copy();
@@ -278,8 +289,10 @@
       setText('chip-food', c.food); setText('chip-music', c.music); setText('chip-family', c.family); setText('chip-waterfront', c.waterfront);
       setText('view-directory', c.viewDirectory);
       const input = document.getElementById('search-input');
-      input.placeholder = c.placeholder;
-      input.setAttribute('aria-label', c.title);
+      if (input) {
+        input.placeholder = c.placeholder;
+        input.setAttribute('aria-label', c.title);
+      }
       render();
     }
 
@@ -312,18 +325,21 @@
     function renderCard(item) {
       const typeLabel = item.type === 'event' ? copy().events : copy().places;
       const badges = (item.badges || []).slice(0, 4).map(badge => `<span class="badge">${escapeHtml(badge)}</span>`).join('');
-      return `<a class="result-card" href="${escapeHtml(resultUrl(item))}">
+      const href = safeHref(resultUrl(item)) || 'directory.html';
+      return `<a class="result-card" href="${escapeHtml(href)}">
         <div class="result-top"><div><h2 class="result-title">${escapeHtml(item.title)}</h2><div class="result-subtitle">${escapeHtml(item.subtitle || '')}</div></div><span class="type-pill">${escapeHtml(typeLabel)}</span></div>
         ${badges ? `<div class="badges">${badges}</div>` : ''}
       </a>`;
     }
     function render() {
       const c = copy();
-      const query = normalize(state.query.trim());
+      const query = normalize(typeof state.query === 'string' ? state.query.trim() : '');
       const hasIntent = Boolean(query) || state.filter !== 'all';
+      const resultsEl = document.getElementById('results');
+      if (!resultsEl) return;
       if (!hasIntent) {
         setText('result-count', '');
-        document.getElementById('results').innerHTML = '';
+        resultsEl.innerHTML = '';
         return;
       }
       const ranked = state.items
@@ -334,15 +350,17 @@
         .slice(0, query ? 24 : 12)
         .map(row => row.item);
       setText('result-count', state.items.length ? (query || state.filter !== 'all' ? c.showing(ranked.length) : c.ready(state.items.length)) : c.loading);
-      document.getElementById('results').innerHTML = ranked.length
+      resultsEl.innerHTML = ranked.length
         ? ranked.map(renderCard).join('')
         : `<div class="empty">${escapeHtml(c.empty)}</div>`;
     }
 
     function bindEvents() {
       const input = document.getElementById('search-input');
+      if (!input) return;
       input.addEventListener('input', event => {
-        state.query = event.target.value;
+        const value = event.currentTarget?.value;
+        state.query = typeof value === 'string' ? value : '';
         document.body.classList.add('search-input-focused');
         render();
       });

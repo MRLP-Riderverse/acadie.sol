@@ -28,7 +28,7 @@
   box-shadow: 0 6px 14px -8px var(--shadow);
 }
 [data-theme="dark"] .site-header {
-  background: #0d2f5e;
+  background: var(--blue-deep);
   color: var(--acadian-yellow);
 }
 body {
@@ -43,7 +43,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 80;
-  background: rgba(26, 20, 16, .38);
+  background: rgba(8, 31, 61, .42);
   backdrop-filter: blur(5px) saturate(.92);
   -webkit-backdrop-filter: blur(5px) saturate(.92);
   opacity: 0;
@@ -135,17 +135,6 @@ body {
   border-radius: 17px;
   text-align: center;
 }
-.site-dock a,
-.site-dock label {
-  gap: 2px;
-  min-height: 56px;
-  padding: 8px 2px;
-  border-radius: 18px;
-  font-size: .68rem;
-  line-height: 1;
-}
-.site-dock a span:first-child,
-.site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
 .menu-control:hover,
 .drawer-close:hover,
 .drawer-nav a:hover,
@@ -153,7 +142,7 @@ body {
 .site-dock label:hover { color: var(--button-fg); background: var(--button-bg-hover, color-mix(in srgb, var(--button-bg) 86%, #fff)); border-color: var(--button-border); }
 .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
 .drawer-title { display: grid; gap: 2px; }
-.drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
+.drawer-title strong { color: var(--label-accent); text-transform: uppercase; letter-spacing: .08em; }
 .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
 
 
@@ -181,19 +170,12 @@ body {
 }
 .site-dock a,
 .site-dock label {
-  display: grid;
-  place-items: center;
   gap: 2px;
   min-height: 56px;
   padding: 8px 2px;
   border-radius: 18px;
-  text-decoration: none;
   font-size: .68rem;
-  font-weight: 900;
   line-height: 1;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
 }
 .site-dock a span:first-child,
 .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
