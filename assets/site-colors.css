@@ -51,7 +51,7 @@
 
   /* Depth/glass */
   --shadow: rgba(65, 47, 29, 0.10);
-  --glass: rgba(255, 250, 242, 0.72);
+  --glass: rgba(10, 43, 87, 0.68);
 }
 
 [data-theme="dark"] {
@@ -86,8 +86,8 @@
   --link-hover: #d2e6ff;
   --gold: #f0c866;
   --acadian-yellow: #f3c85b;
-  --button-bg: rgba(10, 43, 87, 0.82);
-  --button-bg-hover: rgba(17, 58, 112, 0.92);
+  --button-bg: rgba(10, 43, 87, 0.72);
+  --button-bg-hover: rgba(17, 58, 112, 0.84);
   --button-fg: var(--acadian-yellow);
   --button-border: color-mix(in srgb, var(--acadian-yellow) 64%, transparent);
   --gold-ink: #1a1410;
@@ -100,5 +100,5 @@
 
   /* Depth/glass */
   --shadow: rgba(0, 0, 0, 0.38);
-  --glass: rgba(10, 43, 87, 0.76);
+  --glass: rgba(10, 43, 87, 0.72);
 }

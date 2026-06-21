@@ -18,16 +18,10 @@
       min-height: 100vh;
       font-family: "Trebuchet MS", "Verdana", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--blue) 18%, transparent), transparent 24rem),
-        radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 21rem),
-        linear-gradient(180deg, var(--paper) 0%, var(--page-bg) 55%, color-mix(in srgb, var(--page-bg) 82%, var(--gold)) 100%);
+      background: var(--page-bg);
     }
     [data-theme="dark"] body {
-      background:
-        radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--blue) 18%, transparent), transparent 24rem),
-        radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 21rem),
-        linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 90%, #000) 0%, var(--page-bg) 55%, color-mix(in srgb, var(--page-bg) 60%, #000) 100%);
+      background: var(--page-bg);
     }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
@@ -54,13 +48,13 @@
     .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 16px 0 10px; flex-wrap: wrap; }
     .toolbar span { color: var(--muted); font-size: 0.88rem; }
     .draft-list { display: grid; gap: 10px; }
-    .draft-card {
+    .card {
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 13px;
-      background: linear-gradient(180deg, var(--card-strong), var(--card));
-      box-shadow: 0 16px 38px var(--shadow);
-      display: grid;
+      padding: 14px;
+      background: var(--card-strong);
+      box-shadow: 0 14px 28px var(--shadow);
+    }
       gap: 9px;
     }
     .card-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
@@ -70,7 +64,7 @@
     .meta-pill { border: 1px solid var(--line); background: rgba(255,255,255,0.06); border-radius: 999px; padding: 4px 7px; color: var(--muted); font-size: 0.72rem; }
     .desc { margin: 0; color: var(--ink); line-height: 1.45; font-size: 0.9rem; }
     .date { color: var(--soft); font-size: 0.8rem; }
-    .empty { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: linear-gradient(180deg, var(--card-strong), var(--card)); color: var(--muted); }
+    .empty { border: 1px solid var(--line); border-radius: 18px; padding: 18px; background: var(--card-strong); color: var(--muted); }
     .footer { margin-top: 18px; color: var(--muted); font-size: 0.87rem; line-height: 1.45; }
     @media (max-width: 650px) {
       .wrap { width: min(100vw - 16px, 980px); padding-top: 12px; }

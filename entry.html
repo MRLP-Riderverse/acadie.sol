@@ -17,19 +17,17 @@
       margin: 0;
       min-height: 100vh;
       color: var(--ink);
+      background: var(--page-bg);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(217,155,33,.20), transparent 17rem),
-        linear-gradient(180deg, var(--paper) 0%, var(--bg) 58%, color-mix(in srgb, var(--bg) 80%, var(--gold)) 100%);
     }
-    [data-theme="dark"] body { background: radial-gradient(circle at 20% 0%, rgba(217,155,33,.14), transparent 17rem), linear-gradient(180deg, color-mix(in srgb, var(--bg) 90%, #000) 0%, var(--bg) 68%, color-mix(in srgb, var(--bg) 60%, #000) 100%); }
+    [data-theme="dark"] body { background: var(--page-bg); }
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
     .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; }
     /* Full entry pages use the exported thumbnail as a square logo/thumb slot now,
        leaving room for future multi-photo gallery modules later without recropping
        the primary identity image into a poster panorama. */
-    .poster { position: relative; width: min(240px, 100%); aspect-ratio: 1 / 1; margin: 0 auto; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: linear-gradient(135deg, color-mix(in srgb, var(--blue-deep) 94%, #000), color-mix(in srgb, var(--blue) 72%, #000)), radial-gradient(circle at 72% 30%, rgba(217,155,33,.52), transparent 8rem), var(--blue); display: grid; place-items: center; }
+    .poster { position: relative; width: min(240px, 100%); aspect-ratio: 1 / 1; margin: 0 auto; border-radius: 34px; overflow: hidden; box-shadow: 0 22px 48px var(--shadow); background: var(--blue-deep); display: grid; place-items: center; }
     .poster::before { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(255,250,242,.24); border-radius: 27px; pointer-events: none; z-index: 2; }
     .poster-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
     .poster-initial { position: relative; z-index: 1; font-size: 4.5rem; font-weight: 900; color: color-mix(in srgb, var(--blue-ink) 88%, transparent); text-shadow: 0 4px 24px rgba(0,0,0,.24); }
@@ -45,7 +43,7 @@
     .detail-link { color: var(--blue-deep); text-decoration: none; }
     .section-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: var(--muted); font-weight: 900; margin-top: 12px; margin-bottom: 6px; }
     .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; margin-top: 6px; }
-    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: linear-gradient(180deg, var(--calendar-red-top), var(--calendar-red-bottom)); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; font-size: .78rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+    .date-chip { width: 46px; min-height: 46px; border-radius: 15px; background: var(--calendar-red-top); color: var(--calendar-ink); display: grid; place-items: center; text-align: center; font-weight: 900; line-height: 1; font-size: .78rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
     .date-chip small { display: block; font-size: .56rem; opacity: .92; text-transform: uppercase; letter-spacing: .08em; }
     .event-row strong { display: block; font-size: .88rem; }
     .event-row span { display: block; color: var(--muted); font-size: .75rem; }
