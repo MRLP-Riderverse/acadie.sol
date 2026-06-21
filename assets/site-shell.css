@@ -125,7 +125,6 @@ body {
 .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
 .drawer-title { display: grid; gap: 2px; }
 .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
-.drawer-title span { color: var(--muted); font-size: .8rem; }
 .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
 .drawer-nav a {
   width: 100%;
@@ -137,7 +136,7 @@ body {
   text-decoration: none;
   font: inherit;
   font-weight: 900;
-  text-align: left;
+  text-align: center;
 }
 .drawer-nav a:hover,
 .menu-control:hover,

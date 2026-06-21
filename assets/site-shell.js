@@ -4,8 +4,7 @@
 (function () {
   const COPY = {
     en: {
-      drawerTitle: 'Extras',
-      drawerSubtitle: 'View Everyone, support, about us',
+      drawerTitle: 'Menu',
       menuDirectory: 'View Everyone',
       menuSupport: 'Support Acadie.sol',
       menuAbout: 'About us',
@@ -18,8 +17,7 @@
       headerBanner: (entries, events) => `${entries} Entries - Vive l’Acadie! - ${events} Events`
     },
     fr: {
-      drawerTitle: 'Extras',
-      drawerSubtitle: 'Voir tout le monde, soutien, à propos de nous',
+      drawerTitle: 'Menu',
       menuDirectory: 'Voir tout le monde',
       menuSupport: 'Soutenir Acadie.sol',
       menuAbout: 'À propos de nous',
@@ -64,13 +62,11 @@
     }
 
     const title = document.getElementById('global-drawer-title');
-    const subtitle = document.getElementById('global-drawer-subtitle');
     const directory = document.getElementById('global-menu-directory');
     const support = document.getElementById('global-menu-support');
     const about = document.getElementById('global-menu-about');
     const headerText = document.getElementById('global-header-text');
     if (title) title.textContent = copy.drawerTitle;
-    if (subtitle) subtitle.textContent = copy.drawerSubtitle;
     if (directory) directory.textContent = copy.menuDirectory;
     if (support) support.textContent = copy.menuSupport;
     if (about) about.textContent = copy.menuAbout;
@@ -130,14 +126,14 @@
     <header class="site-header" aria-label="Acadian banner"><span id="global-header-text">Vive l'Acadie!</span></header>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
-    <aside class="drawer" aria-label="Extras menu">
+    <aside class="drawer" aria-label="Menu">
       <div class="drawer-controls" aria-label="Display and language controls">
         <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
         <a class="drawer-close" href="obituaries.html" aria-label="Open obituaries" title="Open obituaries">✟</a>
         <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
       </div>
       <div class="drawer-head">
-        <div class="drawer-title"><strong id="global-drawer-title">Extras</strong><span id="global-drawer-subtitle">View Everyone, support, about</span></div>
+        <div class="drawer-title"><strong id="global-drawer-title">Menu</strong></div>
       </div>
       <nav class="drawer-nav">
         <a href="directory.html" id="global-menu-directory">View Everyone</a>
