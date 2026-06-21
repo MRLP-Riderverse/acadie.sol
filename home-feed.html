@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Shared identity metadata: use the same avatar for the desktop tab,
+       homescreen install icon, and other PWA surfaces. -->
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
+  <title>Home Feed · ACADIE.SOL</title>
+  <link rel="stylesheet" href="assets/site-colors.css" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--page-bg);
+      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--link-hover); }
+
+    /* Home feed is the fuller archive for the homepage carousel: a single newest-first
+       stream across entries and events so visitors can read site progress chronologically. */
+    .wrap {
+      width: min(760px, calc(100vw - 24px));
+      margin: 0 auto;
+      padding: 18px 0 96px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .surface {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: color-mix(in srgb, var(--paper) 90%, transparent);
+      box-shadow: 0 18px 42px var(--shadow);
+      padding: 16px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 10px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.35rem, 5.2vw, 2rem);
+      line-height: 1.08;
+      color: var(--ink-strong);
+    }
+
+    .lede,
+    .status-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.88rem;
+    }
+
+    .nav {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .nav-link {
+      min-height: 78px;
+      border-radius: 18px;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      text-decoration: none;
+      display: grid;
+      gap: 6px;
+      align-content: space-between;
+      padding: 12px;
+    }
+
+    .nav-link:hover {
+      background: var(--button-bg-hover);
+      color: var(--button-fg);
+    }
+
+    .nav-label {
+      font-weight: 900;
+      color: var(--ink-strong);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .nav-meta {
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.35;
+    }
+
+    /* Feed cards stay chronological and direct: type badge, time, summary, and a clean
+       handoff into the full entry/event page if someone wants the deeper destination. */
+    .feed-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .feed-card {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--paper-soft) 86%, transparent);
+      box-shadow: 0 14px 30px var(--shadow);
+      scroll-margin-top: 18px;
+    }
+
+    .feed-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .feed-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge,
+    .meta-pill {
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .badge {
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+    }
+
+    .meta-pill {
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 82%, transparent);
+      color: var(--ink);
+    }
+
+    .feed-time {
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .feed-title {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.3;
+      color: var(--ink-strong);
+    }
+
+    .feed-summary {
+      margin: 0;
+      color: var(--ink);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .feed-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .feed-context {
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+
+    .feed-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .feed-link {
+      font-size: 0.8rem;
+      font-weight: 900;
+    }
+
+    .empty {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 16px;
+      color: var(--muted);
+      background: color-mix(in srgb, var(--paper-soft) 86%, transparent);
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100vw - 14px, 760px);
+        padding-top: 12px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feed-top,
+      .feed-footer {
+        display: grid;
+      }
+
+      .feed-time { white-space: normal; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-shell.css" />
+</head>
+<body>
+  <script src="assets/site-shell.js"></script>
+  <main class="wrap">
+    <section class="surface hero" aria-labelledby="feed-title">
+      <p class="eyebrow" id="feed-eyebrow">Home feed</p>
+      <h1 id="feed-title">Newest additions across the project</h1>
+      <p class="lede" id="feed-lede">This page archives the same progress stream used on the homepage carousel: newest entries, drafts, and events, all in one chronological feed.</p>
+      <p class="status-copy" id="feed-status">Loading feed…</p>
+      <nav class="nav" aria-label="Home feed navigation">
+        <a class="nav-link" href="index.html">
+          <span class="nav-label" id="nav-home-label">Home</span>
+          <span class="nav-meta" id="nav-home-meta">Return to the launch surface.</span>
+        </a>
+        <a class="nav-link" href="directory.html#browse">
+          <span class="nav-label" id="nav-directory-label">View Everyone</span>
+          <span class="nav-meta" id="nav-directory-meta">Browse the main local directory.</span>
+        </a>
+        <a class="nav-link" href="events.html">
+          <span class="nav-label" id="nav-events-label">Events</span>
+          <span class="nav-meta" id="nav-events-meta">See the public calendar.</span>
+        </a>
+        <a class="nav-link" href="search.html">
+          <span class="nav-label" id="nav-search-label">Search</span>
+          <span class="nav-meta" id="nav-search-meta">Find a place fast.</span>
+        </a>
+      </nav>
+    </section>
+
+    <section class="feed-list" id="feed-list" aria-live="polite"></section>
+  </main>
+
+  <script>
+    const FEED_COPY = {
+      en: {
+        eyebrow: 'Home feed',
+        title: 'Newest additions across the project',
+        lede: 'This page archives the same progress stream used on the homepage carousel: newest entries, drafts, and events, all in one chronological feed.',
+        statusLoading: 'Loading feed…',
+        statusReady: count => `${count} items, newest first`,
+        statusStamped: (count, stamp) => `${count} items, newest first · latest source update ${stamp}`,
+        nav: {
+          home: { label: 'Home', meta: 'Return to the launch surface.' },
+          directory: { label: 'View Everyone', meta: 'Browse the main local directory.' },
+          events: { label: 'Events', meta: 'See the public calendar.' },
+          search: { label: 'Search', meta: 'Find a place fast.' }
+        },
+        openEntry: 'Open entry ↗',
+        openEvent: 'Open event ↗',
+        jumpHome: 'Back to home feed top',
+        empty: 'No activity yet. New entries and events will appear here automatically.',
+        timestampUnavailable: 'Timestamp unavailable',
+        pageTitle: 'Home Feed · ACADIE.SOL',
+        types: { entry: 'Entry', event: 'Event', draft: 'Draft' },
+        entryFallback: 'Entry details coming soon.',
+        eventFallback: 'Event details coming soon.',
+        draftLabel: 'preview',
+        context: {
+          draft: item => `${item.category || 'Draft'} · preview`,
+          entry: item => `${item.category || 'Entry'} · ${item.area || 'Local'}`,
+          event: item => `${item.statusLabel || 'Event'} · ${item.whenLabel || 'Date TBD'}`
+        }
+      },
+      fr: {
+        eyebrow: 'Fil d’accueil',
+        title: 'Nouveaux ajouts à travers le projet',
+        lede: 'Cette page archive le même flux de progrès que le carrousel de la page d’accueil : nouvelles entrées, brouillons et événements, dans un seul fil chronologique.',
+        statusLoading: 'Chargement du fil…',
+        statusReady: count => `${count} éléments, du plus récent au plus ancien`,
+        statusStamped: (count, stamp) => `${count} éléments, du plus récent au plus ancien · dernière mise à jour source ${stamp}`,
+        nav: {
+          home: { label: 'Accueil', meta: 'Retour à la surface de lancement.' },
+          directory: { label: 'Voir tout le monde', meta: 'Parcourir le répertoire local principal.' },
+          events: { label: 'Événements', meta: 'Voir le calendrier public.' },
+          search: { label: 'Recherche', meta: 'Trouver un lieu rapidement.' }
+        },
+        openEntry: 'Ouvrir l’entrée ↗',
+        openEvent: 'Ouvrir l’événement ↗',
+        jumpHome: 'Retour en haut du fil',
+        empty: 'Aucune activité pour le moment. Les nouvelles entrées et événements apparaîtront ici automatiquement.',
+        timestampUnavailable: 'Horodatage indisponible',
+        pageTitle: 'Fil d’accueil · ACADIE.SOL',
+        types: { entry: 'Entrée', event: 'Événement', draft: 'Brouillon' },
+        entryFallback: 'Détails de l’entrée à venir.',
+        eventFallback: 'Détails de l’événement à venir.',
+        draftLabel: 'aperçu',
+        context: {
+          draft: item => `${item.category || 'Brouillon'} · aperçu`,
+          entry: item => `${item.category || 'Entrée'} · ${item.area || 'Local'}`,
+          event: item => `${item.statusLabel || 'Événement'} · ${item.whenLabel || 'Date à confirmer'}`
+        }
+      }
+    };
+
+    const state = { items: [], latestTs: 0 };
+
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+    }
+
+    function copy() {
+      return FEED_COPY[currentLang()] || FEED_COPY.en;
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function localizedValue(value) {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return value[currentLang()] || value.en || Object.values(value).find(Boolean) || '';
+      }
+      return String(value || '');
+    }
+
+    function cleanSummary(value) {
+      return String(value || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function modifiedTs(item) {
+      const numeric = Number(item?.source_modified_ts || 0);
+      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+      const parsed = Date.parse(item?.source_modified_at || '');
+      return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
+    }
+
+    function formatTimestamp(ts) {
+      const numeric = Number(ts || 0);
+      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
+      return new Intl.DateTimeFormat(currentLang(), {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(new Date(numeric * 1000));
+    }
+
+    function formatEventWhen(value) {
+      const date = new Date(value || '');
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat(currentLang(), {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(date);
+    }
+
+    function normalizeEntry(item) {
+      return {
+        type: item.draft ? 'draft' : 'entry',
+        id: item.slug,
+        anchorId: `activity-entry-${item.slug}`,
+        title: localizedValue(item.title_localized) || item.title,
+        summary: localizedValue(item.description_localized) || cleanSummary(item.summary || item.description || item.notes) || copy().entryFallback,
+        detailHref: item.draft ? `directory.html#entry-${encodeURIComponent(item.slug)}` : `entry.html#${encodeURIComponent(item.slug)}`,
+        badge: item.draft ? copy().types.draft : copy().types.entry,
+        category: cleanSummary(item.category || ''),
+        area: cleanSummary(item.public_area || item.area || ''),
+        statusLabel: item.draft ? copy().draftLabel : copy().types.entry,
+        source_modified_at: item.source_modified_at,
+        source_modified_ts: modifiedTs(item)
+      };
+    }
+
+    function normalizeEvent(item) {
+      return {
+        type: 'event',
+        id: item.id,
+        anchorId: `activity-event-${item.id}`,
+        title: localizedValue(item.title) || item.name,
+        summary: localizedValue(item.summary) || cleanSummary(item.name) || copy().eventFallback,
+        detailHref: `events.html#event-${encodeURIComponent(item.id)}`,
+        badge: copy().types.event,
+        category: 'event',
+        area: cleanSummary(item.region_id || ''),
+        statusLabel: localizedValue({ en: item.computed_status || item.status || 'event', fr: item.computed_status === 'archived' ? 'archivé' : item.computed_status === 'active' ? 'actif' : 'événement' }),
+        whenLabel: formatEventWhen(item.starts_at),
+        source_modified_at: item.source_modified_at,
+        source_modified_ts: modifiedTs(item)
+      };
+    }
+
+    async function loadFeed() {
+      const [directoryResponse, eventsResponse] = await Promise.all([
+        fetch('assets/directory-data.json', { cache: 'no-store' }),
+        fetch('assets/events-data.json', { cache: 'no-store' })
+      ]);
+      if (!directoryResponse.ok || !eventsResponse.ok) {
+        throw new Error('Failed to load home feed data.');
+      }
+      const [directoryPayload, eventsPayload] = await Promise.all([
+        directoryResponse.json(),
+        eventsResponse.json()
+      ]);
+      let metaPayload = {};
+      try {
+        const metaResponse = await fetch('assets/site-meta.json', { cache: 'no-store' });
+        if (metaResponse.ok) metaPayload = await metaResponse.json();
+      } catch (error) {
+        console.warn('Home feed site meta unavailable:', error);
+      }
+      const items = [
+        ...(Array.isArray(directoryPayload.items) ? directoryPayload.items.map(normalizeEntry) : []),
+        ...(Array.isArray(eventsPayload.items) ? eventsPayload.items.map(normalizeEvent) : [])
+      ].sort((a, b) => b.source_modified_ts - a.source_modified_ts || String(a.title || '').localeCompare(String(b.title || '')));
+      return { items, meta: metaPayload || {} };
+    }
+
+    function itemContext(item) {
+      if (item.type === 'draft') return copy().context.draft(item);
+      if (item.type === 'entry') return copy().context.entry(item);
+      return copy().context.event(item);
+    }
+
+    function openLabel(item) {
+      return item.type === 'event' ? copy().openEvent : copy().openEntry;
+    }
+
+    function renderFeed() {
+      const feed = document.getElementById('feed-list');
+      if (!feed) return;
+      if (!state.items.length) {
+        feed.innerHTML = `<div class="empty">${escapeHtml(copy().empty)}</div>`;
+        return;
+      }
+      feed.innerHTML = state.items.map(item => `
+        <article class="feed-card" id="${escapeHtml(item.anchorId)}">
+          <div class="feed-top">
+            <div class="feed-badges">
+              <span class="badge">${escapeHtml(item.badge)}</span>
+              ${item.category ? `<span class="meta-pill">${escapeHtml(item.category)}</span>` : ''}
+              ${item.area ? `<span class="meta-pill">${escapeHtml(item.area)}</span>` : ''}
+            </div>
+            <div class="feed-time">${escapeHtml(formatTimestamp(item.source_modified_ts))}</div>
+          </div>
+          <h2 class="feed-title">${escapeHtml(item.title)}</h2>
+          <p class="feed-summary">${escapeHtml(item.summary)}</p>
+          <div class="feed-footer">
+            <div class="feed-context">${escapeHtml(itemContext(item))}</div>
+            <div class="feed-links">
+              <a class="feed-link" href="${escapeHtml(item.detailHref)}">${escapeHtml(openLabel(item))}</a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function updateStaticCopy() {
+      const c = copy();
+      document.title = c.pageTitle;
+      setText('feed-eyebrow', c.eyebrow);
+      setText('feed-title', c.title);
+      setText('feed-lede', c.lede);
+      setText('nav-home-label', c.nav.home.label);
+      setText('nav-home-meta', c.nav.home.meta);
+      setText('nav-directory-label', c.nav.directory.label);
+      setText('nav-directory-meta', c.nav.directory.meta);
+      setText('nav-events-label', c.nav.events.label);
+      setText('nav-events-meta', c.nav.events.meta);
+      setText('nav-search-label', c.nav.search.label);
+      setText('nav-search-meta', c.nav.search.meta);
+      const stamp = state.latestTs ? formatTimestamp(state.latestTs) : '';
+      setText('feed-status', state.items.length ? (stamp ? c.statusStamped(state.items.length, stamp) : c.statusReady(state.items.length)) : c.statusLoading);
+    }
+
+    async function init() {
+      updateStaticCopy();
+      try {
+        const payload = await loadFeed();
+        state.items = payload.items;
+        state.latestTs = Number(payload.meta.latest_source_modified_ts || payload.items[0]?.source_modified_ts || 0);
+        renderFeed();
+        updateStaticCopy();
+        if (location.hash) {
+          const target = document.querySelector(location.hash);
+          target?.scrollIntoView({ block: 'start' });
+        }
+      } catch (error) {
+        console.warn('Home feed unavailable:', error);
+        document.getElementById('feed-list').innerHTML = `<div class="empty">${escapeHtml(copy().empty)}</div>`;
+        setText('feed-status', copy().timestampUnavailable);
+      }
+    }
+
+    window.addEventListener('acadie:languagechange', () => {
+      init();
+    });
+
+    document.documentElement.lang = currentLang();
+    init();
+  </script>
+</body>
+</html>

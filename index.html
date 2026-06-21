@@ -18,7 +18,9 @@
       src: url("assets/fonts/PokemonGb-RAeo.ttf") format("truetype");
       font-display: swap;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -26,33 +28,342 @@
       background: var(--page-bg);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
+
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--link-hover); }
-    .phone-shell { width: min(430px, 100vw); min-height: 100svh; margin: 0 auto; padding: 12px 12px 92px; display: grid; align-content: start; gap: 12px; position: relative; }
 
-    .surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 14px; }
-    /* Landing page should read like a clean banner + action strip, not a product
-       explainer. Keep the identity block short, then move the heavier framing into
-       the footer bullets where it stays available without crowding the welcome. */
-    .welcome-card { display: grid; gap: 10px; padding: 20px; text-align: center; justify-items: center; }
-    .welcome-card h1 { margin: 0; font-size: clamp(1.08rem, 5.8vw, 1.48rem); line-height: 1.08; letter-spacing: -.01em; color: var(--ink-strong); font-family: "Pokemon GB", ui-monospace, monospace; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
-    .welcome-title-prefix { margin: 0; font-size: .76rem; line-height: 1.25; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-family: "Pokemon GB", ui-monospace, monospace; }
-    .welcome-subtitle { max-width: 27ch; font-size: .82rem; line-height: 1.38; color: var(--muted); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    /* Home stays a compact OS-style launch surface: one banner card, then one
+       action block, then one live block. This keeps the first screen calm. */
+    .phone-shell {
+      width: min(430px, 100vw);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 12px 12px 92px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      position: relative;
+    }
+
+    .surface {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: color-mix(in srgb, var(--paper) 90%, transparent);
+      box-shadow: 0 18px 42px var(--shadow);
+      padding: 14px;
+    }
+
+    /* Welcome banner carries the identity copy only. Routes and live progress move
+       into their own blocks so the intro does not become a busy dashboard. */
+    .welcome-card {
+      display: grid;
+      gap: 10px;
+      padding: 20px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .welcome-card h1 {
+      margin: 0;
+      font-size: clamp(1.08rem, 5.8vw, 1.48rem);
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      color: var(--ink-strong);
+      font-family: "Pokemon GB", ui-monospace, monospace;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .welcome-title-prefix {
+      margin: 0;
+      font-size: .76rem;
+      line-height: 1.25;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-family: "Pokemon GB", ui-monospace, monospace;
+    }
+
+    .welcome-subtitle {
+      max-width: 27ch;
+      font-size: .82rem;
+      line-height: 1.38;
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
     .welcome-card p { margin: 0; color: var(--muted); line-height: 1.42; }
-    /* Shared divider rune keeps the home banner and dock-near routes tied together
-       without reintroducing container chrome. */
-    .home-divider { margin: 2px 0 0; color: var(--muted); font-size: .9rem; line-height: 1; letter-spacing: .08em; text-align: center; }
-    .welcome-meta { width: calc(100% - 40px); margin-top: 8px; padding: 14px 20px 0; display: grid; gap: 8px; justify-items: center; }
+
+    /* Shared divider rune keeps the home banner and live modules visually tied
+       together without bringing back heavy card nesting. */
+    .home-divider {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+
+    .welcome-meta {
+      width: calc(100% - 40px);
+      margin-top: 8px;
+      padding: 14px 20px 0;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+
     .welcome-meta-title { margin: 0; color: var(--ink); font-size: .86rem; line-height: 1.3; }
     .welcome-meta-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
     .welcome-meta-list li { color: var(--muted); }
-    /* Primary routes now live inside the welcome block under the community notes,
-       so the whole homepage reads as one stitched banner instead of split top/bottom zones. */
-    .home-actions { display: grid; justify-items: center; gap: 8px; margin-top: 6px; }
-    .home-action { color: var(--link); font-weight: 900; font-size: .86rem; text-align: center; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .home-action:hover { color: var(--link-hover); }
 
-    @media (min-width: 760px) { .phone-shell { padding-top: 18px; } }
+    /* Home route grid: four equal actions in a simple 2x2 launcher block. */
+    .action-grid-card {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .section-kicker {
+      margin: 0;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: .96rem;
+      line-height: 1.25;
+    }
+
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.4;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .action-tile {
+      min-height: 92px;
+      border-radius: 20px;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      text-decoration: none;
+      box-shadow: 0 12px 24px var(--shadow);
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+      align-content: space-between;
+    }
+
+    .action-tile:hover {
+      background: var(--button-bg-hover);
+      color: var(--button-fg);
+    }
+
+    .action-icon {
+      font-size: 1.05rem;
+      line-height: 1;
+      color: var(--gold);
+    }
+
+    .action-label {
+      font-size: .86rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--ink-strong);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .action-meta {
+      font-size: .72rem;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+
+    /* Live carousel is the one moving part on Home: compact progress signal with
+       a clear path into the full archive/feed page. */
+    .live-card {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .live-head {
+      display: grid;
+      gap: 4px;
+    }
+
+    .live-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .live-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #2fa86f;
+      box-shadow: 0 0 0 4px color-mix(in srgb, #2fa86f 18%, transparent);
+      flex: 0 0 auto;
+    }
+
+    .carousel {
+      display: grid;
+      gap: 10px;
+    }
+
+    .carousel-window {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper-soft) 88%, transparent);
+      min-height: 194px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 360ms ease;
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .carousel-slide:hover { color: inherit; }
+
+    .slide-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      padding: 5px 9px;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      flex: 0 0 auto;
+    }
+
+    .slide-time {
+      color: var(--muted);
+      font-size: .74rem;
+      white-space: nowrap;
+    }
+
+    .slide-title {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: .98rem;
+      line-height: 1.28;
+    }
+
+    .slide-summary {
+      margin: 0;
+      color: var(--ink);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+
+    .slide-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .slide-context {
+      color: var(--muted);
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+
+    .slide-cta {
+      color: var(--link);
+      font-size: .77rem;
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      white-space: nowrap;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 0;
+      padding: 0;
+      background: color-mix(in srgb, var(--ink) 18%, transparent);
+      cursor: pointer;
+    }
+
+    .carousel-dot[aria-current="true"] {
+      background: var(--gold);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 20%, transparent);
+    }
+
+    .carousel-empty {
+      padding: 16px;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.45;
+    }
+
+    @media (min-width: 760px) {
+      .phone-shell { padding-top: 18px; }
+    }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
@@ -72,20 +383,66 @@
           <li>Let’s Discover What’s Around Us!</li>
           <li>Let’s Connect!</li>
         </ul>
-        <div class="home-actions" aria-label="Primary home actions">
-          <a class="home-action" href="events.html" id="welcome-events-link">Events</a>
-          <a class="home-action" href="directory.html#browse" id="welcome-directory-link">View Everyone</a>
+      </div>
+    </section>
+
+    <section class="surface action-grid-card" aria-labelledby="home-actions-title">
+      <p class="section-kicker" id="home-actions-kicker">Launch</p>
+      <h2 class="section-title" id="home-actions-title">4 quick ways in</h2>
+      <p class="section-note" id="home-actions-note">Simple 2×2 routes for browse, search, events, and the live archive.</p>
+      <div class="action-grid" aria-label="Primary home actions">
+        <a class="action-tile" href="events.html" id="action-events-link">
+          <span class="action-icon" aria-hidden="true">◷</span>
+          <span class="action-label" id="action-events-label">Events</span>
+          <span class="action-meta" id="action-events-meta">See what is happening around us.</span>
+        </a>
+        <a class="action-tile" href="directory.html#browse" id="action-directory-link">
+          <span class="action-icon" aria-hidden="true">⌂</span>
+          <span class="action-label" id="action-directory-label">View Everyone</span>
+          <span class="action-meta" id="action-directory-meta">Browse the local directory.</span>
+        </a>
+        <a class="action-tile" href="search.html" id="action-search-link">
+          <span class="action-icon" aria-hidden="true">⌕</span>
+          <span class="action-label" id="action-search-label">Search</span>
+          <span class="action-meta" id="action-search-meta">Jump straight into finding places.</span>
+        </a>
+        <a class="action-tile" href="home-feed.html" id="action-feed-link">
+          <span class="action-icon" aria-hidden="true">✦</span>
+          <span class="action-label" id="action-feed-label">Home Feed</span>
+          <span class="action-meta" id="action-feed-meta">Open the running archive of new additions.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="surface live-card" aria-labelledby="live-title">
+      <div class="live-head">
+        <div class="live-meta-row">
+          <p class="section-kicker" id="live-kicker">Live</p>
+          <div class="live-status" id="live-status"><span class="live-dot" aria-hidden="true"></span><span id="live-status-copy">Loading latest progress…</span></div>
         </div>
+        <h2 class="section-title" id="live-title">Latest 3 additions</h2>
+        <p class="section-note" id="live-note">Auto-cycles every 4 seconds. Tap any slide to open the full home feed archive.</p>
+      </div>
+
+      <div class="carousel" id="home-carousel">
+        <div class="carousel-window">
+          <div class="carousel-track" id="carousel-track" aria-live="polite"></div>
+          <div class="carousel-empty" id="carousel-empty">Loading latest entries and events…</div>
+        </div>
+        <div class="carousel-dots" id="carousel-dots" aria-label="Live progress slides"></div>
       </div>
     </section>
   </main>
   <script>
-    // Home as OS launch surface: keep the copy lean and the routes raw/direct.
+    // Home copy stays lean and route-focused. The live block is the only moving
+    // homepage element and feeds into home-feed.html for the longer archive view.
     const HOME_COPY = {
       en: {
-        menuDirectory: 'View Everyone', menuAbout: 'About us', theme: 'Light ↔ dark mode', lang: 'Language: English',
-        welcomeTitlePrefix: 'Welcome to', welcomeTitle: 'Acadie.sol', welcomeSubtitle: 'By Acadians, For Acadians.',
-        welcomeEvents: 'Events', welcomeDirectory: 'View Everyone',
+        menuDirectory: 'View Everyone',
+        menuAbout: 'About us',
+        welcomeTitlePrefix: 'Welcome to',
+        welcomeTitle: 'Acadie.sol',
+        welcomeSubtitle: 'By Acadians, For Acadians.',
         about: '<strong>Built Locally.</strong>',
         aboutPoints: [
           'Community OS',
@@ -93,11 +450,41 @@
           'Let’s Discover What’s Around Us!',
           'Let’s Connect!'
         ],
+        launchKicker: 'Launch',
+        launchTitle: '4 quick ways in',
+        launchNote: 'Simple 2×2 routes for browse, search, events, and the live archive.',
+        actions: {
+          events: { label: 'Events', meta: 'See what is happening around us.' },
+          directory: { label: 'View Everyone', meta: 'Browse the local directory.' },
+          search: { label: 'Search', meta: 'Jump straight into finding places.' },
+          feed: { label: 'Home Feed', meta: 'Open the running archive of new additions.' }
+        },
+        liveKicker: 'Live',
+        liveTitle: 'Latest 3 additions',
+        liveNote: 'Auto-cycles every 4 seconds. Tap any slide to open the full home feed archive.',
+        liveLoading: 'Loading latest progress…',
+        liveStatus: count => `${count} recent additions in rotation`,
+        liveFallback: 'No recent activity yet. New entries and events will appear here automatically.',
+        openFeed: 'Open home feed ↗',
+        slideAria: index => `Go to slide ${index}`,
+        types: { entry: 'Entry', event: 'Event', draft: 'Draft' },
+        entryFallback: 'Entry details coming soon.',
+        eventFallback: 'Event details coming soon.',
+        timestampUnavailable: 'Timestamp unavailable',
+        updatedNow: 'Updated just now',
+        updatedAgo: mins => mins < 60 ? `${mins} min ago` : `${Math.round(mins / 60)} h ago`,
+        contexts: {
+          draft: item => `${item.category || 'Draft'} · preview`,
+          entry: item => `${item.category || 'Entry'} · ${item.area || 'Local'}`,
+          event: item => `${item.statusLabel || 'Event'} · ${item.whenLabel || 'Date TBD'}`
+        }
       },
       fr: {
-        menuDirectory: 'Voir tout le monde', menuAbout: 'À propos de nous', theme: 'Mode clair ↔ sombre', lang: 'Langue : Français',
-        welcomeTitlePrefix: 'Bienvenue à', welcomeTitle: 'Acadie.sol', welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
-        welcomeEvents: 'Événements', welcomeDirectory: 'Voir tout le monde',
+        menuDirectory: 'Voir tout le monde',
+        menuAbout: 'À propos de nous',
+        welcomeTitlePrefix: 'Bienvenue à',
+        welcomeTitle: 'Acadie.sol',
+        welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
         about: '<strong>Construit ici.</strong>',
         aboutPoints: [
           'OS communautaire',
@@ -105,7 +492,42 @@
           'Découvrons ce qu’il y a autour de nous!',
           'Connectons-nous!'
         ],
+        launchKicker: 'Accès',
+        launchTitle: '4 chemins rapides',
+        launchNote: 'Une grille 2×2 simple pour naviguer, chercher, voir les événements et ouvrir l’archive vivante.',
+        actions: {
+          events: { label: 'Événements', meta: 'Voir ce qui se passe autour de nous.' },
+          directory: { label: 'Voir tout le monde', meta: 'Parcourir le répertoire local.' },
+          search: { label: 'Recherche', meta: 'Trouver un lieu immédiatement.' },
+          feed: { label: 'Fil d’accueil', meta: 'Ouvrir l’archive continue des nouveaux ajouts.' }
+        },
+        liveKicker: 'Direct',
+        liveTitle: '3 derniers ajouts',
+        liveNote: 'Défile automatiquement toutes les 4 secondes. Touchez une carte pour ouvrir le fil d’accueil complet.',
+        liveLoading: 'Chargement des derniers progrès…',
+        liveStatus: count => `${count} ajouts récents en rotation`,
+        liveFallback: 'Aucune activité récente pour le moment. Les nouvelles entrées et événements apparaîtront ici automatiquement.',
+        openFeed: 'Ouvrir le fil d’accueil ↗',
+        slideAria: index => `Aller à la diapositive ${index}`,
+        types: { entry: 'Entrée', event: 'Événement', draft: 'Brouillon' },
+        entryFallback: 'Détails de l’entrée à venir.',
+        eventFallback: 'Détails de l’événement à venir.',
+        timestampUnavailable: 'Horodatage indisponible',
+        updatedNow: 'Mis à jour à l’instant',
+        updatedAgo: mins => mins < 60 ? `Il y a ${mins} min` : `Il y a ${Math.round(mins / 60)} h`,
+        contexts: {
+          draft: item => `${item.category || 'Brouillon'} · aperçu`,
+          entry: item => `${item.category || 'Entrée'} · ${item.area || 'Local'}`,
+          event: item => `${item.statusLabel || 'Événement'} · ${item.whenLabel || 'Date à confirmer'}`
+        }
       }
+    };
+
+    const state = {
+      items: [],
+      carouselIndex: 0,
+      carouselTimer: null,
+      carouselBound: false
     };
 
     function currentLang() {
@@ -113,14 +535,244 @@
       if (saved === 'fr' || saved === 'en') return saved;
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
-    function copy() { return HOME_COPY[currentLang()] || HOME_COPY.en; }
-    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
-    function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
+
+    function copy() {
+      return HOME_COPY[currentLang()] || HOME_COPY.en;
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function setHtml(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = value;
+    }
+
     function setList(id, items) {
       const el = document.getElementById(id);
       if (!el) return;
-      el.innerHTML = (items || []).map(item => `<li>${item}</li>`).join('');
+      el.innerHTML = (items || []).map(item => `<li>${escapeHtml(item)}</li>`).join('');
     }
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function localizedValue(value) {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return value[currentLang()] || value.en || Object.values(value).find(Boolean) || '';
+      }
+      return String(value || '');
+    }
+
+    function cleanSummary(value) {
+      return String(value || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function modifiedTs(item) {
+      const numeric = Number(item?.source_modified_ts || 0);
+      if (Number.isFinite(numeric) && numeric > 0) return numeric;
+      const parsed = Date.parse(item?.source_modified_at || '');
+      return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
+    }
+
+    function formatTimestamp(ts) {
+      const numeric = Number(ts || 0);
+      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
+      return new Intl.DateTimeFormat(currentLang(), {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(new Date(numeric * 1000));
+    }
+
+    function relativeUpdatedLabel(ts) {
+      const numeric = Number(ts || 0);
+      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
+      const minutes = Math.max(0, Math.round((Date.now() - numeric * 1000) / 60000));
+      if (minutes < 1) return copy().updatedNow;
+      return copy().updatedAgo(minutes);
+    }
+
+    function formatEventWhen(value) {
+      const date = new Date(value || '');
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat(currentLang(), {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit'
+      }).format(date);
+    }
+
+    function normalizeEntry(item) {
+      return {
+        type: item.draft ? 'draft' : 'entry',
+        id: item.slug,
+        anchorId: `activity-entry-${item.slug}`,
+        title: localizedValue(item.title_localized) || item.title,
+        summary: localizedValue(item.description_localized) || cleanSummary(item.summary || item.description || item.notes) || copy().entryFallback,
+        href: `home-feed.html#activity-entry-${encodeURIComponent(item.slug)}`,
+        detailHref: item.draft ? `directory.html#entry-${encodeURIComponent(item.slug)}` : `entry.html#${encodeURIComponent(item.slug)}`,
+        badge: item.draft ? copy().types.draft : copy().types.entry,
+        statusLabel: item.draft ? copy().types.draft : copy().types.entry,
+        category: cleanSummary(item.category || ''),
+        area: cleanSummary(item.public_area || item.area || ''),
+        source_modified_at: item.source_modified_at,
+        source_modified_ts: modifiedTs(item)
+      };
+    }
+
+    function normalizeEvent(item) {
+      return {
+        type: 'event',
+        id: item.id,
+        anchorId: `activity-event-${item.id}`,
+        title: localizedValue(item.title) || item.name,
+        summary: localizedValue(item.summary) || cleanSummary(item.name) || copy().eventFallback,
+        href: `home-feed.html#activity-event-${encodeURIComponent(item.id)}`,
+        detailHref: `events.html#event-${encodeURIComponent(item.id)}`,
+        badge: copy().types.event,
+        statusLabel: localizedValue({ en: item.computed_status || item.status || 'event', fr: item.computed_status === 'archived' ? 'archivé' : item.computed_status === 'active' ? 'actif' : 'événement' }),
+        whenLabel: formatEventWhen(item.starts_at),
+        category: 'event',
+        area: cleanSummary(item.region_id || ''),
+        source_modified_at: item.source_modified_at,
+        source_modified_ts: modifiedTs(item)
+      };
+    }
+
+    async function loadActivity() {
+      const [directoryResponse, eventsResponse] = await Promise.all([
+        fetch('assets/directory-data.json', { cache: 'no-store' }),
+        fetch('assets/events-data.json', { cache: 'no-store' })
+      ]);
+      if (!directoryResponse.ok || !eventsResponse.ok) {
+        throw new Error('Failed to load homepage activity payloads.');
+      }
+      const [directoryPayload, eventsPayload] = await Promise.all([
+        directoryResponse.json(),
+        eventsResponse.json()
+      ]);
+      let metaPayload = {};
+      try {
+        const metaResponse = await fetch('assets/site-meta.json', { cache: 'no-store' });
+        if (metaResponse.ok) metaPayload = await metaResponse.json();
+      } catch (error) {
+        console.warn('Homepage site meta unavailable:', error);
+      }
+      const items = [
+        ...(Array.isArray(directoryPayload.items) ? directoryPayload.items.map(normalizeEntry) : []),
+        ...(Array.isArray(eventsPayload.items) ? eventsPayload.items.map(normalizeEvent) : [])
+      ].sort((a, b) => b.source_modified_ts - a.source_modified_ts || String(a.title || '').localeCompare(String(b.title || '')));
+      return { items, meta: metaPayload || {} };
+    }
+
+    function slideContext(item) {
+      if (item.type === 'draft') return copy().contexts.draft(item);
+      if (item.type === 'entry') return copy().contexts.entry(item);
+      return copy().contexts.event(item);
+    }
+
+    function renderCarousel(items) {
+      const track = document.getElementById('carousel-track');
+      const dots = document.getElementById('carousel-dots');
+      const empty = document.getElementById('carousel-empty');
+      if (!track || !dots || !empty) return;
+
+      if (!items.length) {
+        track.innerHTML = '';
+        dots.innerHTML = '';
+        empty.hidden = false;
+        empty.textContent = copy().liveFallback;
+        stopCarousel();
+        return;
+      }
+
+      empty.hidden = true;
+      track.innerHTML = items.map(item => `
+        <a class="carousel-slide" href="${escapeHtml(item.href)}" data-anchor="${escapeHtml(item.anchorId)}">
+          <div class="slide-top">
+            <span class="slide-badge">${escapeHtml(item.badge)}</span>
+            <span class="slide-time">${escapeHtml(formatTimestamp(item.source_modified_ts))}</span>
+          </div>
+          <h3 class="slide-title">${escapeHtml(item.title)}</h3>
+          <p class="slide-summary">${escapeHtml(item.summary)}</p>
+          <div class="slide-footer">
+            <span class="slide-context">${escapeHtml(slideContext(item))}</span>
+            <span class="slide-cta">${escapeHtml(copy().openFeed)}</span>
+          </div>
+        </a>
+      `).join('');
+
+      dots.innerHTML = items.map((item, index) => `
+        <button class="carousel-dot" type="button" aria-label="${escapeHtml(copy().slideAria(index + 1))}" data-index="${index}" ${index === 0 ? 'aria-current="true"' : ''}></button>
+      `).join('');
+
+      dots.querySelectorAll('.carousel-dot').forEach(button => {
+        button.addEventListener('click', () => {
+          state.carouselIndex = Number(button.dataset.index || 0);
+          updateCarousel();
+          restartCarousel();
+        });
+      });
+
+      if (!state.carouselBound) {
+        const carousel = document.getElementById('home-carousel');
+        carousel?.addEventListener('mouseenter', stopCarousel);
+        carousel?.addEventListener('mouseleave', startCarousel);
+        carousel?.addEventListener('focusin', stopCarousel);
+        carousel?.addEventListener('focusout', startCarousel);
+        state.carouselBound = true;
+      }
+
+      state.items = items;
+      state.carouselIndex = 0;
+      updateCarousel();
+      restartCarousel();
+    }
+
+    function updateCarousel() {
+      const track = document.getElementById('carousel-track');
+      if (!track || !state.items.length) return;
+      const index = ((state.carouselIndex % state.items.length) + state.items.length) % state.items.length;
+      state.carouselIndex = index;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((dot, dotIndex) => {
+        if (dotIndex === index) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    }
+
+    function stopCarousel() {
+      if (state.carouselTimer) {
+        clearInterval(state.carouselTimer);
+        state.carouselTimer = null;
+      }
+    }
+
+    function startCarousel() {
+      if (!state.items.length || state.carouselTimer) return;
+      state.carouselTimer = setInterval(() => {
+        state.carouselIndex = (state.carouselIndex + 1) % state.items.length;
+        updateCarousel();
+      }, 4000);
+    }
+
+    function restartCarousel() {
+      stopCarousel();
+      startCarousel();
+    }
+
     function updateMenuControls() {
       document.documentElement.dataset.lang = currentLang();
       const isDark = document.documentElement.dataset.theme === 'dark';
@@ -138,25 +790,71 @@
         langButton.setAttribute('title', isFr ? 'Français actif — passer en anglais' : 'English active — switch to French');
       }
     }
-    function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); updateMenuControls(); }
+
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('acadie-theme', theme);
+      updateMenuControls();
+    }
+
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
+
     function updateStaticCopy() {
       const c = copy();
+      document.title = 'ACADIE.SOL';
       updateMenuControls();
       setText('welcome-title-prefix', c.welcomeTitlePrefix);
       setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
-      setText('welcome-events-link', c.welcomeEvents);
-      setText('welcome-directory-link', c.welcomeDirectory);
       setHtml('about-copy', c.about);
       setList('about-points', c.aboutPoints);
+      setText('home-actions-kicker', c.launchKicker);
+      setText('home-actions-title', c.launchTitle);
+      setText('home-actions-note', c.launchNote);
+      setText('action-events-label', c.actions.events.label);
+      setText('action-events-meta', c.actions.events.meta);
+      setText('action-directory-label', c.actions.directory.label);
+      setText('action-directory-meta', c.actions.directory.meta);
+      setText('action-search-label', c.actions.search.label);
+      setText('action-search-meta', c.actions.search.meta);
+      setText('action-feed-label', c.actions.feed.label);
+      setText('action-feed-meta', c.actions.feed.meta);
+      setText('live-kicker', c.liveKicker);
+      setText('live-title', c.liveTitle);
+      setText('live-note', c.liveNote);
+      if (!state.items.length) setText('live-status-copy', c.liveLoading);
     }
+
+    async function initHomeLive() {
+      try {
+        const payload = await loadActivity();
+        const slides = payload.items.slice(0, 3);
+        renderCarousel(slides);
+        setText('live-status-copy', copy().liveStatus(slides.length || payload.items.length));
+        const latestTs = Number(payload.meta.latest_source_modified_ts || slides[0]?.source_modified_ts || 0);
+        if (latestTs > 0) {
+          setText('live-status-copy', `${copy().liveStatus(slides.length || payload.items.length)} · ${relativeUpdatedLabel(latestTs)}`);
+        }
+      } catch (error) {
+        console.warn('Home live carousel unavailable:', error);
+        const empty = document.getElementById('carousel-empty');
+        if (empty) {
+          empty.hidden = false;
+          empty.textContent = copy().liveFallback;
+        }
+        setText('live-status-copy', copy().timestampUnavailable);
+      }
+    }
+
     window.addEventListener('acadie:languagechange', () => {
       updateStaticCopy();
+      initHomeLive();
     });
+
     document.documentElement.lang = currentLang();
     updateStaticCopy();
+    initHomeLive();
   </script>
 </body>
 </html>
