@@ -150,7 +150,7 @@
     .choice-button:hover small,
     .choice-button.active small { color: color-mix(in srgb, var(--blue-ink) 78%, transparent); }
     html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-    .body-search { margin-top: 8px; position: relative; }
+    .body-search { margin-top: 0; position: relative; }
     .body-search[hidden],
     .directory-shell[hidden] { display: none; }
     html.route-pending .splash,
@@ -162,7 +162,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: 0 0 4px;
+      margin: 0 0 2px;
       padding: 0 2px;
     }
     .search-pill {
@@ -412,6 +412,10 @@
       .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
+    @media (hover: none) and (pointer: coarse) {
+      .nav-actions { display: none; }
+    }
+
     @media (max-width: 650px) {
       .wrap { width: min(100vw - 16px, 1120px); padding-top: 96px; }
       .top-nav { padding: 8px; }
@@ -433,7 +437,7 @@
       .control-grid { gap: 7px; }
       .search-actions { display: flex; flex-wrap: wrap; gap: 7px; }
       .search-action { padding: 7px 10px; font-size: 0.78rem; }
-      .search, .select { padding: 10px 11px; border-radius: 12px; font-size: 0.92rem; }
+      .search, .select { padding: 10px 11px; border-radius: 12px; font-size: 16px; }
       .filter-note { font-size: 0.78rem; }
       .viewbar { margin-top: 13px; }
       .view-title h2 { font-size: 1rem; }
@@ -484,8 +488,8 @@
     .control-head { padding: 14px 14px 0; }
     .control-copy strong { font-size: 1.18rem; color: var(--text); }
     .control-copy span { font-size: .82rem; }
-    .control-body { padding: 14px; gap: 12px; }
-    .search { border-radius: 19px; padding: 14px 15px; font-size: .96rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.7); }
+    .control-body { padding: 10px 14px 12px; gap: 10px; }
+    .search { border-radius: 19px; padding: 14px 15px; font-size: 16px; box-shadow: inset 0 1px 0 rgba(255,255,255,.7); }
     .search-actions { display: flex; flex-wrap: wrap; gap: 8px; }
     .search-action { border-radius: 999px; padding: 8px 12px; font-size: .8rem; }
     .viewbar { display: none; }
