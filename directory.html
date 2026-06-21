@@ -29,45 +29,7 @@
     a:hover { color: var(--link-hover); }
     code { color: var(--ink-strong); }
 
-    .wrap { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 88px 0 40px; }
-
-    .top-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 45;
-      padding: 10px max(14px, calc((100vw - 1120px) / 2));
-      background: rgba(10, 43, 87, 0.82);
-      border-bottom: 1px solid var(--line-strong);
-      box-shadow: 0 10px 28px rgba(5,13,27,0.32);
-      backdrop-filter: blur(8px);
-      transition: transform 0.2s ease;
-    }
-    .top-nav.nav-hidden { transform: translateY(-100%); }
-    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    /* Utility-only top rail: once the corner wordmark is removed, this variant keeps
-       the remaining nav actions anchored to the right edge instead of floating left. */
-    .nav-row-actions-only { justify-content: flex-end; }
-    .nav-brand { display: grid; gap: 2px; text-decoration: none; color: var(--text); line-height: 1.05; }
-    .nav-brand strong { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .nav-brand span { color: var(--muted); font-size: 0.74rem; }
-    .nav-actions { display: flex; gap: 8px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
-    .nav-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid var(--line-strong);
-      border-radius: 999px;
-      padding: 8px 11px;
-      background: rgba(255,255,255,0.07);
-      color: var(--text);
-      text-decoration: none;
-      font: inherit;
-      white-space: nowrap;
-    }
-    .nav-action:hover,
-    .nav-action.active { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); }
+    .wrap { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 18px 0 40px; }
 
     .control-panel,
     .choice-panel,
@@ -412,17 +374,8 @@
       .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
-    @media (hover: none) and (pointer: coarse) {
-      .nav-actions { display: none; }
-    }
-
     @media (max-width: 650px) {
       .wrap { width: min(100vw - 16px, 1120px); padding-top: 96px; }
-      .top-nav { padding: 8px; }
-      .nav-row { align-items: start; }
-      .nav-brand span { display: none; }
-      .nav-actions { gap: 6px; }
-      .nav-action { padding: 7px 9px; font-size: 0.84rem; }
       .splash { min-height: calc(100svh - 112px); padding: 12px 0 22px; align-content: start; }
       .hero { padding: 4px 0 8px; }
       h1 { font-size: clamp(1.55rem, 8vw, 2.18rem); }
@@ -460,10 +413,7 @@
     body {
       background: var(--page-bg);
     }
-    .top-nav { background: var(--glass); border-bottom-color: var(--line); box-shadow: 0 10px 28px var(--shadow); }
-    .nav-brand strong, .eyebrow, .control-kicker, .control-copy strong, .choice-copy strong, .mini-stat strong { color: var(--label-accent); }
-    .nav-action, button, .mini-stat { background: var(--paper); color: var(--ink); }
-    .nav-action:hover, .nav-action.active, button:hover, button.active { background: var(--blue-deep); border-color: var(--blue-deep); color: var(--blue-ink); }
+    .eyebrow, .control-kicker, .control-copy strong, .choice-copy strong, .mini-stat strong { color: var(--label-accent); }
     .choice-panel, .control-panel, .recent-panel, .directory-card, .empty { background: color-mix(in srgb, var(--paper) 88%, transparent); border-color: var(--line); box-shadow: 0 14px 32px var(--shadow); }
     .choice-panel { border-radius: 24px; }
     .choice-button { min-height: 104px; background: var(--panel-strong); border-color: var(--line); }
@@ -474,16 +424,9 @@
     .filter-popover { background: color-mix(in srgb, var(--panel-strong) 92%, transparent); color: var(--ink); box-shadow: 0 16px 36px var(--shadow); }
     .mini-stats { display: none; }
     .splash { min-height: auto; padding: 12px 0 20px; }
-    .wrap { padding-top: 76px; }
     @media (max-width: 720px) { .wrap { width: min(100vw - 18px, 1120px); } .choice-actions { grid-template-columns: 1fr; } }
     /* OS-shaped search screen pass: compact app shell, visual rows, bottom dock. */
-    .top-nav { left: 50%; right: auto; width: min(1120px, calc(100vw - 28px)); transform: translateX(-50%); padding: 10px 14px; background: var(--glass); border-bottom: 0; box-shadow: 0 10px 28px var(--shadow); backdrop-filter: blur(20px) saturate(1.45); }
-    .top-nav.nav-hidden { transform: translate(-50%, -100%); }
-    .nav-brand strong { letter-spacing: .08em; }
-    .nav-brand span { display: none; }
-    .nav-actions { display: flex; }
-    .nav-action { padding: 8px 10px; border-radius: 999px; box-shadow: 0 8px 20px rgba(65,47,29,.08); }
-    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 76px 0 96px; }
+    .wrap { width: min(1120px, calc(100vw - 40px)); padding: 18px 0 96px; }
     .control-panel { margin-top: 0; border-radius: 28px; overflow: visible; }
     .control-head { padding: 14px 14px 0; }
     .control-copy strong { font-size: 1.18rem; color: var(--text); }
@@ -523,9 +466,7 @@
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
     @media (max-width: 720px) {
-      .top-nav { width: min(430px, 100vw); background: transparent; box-shadow: none; backdrop-filter: none; }
-      .nav-actions { display: none; }
-      .wrap { width: min(430px, 100vw); padding: 66px 14px 86px; }
+      .wrap { width: min(430px, 100vw); padding: 14px 14px 86px; }
       .results-grid { grid-template-columns: 1fr; gap: 8px; }
     }
   </style>
@@ -533,17 +474,6 @@
 </head>
 <body>
   <script src="assets/site-shell.js"></script>
-  <header class="top-nav" id="top-nav">
-    <!-- The top rail now behaves as pure utility chrome. The page title lives in the
-         hero/content layer, so the corner wordmark is removed. -->
-    <div class="nav-row nav-row-actions-only">
-      <nav class="nav-actions" aria-label="Directory navigation">
-        <a class="nav-action" id="nav-search" href="#search">🔎</a>
-        <a class="nav-action" href="events.html" id="dir-nav-events">Events</a>
-        <a class="nav-action" href="index.html" id="dir-nav-home">Home</a>
-      </nav>
-    </div>
-  </header>
   <div class="wrap">
     <section class="splash" id="splash-panel" aria-label="Directory start">
       <section class="hero">
@@ -709,7 +639,6 @@
     function updateDirCopy() {
       const c = copy();
       updateMenuControls(); setText('dir-brand-subtitle', c.brandSubtitle);
-      setText('nav-search', c.navSearch); setText('dir-nav-events', c.navEvents); setText('dir-nav-home', c.navHome);
       setText('dir-eyebrow', c.eyebrow); setText('dir-title', c.title); setText('dir-lede', c.lede);
       setText('entry-stat-label', c.entries); setText('category-stat-label', c.categories); setText('city-stat-label', c.cities); setText('draft-stat-label', c.previews);
       setText('dir-choice-kicker', c.choiceKicker); setText('dir-choice-title', c.choiceTitle); setText('dir-choice-copy', c.choiceCopy);
@@ -1194,11 +1123,6 @@
       }
     }
 
-    function showHeader() { document.getElementById('top-nav')?.classList.remove('nav-hidden'); }
-    function hideHeader() {
-      document.getElementById('top-nav')?.classList.add('nav-hidden');
-    }
-
     function syncHashTarget() {
       const hash = window.location.hash;
       if (!hash.startsWith('#entry-')) return;
@@ -1231,11 +1155,6 @@
       menuToggle?.addEventListener('change', () => {
         if (menuToggle.checked) closeFilterPopover();
       });
-      document.getElementById('nav-search')?.addEventListener('click', (event) => {
-        event.preventDefault();
-        history.replaceState(null, '', '#search');
-        setDirectoryIntent('search', { scroll: true, focus: true });
-      });
       document.getElementById('choose-discover')?.addEventListener('click', () => {
         clearFilters();
         history.replaceState(null, '', '#browse');
@@ -1247,17 +1166,8 @@
         setDirectoryIntent('search', { scroll: true, focus: true });
       });
       document.getElementById('to-top')?.addEventListener('click', () => {
-        showHeader();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', () => {
-        const currentY = window.scrollY;
-        const delta = currentY - lastScrollY;
-        if (currentY < 24 || delta < -6) showHeader();
-        else if (delta > 10) hideHeader();
-        lastScrollY = currentY;
-      }, { passive: true });
       document.querySelectorAll('.mini-stat[data-target]').forEach(button => {
         button.addEventListener('click', () => {
           setDirectoryIntent('browse', { scroll: false, focus: false });
