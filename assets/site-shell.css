@@ -85,62 +85,77 @@ body {
   gap: 10px;
   pointer-events: none;
 }
+/* Shared button system: the shell treats every action button as the same
+   familiar blue/yellow control so the UI can shift while the tap target stays
+   readable in both themes. */
 .menu-control,
-.drawer-close {
-  min-width: 44px;
-  min-height: 40px;
+.drawer-close,
+.drawer-nav a,
+.site-dock a,
+.site-dock label {
   display: inline-grid;
   place-items: center;
-  border: 1px solid var(--line);
+  min-width: 44px;
+  min-height: 40px;
+  border: 1px solid var(--button-border);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--paper) 72%, transparent);
-  color: var(--ink);
+  background: var(--button-bg);
+  color: var(--button-fg);
   font: inherit;
   font-weight: 900;
   text-decoration: none;
   cursor: pointer;
   pointer-events: auto;
-  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
 .menu-control:focus,
-.drawer-close:focus { outline: none; }
+.drawer-close:focus,
+.drawer-nav a:focus,
+.site-dock a:focus,
+.site-dock label:focus { outline: none; }
 .menu-control:focus-visible,
-.drawer-close:focus-visible { outline: 2px solid color-mix(in srgb, var(--gold) 55%, transparent); outline-offset: 2px; }
-.theme-button { width: 44px; font-size: 1.15rem; line-height: 1; border-color: transparent; }
-:root:not([data-theme="dark"]) .theme-button { color: var(--gold); background: var(--blue-deep); }
+.drawer-close:focus-visible,
+.drawer-nav a:focus-visible,
+.site-dock a:focus-visible,
+.site-dock label:focus-visible { outline: 2px solid color-mix(in srgb, var(--button-fg) 55%, transparent); outline-offset: 2px; }
+.theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
 .lang-button { display: inline-flex; gap: 3px; align-items: center; padding-inline: 12px; }
 .lang-button .lang-en,
-.lang-button .lang-fr { color: var(--muted); }
-[data-lang="en"] .lang-button .lang-en,
-[data-lang="fr"] .lang-button .lang-fr { color: var(--ink-strong); }
+.lang-button .lang-fr { color: inherit; }
 .drawer-close {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   width: 44px;
-  color: var(--muted);
   font-size: 1.15rem;
-  background: color-mix(in srgb, var(--paper-soft, var(--paper)) 78%, transparent);
 }
+.drawer-nav a {
+  width: 100%;
+  padding: 13px;
+  border-radius: 17px;
+  text-align: center;
+}
+.site-dock a,
+.site-dock label {
+  gap: 2px;
+  min-height: 56px;
+  padding: 8px 2px;
+  border-radius: 18px;
+  font-size: .68rem;
+  line-height: 1;
+}
+.site-dock a span:first-child,
+.site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
+.menu-control:hover,
+.drawer-close:hover,
+.drawer-nav a:hover,
+.site-dock a:hover,
+.site-dock label:hover { color: var(--button-fg); background: color-mix(in srgb, var(--button-bg) 86%, #fff); border-color: var(--button-border); }
 .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
 .drawer-title { display: grid; gap: 2px; }
 .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
 .drawer-nav { display: grid; gap: 8px; margin-top: 22px; }
-.drawer-nav a {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  background: color-mix(in srgb, var(--paper) 72%, transparent);
-  color: var(--ink);
-  text-decoration: none;
-  font: inherit;
-  font-weight: 900;
-  text-align: center;
-}
-.drawer-nav a:hover,
-.menu-control:hover,
-.drawer-close:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 86%, transparent); }
+
 
 /* Shared bottom dock: permanent cross-page navigation, never page-specific chrome.
    Safe-area bottom keeps the dock pinned to the visible phone edge without letting
@@ -173,7 +188,6 @@ body {
   padding: 8px 2px;
   border-radius: 18px;
   text-decoration: none;
-  color: var(--muted);
   font-size: .68rem;
   font-weight: 900;
   line-height: 1;
@@ -183,5 +197,3 @@ body {
 }
 .site-dock a span:first-child,
 .site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
-.site-dock a:hover,
-.site-dock label:hover { color: var(--ink-strong); background: color-mix(in srgb, var(--paper) 72%, transparent); }
