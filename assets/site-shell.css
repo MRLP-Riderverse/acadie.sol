@@ -47,8 +47,9 @@ body {
   backdrop-filter: blur(5px) saturate(.92);
   -webkit-backdrop-filter: blur(5px) saturate(.92);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity .18s ease;
+  transition: opacity .18s ease, visibility 0s linear .18s;
 }
 .drawer {
   position: fixed;
@@ -65,12 +66,13 @@ body {
   -webkit-backdrop-filter: blur(20px) saturate(1.45);
   box-shadow: 0 24px 54px var(--shadow);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translate(-50%, 8px) scale(.98);
-  transition: transform .18s ease, opacity .18s ease;
+  transition: transform .18s ease, opacity .18s ease, visibility 0s linear .18s;
 }
-.menu-toggle:checked ~ .drawer-backdrop { opacity: 1; pointer-events: auto; }
-.menu-toggle:checked ~ .drawer { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) scale(1); }
+.menu-toggle:checked ~ .drawer-backdrop { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.menu-toggle:checked ~ .drawer { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0) scale(1); transition-delay: 0s; }
 
 /* Shared menu controls: display/language controls live in the corners; the quiet
    remembrance cross stays centered as one icon-only global utility. */
