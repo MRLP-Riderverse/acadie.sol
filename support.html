@@ -12,9 +12,8 @@
   <title>How to support us — Acadie.sol</title>
   <link rel="stylesheet" href="assets/site-colors.css" />
   <style>
-    /* Support page intentionally ships blank for now: the shared shell provides
-       the site-wide navigation, while the content surface stays empty until the
-       support copy is ready. */
+    /* Support page stays intentionally simple: one centered donation card so the
+       shared shell can carry navigation while the payment action remains obvious. */
     * { box-sizing: border-box; }
     html, body { min-height: 100%; }
     body {
@@ -26,10 +25,116 @@
       color: var(--ink);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
+    .support-shell {
+      width: min(430px, 100vw);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 14px 12px 92px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+    }
+    .support-card {
+      width: 100%;
+      padding: 22px 18px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: color-mix(in srgb, var(--paper) 90%, transparent);
+      box-shadow: 0 18px 42px var(--shadow);
+      text-align: center;
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+    }
+    .support-card h1 {
+      margin: 0;
+      color: var(--ink-strong);
+      font: inherit;
+      font-weight: 900;
+      letter-spacing: .02em;
+      font-size: clamp(1rem, 4.8vw, 1.28rem);
+    }
+    .support-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--blue-deep);
+      color: #fff;
+      text-decoration: none;
+      font: inherit;
+      font-weight: 900;
+      text-align: center;
+    }
+    .support-link:hover {
+      background: color-mix(in srgb, var(--blue-deep) 86%, #fff);
+      color: #fff;
+    }
+    .support-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.4;
+      max-width: 30ch;
+    }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
 <body>
   <script src="assets/site-shell.js"></script>
+  <main class="support-shell">
+    <section class="support-card" aria-labelledby="support-title">
+      <h1 id="support-title">Support Acadie.sol</h1>
+      <a
+        class="support-link"
+        id="support-link"
+        href="https://square.link/u/ncnSSJML?src=sheet"
+        title="Help Acadie.sol!"
+        aria-label="Help Acadie.sol!"
+      >Voluntary Donations</a>
+      <p class="support-note" id="support-note">A direct way to help keep the project moving.</p>
+    </section>
+  </main>
+  <script>
+    // Support page copy stays tiny and centered so the payment CTA is the only
+    // thing the page asks from the user.
+    const SUPPORT_COPY = {
+      en: {
+        title: 'Support Acadie.sol',
+        button: 'Voluntary Donations',
+        note: 'A direct way to help keep the project moving.'
+      },
+      fr: {
+        title: 'Soutenir Acadie.sol',
+        button: 'Dons à Volonté',
+        note: 'Une façon directe d’aider le projet à avancer.'
+      }
+    };
+
+    function currentLang() {
+      const saved = localStorage.getItem('acadie-lang');
+      if (saved === 'fr' || saved === 'en') return saved;
+      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
+    }
+
+    function updateCopy() {
+      const lang = currentLang();
+      const copy = SUPPORT_COPY[lang] || SUPPORT_COPY.en;
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+      const title = document.getElementById('support-title');
+      const link = document.getElementById('support-link');
+      const note = document.getElementById('support-note');
+      if (title) title.textContent = copy.title;
+      if (link) link.textContent = copy.button;
+      if (note) note.textContent = copy.note;
+    }
+
+    updateCopy();
+    window.addEventListener('acadie:languagechange', updateCopy);
+  </script>
 </body>
 </html>
