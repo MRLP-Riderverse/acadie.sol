@@ -18,18 +18,18 @@
   align-items: center;
   justify-content: center;
   background: var(--blue-deep);
-  color: var(--gold);
+  color: var(--acadian-yellow);
   font-size: .85rem;
   font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
   white-space: nowrap;
-  border-bottom: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--acadian-yellow) 22%, transparent);
   box-shadow: 0 6px 14px -8px var(--shadow);
 }
 [data-theme="dark"] .site-header {
   background: #0d2f5e;
-  color: var(--gold);
+  color: var(--acadian-yellow);
 }
 body {
   padding-top: calc(30px + env(safe-area-inset-top));

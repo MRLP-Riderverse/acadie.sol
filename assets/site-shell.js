@@ -5,8 +5,9 @@
   const COPY = {
     en: {
       drawerTitle: 'Extras',
-      drawerSubtitle: 'Directory, about, display',
-      menuDirectory: 'Full directory',
+      drawerSubtitle: 'View Everyone, support, about',
+      menuDirectory: 'View Everyone',
+      menuSupport: 'Support Acadie.sol',
       menuAbout: 'About Acadie.sol',
       dark: 'Switch to dark mode',
       light: 'Switch to light mode',
@@ -18,8 +19,9 @@
     },
     fr: {
       drawerTitle: 'Extras',
-      drawerSubtitle: 'Répertoire, à propos, affichage',
-      menuDirectory: 'Répertoire complet',
+      drawerSubtitle: 'Voir tout le monde, soutien, à propos',
+      menuDirectory: 'Voir tout le monde',
+      menuSupport: 'Soutenir Acadie.sol',
       menuAbout: 'À propos d’Acadie.sol',
       dark: 'Passer en mode sombre',
       light: 'Passer en mode clair',
@@ -64,11 +66,13 @@
     const title = document.getElementById('global-drawer-title');
     const subtitle = document.getElementById('global-drawer-subtitle');
     const directory = document.getElementById('global-menu-directory');
+    const support = document.getElementById('global-menu-support');
     const about = document.getElementById('global-menu-about');
     const headerText = document.getElementById('global-header-text');
     if (title) title.textContent = copy.drawerTitle;
     if (subtitle) subtitle.textContent = copy.drawerSubtitle;
     if (directory) directory.textContent = copy.menuDirectory;
+    if (support) support.textContent = copy.menuSupport;
     if (about) about.textContent = copy.menuAbout;
     if (headerText) {
       const entries = SHELL_DATA.entryCount;
@@ -133,10 +137,11 @@
         <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
       </div>
       <div class="drawer-head">
-        <div class="drawer-title"><strong id="global-drawer-title">Extras</strong><span id="global-drawer-subtitle">Directory, about, display</span></div>
+        <div class="drawer-title"><strong id="global-drawer-title">Extras</strong><span id="global-drawer-subtitle">View Everyone, support, about</span></div>
       </div>
       <nav class="drawer-nav">
-        <a href="directory.html" id="global-menu-directory">Full directory</a>
+        <a href="directory.html" id="global-menu-directory">View Everyone</a>
+        <a href="support.html" id="global-menu-support">Support Acadie.sol</a>
         <a href="index.html#about" id="global-menu-about">About Acadie.sol</a>
       </nav>
     </aside>
