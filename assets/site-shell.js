@@ -61,12 +61,10 @@
       langButton.setAttribute('title', isFr ? copy.langTitleFr : copy.langTitleEn);
     }
 
-    const title = document.getElementById('global-drawer-title');
     const directory = document.getElementById('global-menu-directory');
     const support = document.getElementById('global-menu-support');
     const about = document.getElementById('global-menu-about');
     const headerText = document.getElementById('global-header-text');
-    if (title) title.textContent = copy.drawerTitle;
     if (directory) directory.textContent = copy.menuDirectory;
     if (support) support.textContent = copy.menuSupport;
     if (about) about.textContent = copy.menuAbout;
@@ -131,9 +129,6 @@
         <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
         <a class="drawer-close" href="obituaries.html" aria-label="Open obituaries" title="Open obituaries">✟</a>
         <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
-      </div>
-      <div class="drawer-head">
-        <div class="drawer-title"><strong id="global-drawer-title">Menu</strong></div>
       </div>
       <nav class="drawer-nav">
         <a href="directory.html#browse" id="global-menu-directory">View Everyone</a>

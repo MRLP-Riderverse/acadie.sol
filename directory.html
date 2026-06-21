@@ -478,8 +478,10 @@
     .thumb-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
     .thumb-fallback { width: 100%; height: 100%; display: grid; place-items: center; font-weight: 900; }
     .summary-thumb .thumb-fallback { font-size: 1.02rem; }
-    .full-page-link { display: block; width: fit-content; margin: 8px 0 0 auto; padding: 0; background: transparent; color: var(--link); border: 0; font-size: .86rem; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; text-align: right; }
-    .full-page-link:hover { color: var(--link-hover); background: transparent; }
+    .card-footer { display: grid; justify-items: center; gap: 8px; margin-top: 12px; }
+    .card-divider { color: var(--acadian-yellow); font-size: .76rem; font-weight: 900; letter-spacing: .22em; text-align: center; text-shadow: 0 1px 0 color-mix(in srgb, var(--paper) 70%, transparent); }
+    .full-page-link { display: inline-flex; align-items: center; gap: 6px; width: fit-content; margin: 0 auto; padding: 8px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--acadian-yellow) 24%, var(--line)); background: var(--glass, color-mix(in srgb, var(--paper) 72%, transparent)); color: var(--acadian-yellow); font-size: .84rem; font-weight: 900; text-decoration: none; text-underline-offset: 3px; text-align: center; box-shadow: 0 10px 22px color-mix(in srgb, var(--shadow) 36%, transparent); backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); }
+    .full-page-link:hover { color: var(--acadian-yellow); background: color-mix(in srgb, var(--paper) 86%, transparent); border-color: color-mix(in srgb, var(--acadian-yellow) 36%, var(--line)); }
     .card-body { padding: 0 12px 12px; }
     .tool-dock { display: none; }
     @media (max-width: 720px) {
@@ -1018,7 +1020,7 @@
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
             ${eventFeed}
-            ${entryLink}
+            ${entryLink ? `<div class="card-footer"><div class="card-divider" aria-hidden="true">✧❅✦❅✧</div>${entryLink}</div>` : ''}
           </div>
         </details>`;
     }
