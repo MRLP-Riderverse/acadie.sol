@@ -405,15 +405,10 @@
     <section class="surface action-grid-card" aria-labelledby="home-actions-title">
       <h2 class="section-title" id="home-actions-title">4 quick ways in</h2>
       <div class="action-grid" aria-label="Primary home actions">
-        <a class="action-tile" href="search.html" id="action-search-link">
-          <span class="action-icon" aria-hidden="true">⌕</span>
-          <span class="action-label" id="action-search-label">Search</span>
-          <span class="action-meta" id="action-search-meta">Find something fast.</span>
-        </a>
         <a class="action-tile" href="directory.html#browse" id="action-directory-link">
-          <span class="action-icon" aria-hidden="true">⌂</span>
-          <span class="action-label" id="action-directory-label">Directory</span>
-          <span class="action-meta" id="action-directory-meta">Browse local listings.</span>
+          <span class="action-icon" aria-hidden="true">⌕</span>
+          <span class="action-label" id="action-directory-label">Search Directory</span>
+          <span class="action-meta" id="action-directory-meta">Browse all listings.</span>
         </a>
         <a class="action-tile" href="events.html" id="action-events-link">
           <span class="action-icon" aria-hidden="true">◷</span>
@@ -425,12 +420,12 @@
           <span class="action-label" id="action-support-label">Support</span>
           <span class="action-meta" id="action-support-meta">Help keep it going.</span>
         </a>
+        <a class="action-tile" href="about-us.html" id="action-about-link">
+          <span class="action-icon" aria-hidden="true">⊹</span>
+          <span class="action-label" id="action-about-label">About Us</span>
+          <span class="action-meta" id="action-about-meta">What this project is.</span>
+        </a>
       </div>
-      <a class="action-tile" href="about-us.html" id="action-about-link" style="min-height:auto;">
-        <span class="action-icon" aria-hidden="true">⊹</span>
-        <span class="action-label" id="action-about-label">About Us</span>
-        <span class="action-meta" id="action-about-meta">What this project is.</span>
-      </a>
     </section>
 
     <section class="surface live-card" aria-labelledby="live-title">
@@ -472,8 +467,7 @@
         ],
         launchTitle: '4 quick ways in',
         actions: {
-          search: { label: 'Search', meta: 'Find something fast.' },
-          directory: { label: 'Directory', meta: 'Browse local listings.' },
+          directory: { label: 'Search Directory', meta: 'Browse all listings.' },
           events: { label: 'Events', meta: 'See what’s happening.' },
           support: { label: 'Support', meta: 'Help keep it going.' },
           about: { label: 'About Us', meta: 'What this project is.' }
@@ -512,8 +506,7 @@
         ],
         launchTitle: '4 chemins rapides',
         actions: {
-          search: { label: 'Recherche', meta: 'Trouver vite.' },
-          directory: { label: 'Répertoire', meta: 'Parcourir les fiches locales.' },
+          directory: { label: 'Chercher le répertoire', meta: 'Parcourir toutes les fiches.' },
           events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
           support: { label: 'Soutien', meta: 'Aider le projet à continuer.' },
           about: { label: 'À propos', meta: 'Ce qu’est ce projet.' }
@@ -858,8 +851,6 @@
       setHtml('about-copy', c.about);
       setList('about-points', c.aboutPoints);
       setText('home-actions-title', c.launchTitle);
-      setText('action-search-label', c.actions.search.label);
-      setText('action-search-meta', c.actions.search.meta);
       setText('action-directory-label', c.actions.directory.label);
       setText('action-directory-meta', c.actions.directory.meta);
       setText('action-events-label', c.actions.events.label);
