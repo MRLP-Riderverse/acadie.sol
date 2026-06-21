@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Acadie.sol//Events V1//EN
+BEGIN:VEVENT
+UID:sir-pathetik-au-louga-night-bar-bathurst@acadie.sol
+DTSTAMP:20260621T173031Z
+DTSTART:20260626T230000Z
+DTEND:20260626T230000Z
+SUMMARY:Sir Pathetik au Louga Night Bar
+DESCRIPTION:Sir Pathetik performs at La Louga Night Bar in Bathurst on Friday\, June 26 at 8 PM.
+LOCATION:125 Main St\, Bathurst\, NB E2A 1A6\, Canada
+END:VEVENT
+END:VCALENDAR

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 68,
+  "item_count": 69,
   "items": [
     {
       "type": "entry",
@@ -732,7 +732,8 @@
       "title": "La Louga Night Bar - Resto",
       "subtitle": "venue · Acadie-Bathurst",
       "badges": [
-        "venue"
+        "venue",
+        "1 event next 7 days"
       ],
       "url": "directory.html#entry-la-louga-night-bar-resto",
       "terms": [
@@ -1259,6 +1260,28 @@
         "free",
         "family",
         "bathurst-municipal-library"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "sir-pathetik-au-louga-night-bar-bathurst",
+      "title": "Sir Pathetik au Louga Night Bar",
+      "subtitle": "active · 2026-06-26T20:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "music",
+        "nightlife"
+      ],
+      "url": "events.html#event-sir-pathetik-au-louga-night-bar-bathurst",
+      "terms": [
+        "Sir Pathetik au Louga Night Bar",
+        "Sir Pathetik performs at La Louga Night Bar in Bathurst on Friday, June 26 at 8 PM.",
+        "2026-06-26T20:00:00-03:00",
+        "music",
+        "nightlife",
+        "concert",
+        "la-louga-night-bar-resto"
       ]
     },
     {
