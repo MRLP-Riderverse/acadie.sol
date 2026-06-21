@@ -6,6 +6,7 @@
     en: {
       drawerTitle: 'Menu',
       menuDirectory: 'View Everyone',
+      menuEvents: 'Events',
       menuSupport: 'Support Acadie.sol',
       menuAbout: 'About us',
       dark: 'Switch to dark mode',
@@ -19,6 +20,7 @@
     fr: {
       drawerTitle: 'Menu',
       menuDirectory: 'Voir tout le monde',
+      menuEvents: 'Événements',
       menuSupport: 'Soutenir Acadie.sol',
       menuAbout: 'À propos de nous',
       dark: 'Passer en mode sombre',
@@ -62,10 +64,12 @@
     }
 
     const directory = document.getElementById('global-menu-directory');
+    const events = document.getElementById('global-menu-events');
     const support = document.getElementById('global-menu-support');
     const about = document.getElementById('global-menu-about');
     const headerText = document.getElementById('global-header-text');
     if (directory) directory.textContent = copy.menuDirectory;
+    if (events) events.textContent = copy.menuEvents;
     if (support) support.textContent = copy.menuSupport;
     if (about) about.textContent = copy.menuAbout;
     if (headerText) {
@@ -132,6 +136,7 @@
       </div>
       <nav class="drawer-nav">
         <a href="directory.html#browse" id="global-menu-directory">View Everyone</a>
+        <a href="events.html" id="global-menu-events">Events</a>
         <a href="support.html" id="global-menu-support">Support Acadie.sol</a>
         <a href="about-us.html" id="global-menu-about">About us</a>
       </nav>

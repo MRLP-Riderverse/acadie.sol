@@ -97,8 +97,6 @@
 
     .welcome-card p { margin: 0; color: var(--muted); line-height: 1.42; }
 
-    /* Shared divider rune keeps the home banner and live modules visually tied
-       together without bringing back heavy card nesting. */
     .home-divider {
       margin: 2px 0 0;
       color: var(--muted);
@@ -108,38 +106,15 @@
       text-align: center;
     }
 
-    .welcome-meta {
-      width: calc(100% - 40px);
-      margin-top: 8px;
-      padding: 14px 20px 0;
-      display: grid;
-      gap: 8px;
-      justify-items: center;
+    .welcome-meta-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: .86rem;
+      line-height: 1.3;
     }
 
-    .welcome-meta-title { margin: 0; color: var(--ink); font-size: .86rem; line-height: 1.3; }
-    .welcome-meta-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
-    .welcome-meta-list li { color: var(--muted); }
-
-    /* Home route grid: four equal actions in a simple 2x2 launcher block. */
     .action-grid-card {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-    }
-
-    .section-title {
-      margin: 0;
-      color: var(--ink-strong);
-      font-size: .92rem;
-      line-height: 1.25;
-    }
-
-    .section-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: .74rem;
-      line-height: 1.35;
+      padding: 0;
     }
 
     .action-grid {
@@ -159,7 +134,9 @@
       padding: 10px 11px;
       display: grid;
       gap: 5px;
-      align-content: space-between;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
     }
 
     .action-tile:hover {
@@ -189,42 +166,8 @@
       color: var(--muted);
     }
 
-    /* Live carousel is the one moving part on Home: compact progress signal with
-       a clear path into the full archive/feed page. */
     .live-card {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-    }
-
-    .live-head {
-      display: grid;
-      gap: 3px;
-    }
-
-    .live-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .live-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--muted);
-      font-size: .7rem;
-    }
-
-    .live-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: #2fa86f;
-      box-shadow: 0 0 0 4px color-mix(in srgb, #2fa86f 18%, transparent);
-      flex: 0 0 auto;
+      padding: 0;
     }
 
     .carousel {
@@ -324,11 +267,15 @@
       white-space: nowrap;
     }
 
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding-top: 14px;
+    }
+
     .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
       width: 34px;
       height: 34px;
       border: 1px solid var(--button-border);
@@ -345,9 +292,6 @@
     .carousel-arrow:hover {
       background: color-mix(in srgb, var(--paper) 96%, transparent);
     }
-
-    .carousel-arrow.prev { left: 8px; }
-    .carousel-arrow.next { right: 8px; }
 
     .carousel-dots {
       display: flex;
@@ -388,23 +332,14 @@
   <main class="phone-shell">
     <section class="surface welcome-card" aria-labelledby="welcome-title">
       <p class="welcome-title-prefix" id="welcome-title-prefix">Welcome to</p>
-      <h1 id="welcome-title">Acadie.sol</h1>
-      <p class="welcome-subtitle" id="welcome-subtitle">By Acadians, For Acadians.</p>
-      <div class="welcome-meta" aria-labelledby="about-copy">
-        <p class="home-divider" aria-hidden="true">✧❅✦❅✧</p>
-        <p class="welcome-meta-title" id="about-copy"><strong>Built Locally.</strong></p>
-        <ul class="welcome-meta-list" id="about-points">
-          <li>Community OS</li>
-          <li>Acadian Pocket Companion</li>
-          <li>Let’s Discover What’s Around Us!</li>
-          <li>Let’s Connect!</li>
-        </ul>
-      </div>
+      <h1 id="welcome-title">Acadie.sol ⭐️</h1>
+      <p class="welcome-subtitle" id="welcome-subtitle">For Acadians, By Acadians.</p>
+      <p class="home-divider" aria-hidden="true">✧❅✦❅✧</p>
+      <p class="welcome-meta-title" id="about-copy">Community OS</p>
     </section>
 
-    <section class="surface action-grid-card" aria-labelledby="home-actions-title">
-      <h2 class="section-title" id="home-actions-title">4 quick ways in</h2>
-      <div class="action-grid" aria-label="Primary home actions">
+    <section class="action-grid-card" aria-label="Primary home actions">
+      <div class="action-grid">
         <a class="action-tile" href="directory.html#browse" id="action-directory-link">
           <span class="action-icon" aria-hidden="true">⌕</span>
           <span class="action-label" id="action-directory-label">Search Directory</span>
@@ -428,23 +363,17 @@
       </div>
     </section>
 
-    <section class="surface live-card" aria-labelledby="live-title">
-      <div class="live-head">
-        <div class="live-meta-row">
-          <div class="live-status" id="live-status"><span class="live-dot" aria-hidden="true"></span><span id="live-status-copy">Loading latest progress…</span></div>
-        </div>
-        <h2 class="section-title" id="live-title">Live progress</h2>
-        <p class="section-note" id="live-note">Swipe or tap a dot to browse.</p>
-      </div>
-
+    <section class="live-card" aria-label="Homepage live feed">
       <div class="carousel" id="home-carousel">
         <div class="carousel-window">
-          <button class="carousel-arrow prev" id="carousel-prev" type="button" aria-label="Previous slide">‹</button>
           <div class="carousel-track" id="carousel-track" aria-live="polite"></div>
-          <button class="carousel-arrow next" id="carousel-next" type="button" aria-label="Next slide">›</button>
           <div class="carousel-empty" id="carousel-empty">Loading latest entries and events…</div>
         </div>
-        <div class="carousel-dots" id="carousel-dots" aria-label="Live progress slides"></div>
+        <div class="carousel-controls" aria-label="Carousel controls">
+          <button class="carousel-arrow prev" id="carousel-prev" type="button" aria-label="Previous slide">‹</button>
+          <div class="carousel-dots" id="carousel-dots" aria-label="Live progress slides"></div>
+          <button class="carousel-arrow next" id="carousel-next" type="button" aria-label="Next slide">›</button>
+        </div>
       </div>
     </section>
   </main>
@@ -456,16 +385,10 @@
         menuDirectory: 'View Everyone',
         menuAbout: 'About us',
         welcomeTitlePrefix: 'Welcome to',
-        welcomeTitle: 'Acadie.sol',
-        welcomeSubtitle: 'By Acadians, For Acadians.',
-        about: '<strong>Built Locally.</strong>',
-        aboutPoints: [
-          'Community OS',
-          'Acadian Pocket Companion',
-          'Let’s Discover What’s Around Us!',
-          'Let’s Connect!'
-        ],
-        launchTitle: '4 quick ways in',
+        welcomeTitle: 'Acadie.sol ⭐️',
+        welcomeSubtitle: 'For Acadians, By Acadians.',
+        about: 'Community OS',
+        aboutPoints: [],
         actions: {
           directory: { label: 'Search Directory', meta: 'Browse all listings.' },
           events: { label: 'Events', meta: 'See what’s happening.' },
@@ -495,16 +418,10 @@
         menuDirectory: 'Voir tout le monde',
         menuAbout: 'À propos de nous',
         welcomeTitlePrefix: 'Bienvenue à',
-        welcomeTitle: 'Acadie.sol',
+        welcomeTitle: 'Acadie.sol ⭐️',
         welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
-        about: '<strong>Construit ici.</strong>',
-        aboutPoints: [
-          'OS communautaire',
-          'Compagnon acadien de poche',
-          'Découvrons ce qu’il y a autour de nous!',
-          'Connectons-nous!'
-        ],
-        launchTitle: '4 chemins rapides',
+        about: 'Community OS',
+        aboutPoints: [],
         actions: {
           directory: { label: 'Chercher le répertoire', meta: 'Parcourir toutes les fiches.' },
           events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
@@ -850,7 +767,6 @@
       setText('welcome-title', c.welcomeTitle);
       setHtml('about-copy', c.about);
       setList('about-points', c.aboutPoints);
-      setText('home-actions-title', c.launchTitle);
       setText('action-directory-label', c.actions.directory.label);
       setText('action-directory-meta', c.actions.directory.meta);
       setText('action-events-label', c.actions.events.label);
