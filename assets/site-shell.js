@@ -5,10 +5,10 @@
   const COPY = {
     en: {
       drawerTitle: 'Extras',
-      drawerSubtitle: 'View Everyone, support, about',
+      drawerSubtitle: 'View Everyone, support, about us',
       menuDirectory: 'View Everyone',
       menuSupport: 'Support Acadie.sol',
-      menuAbout: 'About Acadie.sol',
+      menuAbout: 'About us',
       dark: 'Switch to dark mode',
       light: 'Switch to light mode',
       langToFr: 'Switch language to French',
@@ -19,10 +19,10 @@
     },
     fr: {
       drawerTitle: 'Extras',
-      drawerSubtitle: 'Voir tout le monde, soutien, à propos',
+      drawerSubtitle: 'Voir tout le monde, soutien, à propos de nous',
       menuDirectory: 'Voir tout le monde',
       menuSupport: 'Soutenir Acadie.sol',
-      menuAbout: 'À propos d’Acadie.sol',
+      menuAbout: 'À propos de nous',
       dark: 'Passer en mode sombre',
       light: 'Passer en mode clair',
       langToFr: 'Passer en français',
@@ -142,7 +142,7 @@
       <nav class="drawer-nav">
         <a href="directory.html" id="global-menu-directory">View Everyone</a>
         <a href="support.html" id="global-menu-support">Support Acadie.sol</a>
-        <a href="index.html#about" id="global-menu-about">About Acadie.sol</a>
+        <a href="about-us.html" id="global-menu-about">About us</a>
       </nav>
     </aside>
     <nav class="site-dock" aria-label="Primary dock">
