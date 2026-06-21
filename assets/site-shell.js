@@ -136,7 +136,7 @@
         <div class="drawer-title"><strong id="global-drawer-title">Menu</strong></div>
       </div>
       <nav class="drawer-nav">
-        <a href="directory.html" id="global-menu-directory">View Everyone</a>
+        <a href="directory.html#browse" id="global-menu-directory">View Everyone</a>
         <a href="support.html" id="global-menu-support">Support Acadie.sol</a>
         <a href="about-us.html" id="global-menu-about">About us</a>
       </nav>
