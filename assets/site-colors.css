@@ -38,6 +38,7 @@
   --gold: #b57910;
   --acadian-yellow: #f3c85b;
   --button-bg: var(--blue-deep);
+  --button-bg-hover: color-mix(in srgb, var(--blue-deep) 86%, var(--page-bg));
   --button-fg: var(--acadian-yellow);
   --button-border: color-mix(in srgb, var(--acadian-yellow) 74%, transparent);
   --gold-ink: #1a1410;
@@ -57,39 +58,40 @@
   color-scheme: dark;
 
   /* Foundational surfaces */
-  --page-bg: #1e1a15;
-  --bg: #1e1a15;
-  --bg2: #2a2520;
-  --bg3: #332e27;
-  --panel: #2a2520;
-  --panel-strong: #332e27;
-  --card: #2a2520;
-  --card-strong: #332e27;
-  --paper: #2a2520;
-  --paper-soft: #332e27;
+  --page-bg: #0c1626;
+  --bg: #0c1626;
+  --bg2: #10213a;
+  --bg3: #152845;
+  --panel: #10213a;
+  --panel-strong: #173055;
+  --card: #10213a;
+  --card-strong: #173055;
+  --paper: #10213a;
+  --paper-soft: #173055;
 
   /* Text and line system */
-  --ink: #f2eadf;
-  --ink-strong: #fff8ec;
+  --ink: #f0f6ff;
+  --ink-strong: #ffffff;
   --text: var(--ink);
-  --muted: #d1c2ad;
-  --soft: #b8a995;
-  --line: rgba(242, 234, 223, 0.16);
-  --line-strong: rgba(242, 234, 223, 0.28);
+  --muted: #bfd2ea;
+  --soft: #9fb6cf;
+  --line: rgba(159, 194, 233, 0.18);
+  --line-strong: rgba(159, 194, 233, 0.30);
 
   /* Brand/accent system */
-  --blue: #6da3e0;
-  --blue-deep: #9fc7ff;
-  --blue-ink: #0d2f5e;
-  --link: #9fc7ff;
-  --link-hover: #cfe3ff;
+  --blue: #7fb2ef;
+  --blue-deep: #0a2b57;
+  --blue-ink: #f7fbff;
+  --link: #9bc8ff;
+  --link-hover: #d2e6ff;
   --gold: #f0c866;
   --acadian-yellow: #f3c85b;
-  --button-bg: var(--blue-deep);
+  --button-bg: rgba(10, 43, 87, 0.82);
+  --button-bg-hover: rgba(17, 58, 112, 0.92);
   --button-fg: var(--acadian-yellow);
-  --button-border: color-mix(in srgb, var(--acadian-yellow) 74%, transparent);
+  --button-border: color-mix(in srgb, var(--acadian-yellow) 64%, transparent);
   --gold-ink: #1a1410;
-  --red: #dc6b70;
+  --red: #ff7f86;
 
   /* Shared event/date chips stay brand-stable across themes. */
   --calendar-red-top: #bf4a4f;
@@ -97,6 +99,6 @@
   --calendar-ink: #f3c85b;
 
   /* Depth/glass */
-  --shadow: rgba(0, 0, 0, 0.36);
-  --glass: rgba(42, 37, 32, 0.78);
+  --shadow: rgba(0, 0, 0, 0.38);
+  --glass: rgba(10, 43, 87, 0.76);
 }

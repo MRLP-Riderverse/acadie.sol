@@ -150,7 +150,7 @@ body {
 .drawer-close:hover,
 .drawer-nav a:hover,
 .site-dock a:hover,
-.site-dock label:hover { color: var(--button-fg); background: color-mix(in srgb, var(--button-bg) 86%, #fff); border-color: var(--button-border); }
+.site-dock label:hover { color: var(--button-fg); background: var(--button-bg-hover, color-mix(in srgb, var(--button-bg) 86%, #fff)); border-color: var(--button-border); }
 .drawer-head { display: grid; gap: 2px; margin: 0 4px 18px; text-align: center; }
 .drawer-title { display: grid; gap: 2px; }
 .drawer-title strong { color: var(--blue-deep); text-transform: uppercase; letter-spacing: .08em; }
