@@ -334,7 +334,7 @@
     .city-heading span { color: var(--muted); font-size: 0.78rem; }
     .city-section .results-grid { padding: 0; }
 
-    .directory-card { border-radius: 16px; padding: 0; overflow: clip; }
+    .directory-card { border-radius: 16px; padding: 0; overflow: clip; scroll-margin-bottom: 128px; }
     .directory-card > summary { list-style: none; cursor: pointer; padding: 12px; }
     .directory-card > summary::-webkit-details-marker { display: none; }
     .card-top { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
@@ -459,7 +459,7 @@
     .search-action { border-radius: 16px; padding: 10px 11px; font-size: .82rem; }
     .filter-note { display: none; }
     .viewbar { display: none; }
-    .directory-shell { margin-top: 10px; }
+    .directory-shell { margin-top: 10px; padding-bottom: 128px; }
     .result-section { border: 0; background: transparent; box-shadow: none; }
     .result-section > summary { padding: 6px 2px 10px; }
     .section-heading h3 { color: var(--muted); font-size: .78rem; letter-spacing: .11em; text-transform: uppercase; }
@@ -469,7 +469,7 @@
     .city-section > summary { padding: 8px 2px; }
     .city-heading strong { font-size: .88rem; }
     .results-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 12px; align-items: start; }
-    .directory-card { border-radius: 21px; background: color-mix(in srgb, var(--card) 94%, transparent); color: var(--ink); }
+    .directory-card { border-radius: 21px; background: color-mix(in srgb, var(--card) 94%, transparent); color: var(--ink); scroll-margin-bottom: 128px; }
     .directory-card > summary { padding: 9px; color: var(--ink); }
     /* Quick-card media preview: keep the square thumbnail/logo only in the summary
        rail so expanded cards spend their space on description + details instead of
@@ -504,7 +504,7 @@
          hero/content layer, so the corner wordmark is removed. -->
     <div class="nav-row nav-row-actions-only">
       <nav class="nav-actions" aria-label="Directory navigation">
-        <a class="nav-action" id="nav-search" href="search.html">🔎 Search</a>
+        <a class="nav-action" id="nav-search" href="#search">🔎 Search</a>
         <a class="nav-action" href="events.html" id="dir-nav-events">Events</a>
         <a class="nav-action" href="index.html" id="dir-nav-home">Home</a>
       </nav>
@@ -516,7 +516,7 @@
       <div>
         <div class="eyebrow" id="dir-eyebrow">Acadie.sol directory</div>
         <h1 id="dir-title">Browse local places.</h1>
-        <p class="lede" id="dir-lede">The dock search now opens a dedicated finding surface. This page stays the full directory: browse the cards, open entries, or jump back to search anytime.</p>
+        <p class="lede" id="dir-lede">Search now lives inside the directory: open the search surface, then browse or filter the same cards without jumping pages.</p>
       </div>
       <aside class="mini-stats" aria-label="Directory status">
         <button class="mini-stat" data-target="official-section"><strong id="entry-stat">…</strong> <span id="entry-stat-label">entries</span></button>
@@ -530,7 +530,7 @@
       <div class="choice-copy">
         <strong id="dir-choice-kicker">Start here</strong>
         <h2 id="dir-choice-title">View Everyone</h2>
-        <p id="dir-choice-copy">Search lives in the dock. The directory is now the steady browse surface for all published local cards.</p>
+        <p id="dir-choice-copy">Search lives in the directory now. This page is the steady browse surface for all published local cards.</p>
       </div>
       <div class="choice-actions">
         <button class="choice-button" id="choose-discover" type="button">
@@ -538,16 +538,65 @@
           <b id="dir-discover-title">Show all places</b>
           <span id="dir-discover-copy">Browse the full directory as one alphabetical stack.</span>
         </button>
-        <a class="choice-button" id="choose-search" href="search.html">
+        <button class="choice-button" id="choose-search" type="button">
           <small id="dir-search-kicker">Find directly</small>
           <b id="dir-search-choice-title">Use search</b>
-          <span id="dir-search-choice-copy">Open the dedicated search page for names, areas, categories, and local vibes.</span>
-        </a>
+          <span id="dir-search-choice-copy">Open the search surface above the cards for names, areas, categories, and attached event terms.</span>
+        </button>
       </div>
     </section>
     </section>
 
-    <!-- Search moved to search.html so this page stays a browse-only directory surface. -->
+    <details class="control-panel body-search glass" id="search-surface" hidden open>
+      <summary>
+        <div class="control-copy">
+          <strong id="dir-search-title">Find local places.</strong>
+          <span id="dir-search-intro">Search names, areas, and attached event terms.</span>
+        </div>
+        <span class="recent-chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="control-body">
+        <div class="control-intro">
+          <strong id="dir-filter-title">Filter options</strong>
+          <span id="dir-filter-note">Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.</span>
+        </div>
+        <div class="control-grid">
+          <input id="search" class="search" type="search" autocomplete="off" enterkeyhint="search" placeholder="Search places, categories, or event terms…" aria-label="Search Acadie.sol" />
+          <div class="search-actions">
+            <button class="search-action" id="show-results" type="button">Show matches</button>
+            <button class="search-action" id="open-filters" type="button">More options</button>
+            <button class="search-action" id="quick-clear" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="filter-popover" id="filter-popover" hidden>
+          <div class="filter-title">
+            <span>Refine search</span>
+            <button id="close-filters" type="button" aria-label="Close filters">✕</button>
+          </div>
+          <div class="control-grid">
+            <select id="mood-select" class="select" aria-label="Mood">
+              <option value="">Any vibe</option>
+              <option value="food">Food, cafés & treats</option>
+              <option value="waterfront">Waterfront / out for a walk</option>
+              <option value="family">Family-friendly</option>
+              <option value="night">Music, drinks & night out</option>
+            </select>
+            <select id="category-select" class="select" aria-label="Category">
+              <option value="all">All categories</option>
+            </select>
+            <select id="city-select" class="select" aria-label="Area">
+              <option value="all">All areas</option>
+            </select>
+          </div>
+          <div class="filter-actions">
+            <button type="button" id="apply-filters">Done</button>
+            <button type="button" id="reset-filters">Reset</button>
+          </div>
+        </div>
+      </div>
+    </details>
+    
+    <!-- Search now lives in this page; the directory shell handles browse + filter in one place. -->
 
     <div class="tool-dock" aria-label="Return to top">
       <button class="tool-fab" id="to-top" type="button" aria-label="Return to top of page">
@@ -585,20 +634,20 @@
       query: '',
       lens: '',
       mode: 'intro',
-      showAll: true,
+      showAll: false,
     };
     const DIR_COPY = {
       en: {
-        brandSubtitle: 'Community directory', navSearch: '🔎 Search', navEvents: 'Events', navHome: 'Home', eyebrow: 'Acadie.sol directory', title: 'Browse local places.', lede: 'The dock search now opens a dedicated finding surface. This page stays the full directory: browse the cards, open entries, or jump back to search anytime.', entries: 'entries', categories: 'categories', cities: 'cities', previews: 'previews',
-        choiceKicker: 'Start here', choiceTitle: 'View Everyone', choiceCopy: 'Search lives in the dock. The directory is now the steady browse surface for all published local cards.', discoverKicker: 'Browse freely', discoverTitle: 'Show all places', discoverCopy: 'Browse the full directory as one alphabetical stack.', searchKicker: 'Find directly', searchChoiceTitle: 'Use search', searchChoiceCopy: 'Open the dedicated search page for names, areas, categories, and local vibes.',
-        searchTitle: 'Find local places', searchIntro: 'One path for search, browsing, and exploring — start anywhere and open what catches your eye.', searchPlaceholder: 'Search places, food, music, areas, or notes…', moreOptions: 'More options', showMatches: 'Show matches', clear: 'Clear', filterOptions: 'Filter options', closeFilters: 'Close filters', anyVibe: 'Any vibe', moodFood: 'Food, cafés & treats', moodWaterfront: 'Waterfront / out for a walk', moodFamily: 'Family-friendly', moodNight: 'Music, drinks & night out',
-        allCategories: 'All categories', allAreas: 'All areas', done: 'Done', reset: 'Reset', filterNote: 'Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.', resultsTitle: 'Places', resultDefault: 'Showing local places.', allPlaces: 'All places', jumpToList: 'Jump to list', footer: 'A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.', timestampUnavailable: 'Timestamp unavailable', dateTbd: 'Date TBD', preview: 'preview', noRecentEntries: 'No recent entries yet.', relatedEvents: 'Related events', linkedCalendarItem: 'linked calendar item', location: 'Location', eventSingular: 'event', eventPlural: 'events', next7Days: 'next 7 days', address: 'Address', hours: 'Hours', phone: 'Phone', email: 'Email', website: 'Website', viewFullPage: 'View full page', descriptionComingSoon: 'Public description coming soon.', placeSingular: 'place', placePlural: 'places', searchLabel: 'search', matching: 'matching', showing: 'Showing', alphabetically: 'alphabetically', noMatchesTitle: 'No matches yet.', noMatchesBody: 'Clear filters or try a broader search.', loadFailed: 'Directory failed to load.'
+        brandSubtitle: 'Community directory', navSearch: '🔎 Search', navEvents: 'Events', navHome: 'Home', eyebrow: 'Acadie.sol directory', title: 'Browse local places.', lede: 'Search now lives inside the directory: open the search surface, then browse or filter the same cards without jumping pages.', entries: 'entries', categories: 'categories', cities: 'cities', previews: 'previews',
+        choiceKicker: 'Start here', choiceTitle: 'View Everyone', choiceCopy: 'Search lives in the directory now. This page is the steady browse surface for all published local cards.', discoverKicker: 'Browse freely', discoverTitle: 'Show all places', discoverCopy: 'Browse the full directory as one alphabetical stack.', searchKicker: 'Find directly', searchChoiceTitle: 'Use search', searchChoiceCopy: 'Open the search surface above the cards for names, areas, categories, and attached event terms.',
+        searchTitle: 'Find local places', searchIntro: 'Search names, areas, and attached event terms without leaving the directory.', searchPlaceholder: 'Search places, food, music, areas, or notes…', moreOptions: 'More options', showMatches: 'Show matches', clear: 'Clear', filterOptions: 'Filter options', closeFilters: 'Close filters', anyVibe: 'Any vibe', moodFood: 'Food, cafés & treats', moodWaterfront: 'Waterfront / out for a walk', moodFamily: 'Family-friendly', moodNight: 'Music, drinks & night out',
+        allCategories: 'All categories', allAreas: 'All areas', done: 'Done', reset: 'Reset', filterNote: 'Type to narrow the directory. More options are there if you need them, but browsing and searching lead to the same cards.', resultsTitle: 'Places', resultDefault: 'Showing local places.', searchReady: 'Search is ready.', allPlaces: 'All places', jumpToList: 'Jump to list', footer: 'A small public mirror of the Acadie.sol directory — tuned for quick mobile browsing first.', timestampUnavailable: 'Timestamp unavailable', dateTbd: 'Date TBD', preview: 'preview', noRecentEntries: 'No recent entries yet.', relatedEvents: 'Related events', linkedCalendarItem: 'linked calendar item', location: 'Location', eventSingular: 'event', eventPlural: 'events', next7Days: 'next 7 days', address: 'Address', hours: 'Hours', phone: 'Phone', email: 'Email', website: 'Website', viewFullPage: 'View full page', descriptionComingSoon: 'Public description coming soon.', placeSingular: 'place', placePlural: 'places', searchLabel: 'search', matching: 'matching', showing: 'Showing', alphabetically: 'alphabetically', noMatchesTitle: 'No matches yet.', noMatchesBody: 'Clear filters or try a broader search.', loadFailed: 'Directory failed to load.'
       },
       fr: {
-        brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Recherche', navEvents: 'Événements', navHome: 'Accueil', eyebrow: 'Répertoire Acadie.sol', title: 'Parcourir les lieux locaux.', lede: 'La recherche du dock ouvre maintenant une surface dédiée. Cette page reste le répertoire complet : parcourez les fiches, ouvrez les entrées, ou retournez à la recherche.', entries: 'entrées', categories: 'catégories', cities: 'villes', previews: 'aperçus',
-        choiceKicker: 'Commencez ici', choiceTitle: 'Vue du répertoire complet.', choiceCopy: 'La recherche vit dans le dock. Le répertoire reste la surface stable pour parcourir les fiches publiques.', discoverKicker: 'Parcourir librement', discoverTitle: 'Voir tous les lieux', discoverCopy: 'Parcourir le répertoire complet en une pile alphabétique.', searchKicker: 'Chercher directement', searchChoiceTitle: 'Utiliser la recherche', searchChoiceCopy: 'Ouvrir la page de recherche dédiée pour les noms, secteurs, catégories et ambiances locales.',
-        searchTitle: 'Trouver des lieux locaux', searchIntro: 'Un seul chemin pour chercher, parcourir et explorer — commencez n’importe où et ouvrez ce qui attire l’œil.', searchPlaceholder: 'Chercher des lieux, repas, musique, secteurs ou notes…', moreOptions: 'Plus d’options', showMatches: 'Afficher', clear: 'Effacer', filterOptions: 'Options de filtre', closeFilters: 'Fermer les filtres', anyVibe: 'Toute ambiance', moodFood: 'Restos, cafés et gâteries', moodWaterfront: 'Bord de l’eau / promenade', moodFamily: 'Familial', moodNight: 'Musique, sorties et soirée',
-        allCategories: 'Toutes les catégories', allAreas: 'Tous les secteurs', done: 'Terminé', reset: 'Réinitialiser', filterNote: 'Tapez pour affiner le répertoire. Les options sont là au besoin, mais la navigation et la recherche mènent aux mêmes fiches.', resultsTitle: 'Lieux', resultDefault: 'Affichage des lieux locaux.', allPlaces: 'Tous les lieux', jumpToList: 'Aller à la liste', footer: 'Un petit miroir public du répertoire Acadie.sol — d’abord pensé pour une navigation mobile rapide.', timestampUnavailable: 'Horodatage indisponible', dateTbd: 'Date à confirmer', preview: 'aperçu', noRecentEntries: 'Aucune entrée récente pour le moment.', relatedEvents: 'Événements liés', linkedCalendarItem: 'élément de calendrier lié', location: 'Lieu', eventSingular: 'événement', eventPlural: 'événements', next7Days: 'dans les 7 prochains jours', address: 'Adresse', hours: 'Heures', phone: 'Téléphone', email: 'Courriel', website: 'Site web', viewFullPage: 'Voir la fiche complète', descriptionComingSoon: 'Description publique à venir.', placeSingular: 'lieu', placePlural: 'lieux', searchLabel: 'recherche', matching: 'correspondant à', showing: 'Affichage de', alphabetically: 'par ordre alphabétique', noMatchesTitle: 'Aucun résultat pour le moment.', noMatchesBody: 'Effacez les filtres ou essayez une recherche plus large.', loadFailed: 'Échec du chargement du répertoire.'
+        brandSubtitle: 'Répertoire communautaire', navSearch: '🔎 Recherche', navEvents: 'Événements', navHome: 'Accueil', eyebrow: 'Répertoire Acadie.sol', title: 'Parcourir les lieux locaux.', lede: 'La recherche vit maintenant dans le répertoire : ouvrez la surface de recherche, puis parcourez ou filtrez les mêmes cartes sans changer de page.', entries: 'entrées', categories: 'catégories', cities: 'villes', previews: 'aperçus',
+        choiceKicker: 'Commencez ici', choiceTitle: 'Vue du répertoire complet.', choiceCopy: 'La recherche vit maintenant dans le répertoire. Cette page reste la surface stable pour parcourir les fiches publiques.', discoverKicker: 'Parcourir librement', discoverTitle: 'Voir tous les lieux', discoverCopy: 'Parcourir le répertoire complet en une pile alphabétique.', searchKicker: 'Chercher directement', searchChoiceTitle: 'Utiliser la recherche', searchChoiceCopy: 'Ouvrir la surface de recherche au-dessus des cartes pour les noms, secteurs, catégories et termes d’événements liés.',
+        searchTitle: 'Trouver des lieux locaux', searchIntro: 'Cherchez les noms, secteurs et termes d’événements liés sans quitter le répertoire.', searchPlaceholder: 'Chercher des lieux, repas, musique, secteurs ou notes…', moreOptions: 'Plus d’options', showMatches: 'Afficher', clear: 'Effacer', filterOptions: 'Options de filtre', closeFilters: 'Fermer les filtres', anyVibe: 'Toute ambiance', moodFood: 'Restos, cafés et gâteries', moodWaterfront: 'Bord de l’eau / promenade', moodFamily: 'Familial', moodNight: 'Musique, sorties et soirée',
+        allCategories: 'Toutes les catégories', allAreas: 'Tous les secteurs', done: 'Terminer', reset: 'Réinitialiser', filterNote: 'Tapez pour réduire le répertoire. Il y a plus d’options si nécessaire, mais la navigation et la recherche mènent aux mêmes cartes.', resultsTitle: 'Lieux', resultDefault: 'Affichage des lieux locaux.', searchReady: 'La recherche est prête.', allPlaces: 'Tous les lieux', jumpToList: 'Aller à la liste', footer: 'Une petite version publique du répertoire Acadie.sol — optimisée d’abord pour la navigation mobile rapide.', timestampUnavailable: 'Horodatage indisponible', dateTbd: 'Date à confirmer', preview: 'aperçu', noRecentEntries: 'Aucune entrée récente.', relatedEvents: 'Événements liés', linkedCalendarItem: 'élément du calendrier lié', location: 'Lieu', eventSingular: 'événement', eventPlural: 'événements', next7Days: '7 prochains jours', address: 'Adresse', hours: 'Heures', phone: 'Téléphone', email: 'Courriel', website: 'Site web', viewFullPage: 'Voir la page complète', descriptionComingSoon: 'Description publique à venir.', placeSingular: 'lieu', placePlural: 'lieux', searchLabel: 'recherche', matching: 'correspondant à', showing: 'Affichage de', alphabetically: 'par ordre alphabétique', noMatchesTitle: 'Aucun résultat pour le moment.', noMatchesBody: 'Effacez les filtres ou essayez une recherche plus large.', loadFailed: 'Échec du chargement du répertoire.'
       }
     };
     function copy() { return DIR_COPY[currentLang()] || DIR_COPY.en; }
@@ -767,10 +816,23 @@
     }
 
     function itemHaystack(item) {
+      const eventTerms = relatedEventsFor(item).flatMap(event => [
+        publicEventTitle(event),
+        event.description,
+        event.notes,
+        event.summary,
+        event.category,
+        event.location_name,
+        event.venue,
+        event.computed_status,
+        ...(Array.isArray(event.tags) ? event.tags : []),
+        ...(Array.isArray(event.badges) ? event.badges : []),
+      ]);
       return [
         item.title, item.name, item.category, item.area, publicCity(item), item.description, item.notes,
         contactValue(item, 'address'), contactValue(item, 'hours'), contactValue(item, 'phone'), contactValue(item, 'email'), contactValue(item, 'website'),
-        ...(item.tags || []), ...(item.aliases || []), ...(item.related_places || []), ...(item.sources || [])
+        ...(item.tags || []), ...(item.aliases || []), ...(item.related_places || []), ...(item.sources || []),
+        ...eventTerms
       ].map(normalize).join(' ');
     }
 
@@ -1027,12 +1089,23 @@
       const allMatches = filteredItems();
       const items = allMatches;
       const filters = [];
+      const hasIntent = Boolean(state.query || state.lens || state.category !== 'all' || state.city !== 'all');
       if (state.query) filters.push(`${copy().searchLabel} “${state.query}”`);
       if (state.lens) filters.push(document.getElementById('mood-select').selectedOptions[0]?.textContent || state.lens);
       if (state.category !== 'all') filters.push(document.getElementById('category-select').selectedOptions[0]?.textContent || state.category);
       if (state.city !== 'all') filters.push(document.getElementById('city-select').selectedOptions[0]?.textContent || state.city);
 
-      showAllButton.classList.add('active');
+      const shouldShow = state.showAll || hasIntent;
+      showAllButton.classList.toggle('active', state.showAll && !hasIntent);
+      if (!shouldShow) {
+        resultCopy.textContent = copy().searchReady;
+        app.hidden = true;
+        app.innerHTML = '';
+        syncHashTarget();
+        return;
+      }
+
+      app.hidden = false;
       resultCopy.textContent = filters.length ? `${items.length} ${items.length === 1 ? copy().placeSingular : copy().placePlural} ${copy().matching} ${filters.join(' + ')}.` : `${copy().showing} ${items.length} ${items.length === 1 ? copy().placeSingular : copy().placePlural} ${copy().alphabetically}.`;
       app.innerHTML = items.length
         ? `<div class="flat-results results-grid">${items.map(renderCard).join('')}</div>`
@@ -1060,14 +1133,27 @@
       if (popover) popover.hidden = true;
     }
 
+    function setSearchSurfaceVisible(visible) {
+      const surface = document.getElementById('search-surface');
+      if (surface) surface.hidden = !visible;
+    }
+
     function setDirectoryMode(mode, options = {}) {
       state.mode = mode;
       const isIntro = mode === 'intro';
       const isSearch = mode === 'search';
-      if (isSearch) { window.location.href = 'search.html'; return; }
+      setSearchSurfaceVisible(!isIntro);
       document.getElementById('splash-panel').hidden = !isIntro;
       document.getElementById('directory-shell').hidden = isIntro;
       document.getElementById('choose-discover')?.classList.toggle('active', mode === 'discover');
+      document.getElementById('choose-search')?.classList.toggle('active', isSearch);
+      if (isSearch) {
+        state.showAll = false;
+        closeFilterPopover();
+        if (options.render !== false) renderResults();
+        const search = document.getElementById('search');
+        if (options.focus !== false) requestAnimationFrame(() => search?.focus());
+      }
       closeFilterPopover();
       if (!isIntro && options.render !== false) renderResults();
       if (options.scroll) {
@@ -1094,17 +1180,18 @@
       target.open = true;
     }
 
-    function clearFilters() {
+    function clearFilters(options = {}) {
+      const { showAll = true, render = true } = options;
       state.category = 'all';
       state.city = 'all';
       state.query = '';
       state.lens = '';
-      state.showAll = true;
+      state.showAll = showAll;
       const search = document.getElementById('search'); if (search) search.value = '';
       const mood = document.getElementById('mood-select'); if (mood) mood.value = '';
       const category = document.getElementById('category-select'); if (category) category.value = 'all';
       const city = document.getElementById('city-select'); if (city) city.value = 'all';
-      renderResults();
+      if (render) renderResults();
     }
 
     function bindEvents() {
@@ -1112,9 +1199,19 @@
       menuToggle?.addEventListener('change', () => {
         if (menuToggle.checked) closeFilterPopover();
       });
+      document.getElementById('nav-search')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        history.replaceState(null, '', '#search');
+        setDirectoryMode('search', { scroll: true, focus: true });
+      });
       document.getElementById('choose-discover')?.addEventListener('click', () => {
         clearFilters();
         setDirectoryMode('discover', { scroll: true, focus: false });
+      });
+      document.getElementById('choose-search')?.addEventListener('click', () => {
+        clearFilters({ showAll: false, render: false });
+        history.replaceState(null, '', '#search');
+        setDirectoryMode('search', { scroll: true, focus: true });
       });
       document.getElementById('to-top')?.addEventListener('click', () => {
         showHeader();
@@ -1134,10 +1231,53 @@
           focusSection(button.dataset.target);
         });
       });
-      document.getElementById('show-all')?.addEventListener('click', () => { state.showAll = true; clearFilters(); setDirectoryMode('discover', { scroll: false, focus: false }); });
+      document.getElementById('show-all')?.addEventListener('click', () => { clearFilters({ showAll: true, render: false }); setDirectoryMode('discover', { scroll: false, focus: false }); });
       document.getElementById('view-official')?.addEventListener('click', () => { setDirectoryMode('discover', { scroll: false, focus: false }); document.getElementById('directory-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-      document.getElementById('clear-filters')?.addEventListener('click', clearFilters);
-      window.addEventListener('hashchange', syncHashTarget);
+      document.getElementById('clear-filters')?.addEventListener('click', () => clearFilters({ showAll: true }));
+      document.getElementById('search')?.addEventListener('input', event => {
+        state.query = event.target.value;
+        renderResults();
+      });
+      document.getElementById('search')?.addEventListener('focus', () => setDirectoryMode('search', { scroll: false, focus: false }));
+      document.getElementById('search')?.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          renderResults();
+        }
+      });
+      document.getElementById('mood-select')?.addEventListener('change', event => {
+        state.lens = event.target.value;
+        renderResults();
+      });
+      document.getElementById('category-select')?.addEventListener('change', event => {
+        state.category = event.target.value || 'all';
+        renderResults();
+      });
+      document.getElementById('city-select')?.addEventListener('change', event => {
+        state.city = event.target.value || 'all';
+        renderResults();
+      });
+      document.getElementById('show-results')?.addEventListener('click', () => {
+        state.showAll = true;
+        renderResults();
+        setDirectoryMode('discover', { scroll: true, focus: false });
+      });
+      document.getElementById('open-filters')?.addEventListener('click', () => { document.getElementById('filter-popover')?.removeAttribute('hidden'); });
+      document.getElementById('close-filters')?.addEventListener('click', closeFilterPopover);
+      document.getElementById('apply-filters')?.addEventListener('click', () => {
+        state.showAll = true;
+        closeFilterPopover();
+        renderResults();
+        setDirectoryMode('discover', { scroll: false, focus: false });
+      });
+      document.getElementById('reset-filters')?.addEventListener('click', () => clearFilters({ showAll: false }));
+      document.getElementById('quick-clear')?.addEventListener('click', () => clearFilters({ showAll: false }));
+      window.addEventListener('hashchange', () => {
+        if (window.location.hash === '#search') {
+          setDirectoryMode('search', { scroll: false, focus: true });
+          return;
+        }
+        syncHashTarget();
+      });
     }
 
     loadData().then(data => {
@@ -1152,8 +1292,7 @@
       renderRecent();
       bindEvents();
       renderResults();
-      setDirectoryMode('discover', { scroll: false, focus: false, render: false });
-      if (window.location.hash === '#search') window.location.replace('search.html');
+      setDirectoryMode(window.location.hash === '#search' ? 'search' : 'intro', { scroll: false, focus: false, render: false });
       if (window.location.hash.startsWith('#entry-')) setDirectoryMode('discover', { scroll: false, focus: false });
     }).catch(err => {
       document.getElementById('entry-stat').textContent = '!';

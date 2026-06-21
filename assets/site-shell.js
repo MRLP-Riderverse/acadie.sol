@@ -144,7 +144,7 @@
     <nav class="site-dock" aria-label="Primary dock">
       <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
       <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-      <a href="search.html" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
+      <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
       <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
     </nav>
   `);
