@@ -124,31 +124,22 @@
     /* Home route grid: four equal actions in a simple 2x2 launcher block. */
     .action-grid-card {
       display: grid;
-      gap: 12px;
-      padding: 16px;
-    }
-
-    .section-kicker {
-      margin: 0;
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 900;
+      gap: 10px;
+      padding: 14px;
     }
 
     .section-title {
       margin: 0;
       color: var(--ink-strong);
-      font-size: .96rem;
+      font-size: .92rem;
       line-height: 1.25;
     }
 
     .section-note {
       margin: 0;
       color: var(--muted);
-      font-size: .78rem;
-      line-height: 1.4;
+      font-size: .74rem;
+      line-height: 1.35;
     }
 
     .action-grid {
@@ -158,16 +149,16 @@
     }
 
     .action-tile {
-      min-height: 92px;
-      border-radius: 20px;
+      min-height: 84px;
+      border-radius: 18px;
       border: 1px solid var(--button-border);
       background: var(--button-bg);
       color: var(--button-fg);
       text-decoration: none;
       box-shadow: 0 12px 24px var(--shadow);
-      padding: 12px;
+      padding: 10px 11px;
       display: grid;
-      gap: 6px;
+      gap: 5px;
       align-content: space-between;
     }
 
@@ -177,13 +168,13 @@
     }
 
     .action-icon {
-      font-size: 1.05rem;
+      font-size: .96rem;
       line-height: 1;
       color: var(--gold);
     }
 
     .action-label {
-      font-size: .86rem;
+      font-size: .82rem;
       font-weight: 900;
       line-height: 1.2;
       color: var(--ink-strong);
@@ -193,8 +184,8 @@
     }
 
     .action-meta {
-      font-size: .72rem;
-      line-height: 1.3;
+      font-size: .68rem;
+      line-height: 1.25;
       color: var(--muted);
     }
 
@@ -202,13 +193,13 @@
        a clear path into the full archive/feed page. */
     .live-card {
       display: grid;
-      gap: 12px;
-      padding: 16px;
+      gap: 10px;
+      padding: 14px;
     }
 
     .live-head {
       display: grid;
-      gap: 4px;
+      gap: 3px;
     }
 
     .live-meta-row {
@@ -224,7 +215,7 @@
       align-items: center;
       gap: 7px;
       color: var(--muted);
-      font-size: .75rem;
+      font-size: .7rem;
     }
 
     .live-dot {
@@ -244,10 +235,10 @@
     .carousel-window {
       position: relative;
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: 20px;
       border: 1px solid var(--line);
       background: color-mix(in srgb, var(--paper-soft) 88%, transparent);
-      min-height: 194px;
+      min-height: 178px;
     }
 
     .carousel-track {
@@ -258,9 +249,9 @@
 
     .carousel-slide {
       min-width: 100%;
-      padding: 16px;
+      padding: 14px 18px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
       color: inherit;
       text-decoration: none;
     }
@@ -299,15 +290,15 @@
     .slide-title {
       margin: 0;
       color: var(--ink-strong);
-      font-size: .98rem;
+      font-size: .92rem;
       line-height: 1.28;
     }
 
     .slide-summary {
       margin: 0;
       color: var(--ink);
-      font-size: .82rem;
-      line-height: 1.45;
+      font-size: .76rem;
+      line-height: 1.38;
     }
 
     .slide-footer {
@@ -320,18 +311,43 @@
 
     .slide-context {
       color: var(--muted);
-      font-size: .74rem;
+      font-size: .7rem;
       line-height: 1.35;
     }
 
     .slide-cta {
       color: var(--link);
-      font-size: .77rem;
+      font-size: .72rem;
       font-weight: 900;
       text-decoration: underline;
       text-underline-offset: 3px;
       white-space: nowrap;
     }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--button-border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      color: var(--ink-strong);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 16px var(--shadow);
+    }
+
+    .carousel-arrow:hover {
+      background: color-mix(in srgb, var(--paper) 96%, transparent);
+    }
+
+    .carousel-arrow.prev { left: 8px; }
+    .carousel-arrow.next { right: 8px; }
 
     .carousel-dots {
       display: flex;
@@ -387,46 +403,50 @@
     </section>
 
     <section class="surface action-grid-card" aria-labelledby="home-actions-title">
-      <p class="section-kicker" id="home-actions-kicker">Launch</p>
       <h2 class="section-title" id="home-actions-title">4 quick ways in</h2>
-      <p class="section-note" id="home-actions-note">Simple 2×2 routes for browse, search, events, and the live archive.</p>
       <div class="action-grid" aria-label="Primary home actions">
-        <a class="action-tile" href="events.html" id="action-events-link">
-          <span class="action-icon" aria-hidden="true">◷</span>
-          <span class="action-label" id="action-events-label">Events</span>
-          <span class="action-meta" id="action-events-meta">See what is happening around us.</span>
-        </a>
-        <a class="action-tile" href="directory.html#browse" id="action-directory-link">
-          <span class="action-icon" aria-hidden="true">⌂</span>
-          <span class="action-label" id="action-directory-label">View Everyone</span>
-          <span class="action-meta" id="action-directory-meta">Browse the local directory.</span>
-        </a>
         <a class="action-tile" href="search.html" id="action-search-link">
           <span class="action-icon" aria-hidden="true">⌕</span>
           <span class="action-label" id="action-search-label">Search</span>
-          <span class="action-meta" id="action-search-meta">Jump straight into finding places.</span>
+          <span class="action-meta" id="action-search-meta">Find something fast.</span>
         </a>
-        <a class="action-tile" href="home-feed.html" id="action-feed-link">
+        <a class="action-tile" href="directory.html#browse" id="action-directory-link">
+          <span class="action-icon" aria-hidden="true">⌂</span>
+          <span class="action-label" id="action-directory-label">Directory</span>
+          <span class="action-meta" id="action-directory-meta">Browse local listings.</span>
+        </a>
+        <a class="action-tile" href="events.html" id="action-events-link">
+          <span class="action-icon" aria-hidden="true">◷</span>
+          <span class="action-label" id="action-events-label">Events</span>
+          <span class="action-meta" id="action-events-meta">See what’s happening.</span>
+        </a>
+        <a class="action-tile" href="support.html" id="action-support-link">
           <span class="action-icon" aria-hidden="true">✦</span>
-          <span class="action-label" id="action-feed-label">Home Feed</span>
-          <span class="action-meta" id="action-feed-meta">Open the running archive of new additions.</span>
+          <span class="action-label" id="action-support-label">Support</span>
+          <span class="action-meta" id="action-support-meta">Help keep it going.</span>
         </a>
       </div>
+      <a class="action-tile" href="about-us.html" id="action-about-link" style="min-height:auto;">
+        <span class="action-icon" aria-hidden="true">⊹</span>
+        <span class="action-label" id="action-about-label">About Us</span>
+        <span class="action-meta" id="action-about-meta">What this project is.</span>
+      </a>
     </section>
 
     <section class="surface live-card" aria-labelledby="live-title">
       <div class="live-head">
         <div class="live-meta-row">
-          <p class="section-kicker" id="live-kicker">Live</p>
           <div class="live-status" id="live-status"><span class="live-dot" aria-hidden="true"></span><span id="live-status-copy">Loading latest progress…</span></div>
         </div>
-        <h2 class="section-title" id="live-title">Latest 3 additions</h2>
-        <p class="section-note" id="live-note">Auto-cycles every 4 seconds. Tap any slide to open the full home feed archive.</p>
+        <h2 class="section-title" id="live-title">Live progress</h2>
+        <p class="section-note" id="live-note">Swipe or tap a dot to browse.</p>
       </div>
 
       <div class="carousel" id="home-carousel">
         <div class="carousel-window">
+          <button class="carousel-arrow prev" id="carousel-prev" type="button" aria-label="Previous slide">‹</button>
           <div class="carousel-track" id="carousel-track" aria-live="polite"></div>
+          <button class="carousel-arrow next" id="carousel-next" type="button" aria-label="Next slide">›</button>
           <div class="carousel-empty" id="carousel-empty">Loading latest entries and events…</div>
         </div>
         <div class="carousel-dots" id="carousel-dots" aria-label="Live progress slides"></div>
@@ -450,18 +470,16 @@
           'Let’s Discover What’s Around Us!',
           'Let’s Connect!'
         ],
-        launchKicker: 'Launch',
         launchTitle: '4 quick ways in',
-        launchNote: 'Simple 2×2 routes for browse, search, events, and the live archive.',
         actions: {
-          events: { label: 'Events', meta: 'See what is happening around us.' },
-          directory: { label: 'View Everyone', meta: 'Browse the local directory.' },
-          search: { label: 'Search', meta: 'Jump straight into finding places.' },
-          feed: { label: 'Home Feed', meta: 'Open the running archive of new additions.' }
+          search: { label: 'Search', meta: 'Find something fast.' },
+          directory: { label: 'Directory', meta: 'Browse local listings.' },
+          events: { label: 'Events', meta: 'See what’s happening.' },
+          support: { label: 'Support', meta: 'Help keep it going.' },
+          about: { label: 'About Us', meta: 'What this project is.' }
         },
-        liveKicker: 'Live',
-        liveTitle: 'Latest 3 additions',
-        liveNote: 'Auto-cycles every 4 seconds. Tap any slide to open the full home feed archive.',
+        liveTitle: 'Live progress',
+        liveNote: 'Swipe or tap a dot to browse.',
         liveLoading: 'Loading latest progress…',
         liveStatus: count => `${count} recent additions in rotation`,
         liveFallback: 'No recent activity yet. New entries and events will appear here automatically.',
@@ -492,18 +510,16 @@
           'Découvrons ce qu’il y a autour de nous!',
           'Connectons-nous!'
         ],
-        launchKicker: 'Accès',
         launchTitle: '4 chemins rapides',
-        launchNote: 'Une grille 2×2 simple pour naviguer, chercher, voir les événements et ouvrir l’archive vivante.',
         actions: {
-          events: { label: 'Événements', meta: 'Voir ce qui se passe autour de nous.' },
-          directory: { label: 'Voir tout le monde', meta: 'Parcourir le répertoire local.' },
-          search: { label: 'Recherche', meta: 'Trouver un lieu immédiatement.' },
-          feed: { label: 'Fil d’accueil', meta: 'Ouvrir l’archive continue des nouveaux ajouts.' }
+          search: { label: 'Recherche', meta: 'Trouver vite.' },
+          directory: { label: 'Répertoire', meta: 'Parcourir les fiches locales.' },
+          events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
+          support: { label: 'Soutien', meta: 'Aider le projet à continuer.' },
+          about: { label: 'À propos', meta: 'Ce qu’est ce projet.' }
         },
-        liveKicker: 'Direct',
-        liveTitle: '3 derniers ajouts',
-        liveNote: 'Défile automatiquement toutes les 4 secondes. Touchez une carte pour ouvrir le fil d’accueil complet.',
+        liveTitle: 'Progrès en direct',
+        liveNote: 'Glissez ou touchez un point.',
         liveLoading: 'Chargement des derniers progrès…',
         liveStatus: count => `${count} ajouts récents en rotation`,
         liveFallback: 'Aucune activité récente pour le moment. Les nouvelles entrées et événements apparaîtront ici automatiquement.',
@@ -527,7 +543,9 @@
       items: [],
       carouselIndex: 0,
       carouselTimer: null,
-      carouselBound: false
+      carouselBound: false,
+      touchStartX: 0,
+      touchDeltaX: 0
     };
 
     function currentLang() {
@@ -720,18 +738,43 @@
 
       dots.querySelectorAll('.carousel-dot').forEach(button => {
         button.addEventListener('click', () => {
-          state.carouselIndex = Number(button.dataset.index || 0);
-          updateCarousel();
+          moveToSlide(Number(button.dataset.index || 0));
           restartCarousel();
         });
       });
 
       if (!state.carouselBound) {
         const carousel = document.getElementById('home-carousel');
+        const prev = document.getElementById('carousel-prev');
+        const next = document.getElementById('carousel-next');
+        prev?.addEventListener('click', () => {
+          moveToSlide(state.carouselIndex - 1);
+          restartCarousel();
+        });
+        next?.addEventListener('click', () => {
+          moveToSlide(state.carouselIndex + 1);
+          restartCarousel();
+        });
         carousel?.addEventListener('mouseenter', stopCarousel);
         carousel?.addEventListener('mouseleave', startCarousel);
         carousel?.addEventListener('focusin', stopCarousel);
         carousel?.addEventListener('focusout', startCarousel);
+        carousel?.addEventListener('touchstart', event => {
+          state.touchStartX = event.touches[0]?.clientX || 0;
+          state.touchDeltaX = 0;
+          stopCarousel();
+        }, { passive: true });
+        carousel?.addEventListener('touchmove', event => {
+          state.touchDeltaX = (event.touches[0]?.clientX || 0) - state.touchStartX;
+        }, { passive: true });
+        carousel?.addEventListener('touchend', () => {
+          if (Math.abs(state.touchDeltaX) > 28) {
+            moveToSlide(state.carouselIndex + (state.touchDeltaX < 0 ? 1 : -1));
+          }
+          state.touchStartX = 0;
+          state.touchDeltaX = 0;
+          startCarousel();
+        });
         state.carouselBound = true;
       }
 
@@ -751,6 +794,11 @@
         if (dotIndex === index) dot.setAttribute('aria-current', 'true');
         else dot.removeAttribute('aria-current');
       });
+    }
+
+    function moveToSlide(index) {
+      state.carouselIndex = index;
+      updateCarousel();
     }
 
     function stopCarousel() {
@@ -809,18 +857,17 @@
       setText('welcome-title', c.welcomeTitle);
       setHtml('about-copy', c.about);
       setList('about-points', c.aboutPoints);
-      setText('home-actions-kicker', c.launchKicker);
       setText('home-actions-title', c.launchTitle);
-      setText('home-actions-note', c.launchNote);
-      setText('action-events-label', c.actions.events.label);
-      setText('action-events-meta', c.actions.events.meta);
-      setText('action-directory-label', c.actions.directory.label);
-      setText('action-directory-meta', c.actions.directory.meta);
       setText('action-search-label', c.actions.search.label);
       setText('action-search-meta', c.actions.search.meta);
-      setText('action-feed-label', c.actions.feed.label);
-      setText('action-feed-meta', c.actions.feed.meta);
-      setText('live-kicker', c.liveKicker);
+      setText('action-directory-label', c.actions.directory.label);
+      setText('action-directory-meta', c.actions.directory.meta);
+      setText('action-events-label', c.actions.events.label);
+      setText('action-events-meta', c.actions.events.meta);
+      setText('action-support-label', c.actions.support.label);
+      setText('action-support-meta', c.actions.support.meta);
+      setText('action-about-label', c.actions.about.label);
+      setText('action-about-meta', c.actions.about.meta);
       setText('live-title', c.liveTitle);
       setText('live-note', c.liveNote);
       if (!state.items.length) setText('live-status-copy', c.liveLoading);
