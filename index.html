@@ -47,6 +47,7 @@
       background: color-mix(in srgb, var(--paper) 90%, transparent);
       box-shadow: 0 18px 42px var(--shadow);
       padding: 14px;
+      position: relative;
     }
 
     .welcome-card {
@@ -57,15 +58,12 @@
       justify-items: center;
     }
 
-    .welcome-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      gap: 10px;
-    }
-
+    /* "Community OS" pill that bulges out of the top-left container border */
     .welcome-label-pill {
+      position: absolute;
+      top: 0;
+      left: 20px;
+      transform: translateY(-50%);
       border-radius: 999px;
       border: 1px solid var(--line-strong);
       background: var(--paper);
@@ -76,7 +74,8 @@
       letter-spacing: .06em;
       text-transform: uppercase;
       font-family: "Pokemon GB", ui-monospace, monospace;
-      flex: 0 0 auto;
+      z-index: 1;
+      box-shadow: 0 2px 6px var(--shadow);
     }
 
     [data-theme="dark"] .welcome-label-pill {
@@ -105,16 +104,6 @@
       text-transform: uppercase;
       letter-spacing: .08em;
       font-family: "Pokemon GB", ui-monospace, monospace;
-    }
-
-    .welcome-subtitle {
-      max-width: 27ch;
-      font-size: .82rem;
-      line-height: 1.38;
-      color: var(--muted);
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
     }
 
     .welcome-card p { margin: 0; color: var(--muted); line-height: 1.42; }
@@ -183,15 +172,22 @@
       color: var(--muted);
     }
 
-    /* Section divider — plain text on page, no wrapper */
+    /* Section divider — subtitle + ornament, plain text on page */
     .section-divider {
       margin: 0;
       color: var(--muted);
-      font-size: .88rem;
-      line-height: 1;
-      letter-spacing: .08em;
+      font-size: .82rem;
+      line-height: 1.38;
+      letter-spacing: .02em;
       text-align: center;
       padding: 2px 0;
+    }
+
+    .section-divider-ornament {
+      display: block;
+      font-size: .88rem;
+      letter-spacing: .08em;
+      margin-top: 4px;
     }
 
     /* Media gallery — swipeable, no arrows, no dots */
@@ -359,12 +355,9 @@
   <script src="assets/site-shell.js"></script>
   <main class="phone-shell">
     <section class="surface welcome-card" aria-labelledby="welcome-title">
-      <div class="welcome-card-header">
-        <span class="welcome-label-pill" id="welcome-label-pill">Community OS</span>
-      </div>
+      <span class="welcome-label-pill" id="welcome-label-pill">Community OS</span>
       <p class="welcome-title-prefix" id="welcome-title-prefix">Welcome to</p>
-      <h1 id="welcome-title">Acadie.sol ⭐️</h1>
-      <p class="welcome-subtitle" id="welcome-subtitle">For Acadians, By Acadians.</p>
+      <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
     </section>
 
     <!-- Media gallery up top, 2×2 below -->
@@ -399,8 +392,11 @@
       </div>
     </section>
 
-    <!-- Divider between 2×2 and updates -->
-    <p class="section-divider" aria-hidden="true">✧❅✦❅✧</p>
+    <!-- Subtitle + ornament divider between 2×2 and updates -->
+    <p class="section-divider" aria-hidden="true">
+      <span id="divider-subtitle">For Acadians, By Acadians.</span>
+      <span class="section-divider-ornament">✧❅✦❅✧</span>
+    </p>
 
     <section class="updates-section" id="home-updates" aria-label="Recent updates">
       <div class="updates-header">
@@ -414,7 +410,7 @@
     const HOME_COPY = {
       en: {
         welcomeTitlePrefix: 'Welcome to',
-        welcomeTitle: 'Acadie.sol ⭐️',
+        welcomeTitle: '\u205C Acadie.sol \u205C',
         welcomeSubtitle: 'For Acadians, By Acadians.',
         labelPill: 'Community OS',
         actions: {
@@ -441,7 +437,7 @@
       },
       fr: {
         welcomeTitlePrefix: 'Bienvenue à',
-        welcomeTitle: 'Acadie.sol ⭐️',
+        welcomeTitle: '\u205C Acadie.sol \u205C',
         welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
         labelPill: 'Community OS',
         actions: {
@@ -668,9 +664,9 @@
       const c = copy();
       document.title = 'ACADIE.SOL';
       setText('welcome-title-prefix', c.welcomeTitlePrefix);
-      setText('welcome-subtitle', c.welcomeSubtitle);
       setText('welcome-title', c.welcomeTitle);
       setText('welcome-label-pill', c.labelPill);
+      setText('divider-subtitle', c.welcomeSubtitle);
       setText('action-directory-label', c.actions.directory.label);
       setText('action-directory-meta', c.actions.directory.meta);
       setText('action-events-label', c.actions.events.label);

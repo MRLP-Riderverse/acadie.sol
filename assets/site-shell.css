@@ -19,9 +19,10 @@
   justify-content: center;
   background: var(--blue-deep);
   color: var(--acadian-yellow);
-  font-size: .85rem;
+  font-family: "Pokemon GB", ui-monospace, monospace;
+  font-size: .82rem;
   font-weight: 900;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
   white-space: nowrap;
   border-bottom: 1px solid color-mix(in srgb, var(--acadian-yellow) 22%, transparent);
