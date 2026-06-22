@@ -218,6 +218,161 @@
       background: color-mix(in srgb, var(--paper-soft) 86%, transparent);
     }
 
+    /* Search header — matches directory's search surface */
+    .search-header {
+      display: grid;
+      gap: 10px;
+    }
+
+    .search-surface-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 2px;
+      padding: 0 2px;
+      justify-content: flex-end;
+    }
+
+    .search-pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.74rem;
+      width: auto;
+      min-height: 0;
+      white-space: nowrap;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+
+    .search-pill[aria-pressed="true"],
+    .search-pill.active {
+      background: var(--button-bg-hover);
+    }
+
+    .search-action[aria-pressed="true"],
+    .search-action.active {
+      background: var(--button-bg-hover);
+    }
+
+    .control-panel { margin-top: 0; border-radius: 20px; overflow: clip; }
+    .control-body { padding: 12px; display: grid; gap: 10px; }
+    .control-grid { display: grid; gap: 10px; }
+    .search-shell { display: grid; gap: 7px; width: 100%; }
+    .control-grid.search-shell { grid-template-columns: minmax(0, 1fr); }
+    .search-field { position: relative; width: 100%; }
+    .search-action {
+      white-space: nowrap;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      width: auto;
+      min-height: 0;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .search-action[aria-pressed="true"],
+    .search-action.active {
+      background: var(--button-bg-hover);
+    }
+
+    .search,
+    .select {
+      width: 100%;
+      min-width: 0;
+      padding: 12px 13px;
+      border-radius: 13px;
+      border: 1px solid var(--line-strong);
+      background: rgba(8, 18, 40, 0.3);
+      color: var(--text);
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+    .search { padding-right: 44px; }
+    .search::placeholder { color: color-mix(in srgb, var(--muted) 72%, transparent); }
+
+    .search-clear {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border-radius: 999px;
+      font-size: 1rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      background: color-mix(in srgb, var(--paper) 86%, transparent);
+      border-color: var(--line);
+      box-shadow: 0 6px 14px rgba(5,13,27,0.12);
+      cursor: pointer;
+    }
+    .search-clear[hidden] { display: none; }
+
+    /* Filter popover — same backdrop-blur pattern as directory */
+    .filter-popover {
+      position: fixed;
+      inset: 0;
+      z-index: 55;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: rgba(8, 18, 40, 0.24);
+      backdrop-filter: blur(10px) saturate(1.05);
+      -webkit-backdrop-filter: blur(10px) saturate(1.05);
+    }
+    .filter-popover[hidden] { display: none; }
+    .filter-backdrop {
+      position: absolute;
+      inset: 0;
+    }
+    .filter-sheet {
+      position: relative;
+      z-index: 1;
+      width: min(560px, 100%);
+      display: grid;
+      align-content: start;
+      gap: 9px;
+      padding: 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--panel-strong) 96%, transparent);
+      box-shadow: 0 22px 48px rgba(5,13,27,0.42);
+    }
+    .filter-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+    .filter-title button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    html.filters-open { overflow: hidden; }
+
     @media (max-width: 620px) {
       .wrap {
         width: min(100vw - 14px, 760px);
@@ -239,35 +394,50 @@
   <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
 <body>
-  <script src="assets/site-shell.js"></script>
-  <main class="wrap">
-    <section class="surface hero" aria-labelledby="feed-title">
-      <p class="eyebrow" id="feed-eyebrow">Home feed</p>
-      <h1 id="feed-title">Newest additions across the project</h1>
-      <p class="lede" id="feed-lede">This page archives the same progress stream used on the homepage carousel: newest entries, drafts, and events, all in one chronological feed.</p>
-      <p class="status-copy" id="feed-status">Loading feed…</p>
-      <nav class="nav" aria-label="Home feed navigation">
-        <a class="nav-link" href="index.html">
-          <span class="nav-label" id="nav-home-label">Home</span>
-          <span class="nav-meta" id="nav-home-meta">Return to the launch surface.</span>
-        </a>
-        <a class="nav-link" href="directory.html#browse">
-          <span class="nav-label" id="nav-directory-label">View Everyone</span>
-          <span class="nav-meta" id="nav-directory-meta">Browse the main local directory.</span>
-        </a>
-        <a class="nav-link" href="events.html">
-          <span class="nav-label" id="nav-events-label">Events</span>
-          <span class="nav-meta" id="nav-events-meta">See the public calendar.</span>
-        </a>
-        <a class="nav-link" href="search.html">
-          <span class="nav-label" id="nav-search-label">Search</span>
-          <span class="nav-meta" id="nav-search-meta">Find a place fast.</span>
-        </a>
-      </nav>
+<script src="assets/site-shell.js"></script>
+<main class="wrap">
+  <!-- Search header replaces the hero card: search field + type filter pills -->
+  <section class="search-header" aria-label="Search and filter home feed">
+    <div class="search-surface-actions" aria-label="Search shortcuts">
+      <button class="search-pill filter-type-btn" data-filter="recent" type="button">10 Recent</button>
+      <button class="search-pill filter-type-btn" data-filter="event" type="button">Events</button>
+      <button class="search-pill filter-type-btn" data-filter="entry" type="button">Entries</button>
+      <button class="search-pill filter-type-btn" data-filter="draft" type="button">Drafts</button>
+      <button class="search-pill filter-type-btn" data-filter="post" type="button" hidden>Posts</button>
+      <button class="search-pill" id="open-filters" type="button">Filters</button>
+    </div>
+    <section class="control-panel glass">
+      <div class="control-body">
+        <div class="control-grid search-shell">
+          <div class="search-field">
+            <input id="feed-search" class="search" type="search" autocomplete="off" enterkeyhint="search" placeholder="Search updates…" aria-label="Search home feed" />
+            <button class="search-clear" id="feed-search-clear" type="button" aria-label="Clear search" hidden>×</button>
+          </div>
+        </div>
+      </div>
     </section>
+  </section>
 
-    <section class="feed-list" id="feed-list" aria-live="polite"></section>
-  </main>
+  <!-- Filter popover for full filter set -->
+  <div class="filter-popover" id="filter-popover" hidden>
+    <div class="filter-backdrop" id="filter-backdrop" aria-hidden="true"></div>
+    <div class="filter-sheet" role="dialog" aria-modal="true" aria-label="Filters">
+      <div class="filter-title">
+        <span id="filter-title-label">Filters</span>
+        <button id="close-filters" type="button" aria-label="Close filters">✕</button>
+      </div>
+      <div class="control-grid">
+        <button class="search-action filter-type-btn" data-filter="recent" type="button">10 Recent</button>
+        <button class="search-action filter-type-btn" data-filter="event" type="button">Events</button>
+        <button class="search-action filter-type-btn" data-filter="entry" type="button">Entries</button>
+        <button class="search-action filter-type-btn" data-filter="draft" type="button">Drafts</button>
+        <button class="search-action filter-type-btn" data-filter="post" type="button" hidden>Posts</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="feed-list" id="feed-list" aria-live="polite"></section>
+</main>
 
   <script>
     const FEED_COPY = {
@@ -278,6 +448,14 @@
         statusLoading: 'Loading feed…',
         statusReady: count => `${count} items, newest first`,
         statusStamped: (count, stamp) => `${count} items, newest first · latest source update ${stamp}`,
+        searchPlaceholder: 'Search updates…',
+        filterBtn: 'Filters',
+        filterTitle: 'Filters',
+        filterRecent: '10 Recent',
+        filterEvents: 'Events',
+        filterEntries: 'Entries',
+        filterDrafts: 'Drafts',
+        filterPosts: 'Posts',
         nav: {
           home: { label: 'Home', meta: 'Return to the launch surface.' },
           directory: { label: 'View Everyone', meta: 'Browse the main local directory.' },
@@ -307,6 +485,14 @@
         statusLoading: 'Chargement du fil…',
         statusReady: count => `${count} éléments, du plus récent au plus ancien`,
         statusStamped: (count, stamp) => `${count} éléments, du plus récent au plus ancien · dernière mise à jour source ${stamp}`,
+        searchPlaceholder: 'Rechercher des mises à jour…',
+        filterBtn: 'Filtres',
+        filterTitle: 'Filtres',
+        filterRecent: '10 récents',
+        filterEvents: 'Événements',
+        filterEntries: 'Entrées',
+        filterDrafts: 'Brouillons',
+        filterPosts: 'Publications',
         nav: {
           home: { label: 'Accueil', meta: 'Retour à la surface de lancement.' },
           directory: { label: 'Voir tout le monde', meta: 'Parcourir le répertoire local principal.' },
@@ -331,7 +517,7 @@
       }
     };
 
-    const state = { items: [], latestTs: 0 };
+    const state = { items: [], latestTs: 0, filterMode: 'recent', searchQuery: '' };
 
     function currentLang() {
       const saved = localStorage.getItem('acadie-lang');
@@ -472,7 +658,24 @@
     function renderFeed() {
       const feed = document.getElementById('feed-list');
       if (!feed) return;
-      if (!state.items.length) {
+      let items = state.items;
+      // Apply type filter
+      if (state.filterMode === 'event') items = items.filter(i => i.type === 'event');
+      else if (state.filterMode === 'entry') items = items.filter(i => i.type === 'entry');
+      else if (state.filterMode === 'draft') items = items.filter(i => i.type === 'draft');
+      else if (state.filterMode === 'post') items = items.filter(i => i.type === 'post');
+      // Apply search query
+      if (state.searchQuery) {
+        const q = state.searchQuery.toLowerCase();
+        items = items.filter(i =>
+          (i.title || '').toLowerCase().includes(q) ||
+          (i.summary || '').toLowerCase().includes(q) ||
+          (i.badge || '').toLowerCase().includes(q) ||
+          (i.category || '').toLowerCase().includes(q) ||
+          (i.area || '').toLowerCase().includes(q)
+        );
+      }
+      if (!items.length) {
         feed.innerHTML = `<div class="empty">${escapeHtml(copy().empty)}</div>`;
         return;
       }
@@ -501,20 +704,62 @@
     function updateStaticCopy() {
       const c = copy();
       document.title = c.pageTitle;
-      setText('feed-eyebrow', c.eyebrow);
-      setText('feed-title', c.title);
-      setText('feed-lede', c.lede);
-      setText('nav-home-label', c.nav.home.label);
-      setText('nav-home-meta', c.nav.home.meta);
-      setText('nav-directory-label', c.nav.directory.label);
-      setText('nav-directory-meta', c.nav.directory.meta);
-      setText('nav-events-label', c.nav.events.label);
-      setText('nav-events-meta', c.nav.events.meta);
-      setText('nav-search-label', c.nav.search.label);
-      setText('nav-search-meta', c.nav.search.meta);
-      const stamp = state.latestTs ? formatTimestamp(state.latestTs) : '';
-      setText('feed-status', state.items.length ? (stamp ? c.statusStamped(state.items.length, stamp) : c.statusReady(state.items.length)) : c.statusLoading);
+      const searchEl = document.getElementById('feed-search');
+      if (searchEl) searchEl.placeholder = c.searchPlaceholder;
+      setText('filter-title-label', c.filterTitle);
+      document.querySelectorAll('.filter-type-btn[data-filter="recent"]').forEach(b => b.textContent = c.filterRecent);
+      document.querySelectorAll('.filter-type-btn[data-filter="event"]').forEach(b => b.textContent = c.filterEvents);
+      document.querySelectorAll('.filter-type-btn[data-filter="entry"]').forEach(b => b.textContent = c.filterEntries);
+      document.querySelectorAll('.filter-type-btn[data-filter="draft"]').forEach(b => b.textContent = c.filterDrafts);
+      document.querySelectorAll('.filter-type-btn[data-filter="post"]').forEach(b => b.textContent = c.filterPosts);
+      syncFilterBtns();
     }
+
+    /* --- Filter/search popup handlers --- */
+
+    function syncFilterBtns() {
+      document.querySelectorAll('.filter-type-btn').forEach(btn => {
+        const isActive = btn.dataset.filter === state.filterMode;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+    }
+
+    function openFilterPopover() {
+      const el = document.getElementById('filter-popover');
+      if (el) el.hidden = false;
+      document.documentElement.classList.add('filters-open');
+    }
+    function closeFilterPopover() {
+      const el = document.getElementById('filter-popover');
+      if (el) el.hidden = true;
+      document.documentElement.classList.remove('filters-open');
+    }
+    function setFilterMode(mode) {
+      state.filterMode = mode;
+      closeFilterPopover();
+      syncFilterBtns();
+      renderFeed();
+    }
+
+    document.getElementById('open-filters')?.addEventListener('click', openFilterPopover);
+    document.getElementById('close-filters')?.addEventListener('click', closeFilterPopover);
+    document.getElementById('filter-backdrop')?.addEventListener('click', closeFilterPopover);
+
+    document.getElementById('feed-search')?.addEventListener('input', function(e) {
+      state.searchQuery = e.target.value;
+      const clear = document.getElementById('feed-search-clear');
+      if (clear) clear.hidden = !e.target.value;
+      renderFeed();
+    });
+    document.getElementById('feed-search-clear')?.addEventListener('click', function() {
+      const input = document.getElementById('feed-search');
+      if (input) { input.value = ''; state.searchQuery = ''; this.hidden = true; renderFeed(); }
+    });
+
+    document.querySelectorAll('.filter-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => setFilterMode(btn.dataset.filter));
+    });
 
     async function init() {
       updateStaticCopy();

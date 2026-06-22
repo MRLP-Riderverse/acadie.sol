@@ -284,6 +284,19 @@
       background: var(--paper-soft);
     }
 
+    .updates-header-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .updates-pill[aria-pressed="true"],
+    .updates-pill.active {
+      background: var(--blue-deep);
+      color: var(--acadian-yellow);
+      border-color: var(--button-border);
+    }
+
     [data-theme="dark"] .updates-pill {
       background: var(--button-bg);
       color: var(--button-fg);
@@ -354,6 +367,77 @@
       white-space: nowrap;
     }
 
+    /* Filter popover — matches directory's backdrop-blur pattern */
+    .filter-popover {
+      position: fixed;
+      inset: 0;
+      z-index: 55;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: rgba(8, 18, 40, 0.24);
+      backdrop-filter: blur(10px) saturate(1.05);
+      -webkit-backdrop-filter: blur(10px) saturate(1.05);
+    }
+    .filter-popover[hidden] { display: none; }
+    .filter-backdrop {
+      position: absolute;
+      inset: 0;
+    }
+    .filter-sheet {
+      position: relative;
+      z-index: 1;
+      width: min(560px, 100%);
+      display: grid;
+      align-content: start;
+      gap: 9px;
+      padding: 14px;
+      border: 1px solid var(--line-strong);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--panel-strong) 96%, transparent);
+      box-shadow: 0 22px 48px rgba(5,13,27,0.42);
+    }
+    .filter-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+    }
+    .filter-title button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .filter-type-btn {
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      width: auto;
+      min-height: 0;
+      white-space: nowrap;
+      border: 1px solid var(--button-border);
+      background: var(--button-bg);
+      color: var(--button-fg);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .filter-type-btn:hover,
+    .filter-type-btn[aria-pressed="true"],
+    .filter-type-btn.active {
+      background: var(--button-bg-hover);
+      color: var(--button-fg);
+    }
+
     @media (min-width: 760px) {
       .phone-shell { padding-top: 18px; }
     }
@@ -411,9 +495,30 @@
     <section class="updates-section" id="home-updates" aria-label="Recent updates">
       <div class="updates-header">
         <h2 class="updates-title" id="updates-title">Updates</h2>
-        <a class="updates-pill" href="home-feed.html" id="updates-pill">View Updates ↗</a>
+        <div class="updates-header-actions">
+          <button class="updates-pill" id="updates-filter-btn" type="button">Filters</button>
+          <a class="updates-pill" href="home-feed.html" id="updates-pill">View Updates ↗</a>
+        </div>
       </div>
       <div id="updates-list"></div>
+
+      <!-- Home updates filter popup: matches directory's filter-popover pattern. -->
+      <div class="filter-popover" id="home-filter-popover" hidden>
+        <div class="filter-backdrop" id="home-filter-backdrop" aria-hidden="true"></div>
+        <div class="filter-sheet" role="dialog" aria-modal="true" aria-label="Update filters">
+          <div class="filter-title">
+            <span id="home-filter-title-label">Filters</span>
+            <button id="home-filter-close" type="button" aria-label="Close filters">✕</button>
+          </div>
+          <div class="control-grid">
+            <button class="search-action filter-type-btn" data-filter="recent" type="button">10 Recent</button>
+            <button class="search-action filter-type-btn" data-filter="event" type="button">Events</button>
+            <button class="search-action filter-type-btn" data-filter="entry" type="button">Entries</button>
+            <button class="search-action filter-type-btn" data-filter="draft" type="button">Drafts</button>
+            <button class="search-action filter-type-btn" data-filter="post" type="button" hidden>Posts</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <script>
@@ -431,6 +536,13 @@
         },
         updatesTitle: 'Updates',
         viewUpdates: 'View Updates ↗',
+        filterBtn: 'Filters',
+        filterTitle: 'Filters',
+        filterRecent: '10 Recent',
+        filterEvents: 'Events',
+        filterEntries: 'Entries',
+        filterDrafts: 'Drafts',
+        filterPosts: 'Posts',
         galleryPlaceholder: index => `Gallery ${index + 1}`,
         types: { entry: 'Entry', event: 'Event', draft: 'Draft' },
         entryFallback: 'Entry details coming soon.',
@@ -464,6 +576,13 @@
         },
         updatesTitle: 'Mises à jour',
         viewUpdates: 'Voir les mises à jour ↗',
+        filterBtn: 'Filtres',
+        filterTitle: 'Filtres',
+        filterRecent: '10 récents',
+        filterEvents: 'Événements',
+        filterEntries: 'Entrées',
+        filterDrafts: 'Brouillons',
+        filterPosts: 'Publications',
         galleryPlaceholder: index => `Galerie ${index + 1}`,
         types: { entry: 'Entrée', event: 'Événement', draft: 'Brouillon' },
         entryFallback: 'Détails de l\'entrée à venir.',
@@ -488,6 +607,7 @@
 
     const state = {
       items: [],
+      filterMode: 'recent',
       galleryIndex: 0,
       galleryTouchStartX: 0,
       galleryTouchDeltaX: 0
@@ -676,7 +796,16 @@
         list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(c.emptyUpdates)}</p>`;
         return;
       }
-      const rows = items.slice(0, 10);
+      let filtered = items;
+      if (state.filterMode === 'event') filtered = items.filter(i => i.type === 'event');
+      else if (state.filterMode === 'entry') filtered = items.filter(i => i.type === 'entry');
+      else if (state.filterMode === 'draft') filtered = items.filter(i => i.type === 'draft');
+      else if (state.filterMode === 'post') filtered = items.filter(i => i.type === 'post');
+      if (!filtered.length) {
+        list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(c.emptyUpdates)}</p>`;
+        return;
+      }
+      const rows = filtered.slice(0, 10);
       list.innerHTML = rows.map(item => {
         const badge = escapeHtml(item.badge);
         const name = escapeHtml(item.title);
@@ -710,7 +839,49 @@
       setText('action-about-meta', c.actions.about.meta);
       setText('updates-title', c.updatesTitle);
       setText('updates-pill', c.viewUpdates);
+      setText('updates-filter-btn', c.filterBtn);
+      setText('home-filter-title-label', c.filterTitle);
+      document.querySelectorAll('.filter-type-btn[data-filter="recent"]').forEach(b => b.textContent = c.filterRecent);
+      document.querySelectorAll('.filter-type-btn[data-filter="event"]').forEach(b => b.textContent = c.filterEvents);
+      document.querySelectorAll('.filter-type-btn[data-filter="entry"]').forEach(b => b.textContent = c.filterEntries);
+      document.querySelectorAll('.filter-type-btn[data-filter="draft"]').forEach(b => b.textContent = c.filterDrafts);
+      document.querySelectorAll('.filter-type-btn[data-filter="post"]').forEach(b => b.textContent = c.filterPosts);
+      syncFilterBtns();
     }
+
+    /* --- Home updates filter popup --- */
+
+    function syncFilterBtns() {
+      document.querySelectorAll('.filter-type-btn').forEach(btn => {
+        const isActive = btn.dataset.filter === state.filterMode;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+    }
+
+    function openFilterPopover() {
+      const el = document.getElementById('home-filter-popover');
+      if (el) el.hidden = false;
+    }
+
+    function closeFilterPopover() {
+      const el = document.getElementById('home-filter-popover');
+      if (el) el.hidden = true;
+    }
+
+    function setFilterMode(mode) {
+      state.filterMode = mode;
+      closeFilterPopover();
+      syncFilterBtns();
+      if (state.items.length) renderUpdates(state.items);
+    }
+
+    document.getElementById('updates-filter-btn')?.addEventListener('click', openFilterPopover);
+    document.getElementById('home-filter-close')?.addEventListener('click', closeFilterPopover);
+    document.getElementById('home-filter-backdrop')?.addEventListener('click', closeFilterPopover);
+    document.querySelectorAll('.filter-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => setFilterMode(btn.dataset.filter));
+    });
 
     async function initHome() {
       renderGallery();
