@@ -223,6 +223,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      position: relative;
     }
 
     .gallery-placeholder {
@@ -244,6 +245,40 @@
       font-size: 1.6rem;
       line-height: 1;
       opacity: .45;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      margin: 0;
+    }
+
+    .gallery-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 18px 14px 10px;
+      background: linear-gradient(to top, rgba(0,0,0,.52) 0%, transparent 100%);
+      color: #fff;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      line-height: 1.3;
+      pointer-events: none;
+    }
+
+    [data-theme="light"] .gallery-caption {
+      background: linear-gradient(to top, rgba(12,22,38,.48) 0%, transparent 100%);
+      color: var(--paper);
     }
 
     /* Updates feed — no visible container wrapper, compact rows */
@@ -738,22 +773,39 @@
       return { items };
     }
 
-    /* --- Media Gallery Carousel (swipe-only, no arrows/dots) --- */
+    /* --- Media Gallery Carousel (swipe-only, no arrows/dots) ---
+       Data-driven: each entry is an image object { src, alt, caption }.
+       To fill or reorder, edit GALLERY_IMAGES. Null slots render as
+       placeholder cards so the count stays stable while assets fill in. */
 
-    const GALLERY_COUNT = 3;
+    const GALLERY_IMAGES = [
+      { src: 'assets/images/acadie-in-the-stars.jpg', alt: 'Acadie in the stars', caption: 'Acadie in the stars' },
+      null,
+      null
+    ];
 
     function renderGallery() {
       const track = document.getElementById('gallery-track');
       if (!track) return;
       const c = copy();
-      track.innerHTML = Array.from({ length: GALLERY_COUNT }, (_, i) => `
+      track.innerHTML = GALLERY_IMAGES.map((item, i) => {
+        if (item) {
+          return `
+        <div class="media-gallery-slide">
+          <picture class="gallery-image">
+            <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt || '')}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" />
+          </picture>
+          ${item.caption ? `<div class="gallery-caption">${escapeHtml(item.caption)}</div>` : ''}
+        </div>`;
+        }
+        return `
         <div class="media-gallery-slide">
           <div class="gallery-placeholder">
             <span class="gallery-placeholder-icon" aria-hidden="true"> ◒ </span>
             <span>${escapeHtml(c.galleryPlaceholder(i))}</span>
           </div>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
       state.galleryIndex = 0;
       updateGallery();
       bindGalleryTouch();
@@ -779,7 +831,7 @@
       gallery.addEventListener('touchend', () => {
         if (Math.abs(state.galleryTouchDeltaX) > 28) {
           const next = state.galleryIndex + (state.galleryTouchDeltaX < 0 ? 1 : -1);
-          state.galleryIndex = Math.max(0, Math.min(GALLERY_COUNT - 1, next));
+          state.galleryIndex = Math.max(0, Math.min(GALLERY_IMAGES.length - 1, next));
           updateGallery();
         }
         state.galleryTouchStartX = 0;
