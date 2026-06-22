@@ -61,7 +61,7 @@
     /* "Community OS" pill that bulges out of the top-left container border */
     .welcome-label-pill {
       position: absolute;
-      top: 0;
+      top: 12px;
       left: 20px;
       transform: translateY(-50%);
       border-radius: 999px;
@@ -86,19 +86,16 @@
 
     .welcome-card h1 {
       margin: 0;
-      font-size: clamp(1.08rem, 5.8vw, 1.48rem);
+      font-size: clamp(0.94rem, 5.2vw, 1.28rem);
       line-height: 1.08;
       letter-spacing: -.01em;
       color: var(--ink-strong);
       font-family: "Pokemon GB", ui-monospace, monospace;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 4px;
     }
 
     .welcome-title-prefix {
       margin: 0;
-      font-size: .76rem;
+      font-size: .68rem;
       line-height: 1.25;
       color: var(--muted);
       text-transform: uppercase;
@@ -188,6 +185,14 @@
       font-size: .88rem;
       letter-spacing: .08em;
       margin-top: 4px;
+    }
+
+    .section-divider-line {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: color-mix(in srgb, var(--line) 50%, transparent);
+      margin: 6px 0 0;
     }
 
     /* Media gallery — swipeable, no arrows, no dots */
@@ -396,6 +401,7 @@
     <p class="section-divider" aria-hidden="true">
       <span id="divider-subtitle">For Acadians, By Acadians.</span>
       <span class="section-divider-ornament">✧❅✦❅✧</span>
+      <span class="section-divider-line" aria-hidden="true"></span>
     </p>
 
     <section class="updates-section" id="home-updates" aria-label="Recent updates">
