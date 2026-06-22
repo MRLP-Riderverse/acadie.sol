@@ -50,6 +50,10 @@
   --calendar-red-bottom: #7b1f2a;
   --calendar-ink: #f3c85b;
 
+  /* Calendar date badges — solid navy companion so the badge reads
+     consistently whether the page background is light parchment or dark panel. */
+  --calendar-badge-bg: #0a2b57;
+
   /* Depth/glass */
   --shadow: rgba(65, 47, 29, 0.10);
   --glass: rgba(10, 43, 87, 0.68);
@@ -99,6 +103,8 @@
   --calendar-red-top: #bf4a4f;
   --calendar-red-bottom: #7b1f2a;
   --calendar-ink: #f3c85b;
+  /* Same hex in both modes — keeps the badge recognizable regardless of page bg. */
+  --calendar-badge-bg: #0a2b57;
 
   /* Depth/glass */
   --shadow: rgba(0, 0, 0, 0.38);
