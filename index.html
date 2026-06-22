@@ -263,8 +263,8 @@
       left: 0;
       right: 0;
       z-index: 2;
-      padding: 12px 14px 10px;
-      background: rgba(0,0,0,.38);
+      padding: 10px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,.45) 0%, rgba(0,0,0,.22) 55%, rgba(0,0,0,.06) 100%);
       color: #fff;
       font-size: .74rem;
       font-weight: 700;
@@ -275,8 +275,8 @@
     }
 
     [data-theme="light"] .gallery-caption {
-      background: rgba(12,22,38,.42);
-      color: #f5ede1;
+      background: linear-gradient(to top, rgba(12,22,38,.32) 0%, rgba(12,22,38,.14) 55%, rgba(12,22,38,.04) 100%);
+      color: var(--paper);
     }
 
     /* Updates feed — no visible container wrapper, compact rows */
@@ -777,7 +777,7 @@
        placeholder cards so the count stays stable while assets fill in. */
 
     const GALLERY_IMAGES = [
-      { src: 'assets/images/acadie-in-the-stars.jpg', alt: 'Acadie in the stars', caption: 'Acadie in the stars' },
+      { src: 'assets/images/acadie-in-the-stars.jpg', alt: 'Acadie in the stars', caption: 'Made by One, Made for All' },
       null,
       null
     ];

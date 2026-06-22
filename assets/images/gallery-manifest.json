@@ -1,6 +1,6 @@
 {
   "routing": {
-    "sourceCode": "GALLERY_IMAGES array in index.html <script> block (~line 746)",
+    "sourceCode": "GALLERY_IMAGES array in index.html <script> block (~line 777)",
     "pattern": "Each slide is an object { src, alt, caption }. Null entries render as placeholder cards. The carousel auto-derives its length, swipe bounds, and rendering from this array — no other code changes needed.",
     "addSlide": "Push { src, alt, caption } to GALLERY_IMAGES. Remove a null placeholder if you want to keep the total count stable.",
     "removeSlide": "Set the array entry to null (renders placeholder) or splice it out (shrinks carousel).",
@@ -8,7 +8,7 @@
     "imageSpec": "16:9 aspect-ratio recommended (e.g. 1280x720, 1920x1080). object-fit: cover is applied."
   },
   "slides": [
-    { "src": "assets/images/acadie-in-the-stars.jpg", "alt": "Acadie in the stars", "caption": "Acadie in the stars" },
+    { "src": "assets/images/acadie-in-the-stars.jpg", "alt": "Acadie in the stars", "caption": "Made by One, Made for All" },
     { "placeholder": true, "note": "Slot 2 — add { src, alt, caption } to fill" },
     { "placeholder": true, "note": "Slot 3 — add { src, alt, caption } to fill" }
   ]
