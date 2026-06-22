@@ -437,7 +437,13 @@
         eventFallback: 'Event details coming soon.',
         timestampUnavailable: 'Timestamp unavailable',
         updatedNow: 'Updated just now',
-        updatedAgo: mins => mins < 60 ? `${mins} min ago` : `${Math.round(mins / 60)} h ago`,
+        updatedAgo: mins => {
+          const { value, unit } = relativeTimeBreakdown(mins);
+          if (unit === 'min') return `${value} min ago`;
+          if (unit === 'h') return `${value} h ago`;
+          if (unit === 'd') return `${value} d ago`;
+          return `${value} w ago`;
+        },
         contexts: {
           draft: item => `${item.category || 'Draft'} · preview`,
           entry: item => `${item.category || 'Entry'} · ${item.area || 'Local'}`,
@@ -464,7 +470,13 @@
         eventFallback: 'Détails de l\'événement à venir.',
         timestampUnavailable: 'Horodatage indisponible',
         updatedNow: 'Mis à jour à l\'instant',
-        updatedAgo: mins => mins < 60 ? `Il y a ${mins} min` : `Il y a ${Math.round(mins / 60)} h`,
+        updatedAgo: mins => {
+          const { value, unit } = relativeTimeBreakdown(mins);
+          if (unit === 'min') return `Il y a ${value} min`;
+          if (unit === 'h') return `Il y a ${value} h`;
+          if (unit === 'd') return `Il y a ${value} j`;
+          return `Il y a ${value} sem`;
+        },
         contexts: {
           draft: item => `${item.category || 'Brouillon'} · aperçu`,
           entry: item => `${item.category || 'Entrée'} · ${item.area || 'Local'}`,
@@ -529,6 +541,17 @@
       const minutes = Math.max(0, Math.round((Date.now() - numeric * 1000) / 60000));
       if (minutes < 1) return copy().updatedNow;
       return copy().updatedAgo(minutes);
+    }
+
+    function relativeTimeBreakdown(minutes) {
+      // minutes → { value: N, unit: 'min'|'h'|'d'|'w' }
+      if (minutes < 60) return { value: minutes, unit: 'min' };
+      const hours = Math.round(minutes / 60);
+      if (hours < 48) return { value: hours, unit: 'h' };
+      const days = Math.round(hours / 24);
+      if (days < 14) return { value: days, unit: 'd' };
+      const weeks = Math.round(days / 7);
+      return { value: weeks, unit: 'w' };
     }
 
     function formatEventWhen(value) {
