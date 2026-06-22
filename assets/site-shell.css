@@ -12,14 +12,14 @@
   left: 0;
   right: 0;
   height: calc(30px + env(safe-area-inset-top));
-  padding-top: env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
   z-index: 84;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--blue-deep);
   color: var(--acadian-yellow);
-  font-family: "Pokemon GB", ui-monospace, monospace;
+  font-family: monospace;
   font-size: .65rem;
   font-weight: 900;
   letter-spacing: .06em;
@@ -33,7 +33,7 @@
   color: var(--acadian-yellow);
 }
 body {
-  padding-top: calc(30px + env(safe-area-inset-top));
+  padding-top: calc(42px + env(safe-area-inset-top));
 }
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
 
