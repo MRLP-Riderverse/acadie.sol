@@ -58,12 +58,12 @@
       justify-items: center;
     }
 
-    /* "Community OS" pill that bulges out of the top-left container border */
+    /* \"Community OS\" pill that bulges out of the bottom border of the welcome card */
     .welcome-label-pill {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, 50%);
       border-radius: 999px;
       border: 1px solid var(--line-strong);
       background: var(--paper);
@@ -203,6 +203,10 @@
       border: 1px solid var(--line);
       background: color-mix(in srgb, var(--paper-soft) 88%, transparent);
       min-height: 180px;
+    }
+
+    .media-gallery-section {
+      margin-top: 6px;
     }
 
     .media-gallery-track {
@@ -445,7 +449,7 @@
         welcomeTitlePrefix: 'Bienvenue à',
         welcomeTitle: '\u205C Acadie.sol \u205C',
         welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
-        labelPill: 'Community OS',
+        labelPill: 'Système Communautaire',
         actions: {
           directory: { label: 'Voir tout le monde', meta: 'Parcourir toutes les fiches.' },
           events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
