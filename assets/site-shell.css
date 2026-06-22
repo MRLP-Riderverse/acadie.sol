@@ -12,7 +12,7 @@
   left: 0;
   right: 0;
   height: calc(30px + env(safe-area-inset-top));
-  padding-top: env(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top));
   z-index: 84;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
   background: var(--blue-deep);
   color: var(--acadian-yellow);
   font-family: "Pokemon GB", ui-monospace, monospace;
-  font-size: .70rem;
+  font-size: .65rem;
   font-weight: 900;
   letter-spacing: .06em;
   text-transform: uppercase;
