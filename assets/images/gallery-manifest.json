@@ -9,7 +9,7 @@
   },
   "slides": [
     { "src": "assets/images/acadie-in-the-stars.jpg", "alt": "Acadie in the stars", "caption": "Made by One, Made for All" },
-    { "placeholder": true, "note": "Slot 2 — add { src, alt, caption } to fill" },
+    { "src": "assets/images/acadie-intro-2026.gif", "alt": "Acadie intro", "caption": "Acadie Intro" },
     { "placeholder": true, "note": "Slot 3 — add { src, alt, caption } to fill" }
   ]
 }
