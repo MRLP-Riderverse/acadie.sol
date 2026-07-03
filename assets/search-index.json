@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 72,
+  "item_count": 75,
   "items": [
     {
       "type": "entry",
@@ -180,8 +180,7 @@
       "title": "Bathurst Municipal Library",
       "subtitle": "civic · Acadie-Bathurst",
       "badges": [
-        "civic",
-        "1 event next 7 days"
+        "civic"
       ],
       "url": "directory.html#entry-bathurst-municipal-library",
       "terms": [
@@ -240,6 +239,30 @@
         "produce",
         "market",
         "Big Deal Produce Market Ltd"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "black-pug-live",
+      "title": "Black Pug Live",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "venue",
+        "1 event next 7 days"
+      ],
+      "url": "directory.html#entry-black-pug-live",
+      "terms": [
+        "Black Pug Live",
+        "venue",
+        "Acadie-Bathurst",
+        "Live event venue attached to Black Pug Records on Main St in Bathurst.",
+        "venue",
+        "live music",
+        "events",
+        "private events",
+        "corporate events",
+        "Black Pug Records Live Venue",
+        "Black Pug Live Venue"
       ]
     },
     {
@@ -756,8 +779,7 @@
       "title": "La Louga Night Bar - Resto",
       "subtitle": "venue · Acadie-Bathurst",
       "badges": [
-        "venue",
-        "1 event next 7 days"
+        "venue"
       ],
       "url": "directory.html#entry-la-louga-night-bar-resto",
       "terms": [
@@ -1290,10 +1312,10 @@
       "type": "event",
       "id": "sir-pathetik-au-louga-night-bar-bathurst",
       "title": "Sir Pathetik au Louga Night Bar",
-      "subtitle": "active · 2026-06-26T20:00:00-03:00",
+      "subtitle": "archived · 2026-06-26T20:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "music",
         "nightlife"
       ],
@@ -1306,6 +1328,29 @@
         "nightlife",
         "concert",
         "la-louga-night-bar-resto"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "east-coast-invasion-tour-black-pug-live",
+      "title": "East Coast Invasion Tour",
+      "subtitle": "active · 2026-07-03T20:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "music",
+        "metal"
+      ],
+      "url": "events.html#event-east-coast-invasion-tour-black-pug-live",
+      "terms": [
+        "East Coast Invasion Tour",
+        "HAILBOMB, XENOFORMS, EXULTANCE, and RIFIUM each play their own slice of metal. Flavours from Quebec, NB, and NS. $15 entry.",
+        "2026-07-03T20:00:00-03:00",
+        "music",
+        "metal",
+        "live music",
+        "concert",
+        "black-pug-live"
       ]
     },
     {
@@ -1432,6 +1477,25 @@
         "drive-in",
         "food",
         "family"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "black-pug-live-main-st-bathurst",
+      "title": "Black Pug Live Main St Bathurst",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-black-pug-live-main-st-bathurst",
+      "terms": [
+        "Black Pug Live Main St Bathurst",
+        "Physical location for Black Pug Live on Main St in Bathurst.",
+        "main-st-bathurst",
+        "downtown",
+        "venue",
+        "live music"
       ]
     },
     {
