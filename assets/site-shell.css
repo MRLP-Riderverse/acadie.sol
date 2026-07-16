@@ -12,10 +12,12 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--blue-deep);
-  color: var(--acadian-yellow);
-  border-bottom: 1px solid color-mix(in srgb, var(--acadian-yellow) 22%, transparent);
-  box-shadow: 0 6px 14px -8px var(--shadow);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  color: var(--ink-strong);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 6px 18px -10px var(--shadow);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
   font: 900 .7rem/1 monospace;
   letter-spacing: .045em;
   text-transform: uppercase;
