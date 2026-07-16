@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "public_limit": 10,
+  "updated_at": "2026-07-16T14:20:00-03:00",
+  "albums": [
+    {
+      "slug": "acadie-in-the-stars",
+      "year": 2026,
+      "published_at": "2026-07-16",
+      "status": "public",
+      "featured": true,
+      "title": {
+        "en": "Acadie in the Stars",
+        "fr": "L’Acadie dans les étoiles"
+      },
+      "summary": {
+        "en": "A first visual marker for the renewed Acadie.sol archive.",
+        "fr": "Un premier repère visuel pour les nouvelles archives d’Acadie.sol."
+      },
+      "location": {
+        "en": "Acadie.sol visual archive",
+        "fr": "Archives visuelles d’Acadie.sol"
+      },
+      "href": "photos/2026/acadie-in-the-stars/",
+      "cover": {
+        "src": "assets/gallery/2026/acadie-in-the-stars/cover-960.webp",
+        "srcset": "assets/gallery/2026/acadie-in-the-stars/cover-480.webp 480w, assets/gallery/2026/acadie-in-the-stars/cover-960.webp 960w",
+        "width": 960,
+        "height": 720,
+        "alt": {
+          "en": "Acadie.sol wordmark floating in a field of stars",
+          "fr": "Le mot-symbole Acadie.sol flottant dans un ciel étoilé"
+        }
+      },
+      "photo_count": 1,
+      "full_resolution": {
+        "policy": "request",
+        "public_original": "assets/images/acadie-in-the-stars.jpg",
+        "width": 1280,
+        "height": 960
+      }
+    }
+  ]
+}

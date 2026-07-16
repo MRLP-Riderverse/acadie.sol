@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Acadie.sol — a living Acadian community realm for people, places, events, stories, and images." />
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
@@ -18,7 +19,7 @@
     }
 
     * { box-sizing: border-box; }
-
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
       margin: 0;
       min-height: 100vh;
@@ -26,938 +27,471 @@
       background: var(--page-bg);
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
+    a { color: var(--link); text-underline-offset: 3px; }
 
-    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    a:hover { color: var(--link-hover); }
-
-    .phone-shell {
-      width: min(430px, 100vw);
-      min-height: 100svh;
+    /* Home is a launch surface, not a duplicate navigation dashboard. Each block
+       owns one job: identity, the current signal, photography, or community. */
+    .home-shell {
+      width: min(1120px, 100%);
+      min-height: calc(100svh - 42px);
       margin: 0 auto;
-      padding: 12px 12px 92px;
+      padding: 12px 12px 110px;
       display: grid;
       align-content: start;
       gap: 12px;
-      position: relative;
     }
-
+    .home-shell > * { min-width: 0; }
     .surface {
+      position: relative;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 28px;
-      background: color-mix(in srgb, var(--paper) 90%, transparent);
+      background: color-mix(in srgb, var(--paper) 91%, transparent);
       box-shadow: 0 18px 42px var(--shadow);
-      padding: 14px;
-      position: relative;
     }
 
+    /* Top pair: quiet identity beside one deliberately loud owner-controlled signal. */
+    .home-top { display: grid; gap: 12px; }
     .welcome-card {
+      min-height: 190px;
       display: grid;
-      gap: 10px;
-      padding: 20px;
-      text-align: center;
-      justify-items: center;
-    }
-
-    /* \"Community OS\" pill that bulges out of the bottom border of the welcome card */
-    .welcome-label-pill {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%, 50%);
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink-strong);
-      padding: 3px 10px;
-      font-size: .62rem;
-      font-weight: 900;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      font-family: "Pokemon GB", ui-monospace, monospace;
-      z-index: 1;
-      box-shadow: 0 2px 6px var(--shadow);
-    }
-
-    [data-theme="dark"] .welcome-label-pill {
-      background: var(--button-bg);
-      color: var(--button-fg);
-      border-color: var(--button-border);
-    }
-
-    .welcome-card h1 {
-      margin: 0;
-      font-size: clamp(0.94rem, 5.2vw, 1.28rem);
-      line-height: 1.08;
-      letter-spacing: -.01em;
-      color: var(--ink-strong);
-      font-family: "Pokemon GB", ui-monospace, monospace;
-    }
-
-    .welcome-title-prefix {
-      margin: 0;
-      font-size: .64rem;
-      line-height: 1.25;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-family: "Pokemon GB", ui-monospace, monospace;
-    }
-
-    .welcome-card p { margin: 0; color: var(--muted); line-height: 1.42; }
-
-    .action-grid-card {
-      padding: 0;
-    }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .action-tile {
-      min-height: 84px;
-      border-radius: 18px;
-      border: 1px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink-strong);
-      text-decoration: none;
-      box-shadow: 0 12px 24px var(--shadow);
-      padding: 10px 11px;
-      display: grid;
-      gap: 5px;
       align-content: center;
       justify-items: center;
+      gap: 10px;
+      padding: 28px 22px;
       text-align: center;
     }
-
-    .action-tile:hover {
-      background: var(--paper-soft);
-      color: var(--ink-strong);
-    }
-
-    [data-theme="dark"] .action-tile {
-      background: var(--button-bg);
-      color: var(--button-fg);
-      border-color: var(--button-border);
-    }
-
-    [data-theme="dark"] .action-tile:hover {
-      background: var(--button-bg-hover);
-      color: var(--button-fg);
-    }
-
-    .action-icon {
-      font-size: .96rem;
-      line-height: 1;
-      color: var(--gold);
-    }
-
-    .action-label {
-      font-size: .82rem;
-      font-weight: 900;
-      line-height: 1.2;
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-
-    .action-meta {
-      font-size: .68rem;
-      line-height: 1.25;
-      color: var(--muted);
-    }
-
-    /* Section divider — subtitle + ornament, plain text on page */
-    .section-divider {
+    .welcome-kicker,
+    .section-kicker {
       margin: 0;
       color: var(--muted);
-      font-size: .82rem;
-      line-height: 1.38;
-      letter-spacing: .02em;
-      text-align: center;
-      padding: 2px 0;
-    }
-
-    .section-divider-ornament {
-      display: block;
-      font-size: .88rem;
+      font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace;
       letter-spacing: .08em;
-      margin-top: 4px;
-      padding-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .welcome-card h1 {
+      margin: 0;
+      color: var(--ink-strong);
+      font: 900 clamp(1.02rem, 5.4vw, 1.62rem)/1.16 "Pokemon GB", ui-monospace, monospace;
+    }
+    .welcome-line {
+      margin: 0;
+      max-width: 36ch;
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+    .welcome-mark {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: .18em;
     }
 
-    .section-divider-line {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background: color-mix(in srgb, var(--line) 50%, transparent);
-      margin: 18px 0 0;
+    .live-card {
+      min-height: 250px;
+      padding: 22px;
+      display: grid;
+      align-content: space-between;
+      gap: 24px;
+      color: #fff8e7;
+      background: #0a2b57;
+      border-color: color-mix(in srgb, var(--acadian-yellow) 62%, transparent);
+      isolation: isolate;
     }
-
-    /* Media gallery — swipeable, no arrows, no dots */
-    .media-gallery {
-      position: relative;
-      overflow: hidden;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--paper-soft) 88%, transparent);
-      min-height: 180px;
+    .live-card::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -100px;
+      top: -110px;
+      border: 44px solid rgba(243, 200, 91, .12);
+      border-radius: 50%;
+      z-index: -1;
     }
-
-    .media-gallery-section {
-      margin-top: 6px;
-    }
-
-    .media-gallery-track {
+    .live-head,
+    .live-meta {
       display: flex;
-      transition: transform 360ms ease;
-      will-change: transform;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-
-    .media-gallery-slide {
-      min-width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      position: relative;
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      padding: 7px 11px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 999px;
+      background: #bf4a4f;
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
     }
-
-    .gallery-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 0 5px rgba(255,255,255,.12);
+      animation: live-pulse 1.8s ease-out infinite;
+    }
+    .live-kicker { color: #f3c85b; font-size: .7rem; font-weight: 900; }
+    .live-copy { display: grid; gap: 9px; }
+    .live-copy h2 {
+      margin: 0;
+      max-width: 18ch;
+      color: #fff;
+      font-size: clamp(1.5rem, 7vw, 2.5rem);
+      line-height: 1.02;
+      letter-spacing: -.04em;
+    }
+    .live-copy p { margin: 0; max-width: 50ch; color: #d6e7fb; line-height: 1.5; }
+    .live-place { color: #f3c85b; font-size: .72rem; font-weight: 900; }
+    .live-link {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      color: var(--muted);
-      font-size: .78rem;
-      text-align: center;
-      padding: 20px;
-      background: color-mix(in srgb, var(--ink) 4%, var(--paper-soft));
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid #f3c85b;
+      border-radius: 999px;
+      background: #f3c85b;
+      color: #172033;
+      font-size: .76rem;
+      font-weight: 900;
+      text-decoration: none;
     }
 
-    .gallery-placeholder-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-      opacity: .45;
+    /* Featured album and community share a visual row but remain distinct doors. */
+    .feature-grid { display: grid; gap: 12px; }
+    .photo-feature {
+      min-height: 330px;
+      display: grid;
+      align-items: end;
+      color: #fff;
+      text-decoration: none;
+      background: #111;
     }
-
-    .gallery-image {
+    .photo-feature img {
       position: absolute;
       inset: 0;
-      z-index: 1;
-    }
-
-    .gallery-image img {
-      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform .5s ease;
     }
-
-    .gallery-caption {
+    .photo-feature:hover img { transform: scale(1.025); }
+    .photo-feature::after {
+      content: "";
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      padding: 10px 14px;
-      background: linear-gradient(to top, rgba(0,0,0,.45) 0%, rgba(0,0,0,.22) 55%, rgba(0,0,0,.06) 100%);
-      color: #fff;
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .02em;
-      line-height: 1.3;
-      text-align: center;
-      pointer-events: none;
+      inset: 24% 0 0;
+      background: linear-gradient(to top, rgba(6,12,24,.92), rgba(6,12,24,.08));
     }
-
-    [data-theme="light"] .gallery-caption {
-      background: linear-gradient(to top, rgba(12,22,38,.32) 0%, rgba(12,22,38,.14) 55%, rgba(12,22,38,.04) 100%);
-      color: var(--paper);
-    }
-
-    /* Updates feed — no visible container wrapper, compact rows */
-    .updates-section {
-      padding: 0;
-    }
-
-    .updates-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .updates-title {
-      margin: 0;
-      color: var(--ink-strong);
-      font-size: .86rem;
-      font-weight: 900;
-    }
-
-    .updates-pill {
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink-strong);
-      padding: 4px 12px;
-      font-size: .68rem;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      box-shadow: 0 4px 10px var(--shadow);
-      transition: background 180ms ease;
-    }
-
-    .updates-pill:hover {
-      background: var(--paper-soft);
-    }
-
-    .updates-header-actions {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .updates-pill[aria-pressed="true"],
-    .updates-pill.active {
-      background: var(--blue-deep);
-      color: var(--acadian-yellow);
-      border-color: var(--button-border);
-    }
-
-    [data-theme="dark"] .updates-pill {
-      background: var(--button-bg);
-      color: var(--button-fg);
-      border-color: var(--button-border);
-    }
-
-    [data-theme="dark"] .updates-pill:hover {
-      background: var(--button-bg-hover);
-    }
-
-    .update-row {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      padding: 11px 0;
-      border-bottom: 1px solid color-mix(in srgb, var(--line) 50%, transparent);
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .update-row:last-child { border-bottom: none; }
-    .update-row:hover { color: var(--link); }
-
-    .update-badge {
-      flex: 0 0 auto;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: var(--paper);
-      color: var(--ink-strong);
-      padding: 2px 8px;
-      font-size: .6rem;
-      font-weight: 900;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    [data-theme="dark"] .update-badge {
-      background: var(--button-bg);
-      color: var(--button-fg);
-      border-color: var(--button-border);
-    }
-
-    .update-content {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .update-name {
-      color: var(--ink-strong);
-      font-size: .8rem;
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    .update-desc {
-      color: var(--muted);
-      font-size: .68rem;
-      line-height: 1.3;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .update-time {
-      flex: 0 0 auto;
-      color: var(--muted);
-      font-size: .64rem;
-      white-space: nowrap;
-    }
-
-    /* Filter popover — matches directory's backdrop-blur pattern */
-    .filter-popover {
-      position: fixed;
-      inset: 0;
-      z-index: 55;
-      display: grid;
-      place-items: center;
-      padding: 16px;
-      background: rgba(8, 18, 40, 0.24);
-      backdrop-filter: blur(10px) saturate(1.05);
-      -webkit-backdrop-filter: blur(10px) saturate(1.05);
-    }
-    .filter-popover[hidden] { display: none; }
-    .filter-backdrop {
-      position: absolute;
-      inset: 0;
-    }
-    .filter-sheet {
+    .photo-copy {
       position: relative;
       z-index: 1;
-      width: min(560px, 100%);
       display: grid;
-      align-content: start;
-      gap: 9px;
-      padding: 14px;
-      border: 1px solid var(--line-strong);
-      border-radius: 18px;
-      background: color-mix(in srgb, var(--panel-strong) 96%, transparent);
-      box-shadow: 0 22px 48px rgba(5,13,27,0.42);
+      gap: 7px;
+      padding: 22px;
     }
-    .filter-title {
-      display: flex;
-      justify-content: space-between;
+    .photo-copy h2 { margin: 0; color: #fff; font-size: clamp(1.35rem, 6vw, 2rem); }
+    .photo-copy p { margin: 0; color: #dce8f7; line-height: 1.4; }
+    .photo-meta { color: #f3c85b; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
+
+    .community-card {
+      min-height: 300px;
+      padding: 24px;
+      display: grid;
+      align-content: space-between;
+      gap: 30px;
+      background: color-mix(in srgb, var(--paper) 94%, var(--acadian-yellow));
+    }
+    .community-copy { display: grid; gap: 10px; }
+    .community-card h2 {
+      margin: 0;
+      max-width: 14ch;
+      color: var(--ink-strong);
+      font-size: clamp(1.5rem, 7vw, 2.4rem);
+      line-height: 1.02;
+      letter-spacing: -.035em;
+    }
+    .community-card p { margin: 0; max-width: 40ch; color: var(--muted); line-height: 1.5; }
+    .community-links { display: flex; flex-wrap: wrap; gap: 9px; }
+    .community-link {
+      min-height: 42px;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      color: var(--gold);
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.78rem;
-    }
-    .filter-title button {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 1.1rem;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .filter-type-btn {
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 0.8rem;
-      width: auto;
-      min-height: 0;
-      white-space: nowrap;
+      padding: 9px 14px;
       border: 1px solid var(--button-border);
+      border-radius: 999px;
       background: var(--button-bg);
       color: var(--button-fg);
-      font: inherit;
+      font-size: .76rem;
       font-weight: 900;
-      cursor: pointer;
-      transition: background .15s ease, color .15s ease, border-color .15s ease;
+      text-decoration: none;
     }
-    .filter-type-btn:hover,
-    .filter-type-btn[aria-pressed="true"],
-    .filter-type-btn.active {
-      background: var(--button-bg-hover);
-      color: var(--button-fg);
-    }
+    .community-link.secondary { background: transparent; color: var(--link); border-color: var(--line-strong); }
 
+    /* One quiet archive exit replaces the embedded second application formerly on Home. */
+    .archive-link {
+      padding: 17px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--ink-strong);
+      text-decoration: none;
+    }
+    .archive-copy { display: grid; gap: 4px; }
+    .archive-copy strong { font-size: .9rem; }
+    .archive-copy span { color: var(--muted); font-size: .74rem; }
+    .archive-arrow { color: var(--gold); font-size: 1.2rem; }
+
+    @keyframes live-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,.38); }
+      70%, 100% { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .live-dot { animation: none; }
+      .photo-feature img { transition: none; }
+    }
+    /* Mobile has permanent dock chrome, so Home removes duplicate top chrome and
+       flattens secondary surfaces. One strong LIVE card remains the attention anchor. */
+    @media (max-width: 899px) {
+      body.home-page { padding-top: env(safe-area-inset-top); }
+      .home-page .site-header { display: none; }
+      .home-page .home-shell { padding: 6px 10px 98px; gap: 10px; }
+      .home-page .home-top,
+      .home-page .feature-grid { gap: 10px; }
+      .surface { border-radius: 22px; box-shadow: 0 9px 24px var(--shadow); }
+
+      .home-page .welcome-card {
+        min-height: auto;
+        gap: 5px;
+        padding: 16px 10px 11px;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .welcome-kicker,
+      .welcome-mark { display: none; }
+      .welcome-card h1 { font-size: 1.08rem; }
+      .welcome-line { font-size: .79rem; line-height: 1.35; }
+
+      .home-page .live-card { min-height: auto; padding: 18px; gap: 14px; }
+      .live-head { justify-content: flex-start; }
+      .live-kicker { display: none; }
+      .live-copy { gap: 6px; }
+      .live-copy h2 { max-width: 21ch; font-size: clamp(1.3rem, 6vw, 1.55rem); }
+      .live-copy p { font-size: .82rem; line-height: 1.4; }
+      .live-place { max-width: 15ch; font-size: .65rem; line-height: 1.3; }
+      .live-link { min-height: 38px; padding: 8px 12px; font-size: .7rem; }
+
+      .home-page .photo-feature { min-height: 252px; }
+      .photo-copy { gap: 5px; padding: 18px; }
+      .photo-copy h2 { font-size: 1.3rem; }
+      #featured-album-summary { display: none; }
+      .photo-meta { font-size: .63rem; }
+
+      .home-page .community-card { min-height: auto; padding: 18px; gap: 16px; }
+      .community-copy { gap: 7px; }
+      .community-card h2 { max-width: 22ch; font-size: 1.28rem; line-height: 1.08; }
+      .community-card p:not(.section-kicker),
+      .community-link.secondary { display: none; }
+      .community-link { min-height: 38px; padding: 8px 12px; font-size: .7rem; }
+
+      .archive-link {
+        padding: 13px 4px 2px;
+        border: 0;
+        border-top: 1px solid var(--line);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      #archive-summary { display: none; }
+    }
     @media (min-width: 760px) {
-      .phone-shell { padding-top: 18px; }
+      .home-shell { padding: 18px 22px 54px; gap: 18px; }
+      .home-top { grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); gap: 18px; }
+      .feature-grid { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 18px; }
+      .welcome-card { min-height: 300px; }
+      .live-card { min-height: 300px; padding: 28px; }
+      .photo-feature,
+      .community-card { min-height: 390px; }
     }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
-<body>
+<body class="home-page">
   <script src="assets/site-shell.js"></script>
-  <main class="phone-shell">
-    <section class="surface welcome-card" aria-labelledby="welcome-title">
-      <span class="welcome-label-pill" id="welcome-label-pill">Community OS</span>
-      <p class="welcome-title-prefix" id="welcome-title-prefix">Welcome to</p>
-      <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
-    </section>
+  <main class="home-shell">
+    <div class="home-top">
+      <section class="surface welcome-card" aria-labelledby="welcome-title">
+        <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
+        <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
+        <p class="welcome-line" id="welcome-line">Made here. Shared outward. Kept by community.</p>
+        <span class="welcome-mark" aria-hidden="true">✧❅✦❅✧</span>
+      </section>
 
-    <!-- Media gallery up top, 2×2 below -->
-    <section class="media-gallery-section" aria-label="Media gallery">
-      <div class="media-gallery" id="home-gallery">
-        <div class="media-gallery-track" id="gallery-track"></div>
-      </div>
-    </section>
-
-    <section class="action-grid-card" aria-label="Primary home actions">
-      <div class="action-grid">
-        <a class="action-tile" href="directory.html#browse" id="action-directory-link">
-          <span class="action-icon" aria-hidden="true">⌕</span>
-          <span class="action-label" id="action-directory-label">View Everyone</span>
-          <span class="action-meta" id="action-directory-meta">Browse all listings.</span>
-        </a>
-        <a class="action-tile" href="events.html" id="action-events-link">
-          <span class="action-icon" aria-hidden="true">◷</span>
-          <span class="action-label" id="action-events-label">Events</span>
-          <span class="action-meta" id="action-events-meta">See what's happening.</span>
-        </a>
-        <a class="action-tile" href="support.html" id="action-support-link">
-          <span class="action-icon" aria-hidden="true">✦</span>
-          <span class="action-label" id="action-support-label">Support</span>
-          <span class="action-meta" id="action-support-meta">Help keep it going.</span>
-        </a>
-        <a class="action-tile" href="about-us.html" id="action-about-link">
-          <span class="action-icon" aria-hidden="true">⁜</span>
-          <span class="action-label" id="action-about-label">About Us</span>
-          <span class="action-meta" id="action-about-meta">What this project is.</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Subtitle + ornament divider between 2×2 and updates -->
-    <p class="section-divider" aria-hidden="true">
-      <span id="divider-subtitle">For Acadians, By Acadians.</span>
-      <span class="section-divider-ornament">✧❅✦❅✧</span>
-      <span class="section-divider-line" aria-hidden="true"></span>
-    </p>
-
-    <section class="updates-section" id="home-updates" aria-label="Recent updates">
-      <div class="updates-header">
-        <h2 class="updates-title" id="updates-title">Updates</h2>
-        <div class="updates-header-actions">
-          <button class="updates-pill" id="updates-filter-btn" type="button">Filters</button>
-          <a class="updates-pill" href="home-feed.html" id="updates-pill">View Updates ↗</a>
+      <section class="surface live-card" id="live-card" aria-labelledby="live-title">
+        <div class="live-head">
+          <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">LIVE</span></span>
+          <span class="live-kicker" id="live-kicker">Right now</span>
         </div>
-      </div>
-      <div id="updates-list"></div>
-
-      <!-- Home updates filter popup: matches directory's filter-popover pattern. -->
-      <div class="filter-popover" id="home-filter-popover" hidden>
-        <div class="filter-backdrop" id="home-filter-backdrop" aria-hidden="true"></div>
-        <div class="filter-sheet" role="dialog" aria-modal="true" aria-label="Update filters">
-          <div class="filter-title">
-            <span id="home-filter-title-label">Filters</span>
-            <button id="home-filter-close" type="button" aria-label="Close filters">✕</button>
-          </div>
-          <div class="control-grid">
-            <button class="search-action filter-type-btn" data-filter="recent" type="button">10 Recent</button>
-            <button class="search-action filter-type-btn" data-filter="event" type="button">Events</button>
-            <button class="search-action filter-type-btn" data-filter="entry" type="button">Entries</button>
-            <button class="search-action filter-type-btn" data-filter="draft" type="button">Drafts</button>
-            <button class="search-action filter-type-btn" data-filter="post" type="button" hidden>Posts</button>
-          </div>
+        <div class="live-copy">
+          <h2 id="live-title">Rebuilding Acadie.sol in public</h2>
+          <p id="live-summary">A calmer home, a living event signal, and a photo archive made to last.</p>
         </div>
-      </div>
-    </section>
+        <div class="live-meta">
+          <span class="live-place" id="live-location">From Bathurst, for Acadie</span>
+          <a class="live-link" id="live-link" href="home-feed.html">Follow the build</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="feature-grid">
+      <a class="surface photo-feature" id="featured-album-link" href="photos/2026/acadie-in-the-stars/" aria-labelledby="featured-album-title">
+        <img id="featured-album-image" src="assets/gallery/2026/acadie-in-the-stars/cover-960.webp" alt="Acadie.sol wordmark floating in a field of stars" width="960" height="720" />
+        <span class="photo-copy">
+          <span class="section-kicker" id="photo-kicker">Featured album</span>
+          <h2 id="featured-album-title">Acadie in the Stars</h2>
+          <p id="featured-album-summary">A first visual marker for the renewed Acadie.sol archive.</p>
+          <span class="photo-meta"><span id="featured-album-count">1 photo</span> · <span id="view-all-photos">View all albums ↗</span></span>
+        </span>
+      </a>
+
+      <section class="surface community-card" aria-labelledby="community-title">
+        <div class="community-copy">
+          <p class="section-kicker" id="community-kicker">After hours</p>
+          <h2 id="community-title">The website is the doorway. Community is the room.</h2>
+          <p id="community-summary">Events in public. Conversation in Discord. The archive stays open and useful.</p>
+        </div>
+        <div class="community-links">
+          <a class="community-link" href="community.html" id="community-link">Enter community</a>
+          <a class="community-link secondary" href="events.html" id="events-link">See events</a>
+        </div>
+      </section>
+    </div>
+
+    <a class="surface archive-link" href="home-feed.html">
+      <span class="archive-copy"><strong id="archive-title">Project log</strong><span id="archive-summary">Recent additions, events, and changes.</span></span>
+      <span class="archive-arrow" aria-hidden="true">↗</span>
+    </a>
   </main>
+
   <script>
     const HOME_COPY = {
       en: {
-        welcomeTitlePrefix: 'Welcome to',
-        welcomeTitle: '\u205C Acadie.sol \u205C',
-        welcomeSubtitle: 'For Acadians, By Acadians.',
-        labelPill: 'Community OS',
-        actions: {
-          directory: { label: 'View Everyone', meta: 'Browse all listings.' },
-          events: { label: 'Events', meta: 'See what\'s happening.' },
-          support: { label: 'Support', meta: 'Help keep it going.' },
-          about: { label: 'About Us', meta: 'What this project is.' }
-        },
-        updatesTitle: 'Updates',
-        viewUpdates: 'View Updates ↗',
-        filterBtn: 'Filters',
-        filterTitle: 'Filters',
-        filterRecent: '10 Recent',
-        filterEvents: 'Events',
-        filterEntries: 'Entries',
-        filterDrafts: 'Drafts',
-        filterPosts: 'Posts',
-        galleryPlaceholder: index => `Gallery ${index + 1}`,
-        types: { entry: 'Entry', event: 'Event', draft: 'Draft' },
-        entryFallback: 'Entry details coming soon.',
-        eventFallback: 'Event details coming soon.',
-        timestampUnavailable: 'Timestamp unavailable',
-        updatedNow: 'Updated just now',
-        updatedAgo: mins => {
-          const { value, unit } = relativeTimeBreakdown(mins);
-          if (unit === 'min') return `${value} min ago`;
-          if (unit === 'h') return `${value} h ago`;
-          if (unit === 'd') return `${value} d ago`;
-          return `${value} w ago`;
-        },
-        contexts: {
-          draft: item => `${item.category || 'Draft'} · preview`,
-          entry: item => `${item.category || 'Entry'} · ${item.area || 'Local'}`,
-          event: item => `${item.statusLabel || 'Event'} · ${item.whenLabel || 'Date TBD'}`
-        },
-        emptyUpdates: 'No recent updates.'
+        welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
+        welcomeLine: 'Made here. Shared outward. Kept by community.',
+        photoKicker: 'Featured album', viewAlbums: 'View all albums ↗',
+        photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
+        communityKicker: 'After hours',
+        communityTitle: 'The website is the doorway. Community is the room.',
+        communitySummary: 'Events in public. Conversation in Discord. The archive stays open and useful.',
+        communityLink: 'Enter community', eventsLink: 'See events',
+        archiveTitle: 'Project log', archiveSummary: 'Recent additions, events, and changes.'
       },
       fr: {
-        welcomeTitlePrefix: 'Bienvenue à',
-        welcomeTitle: '\u205C Acadie.sol \u205C',
-        welcomeSubtitle: 'Pour les Acadiens, par les Acadiens.',
-        labelPill: 'Système Communautaire',
-        actions: {
-          directory: { label: 'Voir tout le monde', meta: 'Parcourir toutes les fiches.' },
-          events: { label: 'Événements', meta: 'Voir ce qui se passe.' },
-          support: { label: 'Soutien', meta: 'Aider le projet à continuer.' },
-          about: { label: 'À propos', meta: 'Ce qu\'est ce projet.' }
-        },
-        updatesTitle: 'Mises à jour',
-        viewUpdates: 'Voir les mises à jour ↗',
-        filterBtn: 'Filtres',
-        filterTitle: 'Filtres',
-        filterRecent: '10 récents',
-        filterEvents: 'Événements',
-        filterEntries: 'Entrées',
-        filterDrafts: 'Brouillons',
-        filterPosts: 'Publications',
-        galleryPlaceholder: index => `Galerie ${index + 1}`,
-        types: { entry: 'Entrée', event: 'Événement', draft: 'Brouillon' },
-        entryFallback: 'Détails de l\'entrée à venir.',
-        eventFallback: 'Détails de l\'événement à venir.',
-        timestampUnavailable: 'Horodatage indisponible',
-        updatedNow: 'Mis à jour à l\'instant',
-        updatedAgo: mins => {
-          const { value, unit } = relativeTimeBreakdown(mins);
-          if (unit === 'min') return `Il y a ${value} min`;
-          if (unit === 'h') return `Il y a ${value} h`;
-          if (unit === 'd') return `Il y a ${value} j`;
-          return `Il y a ${value} sem`;
-        },
-        contexts: {
-          draft: item => `${item.category || 'Brouillon'} · aperçu`,
-          entry: item => `${item.category || 'Entrée'} · ${item.area || 'Local'}`,
-          event: item => `${item.statusLabel || 'Événement'} · ${item.whenLabel || 'Date à confirmer'}`
-        },
-        emptyUpdates: 'Aucune mise à jour récente.'
+        welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
+        welcomeLine: 'Créé ici. Partagé au loin. Gardé par la communauté.',
+        photoKicker: 'Album en vedette', viewAlbums: 'Voir tous les albums ↗',
+        photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
+        communityKicker: 'Après les heures',
+        communityTitle: 'Le site est la porte. La communauté est la pièce.',
+        communitySummary: 'Les événements en public. La conversation sur Discord. Les archives restent ouvertes et utiles.',
+        communityLink: 'Entrer dans la communauté', eventsLink: 'Voir les événements',
+        archiveTitle: 'Journal du projet', archiveSummary: 'Ajouts récents, événements et changements.'
       }
     };
 
-    const state = {
-      items: [],
-      filterMode: 'recent',
-      galleryIndex: 0,
-      galleryTouchStartX: 0,
-      galleryTouchDeltaX: 0
-    };
-
-    function currentLang() {
-      const saved = localStorage.getItem('acadie-lang');
-      if (saved === 'fr' || saved === 'en') return saved;
-      return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
-    }
-
-    function copy() {
-      return HOME_COPY[currentLang()] || HOME_COPY.en;
-    }
-
-    function setText(id, value) {
-      const el = document.getElementById(id);
-      if (el) el.textContent = value;
-    }
-
-    function escapeHtml(value) {
-      return String(value || '')
-        .replaceAll('&', '&')
-        .replaceAll('<', '<')
-        .replaceAll('>', '>')
-        .replaceAll('"', '"')
-        .replaceAll("'", '&#39;');
-    }
-
-    function localizedValue(value) {
-      if (value && typeof value === 'object' && !Array.isArray(value)) {
-        return value[currentLang()] || value.en || Object.values(value).find(Boolean) || '';
-      }
+    function lang() { return window.AcadieShell?.currentLang() || 'en'; }
+    function localize(value) {
+      if (value && typeof value === 'object' && !Array.isArray(value)) return value[lang()] || value.en || Object.values(value).find(Boolean) || '';
       return String(value || '');
     }
-
-    function cleanSummary(value) {
-      return String(value || '').replace(/\s+/g, ' ').trim();
+    function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+    function siteUrl(path) { return window.AcadieShell?.url(path) || new URL(path, document.baseURI).href; }
+    function safeSiteHref(path, fallback) {
+      try {
+        const target = new URL(path, siteUrl(''));
+        return target.protocol === 'https:' || target.origin === location.origin ? target.href : siteUrl(fallback);
+      } catch (_) { return siteUrl(fallback); }
     }
-
-    function modifiedTs(item) {
-      const numeric = Number(item?.source_modified_ts || 0);
-      if (Number.isFinite(numeric) && numeric > 0) return numeric;
-      const parsed = Date.parse(item?.source_modified_at || '');
-      return Number.isFinite(parsed) ? Math.floor(parsed / 1000) : 0;
-    }
-
-    function relativeUpdatedLabel(ts) {
-      const numeric = Number(ts || 0);
-      if (!Number.isFinite(numeric) || numeric <= 0) return copy().timestampUnavailable;
-      const minutes = Math.max(0, Math.round((Date.now() - numeric * 1000) / 60000));
-      if (minutes < 1) return copy().updatedNow;
-      return copy().updatedAgo(minutes);
-    }
-
-    function relativeTimeBreakdown(minutes) {
-      // minutes → { value: N, unit: 'min'|'h'|'d'|'w' }
-      if (minutes < 60) return { value: minutes, unit: 'min' };
-      const hours = Math.round(minutes / 60);
-      if (hours < 48) return { value: hours, unit: 'h' };
-      const days = Math.round(hours / 24);
-      if (days < 14) return { value: days, unit: 'd' };
-      const weeks = Math.round(days / 7);
-      return { value: weeks, unit: 'w' };
-    }
-
-    function formatEventWhen(value) {
-      const date = new Date(value || '');
-      if (Number.isNaN(date.getTime())) return '';
-      return new Intl.DateTimeFormat(currentLang(), {
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit'
-      }).format(date);
-    }
-
-    function normalizeEntry(item) {
-      return {
-        type: item.draft ? 'draft' : 'entry',
-        id: item.slug,
-        title: localizedValue(item.title_localized) || item.title,
-        summary: localizedValue(item.description_localized) || cleanSummary(item.summary || item.description || item.notes) || copy().entryFallback,
-        detailHref: item.draft ? `directory.html#entry-${encodeURIComponent(item.slug)}` : `entry.html#${encodeURIComponent(item.slug)}`,
-        badge: item.draft ? copy().types.draft : copy().types.entry,
-        statusLabel: item.draft ? copy().types.draft : copy().types.entry,
-        category: cleanSummary(item.category || ''),
-        area: cleanSummary(item.public_area || item.area || ''),
-        source_modified_at: item.source_modified_at,
-        source_modified_ts: modifiedTs(item)
-      };
-    }
-
-    function normalizeEvent(item) {
-      return {
-        type: 'event',
-        id: item.id,
-        title: localizedValue(item.title) || item.name,
-        summary: localizedValue(item.summary) || cleanSummary(item.name) || copy().eventFallback,
-        detailHref: `events.html#event-${encodeURIComponent(item.id)}`,
-        badge: copy().types.event,
-        statusLabel: localizedValue({ en: item.computed_status || item.status || 'event', fr: item.computed_status === 'archived' ? 'archivé' : item.computed_status === 'active' ? 'actif' : 'événement' }),
-        whenLabel: formatEventWhen(item.starts_at),
-        category: 'event',
-        area: cleanSummary(item.region_id || ''),
-        source_modified_at: item.source_modified_at,
-        source_modified_ts: modifiedTs(item)
-      };
-    }
-
-    async function loadActivity() {
-      const [directoryResponse, eventsResponse] = await Promise.all([
-        fetch('assets/directory-data.json', { cache: 'no-store' }),
-        fetch('assets/events-data.json', { cache: 'no-store' })
-      ]);
-      if (!directoryResponse.ok || !eventsResponse.ok) {
-        throw new Error('Failed to load homepage activity payloads.');
-      }
-      const [directoryPayload, eventsPayload] = await Promise.all([
-        directoryResponse.json(),
-        eventsResponse.json()
-      ]);
-      const items = [
-        ...(Array.isArray(directoryPayload.items) ? directoryPayload.items.map(normalizeEntry) : []),
-        ...(Array.isArray(eventsPayload.items) ? eventsPayload.items.map(normalizeEvent) : [])
-      ].sort((a, b) => b.source_modified_ts - a.source_modified_ts || String(a.title || '').localeCompare(String(b.title || '')));
-      return { items };
-    }
-
-    /* --- Media Gallery Carousel (swipe-only, no arrows/dots) ---
-       Data-driven: each entry is an image object { src, alt, caption }.
-       To fill or reorder, edit GALLERY_IMAGES. Null slots render as
-       placeholder cards so the count stays stable while assets fill in. */
-
-    const GALLERY_IMAGES = [
-      { src: 'assets/images/acadie-in-the-stars.jpg', alt: 'Acadie in the stars', caption: 'Made by One, Made for All' },
-      { src: 'assets/images/acadie-intro-2026.gif', alt: 'Acadie intro', caption: 'Acadie Intro' },
-      null
-    ];
-
-    function renderGallery() {
-      const track = document.getElementById('gallery-track');
-      if (!track) return;
-      const c = copy();
-      track.innerHTML = GALLERY_IMAGES.map((item, i) => {
-        if (item) {
-          return `
-        <div class="media-gallery-slide">
-          <picture class="gallery-image">
-            <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.alt || '')}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" />
-          </picture>
-          ${item.caption ? `<div class="gallery-caption">${escapeHtml(item.caption)}</div>` : ''}
-        </div>`;
-        }
-        return `
-        <div class="media-gallery-slide">
-          <div class="gallery-placeholder">
-            <span class="gallery-placeholder-icon" aria-hidden="true"> ◒ </span>
-            <span>${escapeHtml(c.galleryPlaceholder(i))}</span>
-          </div>
-        </div>`;
-      }).join('');
-      state.galleryIndex = 0;
-      updateGallery();
-      bindGalleryTouch();
-    }
-
-    function updateGallery() {
-      const track = document.getElementById('gallery-track');
-      if (!track) return;
-      track.style.transform = `translateX(-${state.galleryIndex * 100}%)`;
-    }
-
-    function bindGalleryTouch() {
-      const gallery = document.getElementById('home-gallery');
-      if (!gallery || gallery.dataset.bound) return;
-      gallery.dataset.bound = '1';
-      gallery.addEventListener('touchstart', e => {
-        state.galleryTouchStartX = e.touches[0]?.clientX || 0;
-        state.galleryTouchDeltaX = 0;
-      }, { passive: true });
-      gallery.addEventListener('touchmove', e => {
-        state.galleryTouchDeltaX = (e.touches[0]?.clientX || 0) - state.galleryTouchStartX;
-      }, { passive: true });
-      gallery.addEventListener('touchend', () => {
-        if (Math.abs(state.galleryTouchDeltaX) > 28) {
-          const next = state.galleryIndex + (state.galleryTouchDeltaX < 0 ? 1 : -1);
-          state.galleryIndex = Math.max(0, Math.min(GALLERY_IMAGES.length - 1, next));
-          updateGallery();
-        }
-        state.galleryTouchStartX = 0;
-        state.galleryTouchDeltaX = 0;
-      });
-    }
-
-    /* --- Updates feed (top-10 rows, scroll for more) --- */
-
-    function renderUpdates(items) {
-      const list = document.getElementById('updates-list');
-      if (!list) return;
-      const c = copy();
-      if (!items.length) {
-        list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(c.emptyUpdates)}</p>`;
-        return;
-      }
-      let filtered = items;
-      if (state.filterMode === 'event') filtered = items.filter(i => i.type === 'event');
-      else if (state.filterMode === 'entry') filtered = items.filter(i => i.type === 'entry');
-      else if (state.filterMode === 'draft') filtered = items.filter(i => i.type === 'draft');
-      else if (state.filterMode === 'post') filtered = items.filter(i => i.type === 'post');
-      if (!filtered.length) {
-        list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(c.emptyUpdates)}</p>`;
-        return;
-      }
-      const rows = filtered.slice(0, 10);
-      list.innerHTML = rows.map(item => {
-        const badge = escapeHtml(item.badge);
-        const name = escapeHtml(item.title);
-        const desc = escapeHtml(item.summary.substring(0, 60));
-        const time = escapeHtml(relativeUpdatedLabel(item.source_modified_ts));
-        return `<a class="update-row" href="${escapeHtml(item.detailHref)}">
-          <span class="update-badge">${badge}</span>
-          <span class="update-content">
-            <span class="update-name">${name}</span>
-            <span class="update-desc">${desc}</span>
-          </span>
-          <span class="update-time">${time}</span>
-        </a>`;
-      }).join('');
+    function localizedSrcset(value) {
+      return String(value || '').split(',').map(candidate => {
+        const bits = candidate.trim().split(/\s+/);
+        return `${siteUrl(bits[0])}${bits[1] ? ` ${bits[1]}` : ''}`;
+      }).join(', ');
     }
 
     function updateStaticCopy() {
-      const c = copy();
-      document.title = 'ACADIE.SOL';
-      setText('welcome-title-prefix', c.welcomeTitlePrefix);
-      setText('welcome-title', c.welcomeTitle);
-      setText('welcome-label-pill', c.labelPill);
-      setText('divider-subtitle', c.welcomeSubtitle);
-      setText('action-directory-label', c.actions.directory.label);
-      setText('action-directory-meta', c.actions.directory.meta);
-      setText('action-events-label', c.actions.events.label);
-      setText('action-events-meta', c.actions.events.meta);
-      setText('action-support-label', c.actions.support.label);
-      setText('action-support-meta', c.actions.support.meta);
-      setText('action-about-label', c.actions.about.label);
-      setText('action-about-meta', c.actions.about.meta);
-      setText('updates-title', c.updatesTitle);
-      setText('updates-pill', c.viewUpdates);
-      setText('updates-filter-btn', c.filterBtn);
-      setText('home-filter-title-label', c.filterTitle);
-      document.querySelectorAll('.filter-type-btn[data-filter="recent"]').forEach(b => b.textContent = c.filterRecent);
-      document.querySelectorAll('.filter-type-btn[data-filter="event"]').forEach(b => b.textContent = c.filterEvents);
-      document.querySelectorAll('.filter-type-btn[data-filter="entry"]').forEach(b => b.textContent = c.filterEntries);
-      document.querySelectorAll('.filter-type-btn[data-filter="draft"]').forEach(b => b.textContent = c.filterDrafts);
-      document.querySelectorAll('.filter-type-btn[data-filter="post"]').forEach(b => b.textContent = c.filterPosts);
-      syncFilterBtns();
+      const copy = HOME_COPY[lang()] || HOME_COPY.en;
+      setText('welcome-kicker', copy.welcomeKicker);
+      setText('welcome-title', copy.welcomeTitle);
+      setText('welcome-line', copy.welcomeLine);
+      setText('photo-kicker', copy.photoKicker);
+      setText('view-all-photos', copy.viewAlbums);
+      setText('community-kicker', copy.communityKicker);
+      setText('community-title', copy.communityTitle);
+      setText('community-summary', copy.communitySummary);
+      setText('community-link', copy.communityLink);
+      setText('events-link', copy.eventsLink);
+      setText('archive-title', copy.archiveTitle);
+      setText('archive-summary', copy.archiveSummary);
     }
 
-    /* --- Home updates filter popup --- */
-
-    function syncFilterBtns() {
-      document.querySelectorAll('.filter-type-btn').forEach(btn => {
-        const isActive = btn.dataset.filter === state.filterMode;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-pressed', isActive);
-      });
-    }
-
-    function openFilterPopover() {
-      const el = document.getElementById('home-filter-popover');
-      if (el) el.hidden = false;
-    }
-
-    function closeFilterPopover() {
-      const el = document.getElementById('home-filter-popover');
-      if (el) el.hidden = true;
-    }
-
-    function setFilterMode(mode) {
-      state.filterMode = mode;
-      closeFilterPopover();
-      syncFilterBtns();
-      if (state.items.length) renderUpdates(state.items);
-    }
-
-    document.getElementById('updates-filter-btn')?.addEventListener('click', openFilterPopover);
-    document.getElementById('home-filter-close')?.addEventListener('click', closeFilterPopover);
-    document.getElementById('home-filter-backdrop')?.addEventListener('click', closeFilterPopover);
-    document.querySelectorAll('.filter-type-btn').forEach(btn => {
-      btn.addEventListener('click', () => setFilterMode(btn.dataset.filter));
-    });
-
-    async function initHome() {
-      renderGallery();
+    async function loadLive() {
       try {
-        const payload = await loadActivity();
-        state.items = payload.items;
-        renderUpdates(payload.items);
-      } catch (error) {
-        console.warn('Home updates unavailable:', error);
-        const list = document.getElementById('updates-list');
-        if (list) {
-          list.innerHTML = `<p style="color:var(--muted);font-size:.78rem;padding:8px 0">${escapeHtml(copy().emptyUpdates)}</p>`;
-        }
-      }
+        const response = await fetch(siteUrl('assets/live.json'), { cache: 'no-cache' });
+        if (!response.ok) throw new Error('LIVE data unavailable');
+        const item = await response.json();
+        setText('live-label', localize(item.label));
+        setText('live-kicker', localize(item.kicker));
+        setText('live-title', localize(item.title));
+        setText('live-summary', localize(item.summary));
+        setText('live-location', localize(item.location));
+        setText('live-link', localize(item.cta));
+        document.getElementById('live-link').href = safeSiteHref(item.href, 'home-feed.html');
+        document.getElementById('live-card').classList.toggle('is-inactive', item.active === false);
+      } catch (error) { console.warn(error); }
     }
 
-    window.addEventListener('acadie:languagechange', () => {
-      updateStaticCopy();
-      renderGallery();
-      if (state.items.length) renderUpdates(state.items);
-    });
+    async function loadFeaturedAlbum() {
+      try {
+        const response = await fetch(siteUrl('assets/gallery/albums.json'));
+        if (!response.ok) throw new Error('Album data unavailable');
+        const payload = await response.json();
+        const album = payload.albums?.find(item => item.status === 'public' && item.featured) || payload.albums?.find(item => item.status === 'public');
+        if (!album) return;
+        const cover = album.cover || {};
+        const image = document.getElementById('featured-album-image');
+        document.getElementById('featured-album-link').href = safeSiteHref(album.href, 'photos/index.html');
+        image.src = siteUrl(cover.src);
+        if (cover.srcset) image.srcset = localizedSrcset(cover.srcset);
+        image.alt = localize(cover.alt);
+        image.width = Number(cover.width) || 960;
+        image.height = Number(cover.height) || 720;
+        setText('featured-album-title', localize(album.title));
+        setText('featured-album-summary', localize(album.summary));
+        setText('featured-album-count', (HOME_COPY[lang()] || HOME_COPY.en).photoCount(Number(album.photo_count) || 0));
+      } catch (error) { console.warn(error); }
+    }
 
-    document.documentElement.lang = currentLang();
-    updateStaticCopy();
-    initHome();
+    function hydrateHome() {
+      updateStaticCopy();
+      loadLive();
+      loadFeaturedAlbum();
+    }
+
+    window.addEventListener('acadie:languagechange', hydrateHome);
+    hydrateHome();
   </script>
 </body>
 </html>

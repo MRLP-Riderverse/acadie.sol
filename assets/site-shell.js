@@ -1,47 +1,65 @@
 /* Global Acadie.sol shell renderer.
-   Pages call this one script instead of carrying their own dock/menu markup. The
-   script owns only shared chrome state; content pages still own their page data.
-
-   Header count caching: entry/event counts only change on "export to site".  The
-   shell reads cached values from localStorage first (instant render, no flicker),
-   then revalidates in the background.  If the fetch 304s or the counts match the
-   cache, nothing changes visually.  An explicit version key
-   (acadie-shell-counts-v) lets the export step bump the cache so the next load
-   picks up new numbers without a full app restart.                               */
+   One route model renders the mobile dock, desktop navigation, and floating menu.
+   Pages own their content; this file owns only shared navigation, theme, language,
+   and lightweight public counts. */
 (function () {
   const CACHE_KEY = 'acadie-shell-counts';
-  const CACHE_VERSION_KEY = 'acadie-shell-counts-v';
+  const SCRIPT_URL = new URL(document.currentScript?.src || 'assets/site-shell.js', document.baseURI);
+  const SITE_ROOT = new URL('../', SCRIPT_URL);
 
   const COPY = {
     en: {
-      drawerTitle: 'Menu',
-      menuDirectory: 'View Everyone',
-      menuEvents: 'Events',
-      menuSupport: 'Support Acadie.sol',
-      menuAbout: 'About us',
+      menu: 'Menu',
+      closeMenu: 'Close menu',
       dark: 'Switch to dark mode',
       light: 'Switch to light mode',
       langToFr: 'Switch language to French',
       langToEn: 'Switch language to English',
-      langTitleEn: 'English active — switch to French',
-      langTitleFr: 'Français actif — passer en anglais',
-      headerBanner: (entries, events) => `${entries} Entries - Vive l'Acadie! - ${events} Events`
+      remembrance: 'Remembrance',
+      headerBanner: (entries, events) => `${entries} Entries · Vive l'Acadie! · ${events} Events`,
+      routes: {
+        home: 'Home', directory: 'Directory', events: 'Events', search: 'Search',
+        photos: 'Photos', community: 'Community', updates: 'Updates',
+        support: 'Support', about: 'About'
+      }
     },
     fr: {
-      drawerTitle: 'Menu',
-      menuDirectory: 'Voir tout le monde',
-      menuEvents: 'Événements',
-      menuSupport: 'Soutenir Acadie.sol',
-      menuAbout: 'À propos de nous',
+      menu: 'Menu',
+      closeMenu: 'Fermer le menu',
       dark: 'Passer en mode sombre',
       light: 'Passer en mode clair',
       langToFr: 'Passer en français',
       langToEn: 'Passer en anglais',
-      langTitleEn: 'English active — switch to French',
-      langTitleFr: 'Français actif — passer en anglais',
-      headerBanner: (entries, events) => `${entries} entrées - Vive l'Acadie! - ${events} événements`
+      remembrance: 'Souvenirs',
+      headerBanner: (entries, events) => `${entries} entrées · Vive l'Acadie! · ${events} événements`,
+      routes: {
+        home: 'Accueil', directory: 'Répertoire', events: 'Événements', search: 'Recherche',
+        photos: 'Photos', community: 'Communauté', updates: 'Mises à jour',
+        support: 'Soutien', about: 'À propos'
+      }
     }
   };
+
+  const ROUTES = {
+    home: { href: 'index.html', icon: '⌂' },
+    directory: { href: 'directory.html#browse', icon: '⌕' },
+    events: { href: 'events.html', icon: '◷' },
+    search: { href: 'search.html', icon: '⌕' },
+    photos: { href: 'photos/index.html', icon: '▧' },
+    community: { href: 'community.html', icon: '✦' },
+    updates: { href: 'home-feed.html', icon: '↻' },
+    support: { href: 'support.html', icon: '◇' },
+    about: { href: 'about-us.html', icon: '⁜' }
+  };
+
+  const MOBILE_KEYS = ['home', 'events', 'search'];
+  const DESKTOP_KEYS = ['home', 'directory', 'events', 'photos', 'community'];
+  const MENU_KEYS = ['directory', 'events', 'photos', 'community', 'updates', 'support', 'about'];
+  const SHELL_DATA = { entryCount: null, eventCount: null };
+
+  function siteUrl(path = '') {
+    return new URL(path, SITE_ROOT).href;
+  }
 
   function currentLang() {
     const saved = localStorage.getItem('acadie-lang');
@@ -49,31 +67,38 @@
     return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
   }
 
-  /* ── Count caching ── */
+  function routeLink(key, className = '') {
+    const route = ROUTES[key];
+    return `<a class="${className}" href="${siteUrl(route.href)}" data-route-key="${key}">
+      <span class="route-icon" aria-hidden="true">${route.icon}</span>
+      <span class="route-label">${key}</span>
+    </a>`;
+  }
+
+  function activeRouteKey() {
+    const path = location.pathname;
+    if (/\/photos\//.test(path)) return 'photos';
+    if (/community\.html$/.test(path)) return 'community';
+    if (/events\.html$/.test(path)) return 'events';
+    if (/search\.html$/.test(path)) return 'search';
+    if (/directory\.html$/.test(path) || /entry\.html$/.test(path)) return 'directory';
+    if (/home-feed\.html$/.test(path) || /recents\.html$/.test(path)) return 'updates';
+    if (/support\.html$/.test(path)) return 'support';
+    if (/about-us\.html$/.test(path)) return 'about';
+    return 'home';
+  }
 
   function readCachedCounts() {
     try {
-      const raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      const data = JSON.parse(raw);
-      if (Number.isFinite(data.entryCount) && Number.isFinite(data.eventCount)) {
-        return data;
-      }
-    } catch (_) { /* corrupted cache — ignore */ }
-    return null;
+      const data = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      return Number.isFinite(data?.entryCount) && Number.isFinite(data?.eventCount) ? data : null;
+    } catch (_) { return null; }
   }
 
   function writeCachedCounts(entryCount, eventCount) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({
-        entryCount,
-        eventCount,
-        ts: Date.now()
-      }));
-    } catch (_) { /* storage full or unavailable */ }
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({ entryCount, eventCount, ts: Date.now() })); }
+    catch (_) { /* storage unavailable */ }
   }
-
-  const SHELL_DATA = { entryCount: null, eventCount: null, loaded: false };
 
   function syncShell() {
     const lang = currentLang();
@@ -81,6 +106,26 @@
     const isDark = document.documentElement.dataset.theme === 'dark';
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
+
+    document.querySelectorAll('[data-route-key]').forEach(link => {
+      const key = link.dataset.routeKey;
+      const label = copy.routes[key] || key;
+      const text = link.querySelector('.route-label');
+      if (text) text.textContent = label;
+      link.setAttribute('aria-label', label);
+      link.setAttribute('title', label);
+      const active = key === activeRouteKey() || (key === 'directory' && activeRouteKey() === 'search');
+      link.classList.toggle('is-current', active);
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+
+    document.querySelectorAll('[data-menu-label]').forEach(el => {
+      el.setAttribute('aria-label', copy.menu);
+      el.setAttribute('title', copy.menu);
+      const text = el.querySelector('.route-label');
+      if (text) text.textContent = copy.menu;
+    });
 
     const themeButton = document.getElementById('theme-toggle');
     if (themeButton) {
@@ -93,25 +138,25 @@
     const langButton = document.getElementById('lang-toggle');
     if (langButton) {
       const isFr = lang === 'fr';
-      langButton.setAttribute('aria-label', isFr ? copy.langToEn : copy.langToFr);
-      langButton.setAttribute('title', isFr ? copy.langTitleFr : copy.langTitleEn);
+      const label = isFr ? copy.langToEn : copy.langToFr;
+      langButton.setAttribute('aria-label', label);
+      langButton.setAttribute('title', label);
     }
 
-    const directory = document.getElementById('global-menu-directory');
-    const events = document.getElementById('global-menu-events');
-    const support = document.getElementById('global-menu-support');
-    const about = document.getElementById('global-menu-about');
+    const close = document.querySelector('.drawer-backdrop');
+    if (close) close.setAttribute('aria-label', copy.closeMenu);
+    const remembrance = document.querySelector('.drawer-close');
+    if (remembrance) {
+      remembrance.setAttribute('aria-label', copy.remembrance);
+      remembrance.setAttribute('title', copy.remembrance);
+    }
+
     const headerText = document.getElementById('global-header-text');
-    if (directory) directory.textContent = copy.menuDirectory;
-    if (events) events.textContent = copy.menuEvents;
-    if (support) support.textContent = copy.menuSupport;
-    if (about) about.textContent = copy.menuAbout;
     if (headerText) {
-      const entries = SHELL_DATA.entryCount;
-      const evts = SHELL_DATA.eventCount;
-      headerText.textContent = Number.isFinite(entries) && Number.isFinite(evts)
-        ? copy.headerBanner(entries, evts)
-        : 'Vive l\'Acadie!';
+      const { entryCount, eventCount } = SHELL_DATA;
+      headerText.textContent = Number.isFinite(entryCount) && Number.isFinite(eventCount)
+        ? copy.headerBanner(entryCount, eventCount)
+        : "Vive l'Acadie!";
     }
   }
 
@@ -124,57 +169,31 @@
 
   function setLang(lang) {
     localStorage.setItem('acadie-lang', lang);
-    document.documentElement.lang = lang;
     syncShell();
     window.dispatchEvent(new CustomEvent('acadie:languagechange', { detail: { lang } }));
   }
 
-  /* Load counts: read cache first, then revalidate in background.
-     The cached version key lets "export to site" force a refresh. */
   async function loadShellCounts() {
-    /* 1. Apply cached counts immediately (zero flicker). */
     const cached = readCachedCounts();
-    if (cached) {
-      SHELL_DATA.entryCount = cached.entryCount;
-      SHELL_DATA.eventCount = cached.eventCount;
-      SHELL_DATA.loaded = true;
-      syncShell();
-    }
-
-    /* 2. Revalidate in background. If the fetch confirms the same numbers the
-       DOM never shifts. If they differ we update and re-cache. */
+    if (cached) Object.assign(SHELL_DATA, cached);
+    syncShell();
     try {
-      const cachedVersion = localStorage.getItem(CACHE_VERSION_KEY) || '0';
       const [directoryResponse, eventsResponse] = await Promise.all([
-        fetch('assets/directory-data.json', { cache: 'no-store' }),
-        fetch('assets/events-data.json', { cache: 'no-store' })
+        fetch(siteUrl('assets/directory-data.json'), { cache: 'no-cache' }),
+        fetch(siteUrl('assets/events-data.json'), { cache: 'no-cache' })
       ]);
       if (!directoryResponse.ok || !eventsResponse.ok) throw new Error('Failed to load shell counts');
-      const [directoryPayload, eventsPayload] = await Promise.all([
-        directoryResponse.json(),
-        eventsResponse.json()
-      ]);
-      const freshEntries = Number(
-        directoryPayload.published_count ?? directoryPayload.entry_count ?? (Array.isArray(directoryPayload.items) ? directoryPayload.items.length : 0)
-      );
-      const freshEvents = Number(
-        eventsPayload.active_count ?? eventsPayload.event_count ?? (Array.isArray(eventsPayload.items) ? eventsPayload.items.length : 0)
-      );
-
-      /* Only update DOM if numbers actually changed (or first load had no cache). */
-      if (SHELL_DATA.entryCount !== freshEntries || SHELL_DATA.eventCount !== freshEvents) {
-        SHELL_DATA.entryCount = freshEntries;
-        SHELL_DATA.eventCount = freshEvents;
-        writeCachedCounts(freshEntries, freshEvents);
+      const [directoryPayload, eventsPayload] = await Promise.all([directoryResponse.json(), eventsResponse.json()]);
+      const entryCount = Number(directoryPayload.published_count ?? directoryPayload.entry_count ?? directoryPayload.items?.length ?? 0);
+      const eventCount = Number(eventsPayload.active_count ?? eventsPayload.event_count ?? eventsPayload.items?.length ?? 0);
+      if (SHELL_DATA.entryCount !== entryCount || SHELL_DATA.eventCount !== eventCount) {
+        SHELL_DATA.entryCount = entryCount;
+        SHELL_DATA.eventCount = eventCount;
+        writeCachedCounts(entryCount, eventCount);
         syncShell();
-      } else if (!cached) {
-        /* First-ever load with no cache: persist these counts. */
-        writeCachedCounts(freshEntries, freshEvents);
       }
-      SHELL_DATA.loaded = true;
     } catch (error) {
       console.warn('Shell counts unavailable:', error);
-      /* Cached values (if any) remain in place — graceful degradation. */
     }
   }
 
@@ -184,30 +203,30 @@
 
   document.body.insertAdjacentHTML('afterbegin', `
     <header class="site-header" aria-label="Acadian banner"><span id="global-header-text">Vive l'Acadie!</span></header>
+    <nav class="site-desktop-nav" aria-label="Primary navigation">
+      <a class="desktop-wordmark" href="${siteUrl('index.html')}" aria-label="Acadie.sol home">ACADIE.SOL</a>
+      <div class="desktop-route-list">${DESKTOP_KEYS.map(key => routeLink(key, 'desktop-route')).join('')}</div>
+      <label class="desktop-menu-launch" for="menu-toggle" data-menu-label>
+        <span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span>
+      </label>
+    </nav>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
     <aside class="drawer" aria-label="Menu">
       <div class="drawer-controls" aria-label="Display and language controls">
-        <button class="menu-control theme-button" type="button" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">☾</button>
-        <a class="drawer-close" href="obituaries.html" aria-label="Open obituaries" title="Open obituaries">✟</a>
-        <button class="menu-control lang-button" type="button" id="lang-toggle" aria-label="Switch language to French" title="English active — switch to French"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
+        <button class="menu-control theme-button" type="button" id="theme-toggle">☾</button>
+        <a class="drawer-close" href="${siteUrl('obituaries.html')}">✟</a>
+        <button class="menu-control lang-button" type="button" id="lang-toggle"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
       </div>
-      <nav class="drawer-nav">
-        <a href="directory.html#browse" id="global-menu-directory">View Everyone</a>
-        <a href="events.html" id="global-menu-events">Events</a>
-        <a href="support.html" id="global-menu-support">Support Acadie.sol</a>
-        <a href="about-us.html" id="global-menu-about">About us</a>
-      </nav>
+      <nav class="drawer-nav">${MENU_KEYS.map(key => routeLink(key, 'drawer-route')).join('')}</nav>
     </aside>
     <nav class="site-dock" aria-label="Primary dock">
-      <a href="index.html" aria-label="Home" title="Home"><span aria-hidden="true">⌂</span></a>
-      <a href="events.html" aria-label="Events" title="Events"><span aria-hidden="true">◷</span></a>
-      <a href="directory.html#search" aria-label="Search" title="Search"><span aria-hidden="true">⌕</span></a>
-      <label for="menu-toggle" aria-label="Menu" title="Menu"><span aria-hidden="true">☰</span></label>
+      ${MOBILE_KEYS.map(key => routeLink(key, 'dock-route')).join('')}
+      <label for="menu-toggle" data-menu-label><span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span></label>
     </nav>
   `);
 
-  window.AcadieShell = { currentLang, setTheme, setLang, sync: syncShell, loadShellCounts };
+  window.AcadieShell = { currentLang, setTheme, setLang, sync: syncShell, loadShellCounts, url: siteUrl };
 
   document.addEventListener('DOMContentLoaded', () => {
     syncShell();
@@ -218,5 +237,9 @@
     document.getElementById('lang-toggle')?.addEventListener('click', () => {
       setLang(currentLang() === 'fr' ? 'en' : 'fr');
     });
+    document.querySelectorAll('.drawer-nav a').forEach(link => link.addEventListener('click', () => {
+      const toggle = document.getElementById('menu-toggle');
+      if (toggle) toggle.checked = false;
+    }));
   });
 })();

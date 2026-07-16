@@ -1,45 +1,34 @@
 /* Global Acadie.sol shell chrome.
-   This is the single visual contract for the floating menu, bottom dock,
-   and global header across every page; page styles should change content
-   surfaces, not this shared shell. */
+   The same route model is presented as a mobile dock, desktop top bar, and shared
+   floating menu. Page styles own content surfaces, not navigation. */
 
-/* Global header bar — Acadian banner. Fixed at top of every page.
-   Slightly taller and louder now that it carries live counts, while still
-   respecting the iPhone safe area and pushing page content below it globally. */
 .site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto;
   height: calc(30px + env(safe-area-inset-top));
   padding-top: env(safe-area-inset-top);
   z-index: 84;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   background: var(--blue-deep);
   color: var(--acadian-yellow);
-  font-family: monospace;
-  font-size: .74rem;
-  font-weight: 900;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  white-space: nowrap;
   border-bottom: 1px solid color-mix(in srgb, var(--acadian-yellow) 22%, transparent);
   box-shadow: 0 6px 14px -8px var(--shadow);
+  font: 900 .7rem/1 monospace;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
-[data-theme="dark"] .site-header {
-  background: var(--blue-deep);
-  color: var(--acadian-yellow);
-}
-body {
-  padding-top: calc(42px + env(safe-area-inset-top));
-}
+
+body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
 
-/* Shared floating menu overlay: the backdrop and drawer animate separately so the
-   dimmed full-screen layer never inherits the centered panel transform. The high
-   z-index keeps the global menu above page-local fixed headers on search. */
+/* Desktop wrapper: hidden on touch-sized canvases, then replaces—not duplicates—the
+   mobile visual wrapper while retaining the same route data and menu toggle. */
+.site-desktop-nav { display: none; }
+
 .drawer-backdrop {
   position: fixed;
   inset: 0;
@@ -52,15 +41,17 @@ body {
   pointer-events: none;
   transition: opacity .18s ease, visibility 0s linear .18s;
 }
+
 .drawer {
   position: fixed;
   z-index: 81;
-  left: 0;
-  right: 0;
-  bottom: 86px;
+  left: max(14px, env(safe-area-inset-left));
+  right: max(14px, env(safe-area-inset-right));
+  bottom: calc(86px + env(safe-area-inset-bottom));
   margin: 0 auto;
-  width: min(390px, calc(100vw - 28px));
-  min-height: 218px;
+  width: min(390px, calc(100% - 28px));
+  max-height: calc(100svh - 130px);
+  overflow-y: auto;
   padding: 58px 14px 14px;
   border: 1px solid var(--line);
   border-radius: 26px;
@@ -74,11 +65,21 @@ body {
   transform: translateY(8px) scale(.98);
   transition: transform .18s ease, opacity .18s ease, visibility 0s linear .18s;
 }
-.menu-toggle:checked ~ .drawer-backdrop { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
-.menu-toggle:checked ~ .drawer { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); transition-delay: 0s; }
 
-/* Shared menu controls: display/language controls live in the corners; the quiet
-   remembrance cross stays centered as one icon-only global utility. */
+.menu-toggle:checked ~ .drawer-backdrop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+.menu-toggle:checked ~ .drawer {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  transition-delay: 0s;
+}
+
 .drawer-controls {
   position: absolute;
   top: 12px;
@@ -90,14 +91,13 @@ body {
   gap: 10px;
   pointer-events: none;
 }
-/* Shared button system: the shell treats every action button as the same
-   familiar blue/yellow control so the UI can shift while the tap target stays
-   readable in both themes. */
+
 .menu-control,
 .drawer-close,
 .drawer-nav a,
 .site-dock a,
-.site-dock label {
+.site-dock label,
+.desktop-menu-launch {
   display: inline-grid;
   place-items: center;
   min-width: 44px;
@@ -113,20 +113,20 @@ body {
   pointer-events: auto;
   transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
-.menu-control:focus,
-.drawer-close:focus,
-.drawer-nav a:focus,
-.site-dock a:focus,
-.site-dock label:focus { outline: none; }
+
 .menu-control:focus-visible,
 .drawer-close:focus-visible,
 .drawer-nav a:focus-visible,
 .site-dock a:focus-visible,
-.site-dock label:focus-visible { outline: 2px solid color-mix(in srgb, var(--button-fg) 55%, transparent); outline-offset: 2px; }
+.site-dock label:focus-visible,
+.site-desktop-nav a:focus-visible,
+.desktop-menu-launch:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 72%, transparent);
+  outline-offset: 2px;
+}
+
 .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
 .lang-button { display: inline-flex; gap: 3px; align-items: center; padding-inline: 12px; }
-.lang-button .lang-en,
-.lang-button .lang-fr { color: inherit; }
 .drawer-close {
   position: absolute;
   left: 0;
@@ -135,30 +135,38 @@ body {
   width: 44px;
   font-size: 1.15rem;
 }
+.drawer-nav { display: grid; gap: 8px; margin-top: 18px; }
 .drawer-nav a {
   width: 100%;
-  padding: 13px;
+  grid-template-columns: 24px 1fr 24px;
+  gap: 8px;
+  padding: 12px 14px;
   border-radius: 17px;
   text-align: center;
 }
+.drawer-nav a .route-icon { grid-column: 1; }
+.drawer-nav a .route-label { grid-column: 2; }
+
 .menu-control:hover,
 .drawer-close:hover,
 .drawer-nav a:hover,
 .site-dock a:hover,
-.site-dock label:hover { color: var(--button-fg); background: var(--button-bg-hover, color-mix(in srgb, var(--button-bg) 86%, #fff)); border-color: var(--button-border); }
-.drawer-nav { display: grid; gap: 8px; margin-top: 18px; }
+.site-dock label:hover,
+.desktop-menu-launch:hover {
+  color: var(--button-fg);
+  background: var(--button-bg-hover);
+  border-color: var(--button-border);
+}
 
-
-/* Shared bottom dock: permanent cross-page navigation, never page-specific chrome.
-   Safe-area bottom keeps the dock pinned to the visible phone edge without letting
-   directory/search scroll or filter states rewrite its placement. */
+/* Mobile presentation. The fixed layer uses percentage width rather than 100vw so
+   restored PWA layout viewports cannot pull it beyond the visible page. */
 .site-dock {
   position: fixed;
-  left: 0;
-  right: 0;
+  left: max(14px, env(safe-area-inset-left));
+  right: max(14px, env(safe-area-inset-right));
   bottom: max(12px, env(safe-area-inset-bottom));
   margin: 0 auto;
-  width: min(390px, calc(100vw - 28px));
+  width: min(390px, calc(100% - 28px));
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 6px;
@@ -174,12 +182,103 @@ body {
 }
 .site-dock a,
 .site-dock label {
-  gap: 2px;
+  gap: 4px;
   min-height: 56px;
-  padding: 8px 2px;
+  padding: 7px 2px;
   border-radius: 18px;
-  font-size: .68rem;
+  font-size: .62rem;
   line-height: 1;
 }
-.site-dock a span:first-child,
-.site-dock label span:first-child { font-size: 1.12rem; line-height: 1; }
+.site-dock .route-icon { font-size: 1.12rem; line-height: 1; }
+.site-dock .is-current {
+  background: var(--button-bg-hover);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acadian-yellow) 32%, transparent);
+}
+
+@media (min-width: 900px) {
+  body { padding-top: 86px; }
+  .site-header,
+  .site-dock { display: none; }
+
+  .site-desktop-nav {
+    position: fixed;
+    inset: 14px 24px auto;
+    z-index: 84;
+    min-height: 58px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 8px 10px 8px 18px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: color-mix(in srgb, var(--glass) 90%, transparent);
+    box-shadow: 0 14px 36px var(--shadow);
+    backdrop-filter: blur(20px) saturate(1.35);
+    -webkit-backdrop-filter: blur(20px) saturate(1.35);
+  }
+
+  .desktop-wordmark {
+    color: var(--acadian-yellow);
+    font: 900 .76rem/1 "Pokemon GB", ui-monospace, monospace;
+    letter-spacing: .04em;
+    text-decoration: none;
+  }
+
+  .desktop-route-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .desktop-route {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    color: var(--ink);
+    font-size: .76rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .desktop-route:hover,
+  .desktop-route.is-current {
+    background: var(--button-bg);
+    color: var(--button-fg);
+  }
+  .desktop-route .route-icon { color: var(--gold); }
+  .desktop-route:hover .route-icon,
+  .desktop-route.is-current .route-icon { color: inherit; }
+
+  .desktop-menu-launch {
+    display: inline-flex;
+    gap: 7px;
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: .74rem;
+  }
+
+  .drawer {
+    left: auto;
+    right: max(24px, calc((100vw - 1180px) / 2));
+    top: 82px;
+    bottom: auto;
+    margin: 0;
+    width: 360px;
+    max-height: calc(100svh - 106px);
+    transform: translateY(-6px) scale(.98);
+  }
+  .menu-toggle:checked ~ .drawer { transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer-backdrop,
+  .site-dock *,
+  .site-desktop-nav * { transition: none !important; }
+}

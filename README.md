@@ -11,7 +11,7 @@ acadie_sol_directory/  ← DATA (entries, schema, RSS feed)
          ↓ export script writes JSON
 acadie_sol/            ← SITE (HTML, CSS, renders the exported data)
          ↓ deploys to
-GitHub Pages           ← PUBLIC (acadie.sol)
+GitHub Pages           ← PUBLIC (https://acadie.sol.site)
 ```
 
 ## Data Source
@@ -33,15 +33,25 @@ git clone https://github.com/MRLP-Riderverse/acadie-sol-directory.git
 python -m http.server 5173
 ```
 
+## Media and live surfaces
+
+- Owner-controlled LIVE signal: `assets/live.json`
+- Public album catalogue: `assets/gallery/albums.json`
+- Public photo archive: `photos/`
+- Album contract check: `python3 scripts/validate_gallery.py`
+- Original/derivative policy: `docs/media-pipeline.md`
+
+Camera originals do **not** belong in this repository. Keep them in the private ExoCortex media library; commit only reviewed public derivatives.
+
 ## Channels
 
 | Channel | Purpose | Frequency |
 |---------|---------|-----------|
 | RSS | The record — releases, signals, briefings | On publish |
-| TG | The pulse — announcements, low noise | 1-2/week |
-| Discord | The conversation — community discussion | Ongoing |
-| Signal | The action — live coordination | As needed |
-| Hero | The boost — one thing, max reach | Rotational |
+| TG | The pulse and private media-intake bridge | As needed |
+| Discord | The after-hours conversation layer | Ongoing |
+| Signal | Live coordination | As needed |
+| LIVE | One owner-controlled point of attention on Home | Rotational |
 
 ## Author
 

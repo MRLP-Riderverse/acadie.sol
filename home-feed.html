@@ -679,7 +679,7 @@
         feed.innerHTML = `<div class="empty">${escapeHtml(copy().empty)}</div>`;
         return;
       }
-      feed.innerHTML = state.items.map(item => `
+      feed.innerHTML = items.map(item => `
         <article class="feed-card" id="${escapeHtml(item.anchorId)}">
           <div class="feed-top">
             <div class="feed-badges">
@@ -770,8 +770,10 @@
         renderFeed();
         updateStaticCopy();
         if (location.hash) {
-          const target = document.querySelector(location.hash);
-          target?.scrollIntoView({ block: 'start' });
+          let targetId = '';
+          try { targetId = decodeURIComponent(location.hash.slice(1)).trim(); }
+          catch { targetId = ''; }
+          document.getElementById(targetId)?.scrollIntoView({ block: 'start' });
         }
       } catch (error) {
         console.warn('Home feed unavailable:', error);

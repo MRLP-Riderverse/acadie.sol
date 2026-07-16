@@ -13,6 +13,10 @@ Thumbs.db
 _site/
 dist/
 .cache/
+.hermes/
+qa/
+__pycache__/
+*.py[cod]
 
 # Node (if we add any tooling later)
 node_modules/
@@ -24,3 +28,8 @@ node_modules/
 # Backup files
 *.bak
 *.bak-*
+
+# Private media intake/originals — public derivatives only belong in Git
+incoming-media/
+media-source/
+full-resolution/

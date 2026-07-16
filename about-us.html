@@ -1,34 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" data-lang="en">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Shared identity metadata: use the same avatar for the desktop tab,
-       homescreen install icon, and other PWA surfaces. -->
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
-  <title>About us — Acadie.sol</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About Acadie.sol — a locally stewarded public memory and discovery layer for Acadie." />
+  <title>About — Acadie.sol</title>
+  <link rel="icon" href="assets/favicon.png" />
   <link rel="stylesheet" href="assets/site-colors.css" />
-  <style>
-    /* About page intentionally ships blank for now: the shared shell provides
-       the site-wide navigation, while the content surface stays empty until the
-       about copy is ready. */
-    * { box-sizing: border-box; }
-    html, body { min-height: 100%; }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--page-bg);
-      color: var(--ink);
-      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/editorial.css" />
   <link rel="stylesheet" href="assets/site-shell.css" />
 </head>
 <body>
   <script src="assets/site-shell.js"></script>
+  <main class="editorial-shell">
+    <header class="editorial-hero">
+      <p class="editorial-kicker"><span data-lang-copy="en">About Acadie.sol</span><span data-lang-copy="fr">À propos d’Acadie.sol</span></p>
+      <h1><span data-lang-copy="en">A public memory layer for Acadie.</span><span data-lang-copy="fr">Une mémoire publique pour l’Acadie.</span></h1>
+      <p data-lang-copy="en">People, places, events, images, and unfinished ideas—kept locally, shaped with care, and shared when they are ready.</p>
+      <p data-lang-copy="fr">Des personnes, des lieux, des événements, des images et des idées inachevées—gardés localement, façonnés avec soin et partagés lorsqu’ils sont prêts.</p>
+    </header>
+
+    <div class="editorial-grid">
+      <section class="editorial-card">
+        <p class="editorial-kicker"><span data-lang-copy="en">Why it exists</span><span data-lang-copy="fr">Pourquoi ça existe</span></p>
+        <h2><span data-lang-copy="en">Community knowledge should not disappear into feeds.</span><span data-lang-copy="fr">Le savoir communautaire ne devrait pas disparaître dans les fils.</span></h2>
+        <p data-lang-copy="en">Acadie.sol turns scattered local signals into durable routes people can find, revisit, and pass onward.</p>
+        <p data-lang-copy="fr">Acadie.sol transforme des signaux locaux dispersés en chemins durables que les gens peuvent trouver, revisiter et transmettre.</p>
+      </section>
+
+      <section class="editorial-card signal">
+        <p class="editorial-kicker"><span data-lang-copy="en">How it works</span><span data-lang-copy="fr">Comment ça marche</span></p>
+        <h2><span data-lang-copy="en">Local first. Public by intention.</span><span data-lang-copy="fr">Local d’abord. Public par intention.</span></h2>
+        <p data-lang-copy="en">The editable record stays under community stewardship. The website is a low-cost public mirror—not the only copy and not the whole community.</p>
+        <p data-lang-copy="fr">Le dossier modifiable reste sous l’intendance communautaire. Le site est un miroir public peu coûteux—ni la seule copie, ni toute la communauté.</p>
+      </section>
+
+      <section class="editorial-card">
+        <p class="editorial-kicker"><span data-lang-copy="en">Promises</span><span data-lang-copy="fr">Promesses</span></p>
+        <ul>
+          <li><span data-lang-copy="en">Preserve raw notes before polishing them away.</span><span data-lang-copy="fr">Préserver les notes brutes avant de trop les polir.</span></li>
+          <li><span data-lang-copy="en">Keep public data portable and inexpensive to mirror.</span><span data-lang-copy="fr">Garder les données publiques portables et peu coûteuses à copier.</span></li>
+          <li><span data-lang-copy="en">Use AI as a stewarding tool, not a replacement for people.</span><span data-lang-copy="fr">Utiliser l’IA comme outil d’intendance, pas comme remplacement des gens.</span></li>
+          <li><span data-lang-copy="en">Grow bilingual coverage honestly over time.</span><span data-lang-copy="fr">Développer honnêtement le contenu bilingue au fil du temps.</span></li>
+        </ul>
+      </section>
+
+      <section class="editorial-card">
+        <p class="editorial-kicker"><span data-lang-copy="en">Made by one. Made for all.</span><span data-lang-copy="fr">Créé par une personne. Créé pour tout le monde.</span></p>
+        <h2><span data-lang-copy="en">A steward’s project with room for community ownership.</span><span data-lang-copy="fr">Un projet d’intendance avec de la place pour l’appropriation communautaire.</span></h2>
+        <p data-lang-copy="en">Built quietly in Bathurst, with the hope that useful pieces can be shared, mirrored, remixed, and carried elsewhere.</p>
+        <p data-lang-copy="fr">Construit tranquillement à Bathurst, dans l’espoir que les pièces utiles puissent être partagées, copiées, remixées et transportées ailleurs.</p>
+        <div class="editorial-actions">
+          <a class="editorial-action" href="directory.html#browse"><span data-lang-copy="en">Explore Acadie</span><span data-lang-copy="fr">Explorer l’Acadie</span></a>
+          <a class="editorial-action" href="support.html"><span data-lang-copy="en">Support it</span><span data-lang-copy="fr">Soutenir</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
 </body>
 </html>
