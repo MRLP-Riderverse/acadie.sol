@@ -33,3 +33,8 @@ node_modules/
 incoming-media/
 media-source/
 full-resolution/
+
+# Local candidate assets intentionally excluded from the public site
+assets/images/acadie-intro-2026.gif
+assets/images/acadie.gif
+assets/images/lil boat.png

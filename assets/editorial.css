@@ -93,3 +93,6 @@ a { color: var(--link); text-underline-offset: 3px; }
   .editorial-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .editorial-card { padding: 28px; min-height: 250px; }
 }
+@media (min-width: 760px) and (max-width: 899px) {
+  .editorial-shell { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
+}

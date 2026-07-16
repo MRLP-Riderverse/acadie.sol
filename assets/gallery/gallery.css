@@ -159,4 +159,8 @@ a { color: var(--link); text-underline-offset: 3px; }
   .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
   .photo-frame:first-child:nth-last-child(1) { grid-column: 1 / -1; }
 }
+@media (min-width: 760px) and (max-width: 899px) {
+  .gallery-shell,
+  .album-shell { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
+}
 @media (prefers-reduced-motion: reduce) { .album-card img { transition: none; } }

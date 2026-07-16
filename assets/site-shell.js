@@ -206,13 +206,13 @@
     <nav class="site-desktop-nav" aria-label="Primary navigation">
       <a class="desktop-wordmark" href="${siteUrl('index.html')}" aria-label="Acadie.sol home">ACADIE.SOL</a>
       <div class="desktop-route-list">${DESKTOP_KEYS.map(key => routeLink(key, 'desktop-route')).join('')}</div>
-      <label class="desktop-menu-launch" for="menu-toggle" data-menu-label>
+      <label class="desktop-menu-launch" for="menu-toggle" data-menu-label role="button" tabindex="0" aria-controls="site-menu-drawer" aria-expanded="false">
         <span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span>
       </label>
     </nav>
     <input class="menu-toggle" type="checkbox" id="menu-toggle" aria-hidden="true" />
     <label class="drawer-backdrop" for="menu-toggle" aria-label="Close menu"></label>
-    <aside class="drawer" aria-label="Menu">
+    <aside class="drawer" id="site-menu-drawer" aria-label="Menu">
       <div class="drawer-controls" aria-label="Display and language controls">
         <button class="menu-control theme-button" type="button" id="theme-toggle">☾</button>
         <a class="drawer-close" href="${siteUrl('obituaries.html')}">✟</a>
@@ -222,7 +222,7 @@
     </aside>
     <nav class="site-dock" aria-label="Primary dock">
       ${MOBILE_KEYS.map(key => routeLink(key, 'dock-route')).join('')}
-      <label for="menu-toggle" data-menu-label><span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span></label>
+      <label for="menu-toggle" data-menu-label role="button" tabindex="0" aria-controls="site-menu-drawer" aria-expanded="false"><span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span></label>
     </nav>
   `);
 
@@ -231,6 +231,30 @@
   document.addEventListener('DOMContentLoaded', () => {
     syncShell();
     loadShellCounts();
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuLaunchers = document.querySelectorAll('[data-menu-label]');
+    let activeMenuLauncher = [...menuLaunchers].find(launcher => launcher.offsetParent !== null);
+    const syncMenuState = () => {
+      menuLaunchers.forEach(launcher => launcher.setAttribute('aria-expanded', menuToggle?.checked ? 'true' : 'false'));
+    };
+    menuToggle?.addEventListener('change', syncMenuState);
+    menuLaunchers.forEach(launcher => {
+      launcher.addEventListener('click', () => { activeMenuLauncher = launcher; });
+      launcher.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        if (!menuToggle) return;
+        activeMenuLauncher = launcher;
+        menuToggle.checked = !menuToggle.checked;
+        menuToggle.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || !menuToggle?.checked) return;
+      menuToggle.checked = false;
+      syncMenuState();
+      activeMenuLauncher?.focus();
+    });
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
     });
@@ -239,7 +263,10 @@
     });
     document.querySelectorAll('.drawer-nav a').forEach(link => link.addEventListener('click', () => {
       const toggle = document.getElementById('menu-toggle');
-      if (toggle) toggle.checked = false;
+      if (toggle) {
+        toggle.checked = false;
+        toggle.dispatchEvent(new Event('change', { bubbles: true }));
+      }
     }));
   });
 })();
