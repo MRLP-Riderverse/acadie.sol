@@ -151,13 +151,14 @@
       remembrance.setAttribute('title', copy.remembrance);
     }
 
+    const { entryCount, eventCount } = SHELL_DATA;
     const headerText = document.getElementById('global-header-text');
-    if (headerText) {
-      const { entryCount, eventCount } = SHELL_DATA;
-      headerText.textContent = Number.isFinite(entryCount) && Number.isFinite(eventCount)
-        ? copy.headerBanner(entryCount, eventCount)
-        : "Vive l'Acadie!";
-    }
+    if (headerText) headerText.textContent = "Vive l'Acadie!";
+
+    const homeEntryCount = document.getElementById('home-entry-count');
+    const homeEventCount = document.getElementById('home-event-count');
+    if (homeEntryCount) homeEntryCount.textContent = Number.isFinite(entryCount) ? String(entryCount) : '…';
+    if (homeEventCount) homeEventCount.textContent = Number.isFinite(eventCount) ? String(eventCount) : '…';
   }
 
   function setTheme(theme) {

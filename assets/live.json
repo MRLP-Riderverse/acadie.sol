@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
-  "active": true,
-  "state": "building",
-  "updated_at": "2026-07-16T14:20:00-03:00",
+  "active": false,
+  "state": "idle",
+  "updated_at": "2026-07-16T15:12:00-03:00",
   "label": {
-    "en": "LIVE",
-    "fr": "EN DIRECT"
+    "en": "Soon",
+    "fr": "Bientôt"
   },
   "kicker": {
-    "en": "Right now",
-    "fr": "En ce moment"
+    "en": "Quiet for now",
+    "fr": "Calme pour l’instant"
   },
   "title": {
-    "en": "Rebuilding Acadie.sol in public",
-    "fr": "Reconstruction publique d’Acadie.sol"
+    "en": "Check again soon",
+    "fr": "Revenez bientôt"
   },
   "summary": {
-    "en": "A calmer home, a living event signal, and a photo archive made to last.",
-    "fr": "Un accueil plus calme, un signal vivant pour les événements et des archives photo faites pour durer."
+    "en": "Live notes and featured notices will land here when there is something worth sharing.",
+    "fr": "Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager."
   },
   "location": {
-    "en": "From Bathurst, for Acadie",
-    "fr": "Depuis Bathurst, pour l’Acadie"
+    "en": "",
+    "fr": ""
   },
-  "href": "home-feed.html",
+  "href": "events.html",
   "cta": {
-    "en": "Follow the build",
-    "fr": "Suivre le chantier"
+    "en": "Browse events",
+    "fr": "Voir les événements"
   }
 }

@@ -28,17 +28,16 @@
       font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
     }
     a { color: var(--link); text-underline-offset: 3px; }
+    button { font: inherit; }
 
-    /* Home is a launch surface, not a duplicate navigation dashboard. Each block
-       owns one job: identity, the current signal, photography, or community. */
     .home-shell {
       width: min(1120px, 100%);
-      min-height: calc(100svh - 42px);
+      min-height: calc(100svh - 86px);
       margin: 0 auto;
-      padding: 12px 12px 110px;
+      padding: 18px 22px 48px;
       display: grid;
       align-content: start;
-      gap: 12px;
+      gap: 18px;
     }
     .home-shell > * { min-width: 0; }
     .surface {
@@ -50,15 +49,19 @@
       box-shadow: 0 18px 42px var(--shadow);
     }
 
-    /* Top pair: quiet identity beside one deliberately loud owner-controlled signal. */
-    .home-top { display: grid; gap: 12px; }
+    .home-top {
+      display: grid;
+      grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr);
+      gap: 18px;
+      align-items: stretch;
+    }
     .welcome-card {
-      min-height: 190px;
+      min-height: 330px;
+      padding: 28px 22px;
       display: grid;
       align-content: center;
       justify-items: center;
-      gap: 10px;
-      padding: 28px 22px;
+      gap: 11px;
       text-align: center;
     }
     .welcome-kicker,
@@ -72,7 +75,7 @@
     .welcome-card h1 {
       margin: 0;
       color: var(--ink-strong);
-      font: 900 clamp(1.02rem, 5.4vw, 1.62rem)/1.16 "Pokemon GB", ui-monospace, monospace;
+      font: 900 clamp(1.02rem, 3vw, 1.62rem)/1.16 "Pokemon GB", ui-monospace, monospace;
     }
     .welcome-line {
       margin: 0;
@@ -81,22 +84,52 @@
       font-size: .9rem;
       line-height: 1.5;
     }
-    .welcome-mark {
-      color: var(--gold);
-      font-size: 1rem;
-      letter-spacing: .18em;
-    }
+    .welcome-mark { color: var(--gold); font-size: 1rem; letter-spacing: .18em; }
 
-    .live-card {
-      min-height: 250px;
-      padding: 22px;
+    .home-pulse {
+      width: min(320px, 100%);
+      margin-top: 6px;
+      padding-top: 14px;
       display: grid;
-      align-content: space-between;
-      gap: 24px;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .72rem;
+    }
+    .home-pulse a {
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 5px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .home-pulse strong { color: var(--gold); font-size: .9rem; }
+    .pulse-star { color: var(--gold); }
+
+    .attention-carousel {
+      min-height: 330px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      isolation: isolate;
       color: #fff8e7;
       background: #0a2b57;
-      border-color: color-mix(in srgb, var(--acadian-yellow) 62%, transparent);
-      isolation: isolate;
+      border-color: color-mix(in srgb, var(--acadian-yellow) 56%, transparent);
+    }
+    .carousel-stage { min-height: 0; display: grid; }
+    .attention-slide {
+      grid-area: 1 / 1;
+      min-width: 0;
+      padding: 28px 28px 20px;
+    }
+    .attention-slide[hidden] { display: none; }
+
+    .live-card {
+      display: grid;
+      align-content: space-between;
+      gap: 22px;
     }
     .live-card::before {
       content: "";
@@ -109,6 +142,7 @@
       border-radius: 50%;
       z-index: -1;
     }
+    .live-card.is-inactive { background: linear-gradient(145deg, rgba(255,255,255,.035), transparent 58%); }
     .live-head,
     .live-meta {
       display: flex;
@@ -131,6 +165,7 @@
       letter-spacing: .09em;
       text-transform: uppercase;
     }
+    .is-inactive .live-badge { background: rgba(255,255,255,.09); }
     .live-dot {
       width: 7px;
       height: 7px;
@@ -139,19 +174,23 @@
       box-shadow: 0 0 0 5px rgba(255,255,255,.12);
       animation: live-pulse 1.8s ease-out infinite;
     }
+    .is-inactive .live-dot { background: #f3c85b; animation: none; }
     .live-kicker { color: #f3c85b; font-size: .7rem; font-weight: 900; }
     .live-copy { display: grid; gap: 9px; }
-    .live-copy h2 {
+    .live-copy h2,
+    .recent-copy h2 {
       margin: 0;
-      max-width: 18ch;
+      max-width: 19ch;
       color: #fff;
-      font-size: clamp(1.5rem, 7vw, 2.5rem);
-      line-height: 1.02;
+      font-size: clamp(1.5rem, 4vw, 2.45rem);
+      line-height: 1.03;
       letter-spacing: -.04em;
     }
-    .live-copy p { margin: 0; max-width: 50ch; color: #d6e7fb; line-height: 1.5; }
+    .live-copy p,
+    .recent-copy p { margin: 0; max-width: 50ch; color: #d6e7fb; line-height: 1.5; }
     .live-place { color: #f3c85b; font-size: .72rem; font-weight: 900; }
-    .live-link {
+    .live-place[hidden] { display: none; }
+    .attention-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -166,113 +205,154 @@
       text-decoration: none;
     }
 
-    /* Featured album and community share a visual row but remain distinct doors. */
-    .feature-grid { display: grid; gap: 12px; }
-    .photo-feature {
-      min-height: 330px;
+    .recent-slide {
       display: grid;
       align-items: end;
+      overflow: hidden;
       color: #fff;
-      text-decoration: none;
-      background: #111;
     }
-    .photo-feature img {
+    .recent-slide img {
       position: absolute;
       inset: 0;
+      z-index: -2;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .5s ease;
     }
-    .photo-feature:hover img { transform: scale(1.025); }
-    .photo-feature::after {
+    .recent-slide::after {
       content: "";
       position: absolute;
-      inset: 24% 0 0;
-      background: linear-gradient(to top, rgba(6,12,24,.92), rgba(6,12,24,.08));
+      inset: 14% 0 0;
+      z-index: -1;
+      background: linear-gradient(to top, rgba(6,12,24,.96), rgba(6,12,24,.1));
     }
-    .photo-copy {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 7px;
-      padding: 22px;
-    }
-    .photo-copy h2 { margin: 0; color: #fff; font-size: clamp(1.35rem, 6vw, 2rem); }
-    .photo-copy p { margin: 0; color: #dce8f7; line-height: 1.4; }
-    .photo-meta { color: #f3c85b; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
+    .recent-copy { display: grid; gap: 7px; }
+    .recent-copy .section-kicker { color: #f3c85b; }
+    .recent-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+    .recent-count { color: #f3c85b; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
 
-    .community-card {
-      min-height: 300px;
-      padding: 24px;
-      display: grid;
-      align-content: space-between;
-      gap: 30px;
-      background: color-mix(in srgb, var(--paper) 94%, var(--acadian-yellow));
-    }
-    .community-copy { display: grid; gap: 10px; }
-    .community-card h2 {
-      margin: 0;
-      max-width: 14ch;
-      color: var(--ink-strong);
-      font-size: clamp(1.5rem, 7vw, 2.4rem);
-      line-height: 1.02;
-      letter-spacing: -.035em;
-    }
-    .community-card p { margin: 0; max-width: 40ch; color: var(--muted); line-height: 1.5; }
-    .community-links { display: flex; flex-wrap: wrap; gap: 9px; }
-    .community-link {
+    .carousel-controls {
       min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      padding: 9px 14px;
-      border: 1px solid var(--button-border);
-      border-radius: 999px;
-      background: var(--button-bg);
-      color: var(--button-fg);
-      font-size: .76rem;
-      font-weight: 900;
-      text-decoration: none;
-    }
-    .community-link.secondary { background: transparent; color: var(--link); border-color: var(--line-strong); }
-
-    /* One quiet archive exit replaces the embedded second application formerly on Home. */
-    .archive-link {
-      padding: 17px 20px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--ink-strong);
-      text-decoration: none;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 16px 12px;
+      background: linear-gradient(to top, rgba(4,14,32,.42), transparent);
     }
-    .archive-copy { display: grid; gap: 4px; }
-    .archive-copy strong { font-size: .9rem; }
-    .archive-copy span { color: var(--muted); font-size: .74rem; }
-    .archive-arrow { color: var(--gold); font-size: 1.2rem; }
+    .carousel-dot {
+      width: 30px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,.28);
+      cursor: pointer;
+    }
+    .carousel-dot[aria-pressed="true"] { background: #f3c85b; }
+    .carousel-toggle {
+      min-width: 30px;
+      height: 26px;
+      margin-left: 4px;
+      padding: 0 7px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #fff8e7;
+      font: 800 .68rem/1 ui-monospace, monospace;
+      cursor: pointer;
+    }
+    .carousel-toggle:hover { border-color: #f3c85b; }
+    .carousel-dot:focus-visible,
+    .carousel-toggle:focus-visible,
+    .community-sprite:focus-visible,
+    .home-footer a:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 76%, transparent);
+      outline-offset: 3px;
+    }
+
+    .home-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      padding: 6px 12px 2px;
+      color: var(--muted);
+      font-size: .72rem;
+    }
+    .home-footer a { color: inherit; text-decoration: none; }
+    .home-footer a:hover { color: var(--link); }
+    .footer-icon { color: var(--gold); margin-right: 4px; }
+
+    .community-peek {
+      position: fixed;
+      right: max(18px, env(safe-area-inset-right));
+      bottom: 18px;
+      z-index: 74;
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .community-sprite {
+      width: 43px;
+      height: 43px;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 15px 15px 5px 15px;
+      background: color-mix(in srgb, var(--paper) 84%, transparent);
+      color: var(--gold);
+      box-shadow: 0 12px 26px var(--shadow);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      transform: translateY(8px) scale(.9);
+      pointer-events: none;
+      cursor: pointer;
+      transition: opacity .26s ease, transform .26s ease;
+    }
+    .community-sprite[hidden] { display: none; }
+    .community-sprite.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .sprite-hi {
+      position: absolute;
+      right: 34px;
+      top: -6px;
+      color: var(--muted);
+      font: 900 .55rem/1 "Pokemon GB", ui-monospace, monospace;
+    }
+    .community-whisper {
+      max-width: min(245px, calc(100vw - 32px));
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 16px 16px 4px 16px;
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      box-shadow: 0 14px 30px var(--shadow);
+      pointer-events: auto;
+    }
+    .community-whisper[hidden] { display: none; }
+    .community-whisper a { color: var(--link); font-size: .76rem; font-weight: 900; text-decoration: none; }
 
     @keyframes live-pulse {
       0% { box-shadow: 0 0 0 0 rgba(255,255,255,.38); }
       70%, 100% { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .live-dot { animation: none; }
-      .photo-feature img { transition: none; }
-    }
-    /* Mobile has permanent dock chrome, so Home removes duplicate top chrome and
-       flattens secondary surfaces. One strong LIVE card remains the attention anchor. */
+
     @media (max-width: 899px) {
       body.home-page { padding-top: env(safe-area-inset-top); }
       .home-page .site-header { display: none; }
-      .home-page .home-shell { padding: 6px 10px 98px; gap: 10px; }
-      .home-page .home-top,
-      .home-page .feature-grid { gap: 10px; }
+      .home-shell { padding: 7px 10px 102px; gap: 10px; }
+      .home-top { grid-template-columns: 1fr; gap: 10px; }
       .surface { border-radius: 22px; box-shadow: 0 9px 24px var(--shadow); }
-
-      .home-page .welcome-card {
+      .welcome-card {
         min-height: auto;
         gap: 5px;
-        padding: 16px 10px 11px;
+        padding: 15px 10px 10px;
         overflow: visible;
         border: 0;
         border-radius: 0;
@@ -283,47 +363,32 @@
       .welcome-mark { display: none; }
       .welcome-card h1 { font-size: 1.08rem; }
       .welcome-line { font-size: .79rem; line-height: 1.35; }
+      .home-pulse { width: min(300px, 94%); margin-top: 4px; padding-top: 9px; font-size: .65rem; }
+      .home-pulse strong { font-size: .78rem; }
 
-      .home-page .live-card { min-height: auto; padding: 18px; gap: 14px; }
+      .attention-carousel { min-height: 305px; }
+      .attention-slide { padding: 18px 18px 12px; }
+      .live-card { gap: 14px; }
       .live-head { justify-content: flex-start; }
       .live-kicker { display: none; }
       .live-copy { gap: 6px; }
-      .live-copy h2 { max-width: 21ch; font-size: clamp(1.3rem, 6vw, 1.55rem); }
-      .live-copy p { font-size: .82rem; line-height: 1.4; }
+      .live-copy h2,
+      .recent-copy h2 { max-width: 21ch; font-size: clamp(1.3rem, 6vw, 1.55rem); }
+      .live-copy p,
+      .recent-copy p { font-size: .82rem; line-height: 1.4; }
       .live-place { max-width: 15ch; font-size: .65rem; line-height: 1.3; }
-      .live-link { min-height: 38px; padding: 8px 12px; font-size: .7rem; }
+      .attention-link { min-height: 38px; padding: 8px 12px; font-size: .7rem; }
+      .recent-meta { align-items: end; }
+      #recent-summary { display: none; }
+      .carousel-controls { min-height: 40px; padding-bottom: 10px; }
 
-      .home-page .photo-feature { min-height: 252px; }
-      .photo-copy { gap: 5px; padding: 18px; }
-      .photo-copy h2 { font-size: 1.3rem; }
-      #featured-album-summary { display: none; }
-      .photo-meta { font-size: .63rem; }
-
-      .home-page .community-card { min-height: auto; padding: 18px; gap: 16px; }
-      .community-copy { gap: 7px; }
-      .community-card h2 { max-width: 22ch; font-size: 1.28rem; line-height: 1.08; }
-      .community-card p:not(.section-kicker),
-      .community-link.secondary { display: none; }
-      .community-link { min-height: 38px; padding: 8px 12px; font-size: .7rem; }
-
-      .archive-link {
-        padding: 13px 4px 2px;
-        border: 0;
-        border-top: 1px solid var(--line);
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-      }
-      #archive-summary { display: none; }
+      .community-peek { right: max(16px, env(safe-area-inset-right)); bottom: calc(92px + env(safe-area-inset-bottom)); }
+      .home-footer { padding-top: 4px; }
     }
-    @media (min-width: 760px) {
-      .home-shell { padding: 18px 22px 54px; gap: 18px; }
-      .home-top { grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr); gap: 18px; }
-      .feature-grid { grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 18px; }
-      .welcome-card { min-height: 300px; }
-      .live-card { min-height: 300px; padding: 28px; }
-      .photo-feature,
-      .community-card { min-height: 390px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .live-dot { animation: none; }
+      .community-sprite { transition: none; }
     }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
@@ -337,81 +402,97 @@
         <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
         <p class="welcome-line" id="welcome-line">Made here. Shared outward. Kept by community.</p>
         <span class="welcome-mark" aria-hidden="true">✧❅✦❅✧</span>
+        <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
+          <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
+          <span class="pulse-star" aria-hidden="true">✦</span>
+          <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
+        </div>
       </section>
 
-      <section class="surface live-card" id="live-card" aria-labelledby="live-title">
-        <div class="live-head">
-          <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">LIVE</span></span>
-          <span class="live-kicker" id="live-kicker">Right now</span>
+      <section class="surface attention-carousel" data-autoplay-ms="3000" aria-label="Current and recently added">
+        <div class="carousel-stage" aria-live="off">
+          <article class="attention-slide live-card is-inactive" id="live-card" aria-hidden="false" aria-labelledby="live-title">
+            <div class="live-head">
+              <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">Soon</span></span>
+              <span class="live-kicker" id="live-kicker">Quiet for now</span>
+            </div>
+            <div class="live-copy">
+              <h2 id="live-title">Check again soon</h2>
+              <p id="live-summary">Live notes and featured notices will land here when there is something worth sharing.</p>
+            </div>
+            <div class="live-meta">
+              <span class="live-place" id="live-location" hidden></span>
+              <a class="attention-link" id="live-link" href="events.html">Browse events</a>
+            </div>
+          </article>
+
+          <article class="attention-slide recent-slide" id="recent-slide" hidden aria-hidden="true" aria-labelledby="recent-title">
+            <img id="recent-image" src="assets/gallery/2026/acadie-in-the-stars/cover-960.webp" alt="Acadie.sol wordmark floating in a field of stars" width="960" height="720" />
+            <div class="recent-copy">
+              <p class="section-kicker" id="recent-kicker">Recently added</p>
+              <h2 id="recent-title">Acadie in the Stars</h2>
+              <p id="recent-summary">A first visual marker for the renewed Acadie.sol archive.</p>
+              <div class="recent-meta">
+                <span class="recent-count" id="recent-count">1 photo</span>
+                <a class="attention-link" id="recent-link" href="photos/2026/acadie-in-the-stars/">Open ↗</a>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="live-copy">
-          <h2 id="live-title">Rebuilding Acadie.sol in public</h2>
-          <p id="live-summary">A calmer home, a living event signal, and a photo archive made to last.</p>
-        </div>
-        <div class="live-meta">
-          <span class="live-place" id="live-location">From Bathurst, for Acadie</span>
-          <a class="live-link" id="live-link" href="home-feed.html">Follow the build</a>
+        <div class="carousel-controls" aria-label="Choose a homepage notice">
+          <button class="carousel-dot" type="button" aria-pressed="true" aria-controls="live-card" aria-label="Show current notice" data-slide="0"></button>
+          <button class="carousel-dot" type="button" aria-pressed="false" aria-controls="recent-slide" aria-label="Show recently added" data-slide="1"></button>
+          <button class="carousel-toggle" id="carousel-toggle" type="button" aria-pressed="false" aria-label="Pause carousel" title="Pause carousel">Ⅱ</button>
         </div>
       </section>
     </div>
 
-    <div class="feature-grid">
-      <a class="surface photo-feature" id="featured-album-link" href="photos/2026/acadie-in-the-stars/" aria-labelledby="featured-album-title">
-        <img id="featured-album-image" src="assets/gallery/2026/acadie-in-the-stars/cover-960.webp" alt="Acadie.sol wordmark floating in a field of stars" width="960" height="720" />
-        <span class="photo-copy">
-          <span class="section-kicker" id="photo-kicker">Featured album</span>
-          <h2 id="featured-album-title">Acadie in the Stars</h2>
-          <p id="featured-album-summary">A first visual marker for the renewed Acadie.sol archive.</p>
-          <span class="photo-meta"><span id="featured-album-count">1 photo</span> · <span id="view-all-photos">View all albums ↗</span></span>
-        </span>
-      </a>
-
-      <section class="surface community-card" aria-labelledby="community-title">
-        <div class="community-copy">
-          <p class="section-kicker" id="community-kicker">After hours</p>
-          <h2 id="community-title">The website is the doorway. Community is the room.</h2>
-          <p id="community-summary">Events in public. Conversation in Discord. The archive stays open and useful.</p>
-        </div>
-        <div class="community-links">
-          <a class="community-link" href="community.html" id="community-link">Enter community</a>
-          <a class="community-link secondary" href="events.html" id="events-link">See events</a>
-        </div>
-      </section>
-    </div>
-
-    <a class="surface archive-link" href="home-feed.html">
-      <span class="archive-copy"><strong id="archive-title">Project log</strong><span id="archive-summary">Recent additions, events, and changes.</span></span>
-      <span class="archive-arrow" aria-hidden="true">↗</span>
-    </a>
+    <footer class="home-footer" id="home-footer" aria-label="Community links">
+      <a href="community.html"><span class="footer-icon" aria-hidden="true">✦</span><span id="footer-community">Community</span></a>
+      <a href="about-us.html"><span class="footer-icon" aria-hidden="true">⁜</span><span id="footer-about">About</span></a>
+      <a href="support.html"><span class="footer-icon" aria-hidden="true">◇</span><span id="footer-support">Support</span></a>
+    </footer>
   </main>
+
+  <div class="community-peek" aria-live="polite">
+    <div class="community-whisper" id="community-whisper" hidden><a href="community.html" id="community-whisper-link">Come chat with us here →</a></div>
+    <button class="community-sprite" id="community-sprite" type="button" hidden aria-controls="community-whisper" aria-expanded="false" aria-label="A quiet hello from the community">
+      <span class="sprite-hi" id="sprite-hi">hi</span><span aria-hidden="true">✦</span>
+    </button>
+  </div>
 
   <script>
     const HOME_COPY = {
       en: {
         welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: 'Made here. Shared outward. Kept by community.',
-        photoKicker: 'Featured album', viewAlbums: 'View all albums ↗',
-        photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
-        communityKicker: 'After hours',
-        communityTitle: 'The website is the doorway. Community is the room.',
-        communitySummary: 'Events in public. Conversation in Discord. The archive stays open and useful.',
-        communityLink: 'Enter community', eventsLink: 'See events',
-        archiveTitle: 'Project log', archiveSummary: 'Recent additions, events, and changes.'
+        welcomeLine: 'Made here. Shared outward. Kept by community.', entries: 'entries', events: 'events',
+        fallbackLabel: 'Soon', fallbackKicker: 'Quiet for now', fallbackTitle: 'Check again soon',
+        fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
+        recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
+        footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', pulseLabel: 'Site pulse', footerLabel: 'Community links',
+        spriteHi: 'hi', spriteLabel: 'A quiet hello from the community', communityWhisper: 'Come chat with us here →',
+        carouselLabel: 'Current and recently added', controlsLabel: 'Choose a homepage notice', liveTab: 'Show current notice', recentTab: 'Show recently added', pauseCarousel: 'Pause carousel', playCarousel: 'Play carousel'
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: 'Créé ici. Partagé au loin. Gardé par la communauté.',
-        photoKicker: 'Album en vedette', viewAlbums: 'Voir tous les albums ↗',
-        photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
-        communityKicker: 'Après les heures',
-        communityTitle: 'Le site est la porte. La communauté est la pièce.',
-        communitySummary: 'Les événements en public. La conversation sur Discord. Les archives restent ouvertes et utiles.',
-        communityLink: 'Entrer dans la communauté', eventsLink: 'Voir les événements',
-        archiveTitle: 'Journal du projet', archiveSummary: 'Ajouts récents, événements et changements.'
+        welcomeLine: 'Créé ici. Partagé au loin. Gardé par la communauté.', entries: 'entrées', events: 'événements',
+        fallbackLabel: 'Bientôt', fallbackKicker: 'Calme pour l’instant', fallbackTitle: 'Revenez bientôt',
+        fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
+        recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
+        footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
+        spriteHi: 'salut', spriteLabel: 'Un petit salut de la communauté', communityWhisper: 'Venez jaser avec nous ici →',
+        carouselLabel: 'En cours et ajouté récemment', controlsLabel: 'Choisir un avis d’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent', pauseCarousel: 'Mettre le carrousel en pause', playCarousel: 'Démarrer le carrousel'
       }
     };
 
+    let livePayload = null;
+    let recentAlbum = null;
+    let activeSlide = 0;
+    let carouselTimer = null;
+    let carouselUserPaused = false;
+
     function lang() { return window.AcadieShell?.currentLang() || 'en'; }
+    function copy() { return HOME_COPY[lang()] || HOME_COPY.en; }
     function localize(value) {
       if (value && typeof value === 'object' && !Array.isArray(value)) return value[lang()] || value.en || Object.values(value).find(Boolean) || '';
       return String(value || '');
@@ -420,8 +501,9 @@
     function siteUrl(path) { return window.AcadieShell?.url(path) || new URL(path, document.baseURI).href; }
     function safeSiteHref(path, fallback) {
       try {
-        const target = new URL(path, siteUrl(''));
-        return target.protocol === 'https:' || target.origin === location.origin ? target.href : siteUrl(fallback);
+        const root = new URL(siteUrl(''));
+        const target = new URL(path, root);
+        return target.origin === root.origin ? target.href : siteUrl(fallback);
       } catch (_) { return siteUrl(fallback); }
     }
     function localizedSrcset(value) {
@@ -431,67 +513,168 @@
       }).join(', ');
     }
 
-    function updateStaticCopy() {
-      const copy = HOME_COPY[lang()] || HOME_COPY.en;
-      setText('welcome-kicker', copy.welcomeKicker);
-      setText('welcome-title', copy.welcomeTitle);
-      setText('welcome-line', copy.welcomeLine);
-      setText('photo-kicker', copy.photoKicker);
-      setText('view-all-photos', copy.viewAlbums);
-      setText('community-kicker', copy.communityKicker);
-      setText('community-title', copy.communityTitle);
-      setText('community-summary', copy.communitySummary);
-      setText('community-link', copy.communityLink);
-      setText('events-link', copy.eventsLink);
-      setText('archive-title', copy.archiveTitle);
-      setText('archive-summary', copy.archiveSummary);
+    function renderStaticCopy() {
+      const c = copy();
+      setText('welcome-kicker', c.welcomeKicker);
+      setText('welcome-title', c.welcomeTitle);
+      setText('welcome-line', c.welcomeLine);
+      setText('home-entry-label', c.entries);
+      setText('home-event-label', c.events);
+      setText('recent-kicker', c.recentKicker);
+      setText('recent-link', c.recentCta);
+      setText('footer-community', c.footerCommunity);
+      setText('footer-about', c.footerAbout);
+      setText('footer-support', c.footerSupport);
+      setText('sprite-hi', c.spriteHi);
+      setText('community-whisper-link', c.communityWhisper);
+      document.getElementById('home-pulse').setAttribute('aria-label', c.pulseLabel);
+      document.getElementById('home-footer').setAttribute('aria-label', c.footerLabel);
+      const sprite = document.getElementById('community-sprite');
+      sprite.setAttribute('aria-label', c.spriteLabel);
+      document.querySelector('.attention-carousel').setAttribute('aria-label', c.carouselLabel);
+      document.querySelector('.carousel-controls').setAttribute('aria-label', c.controlsLabel);
+      document.querySelector('[data-slide="0"]').setAttribute('aria-label', c.liveTab);
+      document.querySelector('[data-slide="1"]').setAttribute('aria-label', c.recentTab);
+      updateCarouselControl();
     }
 
-    async function loadLive() {
-      try {
-        const response = await fetch(siteUrl('assets/live.json'), { cache: 'no-cache' });
-        if (!response.ok) throw new Error('LIVE data unavailable');
-        const item = await response.json();
-        setText('live-label', localize(item.label));
-        setText('live-kicker', localize(item.kicker));
-        setText('live-title', localize(item.title));
-        setText('live-summary', localize(item.summary));
-        setText('live-location', localize(item.location));
-        setText('live-link', localize(item.cta));
-        document.getElementById('live-link').href = safeSiteHref(item.href, 'home-feed.html');
-        document.getElementById('live-card').classList.toggle('is-inactive', item.active === false);
-      } catch (error) { console.warn(error); }
+    function renderLive(item) {
+      const c = copy();
+      const active = item?.active === true;
+      setText('live-label', active ? localize(item.label) : c.fallbackLabel);
+      setText('live-kicker', active ? localize(item.kicker) : c.fallbackKicker);
+      setText('live-title', active ? localize(item.title) : c.fallbackTitle);
+      setText('live-summary', active ? localize(item.summary) : c.fallbackSummary);
+      setText('live-link', active ? localize(item.cta) : c.fallbackCta);
+      const location = active ? localize(item.location) : '';
+      const locationEl = document.getElementById('live-location');
+      locationEl.textContent = location;
+      locationEl.hidden = !location;
+      document.getElementById('live-link').href = active
+        ? safeSiteHref(item.href, 'events.html')
+        : siteUrl('events.html');
+      document.getElementById('live-card').classList.toggle('is-inactive', !active);
     }
 
-    async function loadFeaturedAlbum() {
-      try {
-        const response = await fetch(siteUrl('assets/gallery/albums.json'));
-        if (!response.ok) throw new Error('Album data unavailable');
-        const payload = await response.json();
-        const album = payload.albums?.find(item => item.status === 'public' && item.featured) || payload.albums?.find(item => item.status === 'public');
-        if (!album) return;
-        const cover = album.cover || {};
-        const image = document.getElementById('featured-album-image');
-        document.getElementById('featured-album-link').href = safeSiteHref(album.href, 'photos/index.html');
-        image.src = siteUrl(cover.src);
-        if (cover.srcset) image.srcset = localizedSrcset(cover.srcset);
-        image.alt = localize(cover.alt);
-        image.width = Number(cover.width) || 960;
-        image.height = Number(cover.height) || 720;
-        setText('featured-album-title', localize(album.title));
-        setText('featured-album-summary', localize(album.summary));
-        setText('featured-album-count', (HOME_COPY[lang()] || HOME_COPY.en).photoCount(Number(album.photo_count) || 0));
-      } catch (error) { console.warn(error); }
+    function renderRecent(album) {
+      if (!album) return;
+      const c = copy();
+      const cover = album.cover || {};
+      const image = document.getElementById('recent-image');
+      document.getElementById('recent-link').href = safeSiteHref(album.href, 'photos/index.html');
+      if (cover.src) image.src = siteUrl(cover.src);
+      if (cover.srcset) image.srcset = localizedSrcset(cover.srcset);
+      image.alt = localize(cover.alt);
+      image.width = Number(cover.width) || 960;
+      image.height = Number(cover.height) || 720;
+      setText('recent-title', localize(album.title));
+      setText('recent-summary', localize(album.summary));
+      setText('recent-count', c.photoCount(Number(album.photo_count) || 0));
+    }
+
+    async function loadHomeData() {
+      const [liveResult, albumResult] = await Promise.allSettled([
+        fetch(siteUrl('assets/live.json'), { cache: 'no-cache' }).then(response => {
+          if (!response.ok) throw new Error('Live data unavailable');
+          return response.json();
+        }),
+        fetch(siteUrl('assets/gallery/albums.json'), { cache: 'no-cache' }).then(response => {
+          if (!response.ok) throw new Error('Album data unavailable');
+          return response.json();
+        })
+      ]);
+      if (liveResult.status === 'fulfilled') livePayload = liveResult.value;
+      if (albumResult.status === 'fulfilled') {
+        recentAlbum = (albumResult.value.albums || [])
+          .filter(album => album.status === 'public')
+          .sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || '')))[0] || null;
+      }
+      renderLive(livePayload);
+      renderRecent(recentAlbum);
+    }
+
+    function showSlide(index) {
+      const slides = [...document.querySelectorAll('.attention-slide')];
+      const dots = [...document.querySelectorAll('.carousel-dot')];
+      activeSlide = ((index % slides.length) + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === activeSlide;
+        slide.hidden = !active;
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach((dot, dotIndex) => dot.setAttribute('aria-pressed', String(dotIndex === activeSlide)));
+    }
+
+    function updateCarouselControl() {
+      const button = document.getElementById('carousel-toggle');
+      if (!button) return;
+      const label = carouselUserPaused ? copy().playCarousel : copy().pauseCarousel;
+      button.textContent = carouselUserPaused ? '▶' : 'Ⅱ';
+      button.setAttribute('aria-pressed', String(carouselUserPaused));
+      button.setAttribute('aria-label', label);
+      button.title = label;
+    }
+    function stopCarousel() {
+      if (carouselTimer) window.clearInterval(carouselTimer);
+      carouselTimer = null;
+    }
+    function startCarousel() {
+      stopCarousel();
+      if (carouselUserPaused || document.hidden) return;
+      const interval = Number(document.querySelector('.attention-carousel').dataset.autoplayMs) || 3000;
+      carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), interval);
+    }
+    function setUserPaused(paused) {
+      carouselUserPaused = paused;
+      paused ? stopCarousel() : startCarousel();
+      updateCarouselControl();
+    }
+    function initCarousel() {
+      carouselUserPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('.carousel-dot').forEach(dot => dot.addEventListener('click', () => {
+        setUserPaused(true);
+        showSlide(Number(dot.dataset.slide));
+      }));
+      document.getElementById('carousel-toggle').addEventListener('click', () => setUserPaused(!carouselUserPaused));
+      const carousel = document.querySelector('.attention-carousel');
+      carousel.addEventListener('mouseenter', stopCarousel);
+      carousel.addEventListener('mouseleave', startCarousel);
+      carousel.addEventListener('focusin', stopCarousel);
+      carousel.addEventListener('focusout', event => {
+        if (!carousel.contains(event.relatedTarget)) startCarousel();
+      });
+      document.addEventListener('visibilitychange', () => document.hidden ? stopCarousel() : startCarousel());
+      showSlide(0);
+      updateCarouselControl();
+      startCarousel();
+    }
+
+    function initCommunityPeek() {
+      const sprite = document.getElementById('community-sprite');
+      const whisper = document.getElementById('community-whisper');
+      window.setTimeout(() => {
+        sprite.hidden = false;
+        window.requestAnimationFrame(() => sprite.classList.add('is-visible'));
+      }, 8000);
+      sprite.addEventListener('click', () => {
+        const opening = whisper.hidden;
+        whisper.hidden = !opening;
+        sprite.setAttribute('aria-expanded', String(opening));
+      });
     }
 
     function hydrateHome() {
-      updateStaticCopy();
-      loadLive();
-      loadFeaturedAlbum();
+      renderStaticCopy();
+      renderLive(livePayload);
+      renderRecent(recentAlbum);
+      window.AcadieShell?.sync();
     }
 
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
+    initCarousel();
+    initCommunityPeek();
+    loadHomeData();
   </script>
 </body>
 </html>
