@@ -373,7 +373,6 @@
         overscroll-behavior-x: contain;
         scroll-snap-type: x mandatory;
         scrollbar-width: none;
-        touch-action: pan-x;
       }
       .home-top::-webkit-scrollbar { display: none; }
       .home-top > .surface {
@@ -388,7 +387,9 @@
       .welcome-card {
         gap: 11px;
         padding: 24px 18px;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
       }
       .welcome-kicker,
       .welcome-mark { display: block; }
@@ -406,7 +407,14 @@
       }
 
       .attention-carousel { min-height: 0; }
-      .attention-slide { padding: 24px 20px 16px; }
+      .attention-slide {
+        height: 100%;
+        min-height: 0;
+        padding: 24px 20px 16px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior-y: contain;
+      }
       .live-card { gap: 18px; }
       .live-head { justify-content: flex-start; }
       .live-kicker { display: none; }
