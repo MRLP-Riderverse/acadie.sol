@@ -1023,7 +1023,7 @@
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
             ${eventFeed}
-            ${entryLink ? `<div class="card-footer"><div class="card-divider" aria-hidden="true">✧❅✦❅✧</div>${entryLink}</div>` : ''}
+            ${entryLink ? `<div class="card-footer"><div class="card-divider" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</div>${entryLink}</div>` : ''}
           </div>
         </details>`;
     }

@@ -1,6 +1,6 @@
 /* Global Acadie.sol shell renderer.
-   One route model renders the mobile dock, desktop navigation, and floating menu.
-   Pages own their content; this file owns only shared navigation, theme, language,
+   One focused route model renders the mobile launcher, desktop navigation, and
+   floating menu. Pages own their content; this file owns only shared navigation,
    and lightweight public counts. */
 (function () {
   const CACHE_KEY = 'acadie-shell-counts';

@@ -349,8 +349,10 @@
       }
       .welcome-card {
         grid-row: auto;
+        grid-template-rows: auto auto auto auto auto minmax(48px, 1fr) auto;
+        align-content: stretch;
         gap: 11px;
-        padding: 24px 22px;
+        padding: clamp(38px, 7svh, 68px) 22px 10px;
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior-y: contain;
@@ -363,7 +365,9 @@
       .home-pulse strong { font-size: .82rem; }
       .mobile-deck-hint {
         display: block;
-        margin: 8px 0 0;
+        grid-row: 7;
+        align-self: end;
+        margin: 0 0 2px;
         color: var(--muted);
         font-size: .68rem;
         font-weight: 900;
@@ -403,7 +407,29 @@
       #recent-summary { display: none; }
       .deck-controls { display: flex; }
 
-      .community-peek { right: max(16px, env(safe-area-inset-right)); bottom: calc(92px + env(safe-area-inset-bottom)); }
+      /* Keep the opt-in community prompt in the open lower-left lane. It remains
+         clear of the menu launcher and leaves the welcome panel's middle available. */
+      .community-peek {
+        right: auto;
+        left: max(18px, env(safe-area-inset-left));
+        bottom: calc(142px + env(safe-area-inset-bottom));
+        justify-items: start;
+      }
+      .community-sprite { border-radius: 15px 15px 15px 5px; }
+      .sprite-hi {
+        right: auto;
+        left: 35px;
+        top: -9px;
+        width: max-content;
+        padding: 6px 8px;
+        border: 1px solid var(--line);
+        border-radius: 10px 10px 10px 3px;
+        background: color-mix(in srgb, var(--paper) 94%, transparent);
+        box-shadow: 0 9px 20px var(--shadow);
+        color: var(--ink-strong);
+        white-space: nowrap;
+      }
+      .community-whisper { border-radius: 16px 16px 16px 4px; }
       .home-footer { min-height: 22px; padding: 2px 12px 0; }
     }
 
@@ -422,7 +448,7 @@
         <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
         <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
         <p class="welcome-line" id="welcome-line">Made here. Shared outward. Kept by community.</p>
-        <span class="welcome-mark" aria-hidden="true">✧❅✦❅✧</span>
+        <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
         <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
           <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
           <span class="pulse-star" aria-hidden="true">✦</span>
@@ -474,9 +500,9 @@
   </main>
 
   <div class="community-peek" aria-live="polite">
-    <div class="community-whisper" id="community-whisper" hidden><a href="community.html" id="community-whisper-link">Come chat with us here →</a></div>
+    <div class="community-whisper" id="community-whisper" hidden><a href="https://discord.gg/frw6uYYDSa" target="_blank" rel="noopener noreferrer" id="community-whisper-link">Open Discord →</a></div>
     <button class="community-sprite" id="community-sprite" type="button" hidden aria-controls="community-whisper" aria-expanded="false" aria-label="A quiet hello from the community">
-      <span class="sprite-hi" id="sprite-hi">hi</span><span aria-hidden="true">✦</span>
+      <span class="sprite-hi" id="sprite-hi">Join our Discord xo</span><span aria-hidden="true">📣</span>
     </button>
   </div>
 
@@ -489,7 +515,7 @@
         fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', pulseLabel: 'Site pulse', footerLabel: 'Community links',
-        spriteHi: 'hi', spriteLabel: 'A quiet hello from the community', communityWhisper: 'Come chat with us here →',
+        spriteHi: 'Join our Discord xo', spriteLabel: 'Join our Discord community', communityWhisper: 'Open Discord →',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
       },
       fr: {
@@ -499,7 +525,7 @@
         fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
-        spriteHi: 'salut', spriteLabel: 'Un petit salut de la communauté', communityWhisper: 'Venez jaser avec nous ici →',
+        spriteHi: 'Rejoignez notre Discord xo', spriteLabel: 'Rejoignez notre communauté Discord', communityWhisper: 'Ouvrir Discord →',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
       }
     };
