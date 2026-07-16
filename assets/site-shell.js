@@ -20,7 +20,7 @@
       routes: {
         home: 'Home', directory: 'Directory', events: 'Events', search: 'Search',
         photos: 'Photos', community: 'Community', updates: 'Updates',
-        support: 'Support', about: 'About'
+        support: 'Support', about: 'About', extras: 'Extras'
       }
     },
     fr: {
@@ -35,7 +35,7 @@
       routes: {
         home: 'Accueil', directory: 'Répertoire', events: 'Événements', search: 'Recherche',
         photos: 'Photos', community: 'Communauté', updates: 'Mises à jour',
-        support: 'Soutien', about: 'À propos'
+        support: 'Soutien', about: 'À propos', extras: 'Extras'
       }
     }
   };
@@ -49,12 +49,14 @@
     community: { href: 'community.html', icon: '✦' },
     updates: { href: 'home-feed.html', icon: '↻' },
     support: { href: 'support.html', icon: '◇' },
-    about: { href: 'about-us.html', icon: '⁜' }
+    about: { href: 'about-us.html', icon: '⁜' },
+    extras: { href: 'extras.html', icon: '＋' }
   };
 
-  const MOBILE_KEYS = ['home', 'events', 'search'];
-  const DESKTOP_KEYS = ['home', 'directory', 'events', 'photos', 'community'];
-  const MENU_KEYS = ['directory', 'events', 'photos', 'community', 'updates', 'support', 'about'];
+  // Keep the everyday shell focused. Directory, events, and institutional links
+  // remain reachable from Home or the full-page Extras hub instead of crowding Menu.
+  const DESKTOP_KEYS = ['home', 'search', 'photos'];
+  const MENU_KEYS = ['home', 'search', 'photos', 'extras'];
   const SHELL_DATA = { entryCount: null, eventCount: null };
 
   function siteUrl(path = '') {
@@ -85,6 +87,7 @@
     if (/home-feed\.html$/.test(path) || /recents\.html$/.test(path)) return 'updates';
     if (/support\.html$/.test(path)) return 'support';
     if (/about-us\.html$/.test(path)) return 'about';
+    if (/extras\.html$/.test(path)) return 'extras';
     return 'home';
   }
 
@@ -221,10 +224,9 @@
       </div>
       <nav class="drawer-nav">${MENU_KEYS.map(key => routeLink(key, 'drawer-route')).join('')}</nav>
     </aside>
-    <nav class="site-dock" aria-label="Primary dock">
-      ${MOBILE_KEYS.map(key => routeLink(key, 'dock-route')).join('')}
-      <label for="menu-toggle" data-menu-label role="button" tabindex="0" aria-controls="site-menu-drawer" aria-expanded="false"><span class="route-icon" aria-hidden="true">☰</span><span class="route-label">Menu</span></label>
-    </nav>
+    <label class="site-menu-fab" for="menu-toggle" data-menu-label role="button" tabindex="0" aria-controls="site-menu-drawer" aria-expanded="false">
+      <span class="route-icon" aria-hidden="true">☰</span><span class="route-label shell-visually-hidden">Menu</span>
+    </label>
   `);
 
   window.AcadieShell = { currentLang, setTheme, setLang, sync: syncShell, loadShellCounts, url: siteUrl };

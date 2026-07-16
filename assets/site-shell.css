@@ -26,6 +26,17 @@
 
 body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.shell-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* Desktop wrapper: hidden on touch-sized canvases, then replaces—not duplicates—the
    mobile visual wrapper while retaining the same route data and menu toggle. */
@@ -97,8 +108,7 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .menu-control,
 .drawer-close,
 .drawer-nav a,
-.site-dock a,
-.site-dock label,
+.site-menu-fab,
 .desktop-menu-launch {
   display: inline-grid;
   place-items: center;
@@ -119,8 +129,7 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .menu-control:focus-visible,
 .drawer-close:focus-visible,
 .drawer-nav a:focus-visible,
-.site-dock a:focus-visible,
-.site-dock label:focus-visible,
+.site-menu-fab:focus-visible,
 .site-desktop-nav a:focus-visible,
 .desktop-menu-launch:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 72%, transparent);
@@ -152,55 +161,42 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .menu-control:hover,
 .drawer-close:hover,
 .drawer-nav a:hover,
-.site-dock a:hover,
-.site-dock label:hover,
+.site-menu-fab:hover,
 .desktop-menu-launch:hover {
   color: var(--button-fg);
   background: var(--button-bg-hover);
   border-color: var(--button-border);
 }
 
-/* Mobile presentation. The fixed layer uses percentage width rather than 100vw so
-   restored PWA layout viewports cannot pull it beyond the visible page. */
-.site-dock {
+/* Mobile shell: one thumb-reachable launcher replaces the former four-route dock.
+   Home now lives inside Menu, while secondary destinations move to Extras. */
+.site-menu-fab {
   position: fixed;
-  left: max(14px, env(safe-area-inset-left));
-  right: max(14px, env(safe-area-inset-right));
+  right: max(16px, env(safe-area-inset-right));
   bottom: max(12px, env(safe-area-inset-bottom));
-  margin: 0 auto;
-  width: min(390px, calc(100% - 28px));
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  padding: 7px;
+  width: 58px;
+  min-width: 58px;
+  height: 58px;
+  min-height: 58px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
   border: 1px solid var(--line);
-  border-radius: 26px;
+  border-radius: 20px;
   background: var(--glass, color-mix(in srgb, var(--paper) 72%, transparent));
   box-shadow: 0 14px 38px var(--shadow);
   backdrop-filter: blur(20px) saturate(1.45);
   -webkit-backdrop-filter: blur(20px) saturate(1.45);
   z-index: 82;
-  isolation: isolate;
-}
-.site-dock a,
-.site-dock label {
-  gap: 4px;
-  min-height: 56px;
-  padding: 7px 2px;
-  border-radius: 18px;
-  font-size: .62rem;
+  color: var(--button-fg);
+  font-size: 1.45rem;
   line-height: 1;
-}
-.site-dock .route-icon { font-size: 1.12rem; line-height: 1; }
-.site-dock .is-current {
-  background: var(--button-bg-hover);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acadian-yellow) 32%, transparent);
 }
 
 @media (min-width: 900px) {
   body { padding-top: 86px; }
   .site-header,
-  .site-dock { display: none; }
+  .site-menu-fab { display: none; }
 
   .site-desktop-nav {
     position: fixed;
@@ -281,6 +277,6 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 @media (prefers-reduced-motion: reduce) {
   .drawer,
   .drawer-backdrop,
-  .site-dock *,
+  .site-menu-fab,
   .site-desktop-nav * { transition: none !important; }
 }

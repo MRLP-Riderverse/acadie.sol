@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="More ways to explore and support Acadie.sol." />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
+  <title>Extras — Acadie.sol</title>
+  <link rel="stylesheet" href="assets/site-colors.css" />
+  <style>
+    /* Extras is the full-page secondary route map. The floating menu stays focused;
+       less-frequent destinations remain available here without becoming hidden. */
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--page-bg);
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif;
+    }
+    [data-lang="fr"] [data-lang-copy="en"],
+    [data-lang="en"] [data-lang-copy="fr"] { display: none; }
+    .extras-shell {
+      width: min(860px, 100%);
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 34px 22px 96px;
+      display: grid;
+      align-content: center;
+      gap: 34px;
+    }
+    .extras-head { display: grid; gap: 8px; }
+    .extras-kicker {
+      margin: 0;
+      color: var(--label-accent);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .extras-head h1 {
+      margin: 0;
+      color: var(--ink-strong);
+      font-size: clamp(2rem, 8vw, 4.25rem);
+      line-height: .95;
+      letter-spacing: -.055em;
+    }
+    .extras-head p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    .extras-groups {
+      display: grid;
+      gap: 30px;
+    }
+    .extras-group { min-width: 0; }
+    .extras-group h2 {
+      margin: 0 0 7px;
+      color: var(--label-accent);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .extras-routes { display: grid; }
+    .extras-route {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-height: 58px;
+      padding: 11px 2px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-strong);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+    .extras-route:first-child { border-top: 1px solid var(--line); }
+    .extras-route:hover { color: var(--link-hover); }
+    .extras-route:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 72%, transparent);
+      outline-offset: 4px;
+    }
+    .extras-icon { color: var(--label-accent); text-align: center; }
+    .extras-arrow { color: var(--muted); font-family: ui-monospace, monospace; }
+    @media (min-width: 700px) {
+      .extras-shell { padding: 58px 32px 72px; }
+      .extras-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 58px; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/site-shell.css" />
+</head>
+<body>
+  <script src="assets/site-shell.js"></script>
+  <main class="extras-shell">
+    <header class="extras-head">
+      <p class="extras-kicker">Acadie.sol</p>
+      <h1>Extras</h1>
+      <p><span data-lang-copy="en">More ways in.</span><span data-lang-copy="fr">D’autres chemins.</span></p>
+    </header>
+
+    <div class="extras-groups">
+      <section class="extras-group" aria-labelledby="explore-heading">
+        <h2 id="explore-heading"><span data-lang-copy="en">Explore</span><span data-lang-copy="fr">Explorer</span></h2>
+        <nav class="extras-routes" id="extras-explore-nav" aria-label="Explore Acadie.sol">
+          <a class="extras-route" href="directory.html#browse"><span class="extras-icon" aria-hidden="true">⌕</span><span><span data-lang-copy="en">Directory</span><span data-lang-copy="fr">Répertoire</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+          <a class="extras-route" href="events.html"><span class="extras-icon" aria-hidden="true">◷</span><span><span data-lang-copy="en">Events</span><span data-lang-copy="fr">Événements</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+          <a class="extras-route" href="home-feed.html"><span class="extras-icon" aria-hidden="true">↻</span><span><span data-lang-copy="en">Updates</span><span data-lang-copy="fr">Mises à jour</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+        </nav>
+      </section>
+
+      <section class="extras-group" aria-labelledby="project-heading">
+        <h2 id="project-heading"><span data-lang-copy="en">Project</span><span data-lang-copy="fr">Projet</span></h2>
+        <nav class="extras-routes" id="extras-project-nav" aria-label="Project links">
+          <a class="extras-route" href="community.html"><span class="extras-icon" aria-hidden="true">✦</span><span><span data-lang-copy="en">Community</span><span data-lang-copy="fr">Communauté</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+          <a class="extras-route" href="support.html"><span class="extras-icon" aria-hidden="true">◇</span><span><span data-lang-copy="en">Support</span><span data-lang-copy="fr">Soutien</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+          <a class="extras-route" href="about-us.html"><span class="extras-icon" aria-hidden="true">⁜</span><span><span data-lang-copy="en">About</span><span data-lang-copy="fr">À propos</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+          <a class="extras-route" href="obituaries.html"><span class="extras-icon" aria-hidden="true">✟</span><span><span data-lang-copy="en">Remembrance</span><span data-lang-copy="fr">Souvenirs</span></span><span class="extras-arrow" aria-hidden="true">→</span></a>
+        </nav>
+      </section>
+    </div>
+  </main>
+  <script>
+    // Visible labels switch through shared data-lang state; this small companion
+    // keeps document and navigation labels bilingual for assistive technology too.
+    function syncExtrasCopy() {
+      const isFrench = window.AcadieShell?.currentLang() === 'fr';
+      document.getElementById('extras-explore-nav')?.setAttribute('aria-label', isFrench ? 'Explorer Acadie.sol' : 'Explore Acadie.sol');
+      document.getElementById('extras-project-nav')?.setAttribute('aria-label', isFrench ? 'Liens du projet' : 'Project links');
+    }
+    syncExtrasCopy();
+    window.addEventListener('acadie:languagechange', syncExtrasCopy);
+  </script>
+</body>
+</html>
