@@ -65,6 +65,7 @@
       gap: 11px;
       text-align: center;
     }
+    .welcome-content { display: contents; }
     .welcome-kicker,
     .section-kicker {
       margin: 0;
@@ -229,8 +230,6 @@
     }
     .deck-dot[aria-current="true"]::before { width: 22px; background: var(--gold); }
     .deck-dot:focus-visible,
-    .community-sprite:focus-visible,
-    .community-dismiss:focus-visible,
     .home-footer a:focus-visible {
       outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 76%, transparent);
       outline-offset: 3px;
@@ -257,87 +256,6 @@
       text-align: center;
     }
 
-    .community-peek {
-      position: fixed;
-      right: max(18px, env(safe-area-inset-right));
-      bottom: 18px;
-      z-index: 74;
-      display: grid;
-      justify-items: end;
-      gap: 8px;
-      opacity: .72;
-      pointer-events: none;
-      transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
-    }
-    .community-peek:hover,
-    .community-peek:focus-within { opacity: .96; }
-    .community-peek.is-deck-hidden,
-    .community-peek.is-dismissed {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(8px);
-      pointer-events: none;
-    }
-    .community-sprite {
-      width: 43px;
-      height: 43px;
-      padding: 0;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line-strong);
-      border-radius: 15px 15px 5px 15px;
-      background: color-mix(in srgb, var(--paper) 84%, transparent);
-      color: var(--gold);
-      box-shadow: 0 12px 26px var(--shadow);
-      backdrop-filter: blur(14px);
-      opacity: 0;
-      transform: translateY(8px) scale(.9);
-      pointer-events: none;
-      cursor: pointer;
-      transition: opacity .26s ease, transform .26s ease;
-    }
-    .community-sprite[hidden] { display: none; }
-    .community-sprite.is-visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-    }
-    .sprite-hi {
-      position: absolute;
-      right: 34px;
-      top: -6px;
-      color: var(--muted);
-      font: 900 .55rem/1 "Pokemon GB", ui-monospace, monospace;
-    }
-    .community-whisper {
-      max-width: min(245px, calc(100vw - 32px));
-      padding: 11px 13px;
-      border: 1px solid var(--line);
-      border-radius: 16px 16px 4px 16px;
-      background: color-mix(in srgb, var(--paper) 94%, transparent);
-      box-shadow: 0 14px 30px var(--shadow);
-      pointer-events: auto;
-    }
-    .community-whisper[hidden] { display: none; }
-    .community-whisper a { color: var(--link); font-size: .76rem; font-weight: 900; text-decoration: none; }
-    .community-dismiss {
-      position: absolute;
-      top: -12px;
-      right: -10px;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      background: color-mix(in srgb, var(--paper) 78%, transparent);
-      color: var(--muted);
-      font: 900 .8rem/1 ui-monospace, monospace;
-      box-shadow: 0 7px 16px var(--shadow);
-      backdrop-filter: blur(12px);
-      cursor: pointer;
-      pointer-events: auto;
-    }
-    .community-dismiss[hidden] { display: none; }
 
     @keyframes live-pulse {
       0% { box-shadow: 0 0 0 0 rgba(255,255,255,.38); }
@@ -385,13 +303,19 @@
       }
       .welcome-card {
         grid-row: auto;
-        grid-template-rows: auto auto auto auto auto minmax(48px, 1fr) auto;
+        grid-template-rows: minmax(0, 1fr) auto;
         align-content: stretch;
         gap: 11px;
-        padding: clamp(38px, 7svh, 68px) 22px 10px;
+        padding: 20px 22px 10px;
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior-y: contain;
+      }
+      .welcome-content {
+        display: grid;
+        align-self: center;
+        justify-items: center;
+        gap: 11px;
       }
       .welcome-kicker,
       .welcome-mark { display: block; }
@@ -401,7 +325,7 @@
       .home-pulse strong { font-size: .82rem; }
       .mobile-deck-hint {
         display: block;
-        grid-row: 7;
+        grid-row: 2;
         align-self: end;
         margin: 0 0 2px;
         color: var(--muted);
@@ -443,37 +367,11 @@
       #recent-summary { display: none; }
       .deck-controls { display: flex; }
 
-      /* Anchor the prompt roughly 40px below the welcome metadata. JS supplies the
-         exact viewport-safe top value so localized copy and phone heights stay stable. */
-      .community-peek {
-        right: auto;
-        left: max(18px, env(safe-area-inset-left));
-        top: var(--community-peek-top, calc(env(safe-area-inset-top) + 280px));
-        bottom: auto;
-        justify-items: start;
-      }
-      .community-sprite { border-radius: 15px 15px 15px 5px; }
-      .sprite-hi {
-        right: auto;
-        left: 35px;
-        top: -9px;
-        width: max-content;
-        padding: 6px 8px;
-        border: 1px solid var(--line);
-        border-radius: 10px 10px 10px 3px;
-        background: color-mix(in srgb, var(--paper) 94%, transparent);
-        box-shadow: 0 9px 20px var(--shadow);
-        color: var(--ink-strong);
-        white-space: nowrap;
-      }
-      .community-whisper { border-radius: 16px 16px 16px 4px; }
-      .community-dismiss { right: auto; left: -10px; }
       .home-footer { min-height: 32px; padding: 2px 12px 0; row-gap: 4px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .live-dot { animation: none; }
-      .community-sprite { transition: none; }
     }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
@@ -483,14 +381,16 @@
   <main class="home-shell">
     <div class="home-top">
       <section class="surface welcome-card" id="welcome-card" aria-labelledby="welcome-title">
-        <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
-        <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
-        <p class="welcome-line" id="welcome-line">Better Together</p>
-        <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
-        <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
-          <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
-          <span class="pulse-star" aria-hidden="true">✦</span>
-          <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
+        <div class="welcome-content">
+          <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
+          <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
+          <p class="welcome-line" id="welcome-line">Better Together</p>
+          <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
+          <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
+            <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
+            <span class="pulse-star" aria-hidden="true">✦</span>
+            <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
+          </div>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
@@ -538,13 +438,6 @@
     </footer>
   </main>
 
-  <div class="community-peek" aria-live="polite">
-    <div class="community-whisper" id="community-whisper" hidden><a href="https://discord.gg/efUebw4NkK" target="_blank" rel="noopener noreferrer" id="community-whisper-link">Open Discord →</a></div>
-    <button class="community-dismiss" id="community-dismiss" type="button" hidden aria-label="Dismiss Discord invitation">×</button>
-    <button class="community-sprite" id="community-sprite" type="button" hidden aria-controls="community-whisper" aria-expanded="false" aria-label="A quiet hello from the community">
-      <span class="sprite-hi" id="sprite-hi">Join our Discord xo</span><span aria-hidden="true">📣</span>
-    </button>
-  </div>
 
   <script>
     const HOME_COPY = {
@@ -555,7 +448,6 @@
         fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
-        spriteHi: 'Join our Discord xo', spriteLabel: 'Join our Discord community', communityWhisper: 'Open Discord →', dismissCommunity: 'Dismiss Discord invitation',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
       },
       fr: {
@@ -565,7 +457,6 @@
         fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
-        spriteHi: 'Rejoignez notre Discord xo', spriteLabel: 'Rejoignez notre communauté Discord', communityWhisper: 'Ouvrir Discord →', dismissCommunity: 'Fermer l’invitation Discord',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
       }
     };
@@ -574,7 +465,6 @@
     let recentAlbum = null;
     let activeSection = 0;
     let deckFrame = null;
-    let communityDismissed = false;
 
     function lang() { return window.AcadieShell?.currentLang() || 'en'; }
     function copy() { return HOME_COPY[lang()] || HOME_COPY.en; }
@@ -612,13 +502,8 @@
       setText('footer-about', c.footerAbout);
       setText('footer-support', c.footerSupport);
       setText('footer-created', c.footerCreated);
-      setText('sprite-hi', c.spriteHi);
-      setText('community-whisper-link', c.communityWhisper);
       document.getElementById('home-pulse').setAttribute('aria-label', c.pulseLabel);
       document.getElementById('home-footer').setAttribute('aria-label', c.footerLabel);
-      const sprite = document.getElementById('community-sprite');
-      sprite.setAttribute('aria-label', c.spriteLabel);
-      document.getElementById('community-dismiss').setAttribute('aria-label', c.dismissCommunity);
       const deck = document.getElementById('deck-controls');
       deck.setAttribute('aria-label', c.deckLabel);
       const dots = [...deck.querySelectorAll('.deck-dot')];
@@ -688,42 +573,16 @@
       dots.forEach((dot, dotIndex) => dot.setAttribute('aria-current', String(dotIndex === activeSection)));
     }
 
-    function closeCommunityWhisper() {
-      const sprite = document.getElementById('community-sprite');
-      document.getElementById('community-whisper').hidden = true;
-      sprite.setAttribute('aria-expanded', 'false');
-    }
-
-    function setCommunityDeckHidden(hidden) {
-      const peek = document.querySelector('.community-peek');
-      peek.classList.toggle('is-deck-hidden', !communityDismissed && hidden);
-      if (hidden) closeCommunityWhisper();
-    }
-
-    function positionCommunityPeek() {
-      const peek = document.querySelector('.community-peek');
-      if (!window.matchMedia('(max-width: 899px)').matches) {
-        peek.style.removeProperty('--community-peek-top');
-        return;
-      }
-      const pulseBottom = document.getElementById('home-pulse').getBoundingClientRect().bottom;
-      const promptHeight = Math.max(peek.offsetHeight, 43);
-      const top = Math.max(16, Math.min(pulseBottom + 40, window.innerHeight - promptHeight - 104));
-      peek.style.setProperty('--community-peek-top', `${Math.round(top)}px`);
-    }
-
     function syncDeckPosition() {
       const deck = document.querySelector('.home-top');
       if (!window.matchMedia('(max-width: 899px)').matches) {
         updateDeck(0);
-        setCommunityDeckHidden(false);
         return;
       }
       const sections = [...deck.querySelectorAll(':scope > .surface')];
       const deckCenter = deck.getBoundingClientRect().left + deck.clientWidth / 2;
       const distances = sections.map(section => Math.abs(section.getBoundingClientRect().left + section.clientWidth / 2 - deckCenter));
       updateDeck(distances.indexOf(Math.min(...distances)));
-      setCommunityDeckHidden(deck.scrollLeft > 24);
     }
 
     function initDeck() {
@@ -734,49 +593,13 @@
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         deck.scrollTo({ left: sections[index].offsetLeft, behavior: reducedMotion ? 'instant' : 'smooth' });
         updateDeck(index);
-        setCommunityDeckHidden(index !== 0);
       }));
       deck.addEventListener('scroll', () => {
         if (deckFrame) window.cancelAnimationFrame(deckFrame);
         deckFrame = window.requestAnimationFrame(syncDeckPosition);
       }, { passive: true });
-      window.addEventListener('resize', () => {
-        syncDeckPosition();
-        positionCommunityPeek();
-      });
+      window.addEventListener('resize', syncDeckPosition);
       updateDeck(0);
-    }
-
-    function initCommunityPeek() {
-      const peek = document.querySelector('.community-peek');
-      const sprite = document.getElementById('community-sprite');
-      const whisper = document.getElementById('community-whisper');
-      const dismiss = document.getElementById('community-dismiss');
-      try { communityDismissed = sessionStorage.getItem('acadie-discord-dismissed') === '1'; } catch (_) {}
-      if (communityDismissed) {
-        peek.classList.add('is-dismissed');
-        return;
-      }
-      window.setTimeout(() => {
-        sprite.hidden = false;
-        dismiss.hidden = false;
-        positionCommunityPeek();
-        window.requestAnimationFrame(() => sprite.classList.add('is-visible'));
-      }, 8000);
-      sprite.addEventListener('click', () => {
-        const opening = whisper.hidden;
-        whisper.hidden = !opening;
-        sprite.setAttribute('aria-expanded', String(opening));
-        positionCommunityPeek();
-      });
-      dismiss.addEventListener('click', () => {
-        communityDismissed = true;
-        try { sessionStorage.setItem('acadie-discord-dismissed', '1'); } catch (_) {}
-        closeCommunityWhisper();
-        peek.classList.remove('is-deck-hidden');
-        peek.classList.add('is-dismissed');
-      });
-      positionCommunityPeek();
     }
 
     function hydrateHome() {
@@ -789,7 +612,6 @@
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
     initDeck();
-    initCommunityPeek();
     loadHomeData();
   </script>
 </body>
