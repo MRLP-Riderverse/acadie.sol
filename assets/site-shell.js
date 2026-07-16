@@ -235,10 +235,38 @@
     syncShell();
     loadShellCounts();
     const menuToggle = document.getElementById('menu-toggle');
+    const menuDrawer = document.getElementById('site-menu-drawer');
     const menuLaunchers = document.querySelectorAll('[data-menu-label]');
     let activeMenuLauncher = [...menuLaunchers].find(launcher => launcher.offsetParent !== null);
+    let menuWasOpen = false;
+    const backgroundInertState = new Map();
+    const drawerFocusables = () => [...(menuDrawer?.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])') || [])]
+      .filter(control => control.offsetParent !== null);
+    const setBackgroundInert = inert => {
+      const background = [...document.body.children].filter(element =>
+        !element.matches('#menu-toggle, .drawer-backdrop, .drawer, script, style')
+      );
+      if (inert) {
+        background.forEach(element => {
+          backgroundInertState.set(element, element.inert);
+          element.inert = true;
+        });
+        return;
+      }
+      backgroundInertState.forEach((wasInert, element) => { element.inert = wasInert; });
+      backgroundInertState.clear();
+    };
     const syncMenuState = () => {
-      menuLaunchers.forEach(launcher => launcher.setAttribute('aria-expanded', menuToggle?.checked ? 'true' : 'false'));
+      const isOpen = Boolean(menuToggle?.checked);
+      menuLaunchers.forEach(launcher => launcher.setAttribute('aria-expanded', isOpen ? 'true' : 'false'));
+      if (isOpen && !menuWasOpen) {
+        setBackgroundInert(true);
+        requestAnimationFrame(() => drawerFocusables()[0]?.focus());
+      } else if (!isOpen && menuWasOpen) {
+        setBackgroundInert(false);
+        requestAnimationFrame(() => activeMenuLauncher?.focus());
+      }
+      menuWasOpen = isOpen;
     };
     menuToggle?.addEventListener('change', syncMenuState);
     menuLaunchers.forEach(launcher => {
@@ -253,10 +281,24 @@
       });
     });
     document.addEventListener('keydown', event => {
+      if (event.key === 'Tab' && menuToggle?.checked) {
+        const controls = drawerFocusables();
+        if (!controls.length) return;
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && (document.activeElement === first || !menuDrawer?.contains(document.activeElement))) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (document.activeElement === last || !menuDrawer?.contains(document.activeElement))) {
+          event.preventDefault();
+          first.focus();
+        }
+        return;
+      }
       if (event.key !== 'Escape' || !menuToggle?.checked) return;
+      event.preventDefault();
       menuToggle.checked = false;
-      syncMenuState();
-      activeMenuLauncher?.focus();
+      menuToggle.dispatchEvent(new Event('change', { bubbles: true }));
     });
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');

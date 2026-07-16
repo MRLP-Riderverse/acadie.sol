@@ -1,6 +1,6 @@
 /* Global Acadie.sol shell chrome.
-   The same route model is presented as a mobile dock, desktop top bar, and shared
-   floating menu. Page styles own content surfaces, not navigation. */
+   A single mobile launcher and the desktop top bar share one focused menu model.
+   Page styles own content surfaces, not navigation. */
 
 .site-header {
   position: fixed;
@@ -45,7 +45,7 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 .drawer-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 94;
   background: rgba(8, 31, 61, .42);
   backdrop-filter: blur(5px) saturate(.92);
   -webkit-backdrop-filter: blur(5px) saturate(.92);
@@ -57,7 +57,7 @@ body { padding-top: calc(42px + env(safe-area-inset-top)); }
 
 .drawer {
   position: fixed;
-  z-index: 81;
+  z-index: 95;
   left: max(14px, env(safe-area-inset-left));
   right: max(14px, env(safe-area-inset-right));
   bottom: calc(86px + env(safe-area-inset-bottom));
