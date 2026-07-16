@@ -42,20 +42,21 @@
     .home-shell > * { min-width: 0; }
     .surface {
       position: relative;
+      min-width: 0;
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: color-mix(in srgb, var(--paper) 91%, transparent);
-      box-shadow: 0 18px 42px var(--shadow);
     }
 
     .home-top {
+      min-height: 560px;
       display: grid;
-      grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr);
-      gap: 18px;
+      grid-template-columns: minmax(280px, .82fr) minmax(0, 1.18fr);
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      column-gap: 36px;
+      row-gap: 18px;
       align-items: stretch;
     }
     .welcome-card {
+      grid-row: 1 / -1;
       min-height: 330px;
       padding: 28px 22px;
       display: grid;
@@ -110,40 +111,16 @@
     .pulse-star { color: var(--gold); }
     .mobile-deck-hint { display: none; }
 
-    .attention-carousel {
-      min-height: 330px;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      isolation: isolate;
-      color: #fff8e7;
-      background: #0a2b57;
-      border-color: color-mix(in srgb, var(--acadian-yellow) 56%, transparent);
+    .home-feature {
+      min-height: 0;
+      padding: 24px 28px;
     }
-    .carousel-stage { min-height: 0; display: grid; }
-    .attention-slide {
-      grid-area: 1 / 1;
-      min-width: 0;
-      padding: 28px 28px 20px;
-    }
-    .attention-slide[hidden] { display: none; }
 
     .live-card {
       display: grid;
-      align-content: space-between;
-      gap: 22px;
+      align-content: center;
+      gap: 18px;
     }
-    .live-card::before {
-      content: "";
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      right: -100px;
-      top: -110px;
-      border: 44px solid rgba(243, 200, 91, .12);
-      border-radius: 50%;
-      z-index: -1;
-    }
-    .live-card.is-inactive { background: linear-gradient(145deg, rgba(255,255,255,.035), transparent 58%); }
     .live-head,
     .live-meta {
       display: flex;
@@ -157,16 +134,16 @@
       gap: 7px;
       width: fit-content;
       padding: 7px 11px;
-      border: 1px solid rgba(255,255,255,.28);
+      border: 0;
       border-radius: 999px;
-      background: #bf4a4f;
-      color: #fff;
+      background: var(--red);
+      color: var(--paper);
       font-size: .68rem;
       font-weight: 900;
       letter-spacing: .09em;
       text-transform: uppercase;
     }
-    .is-inactive .live-badge { background: rgba(255,255,255,.09); }
+    .is-inactive .live-badge { background: color-mix(in srgb, var(--gold) 13%, transparent); color: var(--gold); }
     .live-dot {
       width: 7px;
       height: 7px;
@@ -176,20 +153,20 @@
       animation: live-pulse 1.8s ease-out infinite;
     }
     .is-inactive .live-dot { background: #f3c85b; animation: none; }
-    .live-kicker { color: #f3c85b; font-size: .7rem; font-weight: 900; }
+    .live-kicker { color: var(--gold); font-size: .7rem; font-weight: 900; }
     .live-copy { display: grid; gap: 9px; }
     .live-copy h2,
     .recent-copy h2 {
       margin: 0;
       max-width: 19ch;
-      color: #fff;
-      font-size: clamp(1.5rem, 4vw, 2.45rem);
+      color: var(--ink-strong);
+      font-size: clamp(1.35rem, 3vw, 2.15rem);
       line-height: 1.03;
       letter-spacing: -.04em;
     }
     .live-copy p,
-    .recent-copy p { margin: 0; max-width: 50ch; color: #d6e7fb; line-height: 1.5; }
-    .live-place { color: #f3c85b; font-size: .72rem; font-weight: 900; }
+    .recent-copy p { margin: 0; max-width: 50ch; color: var(--muted); line-height: 1.5; }
+    .live-place { color: var(--gold); font-size: .72rem; font-weight: 900; }
     .live-place[hidden] { display: none; }
     .attention-link {
       display: inline-flex;
@@ -197,10 +174,10 @@
       justify-content: center;
       min-height: 42px;
       padding: 9px 14px;
-      border: 1px solid #f3c85b;
+      border: 1px solid var(--button-border);
       border-radius: 999px;
-      background: #f3c85b;
-      color: #172033;
+      background: var(--button-bg);
+      color: var(--button-fg);
       font-size: .76rem;
       font-weight: 900;
       text-decoration: none;
@@ -208,64 +185,51 @@
 
     .recent-slide {
       display: grid;
-      align-items: end;
-      overflow: hidden;
-      color: #fff;
+      grid-template-columns: minmax(120px, .72fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 20px;
     }
     .recent-slide img {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
       width: 100%;
-      height: 100%;
+      height: min(220px, 100%);
+      min-height: 150px;
       object-fit: cover;
+      border-radius: 20px;
     }
-    .recent-slide::after {
-      content: "";
-      position: absolute;
-      inset: 14% 0 0;
-      z-index: -1;
-      background: linear-gradient(to top, rgba(6,12,24,.96), rgba(6,12,24,.1));
-    }
-    .recent-copy { display: grid; gap: 7px; }
-    .recent-copy .section-kicker { color: #f3c85b; }
+    .recent-copy { min-width: 0; display: grid; gap: 7px; }
+    .recent-copy .section-kicker { color: var(--gold); }
     .recent-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
-    .recent-count { color: #f3c85b; font-size: .7rem; font-weight: 900; text-transform: uppercase; }
+    .recent-count { color: var(--gold); font-size: .7rem; font-weight: 900; text-transform: uppercase; }
 
-    .carousel-controls {
-      min-height: 42px;
-      display: flex;
+    .deck-controls {
+      display: none;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 8px 16px 12px;
-      background: linear-gradient(to top, rgba(4,14,32,.42), transparent);
+      gap: 0;
     }
-    .carousel-dot {
-      width: 30px;
-      height: 8px;
+    .deck-dot {
+      position: relative;
+      width: 40px;
+      height: 28px;
       padding: 0;
       border: 0;
-      border-radius: 999px;
-      background: rgba(255,255,255,.28);
+      background: transparent;
       cursor: pointer;
     }
-    .carousel-dot[aria-pressed="true"] { background: #f3c85b; }
-    .carousel-toggle {
-      min-width: 30px;
-      height: 26px;
-      margin-left: 4px;
-      padding: 0 7px;
-      border: 1px solid rgba(255,255,255,.2);
+    .deck-dot::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 7px;
+      height: 7px;
       border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      color: #fff8e7;
-      font: 800 .68rem/1 ui-monospace, monospace;
-      cursor: pointer;
+      background: color-mix(in srgb, var(--muted) 38%, transparent);
+      transform: translate(-50%, -50%);
+      transition: width .2s ease, background-color .2s ease;
     }
-    .carousel-toggle:hover { border-color: #f3c85b; }
-    .carousel-dot:focus-visible,
-    .carousel-toggle:focus-visible,
+    .deck-dot[aria-current="true"]::before { width: 22px; background: var(--gold); }
+    .deck-dot:focus-visible,
     .community-sprite:focus-visible,
     .home-footer a:focus-visible {
       outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 76%, transparent);
@@ -356,7 +320,7 @@
         height: calc(100svh - env(safe-area-inset-top));
         min-height: 0;
         padding: 8px 0 calc(98px + env(safe-area-inset-bottom));
-        grid-template-rows: minmax(0, 1fr) auto;
+        grid-template-rows: minmax(0, 1fr) 28px auto;
         gap: 4px;
         overflow: hidden;
       }
@@ -366,8 +330,8 @@
         min-height: 0;
         display: flex;
         align-items: stretch;
-        gap: 12px;
-        padding: 0 10px;
+        gap: 0;
+        padding: 0;
         overflow-x: auto;
         overflow-y: hidden;
         overscroll-behavior-x: contain;
@@ -376,17 +340,17 @@
       }
       .home-top::-webkit-scrollbar { display: none; }
       .home-top > .surface {
-        flex: 0 0 calc(100vw - 20px);
-        width: calc(100vw - 20px);
+        flex: 0 0 100vw;
+        width: 100vw;
         height: 100%;
         min-height: 0;
         scroll-snap-align: center;
         scroll-snap-stop: always;
       }
-      .surface { border-radius: 24px; box-shadow: 0 9px 24px var(--shadow); }
       .welcome-card {
+        grid-row: auto;
         gap: 11px;
-        padding: 24px 18px;
+        padding: 24px 22px;
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior-y: contain;
@@ -406,16 +370,15 @@
         letter-spacing: .02em;
       }
 
-      .attention-carousel { min-height: 0; }
-      .attention-slide {
+      .home-feature {
         height: 100%;
         min-height: 0;
-        padding: 24px 20px 16px;
+        padding: 24px 24px 16px;
         overflow-x: hidden;
         overflow-y: auto;
         overscroll-behavior-y: contain;
       }
-      .live-card { gap: 18px; }
+      .live-card { align-content: center; gap: 18px; }
       .live-head { justify-content: flex-start; }
       .live-kicker { display: none; }
       .live-copy { gap: 7px; }
@@ -425,9 +388,20 @@
       .recent-copy p { font-size: .86rem; line-height: 1.45; }
       .live-place { max-width: 15ch; font-size: .65rem; line-height: 1.3; }
       .attention-link { min-height: 40px; padding: 8px 13px; font-size: .72rem; }
+      .recent-slide {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(150px, 48%) auto;
+        align-content: center;
+        gap: 18px;
+      }
+      .recent-slide img {
+        height: 100%;
+        min-height: 150px;
+        border-radius: 22px;
+      }
       .recent-meta { align-items: end; }
       #recent-summary { display: none; }
-      .carousel-controls { min-height: 44px; padding-bottom: 12px; }
+      .deck-controls { display: flex; }
 
       .community-peek { right: max(16px, env(safe-area-inset-right)); bottom: calc(92px + env(safe-area-inset-bottom)); }
       .home-footer { min-height: 22px; padding: 2px 12px 0; }
@@ -444,7 +418,7 @@
   <script src="assets/site-shell.js"></script>
   <main class="home-shell">
     <div class="home-top">
-      <section class="surface welcome-card" aria-labelledby="welcome-title">
+      <section class="surface welcome-card" id="welcome-card" aria-labelledby="welcome-title">
         <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
         <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
         <p class="welcome-line" id="welcome-line">Made here. Shared outward. Kept by community.</p>
@@ -457,43 +431,40 @@
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
 
-      <section class="surface attention-carousel" data-autoplay-ms="5000" aria-label="Current and recently added">
-        <div class="carousel-stage" aria-live="off">
-          <article class="attention-slide live-card is-inactive" id="live-card" aria-hidden="false" aria-labelledby="live-title">
-            <div class="live-head">
-              <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">Soon</span></span>
-              <span class="live-kicker" id="live-kicker">Quiet for now</span>
-            </div>
-            <div class="live-copy">
-              <h2 id="live-title">Check again soon</h2>
-              <p id="live-summary">Live notes and featured notices will land here when there is something worth sharing.</p>
-            </div>
-            <div class="live-meta">
-              <span class="live-place" id="live-location" hidden></span>
-              <a class="attention-link" id="live-link" href="events.html">Browse events</a>
-            </div>
-          </article>
-
-          <article class="attention-slide recent-slide" id="recent-slide" hidden aria-hidden="true" aria-labelledby="recent-title">
-            <img id="recent-image" src="assets/gallery/2026/acadie-in-the-stars/cover-960.webp" alt="Acadie.sol wordmark floating in a field of stars" width="960" height="720" />
-            <div class="recent-copy">
-              <p class="section-kicker" id="recent-kicker">Recently added</p>
-              <h2 id="recent-title">Acadie in the Stars</h2>
-              <p id="recent-summary">A first visual marker for the renewed Acadie.sol archive.</p>
-              <div class="recent-meta">
-                <span class="recent-count" id="recent-count">1 photo</span>
-                <a class="attention-link" id="recent-link" href="photos/2026/acadie-in-the-stars/">Open ↗</a>
-              </div>
-            </div>
-          </article>
+      <section class="surface home-feature live-card is-inactive" id="live-card" aria-labelledby="live-title">
+        <div class="live-head">
+          <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">Soon</span></span>
+          <span class="live-kicker" id="live-kicker">Quiet for now</span>
         </div>
-        <div class="carousel-controls" aria-label="Choose a homepage notice">
-          <button class="carousel-dot" type="button" aria-pressed="true" aria-controls="live-card" aria-label="Show current notice" data-slide="0"></button>
-          <button class="carousel-dot" type="button" aria-pressed="false" aria-controls="recent-slide" aria-label="Show recently added" data-slide="1"></button>
-          <button class="carousel-toggle" id="carousel-toggle" type="button" aria-pressed="false" aria-label="Pause carousel" title="Pause carousel">Ⅱ</button>
+        <div class="live-copy">
+          <h2 id="live-title">Check again soon</h2>
+          <p id="live-summary">Live notes and featured notices will land here when there is something worth sharing.</p>
+        </div>
+        <div class="live-meta">
+          <span class="live-place" id="live-location" hidden></span>
+          <a class="attention-link" id="live-link" href="events.html">Browse events</a>
+        </div>
+      </section>
+
+      <section class="surface home-feature recent-slide" id="recent-slide" aria-labelledby="recent-title">
+        <img id="recent-image" src="assets/gallery/2026/acadie-in-the-stars/cover-960.webp" alt="Acadie.sol wordmark floating in a field of stars" width="960" height="720" />
+        <div class="recent-copy">
+          <p class="section-kicker" id="recent-kicker">Recently added</p>
+          <h2 id="recent-title">Acadie in the Stars</h2>
+          <p id="recent-summary">A first visual marker for the renewed Acadie.sol archive.</p>
+          <div class="recent-meta">
+            <span class="recent-count" id="recent-count">1 photo</span>
+            <a class="attention-link" id="recent-link" href="photos/2026/acadie-in-the-stars/">Open ↗</a>
+          </div>
         </div>
       </section>
     </div>
+
+    <nav class="deck-controls" id="deck-controls" aria-label="Homepage sections">
+      <button class="deck-dot" type="button" aria-current="true" aria-controls="welcome-card" aria-label="Show welcome" data-section="0"></button>
+      <button class="deck-dot" type="button" aria-current="false" aria-controls="live-card" aria-label="Show current notice" data-section="1"></button>
+      <button class="deck-dot" type="button" aria-current="false" aria-controls="recent-slide" aria-label="Show recently added" data-section="2"></button>
+    </nav>
 
     <footer class="home-footer" id="home-footer" aria-label="Community links">
       <a href="community.html"><span class="footer-icon" aria-hidden="true">✦</span><span id="footer-community">Community</span></a>
@@ -519,7 +490,7 @@
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', pulseLabel: 'Site pulse', footerLabel: 'Community links',
         spriteHi: 'hi', spriteLabel: 'A quiet hello from the community', communityWhisper: 'Come chat with us here →',
-        carouselLabel: 'Current and recently added', controlsLabel: 'Choose a homepage notice', liveTab: 'Show current notice', recentTab: 'Show recently added', pauseCarousel: 'Pause carousel', playCarousel: 'Play carousel'
+        deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
@@ -529,15 +500,14 @@
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
         spriteHi: 'salut', spriteLabel: 'Un petit salut de la communauté', communityWhisper: 'Venez jaser avec nous ici →',
-        carouselLabel: 'En cours et ajouté récemment', controlsLabel: 'Choisir un avis d’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent', pauseCarousel: 'Mettre le carrousel en pause', playCarousel: 'Démarrer le carrousel'
+        deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
       }
     };
 
     let livePayload = null;
     let recentAlbum = null;
-    let activeSlide = 0;
-    let carouselTimer = null;
-    let carouselUserPaused = false;
+    let activeSection = 0;
+    let deckFrame = null;
 
     function lang() { return window.AcadieShell?.currentLang() || 'en'; }
     function copy() { return HOME_COPY[lang()] || HOME_COPY.en; }
@@ -580,11 +550,12 @@
       document.getElementById('home-footer').setAttribute('aria-label', c.footerLabel);
       const sprite = document.getElementById('community-sprite');
       sprite.setAttribute('aria-label', c.spriteLabel);
-      document.querySelector('.attention-carousel').setAttribute('aria-label', c.carouselLabel);
-      document.querySelector('.carousel-controls').setAttribute('aria-label', c.controlsLabel);
-      document.querySelector('[data-slide="0"]').setAttribute('aria-label', c.liveTab);
-      document.querySelector('[data-slide="1"]').setAttribute('aria-label', c.recentTab);
-      updateCarouselControl();
+      const deck = document.getElementById('deck-controls');
+      deck.setAttribute('aria-label', c.deckLabel);
+      const dots = [...deck.querySelectorAll('.deck-dot')];
+      dots[0].setAttribute('aria-label', c.welcomeTab);
+      dots[1].setAttribute('aria-label', c.liveTab);
+      dots[2].setAttribute('aria-label', c.recentTab);
     }
 
     function renderLive(item) {
@@ -642,60 +613,39 @@
       renderRecent(recentAlbum);
     }
 
-    function showSlide(index) {
-      const slides = [...document.querySelectorAll('.attention-slide')];
-      const dots = [...document.querySelectorAll('.carousel-dot')];
-      activeSlide = ((index % slides.length) + slides.length) % slides.length;
-      slides.forEach((slide, slideIndex) => {
-        const active = slideIndex === activeSlide;
-        slide.hidden = !active;
-        slide.setAttribute('aria-hidden', String(!active));
-      });
-      dots.forEach((dot, dotIndex) => dot.setAttribute('aria-pressed', String(dotIndex === activeSlide)));
+    function updateDeck(index) {
+      const dots = [...document.querySelectorAll('.deck-dot')];
+      activeSection = Math.max(0, Math.min(index, dots.length - 1));
+      dots.forEach((dot, dotIndex) => dot.setAttribute('aria-current', String(dotIndex === activeSection)));
     }
 
-    function updateCarouselControl() {
-      const button = document.getElementById('carousel-toggle');
-      if (!button) return;
-      const label = carouselUserPaused ? copy().playCarousel : copy().pauseCarousel;
-      button.textContent = carouselUserPaused ? '▶' : 'Ⅱ';
-      button.setAttribute('aria-pressed', String(carouselUserPaused));
-      button.setAttribute('aria-label', label);
-      button.title = label;
+    function syncDeckPosition() {
+      const deck = document.querySelector('.home-top');
+      if (!window.matchMedia('(max-width: 899px)').matches) {
+        updateDeck(0);
+        return;
+      }
+      const sections = [...deck.querySelectorAll(':scope > .surface')];
+      const deckCenter = deck.getBoundingClientRect().left + deck.clientWidth / 2;
+      const distances = sections.map(section => Math.abs(section.getBoundingClientRect().left + section.clientWidth / 2 - deckCenter));
+      updateDeck(distances.indexOf(Math.min(...distances)));
     }
-    function stopCarousel() {
-      if (carouselTimer) window.clearInterval(carouselTimer);
-      carouselTimer = null;
-    }
-    function startCarousel() {
-      stopCarousel();
-      if (carouselUserPaused || document.hidden) return;
-      const interval = Number(document.querySelector('.attention-carousel').dataset.autoplayMs) || 3000;
-      carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), interval);
-    }
-    function setUserPaused(paused) {
-      carouselUserPaused = paused;
-      paused ? stopCarousel() : startCarousel();
-      updateCarouselControl();
-    }
-    function initCarousel() {
-      carouselUserPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('.carousel-dot').forEach(dot => dot.addEventListener('click', () => {
-        setUserPaused(true);
-        showSlide(Number(dot.dataset.slide));
+
+    function initDeck() {
+      const deck = document.querySelector('.home-top');
+      const sections = [...deck.querySelectorAll(':scope > .surface')];
+      document.querySelectorAll('.deck-dot').forEach(dot => dot.addEventListener('click', () => {
+        const index = Number(dot.dataset.section);
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        deck.scrollTo({ left: sections[index].offsetLeft, behavior: reducedMotion ? 'instant' : 'smooth' });
+        updateDeck(index);
       }));
-      document.getElementById('carousel-toggle').addEventListener('click', () => setUserPaused(!carouselUserPaused));
-      const carousel = document.querySelector('.attention-carousel');
-      carousel.addEventListener('mouseenter', stopCarousel);
-      carousel.addEventListener('mouseleave', startCarousel);
-      carousel.addEventListener('focusin', stopCarousel);
-      carousel.addEventListener('focusout', event => {
-        if (!carousel.contains(event.relatedTarget)) startCarousel();
-      });
-      document.addEventListener('visibilitychange', () => document.hidden ? stopCarousel() : startCarousel());
-      showSlide(0);
-      updateCarouselControl();
-      startCarousel();
+      deck.addEventListener('scroll', () => {
+        if (deckFrame) window.cancelAnimationFrame(deckFrame);
+        deckFrame = window.requestAnimationFrame(syncDeckPosition);
+      }, { passive: true });
+      window.addEventListener('resize', syncDeckPosition);
+      updateDeck(0);
     }
 
     function initCommunityPeek() {
@@ -721,7 +671,7 @@
 
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
-    initCarousel();
+    initDeck();
     initCommunityPeek();
     loadHomeData();
   </script>
