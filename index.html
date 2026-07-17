@@ -47,10 +47,10 @@
     }
 
     .home-top {
-      min-height: 560px;
+      min-height: 760px;
       display: grid;
       grid-template-columns: minmax(280px, .82fr) minmax(0, 1.18fr);
-      grid-template-rows: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
       column-gap: 36px;
       row-gap: 18px;
       align-items: stretch;
@@ -87,6 +87,7 @@
       line-height: 1.5;
     }
     .welcome-mark { color: var(--gold); font-size: 1rem; letter-spacing: .18em; }
+    .pilot-project { margin: 0; color: var(--muted); font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace; letter-spacing: .08em; }
 
     .home-pulse {
       width: min(320px, 100%);
@@ -150,6 +151,8 @@
     .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: .92rem; line-height: 1.12; }
     .live-share-copy button { cursor: pointer; font: inherit; }
     .share-card { justify-items: center; }
+    .gif-card { display: grid; align-content: center; justify-items: center; gap: 10px; }
+    .gif-card img { display: block; width: min(320px, 100%); height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; }
 
     .live-badge {
       display: inline-flex;
@@ -408,12 +411,14 @@
           <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
           <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
           <p class="welcome-line" id="welcome-line">Better Together</p>
-          <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
           <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
             <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
             <span class="pulse-star" aria-hidden="true">✦</span>
             <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
           </div>
+          <p class="welcome-kicker">What if we tried something different?</p>
+          <p class="pilot-project">An Acadian Pilot Project</p>
+          <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
@@ -441,12 +446,17 @@
           </div>
         </div>
       </section>
+
+      <section class="surface home-feature gif-card" id="gif-card" aria-label="Vive l’Acadie animation">
+        <img src="assets/images/acadie.gif" width="480" height="360" alt="Vive l’Acadie animated graphic" />
+      </section>
     </div>
 
     <nav class="deck-controls" id="deck-controls" aria-label="Homepage sections">
       <button class="deck-dot" type="button" aria-current="true" aria-controls="welcome-card" aria-label="Show welcome" data-section="0"></button>
       <button class="deck-dot" type="button" aria-current="false" aria-controls="share-card" aria-label="Show share card" data-section="1"></button>
       <button class="deck-dot" type="button" aria-current="false" aria-controls="recent-slide" aria-label="Show recently added" data-section="2"></button>
+      <button class="deck-dot" type="button" aria-current="false" aria-controls="gif-card" aria-label="Show Vive l’Acadie" data-section="3"></button>
     </nav>
 
     <footer class="home-footer" id="home-footer" aria-label="Community links">
@@ -466,7 +476,7 @@
         shareTitle: 'Share with friends!', shareButton: 'Share ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
-        deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added'
+        deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added', gifTab: 'Show Vive l’Acadie'
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
@@ -474,7 +484,7 @@
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partager ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
-        deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent'
+        deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent', gifTab: 'Afficher Vive l’Acadie'
       }
     };
 
@@ -528,6 +538,7 @@
       dots[0].setAttribute('aria-label', c.welcomeTab);
       dots[1].setAttribute('aria-label', c.shareTab);
       dots[2].setAttribute('aria-label', c.recentTab);
+      dots[3].setAttribute('aria-label', c.gifTab);
     }
 
     function renderRecent(album) {
