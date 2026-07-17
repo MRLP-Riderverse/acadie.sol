@@ -128,30 +128,28 @@
       justify-content: space-between;
       gap: 12px;
     }
-    /* QR share block – keeps the homepage Live Card useful between live notices
-       while giving visitors a simple, image-led way to pass the site along. */
+    /* QR share block – a compact square scan target with one playful share action
+       below it, so the Live Card stays useful without repeating the site address. */
     .live-share {
       display: grid;
-      grid-template-columns: minmax(104px, 132px) minmax(0, 1fr);
-      align-items: center;
-      gap: 18px;
+      justify-items: center;
+      gap: 9px;
       padding-top: 6px;
       border-top: 1px solid var(--line);
     }
     .live-share img {
       display: block;
-      width: 100%;
-      max-width: 132px;
+      width: min(112px, 30vw);
+      height: auto;
       aspect-ratio: 1;
-      padding: 7px;
-      border-radius: 16px;
+      padding: 5px;
+      border-radius: 10px;
       background: #fff;
-      box-shadow: 0 12px 24px var(--shadow);
+      box-shadow: 0 8px 16px var(--shadow);
     }
-    .live-share-copy { display: grid; gap: 7px; }
-    .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: 1rem; line-height: 1.12; }
-    .live-share-copy p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
-    .live-share-copy a { width: fit-content; font-size: .72rem; font-weight: 900; }
+    .live-share-copy { display: grid; justify-items: center; gap: 7px; text-align: center; }
+    .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: .92rem; line-height: 1.12; }
+    .live-share-copy button { cursor: pointer; font: inherit; }
 
     .live-badge {
       display: inline-flex;
@@ -436,9 +434,8 @@
         <div class="live-share" aria-labelledby="live-share-title">
           <img src="assets/qr/acadie-sol-site.png" width="396" height="396" alt="QR code linking to acadie.sol.site" />
           <div class="live-share-copy">
-            <h3 id="live-share-title">Share with your friends easily!</h3>
-            <p id="live-share-summary">Scan the code to open Acadie.sol and pass it along.</p>
-            <a href="https://acadie.sol.site">acadie.sol.site ↗</a>
+            <h3 id="live-share-title">Share with friends!</h3>
+            <button class="attention-link" id="live-share-button" type="button" data-share-label="Share">Share ↗</button>
           </div>
         </div>
       </section>
@@ -479,7 +476,7 @@
         welcomeLine: 'Better Together', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         fallbackLabel: 'Soon', fallbackKicker: 'Quiet for now', fallbackTitle: 'Check again soon',
         fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
-        shareTitle: 'Share with your friends easily!', shareSummary: 'Scan the code to open Acadie.sol and pass it along.',
+        shareTitle: 'Share with friends!', shareButton: 'Share ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
@@ -489,7 +486,7 @@
         welcomeLine: 'Mieux ensemble', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         fallbackLabel: 'Bientôt', fallbackKicker: 'Calme pour l’instant', fallbackTitle: 'Revenez bientôt',
         fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
-        shareTitle: 'Partagez facilement avec vos amis !', shareSummary: 'Scannez le code pour ouvrir Acadie.sol et le partager autour de vous.',
+        shareTitle: 'Partagez avec vos amis !', shareButton: 'Partager ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
@@ -534,7 +531,7 @@
       setText('recent-kicker', c.recentKicker);
       setText('recent-link', c.recentCta);
       setText('live-share-title', c.shareTitle);
-      setText('live-share-summary', c.shareSummary);
+      setText('live-share-button', c.shareButton);
       setText('footer-community', c.footerCommunity);
       setText('footer-about', c.footerAbout);
       setText('footer-support', c.footerSupport);
@@ -581,6 +578,27 @@
       setText('recent-title', localize(album.title));
       setText('recent-summary', localize(album.summary));
       setText('recent-count', c.photoCount(Number(album.photo_count) || 0));
+    }
+
+    // Share action – use the native share sheet when available, then fall back to
+    // copying the public site URL so desktop visitors still get a useful action.
+    async function shareAcadie() {
+      const button = document.getElementById('live-share-button');
+      const shareData = { title: 'Acadie.sol', url: 'https://acadie.sol.site' };
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(shareData.url);
+        } else {
+          throw new Error('Sharing unavailable');
+        }
+        const originalLabel = button.textContent;
+        button.textContent = copy().shareDone;
+        window.setTimeout(() => { button.textContent = originalLabel; }, 1800);
+      } catch (error) {
+        if (error.name !== 'AbortError') console.warn('Share unavailable', error);
+      }
     }
 
     async function loadHomeData() {
@@ -649,6 +667,7 @@
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
     initDeck();
+    document.getElementById('live-share-button').addEventListener('click', shareAcadie);
     loadHomeData();
   </script>
 </body>
