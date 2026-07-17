@@ -134,8 +134,7 @@
       display: grid;
       justify-items: center;
       gap: 9px;
-      padding-top: 6px;
-      border-top: 1px solid var(--line);
+      padding-top: 0;
     }
     .live-share img {
       display: block;
@@ -150,6 +149,7 @@
     .live-share-copy { display: grid; justify-items: center; gap: 7px; text-align: center; }
     .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: .92rem; line-height: 1.12; }
     .live-share-copy button { cursor: pointer; font: inherit; }
+    .share-card { justify-items: center; }
 
     .live-badge {
       display: inline-flex;
@@ -418,24 +418,13 @@
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
 
-      <section class="surface home-feature live-card is-inactive" id="live-card" aria-labelledby="live-title">
-        <div class="live-head">
-          <span class="live-badge"><span class="live-dot" aria-hidden="true"></span><span id="live-label">Soon</span></span>
-          <span class="live-kicker" id="live-kicker">Quiet for now</span>
-        </div>
-        <div class="live-copy">
-          <h2 id="live-title">Check again soon</h2>
-          <p id="live-summary">Live notes and featured notices will land here when there is something worth sharing.</p>
-        </div>
-        <div class="live-meta">
-          <span class="live-place" id="live-location" hidden></span>
-          <a class="attention-link" id="live-link" href="events.html">Browse events</a>
-        </div>
+      <section class="surface home-feature live-card share-card" id="share-card" aria-labelledby="live-share-title">
         <div class="live-share" aria-labelledby="live-share-title">
           <img src="assets/qr/acadie-sol-site.png" width="396" height="396" alt="QR code linking to acadie.sol.site" />
           <div class="live-share-copy">
             <h3 id="live-share-title">Share with friends!</h3>
             <button class="attention-link" id="live-share-button" type="button" data-share-label="Share">Share ↗</button>
+            <a class="attention-link" href="https://discord.gg/efUebw4NkK" target="_blank" rel="noopener noreferrer">Join Our Discord! ♡</a>
           </div>
         </div>
       </section>
@@ -456,7 +445,7 @@
 
     <nav class="deck-controls" id="deck-controls" aria-label="Homepage sections">
       <button class="deck-dot" type="button" aria-current="true" aria-controls="welcome-card" aria-label="Show welcome" data-section="0"></button>
-      <button class="deck-dot" type="button" aria-current="false" aria-controls="live-card" aria-label="Show current notice" data-section="1"></button>
+      <button class="deck-dot" type="button" aria-current="false" aria-controls="share-card" aria-label="Show share card" data-section="1"></button>
       <button class="deck-dot" type="button" aria-current="false" aria-controls="recent-slide" aria-label="Show recently added" data-section="2"></button>
     </nav>
 
@@ -473,27 +462,22 @@
     const HOME_COPY = {
       en: {
         welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: 'Better Together', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
-        fallbackLabel: 'Soon', fallbackKicker: 'Quiet for now', fallbackTitle: 'Check again soon',
-        fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
+        welcomeLine: '⭐️💙🤍❤️', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         shareTitle: 'Share with friends!', shareButton: 'Share ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
-        deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
+        deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added'
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: 'Mieux ensemble', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
-        fallbackLabel: 'Bientôt', fallbackKicker: 'Calme pour l’instant', fallbackTitle: 'Revenez bientôt',
-        fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
+        welcomeLine: '⭐️💙🤍❤️', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partager ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
-        deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
+        deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent'
       }
     };
 
-    let livePayload = null;
     let recentAlbum = null;
     let activeSection = 0;
     let deckFrame = null;
@@ -542,26 +526,8 @@
       deck.setAttribute('aria-label', c.deckLabel);
       const dots = [...deck.querySelectorAll('.deck-dot')];
       dots[0].setAttribute('aria-label', c.welcomeTab);
-      dots[1].setAttribute('aria-label', c.liveTab);
+      dots[1].setAttribute('aria-label', c.shareTab);
       dots[2].setAttribute('aria-label', c.recentTab);
-    }
-
-    function renderLive(item) {
-      const c = copy();
-      const active = item?.active === true;
-      setText('live-label', active ? localize(item.label) : c.fallbackLabel);
-      setText('live-kicker', active ? localize(item.kicker) : c.fallbackKicker);
-      setText('live-title', active ? localize(item.title) : c.fallbackTitle);
-      setText('live-summary', active ? localize(item.summary) : c.fallbackSummary);
-      setText('live-link', active ? localize(item.cta) : c.fallbackCta);
-      const location = active ? localize(item.location) : '';
-      const locationEl = document.getElementById('live-location');
-      locationEl.textContent = location;
-      locationEl.hidden = !location;
-      document.getElementById('live-link').href = active
-        ? safeSiteHref(item.href, 'events.html')
-        : siteUrl('events.html');
-      document.getElementById('live-card').classList.toggle('is-inactive', !active);
     }
 
     function renderRecent(album) {
@@ -602,23 +568,17 @@
     }
 
     async function loadHomeData() {
-      const [liveResult, albumResult] = await Promise.allSettled([
-        fetch(siteUrl('assets/live.json'), { cache: 'no-cache' }).then(response => {
-          if (!response.ok) throw new Error('Live data unavailable');
-          return response.json();
-        }),
+      const albumResult = await Promise.allSettled([
         fetch(siteUrl('assets/gallery/albums.json'), { cache: 'no-cache' }).then(response => {
           if (!response.ok) throw new Error('Album data unavailable');
           return response.json();
         })
       ]);
-      if (liveResult.status === 'fulfilled') livePayload = liveResult.value;
       if (albumResult.status === 'fulfilled') {
         recentAlbum = (albumResult.value.albums || [])
           .filter(album => album.status === 'public')
           .sort((a, b) => String(b.published_at || '').localeCompare(String(a.published_at || '')))[0] || null;
       }
-      renderLive(livePayload);
       renderRecent(recentAlbum);
     }
 
@@ -659,7 +619,6 @@
 
     function hydrateHome() {
       renderStaticCopy();
-      renderLive(livePayload);
       renderRecent(recentAlbum);
       window.AcadieShell?.sync();
     }

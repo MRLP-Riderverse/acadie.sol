@@ -39,39 +39,6 @@
         "width": 1280,
         "height": 960
       }
-    },
-    {
-      "slug": "la-louga-after-party-16-07-26",
-      "year": 2026,
-      "published_at": "2026-07-16",
-      "status": "preview",
-      "featured": false,
-      "title": {
-        "en": "La Louga After-Party 16-07-26",
-        "fr": "La Louga After-Party 16-07-26"
-      },
-      "summary": {
-        "en": "Photos coming soon from the La Louga after-party.",
-        "fr": "Photos à venir de l’after-party La Louga."
-      },
-      "location": {
-        "en": "La Louga · coming soon",
-        "fr": "La Louga · à venir"
-      },
-      "href": "photos/2026/la-louga-after-party-16-07-26/",
-      "cover": {
-        "src": "assets/gallery/2026/la-louga-after-party-16-07-26/cover.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": {
-          "en": "La Louga After-Party 16-07-26 — coming soon",
-          "fr": "La Louga After-Party 16-07-26 — à venir"
-        }
-      },
-      "photo_count": 0,
-      "full_resolution": {
-        "policy": "preview"
-      }
     }
   ]
 }
