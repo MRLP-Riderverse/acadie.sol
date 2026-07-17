@@ -128,6 +128,31 @@
       justify-content: space-between;
       gap: 12px;
     }
+    /* QR share block – keeps the homepage Live Card useful between live notices
+       while giving visitors a simple, image-led way to pass the site along. */
+    .live-share {
+      display: grid;
+      grid-template-columns: minmax(104px, 132px) minmax(0, 1fr);
+      align-items: center;
+      gap: 18px;
+      padding-top: 6px;
+      border-top: 1px solid var(--line);
+    }
+    .live-share img {
+      display: block;
+      width: 100%;
+      max-width: 132px;
+      aspect-ratio: 1;
+      padding: 7px;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 24px var(--shadow);
+    }
+    .live-share-copy { display: grid; gap: 7px; }
+    .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: 1rem; line-height: 1.12; }
+    .live-share-copy p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+    .live-share-copy a { width: fit-content; font-size: .72rem; font-weight: 900; }
+
     .live-badge {
       display: inline-flex;
       align-items: center;
@@ -408,6 +433,14 @@
           <span class="live-place" id="live-location" hidden></span>
           <a class="attention-link" id="live-link" href="events.html">Browse events</a>
         </div>
+        <div class="live-share" aria-labelledby="live-share-title">
+          <img src="assets/qr/acadie-sol-site.png" width="396" height="396" alt="QR code linking to acadie.sol.site" />
+          <div class="live-share-copy">
+            <h3 id="live-share-title">Share with your friends easily!</h3>
+            <p id="live-share-summary">Scan the code to open Acadie.sol and pass it along.</p>
+            <a href="https://acadie.sol.site">acadie.sol.site ↗</a>
+          </div>
+        </div>
       </section>
 
       <section class="surface home-feature recent-slide" id="recent-slide" aria-labelledby="recent-title">
@@ -446,6 +479,7 @@
         welcomeLine: 'Better Together', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         fallbackLabel: 'Soon', fallbackKicker: 'Quiet for now', fallbackTitle: 'Check again soon',
         fallbackSummary: 'Live notes and featured notices will land here when there is something worth sharing.', fallbackCta: 'Browse events',
+        shareTitle: 'Share with your friends easily!', shareSummary: 'Scan the code to open Acadie.sol and pass it along.',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', liveTab: 'Show current notice', recentTab: 'Show recently added'
@@ -455,6 +489,7 @@
         welcomeLine: 'Mieux ensemble', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         fallbackLabel: 'Bientôt', fallbackKicker: 'Calme pour l’instant', fallbackTitle: 'Revenez bientôt',
         fallbackSummary: 'Les nouvelles en direct et les avis en vedette apparaîtront ici quand il y aura quelque chose à partager.', fallbackCta: 'Voir les événements',
+        shareTitle: 'Partagez facilement avec vos amis !', shareSummary: 'Scannez le code pour ouvrir Acadie.sol et le partager autour de vous.',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', liveTab: 'Afficher l’avis actuel', recentTab: 'Afficher l’ajout récent'
@@ -498,6 +533,8 @@
       setText('home-event-label', c.events);
       setText('recent-kicker', c.recentKicker);
       setText('recent-link', c.recentCta);
+      setText('live-share-title', c.shareTitle);
+      setText('live-share-summary', c.shareSummary);
       setText('footer-community', c.footerCommunity);
       setText('footer-about', c.footerAbout);
       setText('footer-support', c.footerSupport);

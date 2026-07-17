@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">La Louga After-Party — coming soon</title>
+  <desc id="desc">A deep blue and warm gold placeholder cover for the La Louga After-Party photo album.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07152d"/>
+      <stop offset="0.55" stop-color="#12386b"/>
+      <stop offset="1" stop-color="#7d3f5c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="30%" r="60%">
+      <stop offset="0" stop-color="#f3c85b" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#f3c85b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#sky)"/>
+  <rect width="1200" height="900" fill="url(#glow)"/>
+  <g fill="#fff" opacity=".72">
+    <circle cx="120" cy="150" r="4"/><circle cx="260" cy="250" r="3"/><circle cx="420" cy="120" r="5"/>
+    <circle cx="720" cy="180" r="3"/><circle cx="930" cy="100" r="4"/><circle cx="1080" cy="280" r="3"/>
+  </g>
+  <path d="M0 720 Q260 610 520 710 T1200 650 V900 H0Z" fill="#07152d" opacity=".72"/>
+  <g fill="#f3c85b" font-family="Trebuchet MS, Arial, sans-serif" text-anchor="middle">
+    <text x="600" y="350" font-size="32" font-weight="700" letter-spacing="8">LA LOUGA</text>
+    <text x="600" y="475" font-size="76" font-weight="900" letter-spacing="-2">AFTER-PARTY</text>
+    <text x="600" y="560" font-size="30" font-weight="700" letter-spacing="7">16 · 07 · 26</text>
+  </g>
+  <text x="600" y="785" fill="#fff" font-family="Trebuchet MS, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle" letter-spacing="5">COMING SOON ✦ À VENIR</text>
+</svg>
