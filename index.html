@@ -89,6 +89,7 @@
     .welcome-mark { color: var(--gold); font-size: 1rem; letter-spacing: .18em; }
     .pilot-project { margin: 0; color: var(--muted); font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace; letter-spacing: .08em; }
     .welcome-gif { display: block; width: min(240px, 68vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 34px rgba(0, 0, 0, .32), 0 0 24px color-mix(in srgb, var(--gold) 18%, transparent); }
+    .welcome-question { margin-top: 6px; padding-top: 6px; }
 
     .home-pulse {
       width: min(320px, 100%);
@@ -121,7 +122,7 @@
     .live-card {
       display: grid;
       align-content: center;
-      gap: 18px;
+      gap: 22px;
     }
     .live-head,
     .live-meta {
@@ -135,12 +136,11 @@
     .live-share {
       display: grid;
       justify-items: center;
-      gap: 9px;
-      padding-top: 0;
+      gap: 14px;
     }
     .live-share img {
       display: block;
-      width: min(112px, 30vw);
+      width: min(134px, 36vw);
       height: auto;
       aspect-ratio: 1;
       padding: 5px;
@@ -148,11 +148,11 @@
       background: #fff;
       box-shadow: 0 8px 16px var(--shadow);
     }
-    .live-share-copy { display: grid; justify-items: center; gap: 7px; text-align: center; }
+    .live-share-copy { display: grid; justify-items: center; gap: 12px; text-align: center; padding-top: 2px; }
     .live-share-copy h3 { margin: 0; color: var(--ink-strong); font-size: .92rem; line-height: 1.12; }
     .live-share-copy button { cursor: pointer; font: inherit; }
     .share-card { justify-items: center; }
-
+    .recent-copy h2 { font-family: "Pokemon GB", ui-monospace, monospace; font-weight: 900; }
 
     .live-badge {
       display: inline-flex;
@@ -368,7 +368,7 @@
         overflow-y: auto;
         overscroll-behavior-y: contain;
       }
-      .live-card { align-content: center; gap: 18px; }
+      .live-card { align-content: center; gap: 22px; }
       .live-head { justify-content: flex-start; }
       .live-kicker { display: none; }
       .live-copy { gap: 7px; }
@@ -410,26 +410,25 @@
         <div class="welcome-content">
           <p class="welcome-kicker" id="welcome-kicker">Welcome to</p>
           <h1 id="welcome-title">⁜ Acadie.sol ⁜</h1>
-          <p class="welcome-line" id="welcome-line">Better Together</p>
           <p class="pilot-project">An Acadian Pilot Project</p>
+          <p class="welcome-line" id="welcome-line">Better Together</p>
           <div class="home-pulse" id="home-pulse" aria-label="Site pulse">
             <a href="directory.html#browse"><strong id="home-entry-count">…</strong><span id="home-entry-label">entries</span></a>
             <span class="pulse-star" aria-hidden="true">✦</span>
             <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
           </div>
           <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
-          <p class="welcome-kicker">What if we tried something different?</p>
+          <p class="welcome-kicker welcome-question">What if we tried something different?</p>
           <img class="welcome-gif" src="assets/images/acadie.gif" width="480" height="360" alt="Vive l’Acadie animated graphic" />
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
 
-      <section class="surface home-feature live-card share-card" id="share-card" aria-labelledby="live-share-title">
-        <div class="live-share" aria-labelledby="live-share-title">
+      <section class="surface home-feature live-card share-card" id="share-card" aria-label="Share this site">
+        <div class="live-share" aria-label="Share this site">
           <img src="assets/qr/acadie-sol-site.png" width="396" height="396" alt="QR code linking to acadie.sol.site" />
           <div class="live-share-copy">
-            <h3 id="live-share-title">Share with friends!</h3>
-            <button class="attention-link" id="live-share-button" type="button" data-share-label="Share">Share ↗</button>
+            <button class="attention-link" id="live-share-button" type="button" data-share-label="Share">Share with friends! ↗</button>
             <a class="attention-link" href="https://discord.gg/efUebw4NkK" target="_blank" rel="noopener noreferrer">Join Our Discord! ♡</a>
           </div>
         </div>
@@ -471,7 +470,7 @@
       en: {
         welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
         welcomeLine: '⭐️💙🤍❤️', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
-        shareTitle: 'Share with friends!', shareButton: 'Share ↗', shareDone: 'Copied ✓',
+        shareTitle: 'Share with friends!', shareButton: 'Share with friends! ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added'
@@ -479,7 +478,7 @@
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
         welcomeLine: '⭐️💙🤍❤️', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
-        shareTitle: 'Partagez avec vos amis !', shareButton: 'Partager ↗', shareDone: 'Copié ✓',
+        shareTitle: 'Partagez avec vos amis !', shareButton: 'Partagez avec vos amis ! ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent'
