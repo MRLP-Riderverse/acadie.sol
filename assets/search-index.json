@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 75,
+  "item_count": 79,
   "items": [
     {
       "type": "entry",
@@ -247,8 +247,7 @@
       "title": "Black Pug Live",
       "subtitle": "venue · Acadie-Bathurst",
       "badges": [
-        "venue",
-        "1 event next 7 days"
+        "venue"
       ],
       "url": "directory.html#entry-black-pug-live",
       "terms": [
@@ -1334,10 +1333,10 @@
       "type": "event",
       "id": "east-coast-invasion-tour-black-pug-live",
       "title": "East Coast Invasion Tour",
-      "subtitle": "active · 2026-07-03T20:00:00-03:00",
+      "subtitle": "archived · 2026-07-03T20:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "music",
         "metal"
       ],
@@ -1357,10 +1356,10 @@
       "type": "event",
       "id": "louga-event-placeholder",
       "title": "Louga Event Placeholder",
-      "subtitle": "active · 2026-07-12T21:00:00-03:00",
+      "subtitle": "archived · 2026-07-12T21:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "music",
         "nightlife"
       ],
@@ -1379,10 +1378,10 @@
       "type": "event",
       "id": "big-d-community-placeholder",
       "title": "Big D Community Placeholder",
-      "subtitle": "active · 2026-07-19T12:00:00-03:00",
+      "subtitle": "archived · 2026-07-19T12:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "food",
         "family"
       ],
@@ -1395,6 +1394,29 @@
         "family",
         "placeholder",
         "big-d-drive-in"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "hangout-dacadiennes-2026",
+      "title": "Hangout d’Acadien(ne)s!",
+      "subtitle": "active · 2026-07-28T10:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "community",
+        "acadian"
+      ],
+      "url": "events.html#event-hangout-dacadiennes-2026",
+      "terms": [
+        "Hangout d’Acadien(ne)s!",
+        "An informal Acadian meet-and-greet at Coronation Park in Bathurst on Tuesday, July 28, 2026, from 10 AM to 2 PM.",
+        "2026-07-28T10:00:00-03:00",
+        "community",
+        "acadian",
+        "meet-and-greet",
+        "outdoor",
+        "free"
       ]
     },
     {
@@ -1418,6 +1440,50 @@
         "concert",
         "afterparty",
         "la-louga-night-bar-resto"
+      ]
+    },
+    {
+      "type": "event",
+      "id": "farmers-market-bathurst-dart-hall-2026",
+      "title": "Farmer’s Market",
+      "subtitle": "active · 2026-08-16T08:00:00-03:00",
+      "badges": [
+        "event",
+        "active",
+        "market",
+        "farmers-market"
+      ],
+      "url": "events.html#event-farmers-market-bathurst-dart-hall-2026",
+      "terms": [
+        "Farmer’s Market",
+        "A Farmer’s Market at Bathurst City Dart Hall on Sunday, August 16, 2026, from 8 AM to 1 PM — a chance for locals to discover each other and their talents. Vendors can reserve a table for $20.",
+        "2026-08-16T08:00:00-03:00",
+        "market",
+        "farmers-market",
+        "community",
+        "local-vendors",
+        "talent",
+        "bathurst-city-dart-hall"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "bathurst-city-dart-hall",
+      "title": "Bathurst City Dart Hall",
+      "subtitle": "venue · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "venue"
+      ],
+      "url": "events.html#location-bathurst-city-dart-hall",
+      "terms": [
+        "Bathurst City Dart Hall",
+        "Community hall and event venue in Bathurst.",
+        "st-andre-rd-bathurst",
+        "venue",
+        "community-events",
+        "darts",
+        "market"
       ]
     },
     {
@@ -1496,6 +1562,27 @@
         "downtown",
         "venue",
         "live music"
+      ]
+    },
+    {
+      "type": "location",
+      "id": "coronation-park-bathurst",
+      "title": "Coronation Park, Bathurst",
+      "subtitle": "outdoor-site · Acadie-Bathurst",
+      "badges": [
+        "location",
+        "outdoor-site"
+      ],
+      "url": "events.html#location-coronation-park-bathurst",
+      "terms": [
+        "Coronation Park, Bathurst",
+        "Outdoor community gathering place in Bathurst, around the walking track and central gazebo.",
+        "",
+        "park",
+        "outdoor",
+        "walking-track",
+        "gazebo",
+        "community"
       ]
     },
     {

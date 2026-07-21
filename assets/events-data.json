@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "event_count": 6,
-  "active_count": 4,
-  "archived_count": 2,
+  "event_count": 8,
+  "active_count": 3,
+  "archived_count": 5,
   "items": [
     {
       "id": "socialite-reading-marc-chamberlain-bathurst-library",
@@ -120,7 +120,7 @@
     {
       "id": "east-coast-invasion-tour-black-pug-live",
       "status": "active",
-      "computed_status": "active",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "East Coast Invasion Tour",
@@ -176,7 +176,7 @@
     {
       "id": "louga-event-placeholder",
       "status": "published",
-      "computed_status": "active",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "Louga Event Placeholder",
@@ -231,7 +231,7 @@
     {
       "id": "big-d-community-placeholder",
       "status": "published",
-      "computed_status": "active",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "Big D Community Placeholder",
@@ -282,6 +282,61 @@
       "path": "events/big-d-community-placeholder/event.md",
       "source_modified_at": "2026-06-18T16:20:26.230202Z",
       "source_modified_ts": 1781799626
+    },
+    {
+      "id": "hangout-dacadiennes-2026",
+      "status": "published",
+      "computed_status": "active",
+      "kind": "event",
+      "title": {
+        "en": "Hangout d’Acadien(ne)s!",
+        "fr": "Hangout d’Acadien(ne)s!",
+        "shiac": "Hangout d’Acadien(ne)s!"
+      },
+      "name": "Hangout d’Acadien(ne)s!",
+      "summary": {
+        "en": "An informal Acadian meet-and-greet at Coronation Park in Bathurst on Tuesday, July 28, 2026, from 10 AM to 2 PM.",
+        "fr": "Une rencontre informelle entre Acadien·ne·s au parc Coronation à Bathurst, le mardi 28 juillet 2026, de 10 h à 14 h.",
+        "shiac": "Un meet-and-greet acadien relaxe au parc Coronation à Bathurst, mardi le 28 juillet 2026, de 10 h à 14 h."
+      },
+      "starts_at": "2026-07-28T10:00:00-03:00",
+      "ends_at": "2026-07-28T14:00:00-03:00",
+      "expires_at": "2026-07-28T14:00:00-03:00",
+      "timezone": "America/Moncton",
+      "region_id": "acadie-bathurst",
+      "location_id": "coronation-park-bathurst",
+      "host_entry_ids": [],
+      "performer_entry_ids": [],
+      "sponsor_entry_ids": [],
+      "related_offer_ids": [],
+      "tags": [
+        "community",
+        "acadian",
+        "meet-and-greet",
+        "outdoor",
+        "free"
+      ],
+      "wayfinding": {
+        "en": "Coronation Park in Bathurst, around the walking track and central gazebo. No civic address is available.",
+        "fr": "Parc Coronation à Bathurst, près de la piste de marche et du gazebo central. Aucune adresse civique n’est disponible.",
+        "shiac": "Au parc Coronation à Bathurst, autour de la track de marche pis du gazebo au centre. Y’a pas d’adresse civique."
+      },
+      "bring": {
+        "en": "Nothing special is required. Bring a water bottle or your own water supply.",
+        "fr": "Rien de particulier n’est requis. Apportez une bouteille ou votre propre eau.",
+        "shiac": "T’as pas besoin de rien de spécial. Amène ta bouteille d’eau."
+      },
+      "calendar": {
+        "ics_enabled": true
+      },
+      "source": {
+        "type": "web",
+        "submitted_by": "Acadie.sol",
+        "url": "https://www.facebook.com/events/coronation-park/hangout-dacadiennes/1336927341425629/"
+      },
+      "path": "events/hangout-dacadiennes-2026/event.md",
+      "source_modified_at": "2026-07-21T17:16:41.072504Z",
+      "source_modified_ts": 1784654201
     },
     {
       "id": "after-block-party-2026",
@@ -338,6 +393,62 @@
       "path": "events/after-block-party-2026/event.md",
       "source_modified_at": "2026-06-21T19:39:56.040901Z",
       "source_modified_ts": 1782070796
+    },
+    {
+      "id": "farmers-market-bathurst-dart-hall-2026",
+      "status": "published",
+      "computed_status": "active",
+      "kind": "event",
+      "title": {
+        "en": "Farmer’s Market",
+        "fr": "Marché fermier",
+        "shiac": "Farmer’s Market"
+      },
+      "name": "Farmer’s Market",
+      "summary": {
+        "en": "A Farmer’s Market at Bathurst City Dart Hall on Sunday, August 16, 2026, from 8 AM to 1 PM — a chance for locals to discover each other and their talents. Vendors can reserve a table for $20.",
+        "fr": "Un marché fermier au Bathurst City Dart Hall le dimanche 16 août 2026, de 8 h à 13 h — une chance pour les gens du coin de se découvrir et de partager leurs talents. Les vendeurs peuvent réserver une table pour 20 $.",
+        "shiac": "Un Farmer’s Market au Bathurst City Dart Hall, dimanche le 16 août 2026, de 8 h à 13 h — une chance pour le monde d’icitte de se découvrir pis de montrer ses talents. Les vendeurs peuvent réserver une table pour 20 $."
+      },
+      "starts_at": "2026-08-16T08:00:00-03:00",
+      "ends_at": "2026-08-16T13:00:00-03:00",
+      "expires_at": "2026-08-16T13:00:00-03:00",
+      "timezone": "America/Moncton",
+      "region_id": "acadie-bathurst",
+      "location_id": "bathurst-city-dart-hall",
+      "host_entry_ids": [
+        "bathurst-city-dart-hall"
+      ],
+      "performer_entry_ids": [],
+      "sponsor_entry_ids": [],
+      "related_offer_ids": [],
+      "tags": [
+        "market",
+        "farmers-market",
+        "community",
+        "local-vendors",
+        "talent"
+      ],
+      "wayfinding": {
+        "en": "Bathurst City Dart Hall, 87 St Andre Rd, Bathurst, NB, Canada, E2A 7A1.",
+        "fr": "Bathurst City Dart Hall, 87, chemin St Andre, Bathurst, N.-B., Canada, E2A 7A1.",
+        "shiac": "Bathurst City Dart Hall, 87 St Andre Rd, Bathurst, NB, Canada, E2A 7A1."
+      },
+      "bring": {
+        "en": "Vendors can reserve a table for $20.",
+        "fr": "Les vendeurs peuvent réserver une table pour 20 $.",
+        "shiac": "Les vendeurs peuvent réserver une table pour 20 $."
+      },
+      "calendar": {
+        "ics_enabled": true
+      },
+      "source": {
+        "type": "community_submission",
+        "submitted_by": "Acadie.sol"
+      },
+      "path": "events/farmers-market-bathurst-dart-hall-2026/event.md",
+      "source_modified_at": "2026-07-21T17:40:43.500213Z",
+      "source_modified_ts": 1784655643
     }
   ]
 }

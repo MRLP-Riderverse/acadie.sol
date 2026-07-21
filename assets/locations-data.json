@@ -1,8 +1,42 @@
 {
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
-  "location_count": 7,
+  "location_count": 9,
   "items": [
+    {
+      "id": "bathurst-city-dart-hall",
+      "status": "published",
+      "kind": "venue",
+      "title": {
+        "en": "Bathurst City Dart Hall",
+        "fr": "Bathurst City Dart Hall",
+        "shiac": "Bathurst City Dart Hall"
+      },
+      "name": "Bathurst City Dart Hall",
+      "summary": {
+        "en": "Community hall and event venue in Bathurst.",
+        "fr": "Salle communautaire et lieu d’événements à Bathurst.",
+        "shiac": "Community hall pis place pour des événements à Bathurst."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "st-andre-rd-bathurst",
+      "address": "87 St Andre Rd, Bathurst, NB, Canada, E2A 7A1",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [
+        "bathurst-city-dart-hall"
+      ],
+      "nearby_location_ids": [],
+      "tags": [
+        "venue",
+        "community-events",
+        "darts",
+        "market"
+      ],
+      "path": "locations/bathurst-city-dart-hall/location.md",
+      "source_modified_at": "2026-07-21T17:40:28.810196Z",
+      "source_modified_ts": 1784655628
+    },
     {
       "id": "bathurst-hospitality-days",
       "status": "published",
@@ -146,6 +180,39 @@
       "path": "locations/black-pug-live-main-st-bathurst/location.md",
       "source_modified_at": "2026-07-03T18:46:29.540910Z",
       "source_modified_ts": 1783104389
+    },
+    {
+      "id": "coronation-park-bathurst",
+      "status": "published",
+      "kind": "outdoor-site",
+      "title": {
+        "en": "Coronation Park, Bathurst",
+        "fr": "Parc Coronation, Bathurst",
+        "shiac": "Le parc Coronation à Bathurst"
+      },
+      "name": "Coronation Park, Bathurst",
+      "summary": {
+        "en": "Outdoor community gathering place in Bathurst, around the walking track and central gazebo.",
+        "fr": "Lieu de rassemblement communautaire extérieur à Bathurst, près de la piste de marche et du gazebo central.",
+        "shiac": "Un spot dehors à Bathurst, autour de la track de marche pis du gazebo au centre."
+      },
+      "region_id": "acadie-bathurst",
+      "street_id": "",
+      "address": "",
+      "municipality": "Bathurst",
+      "public_area": "Acadie-Bathurst",
+      "entry_ids": [],
+      "nearby_location_ids": [],
+      "tags": [
+        "park",
+        "outdoor",
+        "walking-track",
+        "gazebo",
+        "community"
+      ],
+      "path": "locations/coronation-park-bathurst/location.md",
+      "source_modified_at": "2026-07-21T17:16:41.085931Z",
+      "source_modified_ts": 1784654201
     },
     {
       "id": "downtown-main-st-bathurst",
