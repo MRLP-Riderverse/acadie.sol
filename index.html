@@ -98,6 +98,7 @@
     .welcome-mark { color: var(--gold); font-size: 1rem; letter-spacing: .18em; }
     .pilot-project { margin: 0; color: var(--muted); font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace; letter-spacing: .08em; }
     .welcome-gif { display: block; width: min(240px, 68vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 34px rgba(0, 0, 0, .32), 0 0 24px color-mix(in srgb, var(--gold) 18%, transparent); }
+    .merch-teaser { margin: 8px 0 0; color: var(--red); font-size: .72rem; letter-spacing: .08em; }
     .welcome-question { margin-top: 6px; padding-top: 6px; }
 
     .home-pulse {
@@ -430,6 +431,7 @@
           <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
           <p class="welcome-kicker welcome-question" id="welcome-question">What if we tried something different?</p>
           <img class="welcome-gif" src="assets/images/acadie.gif" width="480" height="360" alt="Vive l’Acadie animated graphic" />
+          <h4 class="merch-teaser" id="merch-teaser">⁜ MERCH COMING SOON ⁜</h4>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
@@ -479,7 +481,7 @@
     const HOME_COPY = {
       en: {
         welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', welcomeQuestion: 'What if we tried something different?', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
+        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', welcomeQuestion: 'What if we tried something different?', merchTeaser: '⁜ MERCH COMING SOON ⁜', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         shareTitle: 'Share with friends!', shareButton: 'Share with friends! ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
@@ -487,7 +489,7 @@
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', welcomeQuestion: 'Et si on essayait quelque chose de différent ?', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
+        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', welcomeQuestion: 'Et si on essayait quelque chose de différent ?', merchTeaser: '⁜ MARCHANDISE À VENIR ⁜', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partagez avec vos amis ! ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
@@ -528,6 +530,7 @@
       setText('welcome-pilot', c.pilotProject);
       setText('welcome-line', c.welcomeLine);
       setText('welcome-question', c.welcomeQuestion);
+      setText('merch-teaser', c.merchTeaser);
       setText('mobile-deck-hint', c.mobileHint);
       setText('home-entry-label', c.entries);
       setText('home-event-label', c.events);

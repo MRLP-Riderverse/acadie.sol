@@ -90,7 +90,8 @@
     // Keep authored Markdown links intact as safe, readable outbound links.
     function renderInlineMarkdown(value) {
       const escaped = escapeHtml(value);
-      return escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, url) => `<a class="detail-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      const linked = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, url) => `<a class="detail-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+      return linked.split(/(<[^>]+>)/g).map(part => part.startsWith('<') ? part : part.replace(/\b(MidnightRider\.sol|Acadie\.sol)\b/g, name => `<a class="detail-link" href="entry.html#${name === 'Acadie.sol' ? 'acadie-sol' : 'midnightrider-sol'}">${name}</a>`)).join('');
     }
     function normalize(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
     function cleanSummary(v) {
@@ -103,12 +104,13 @@
     function localized(v) { return cleanSummary(v); }
     function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
     function publicDataRows(item) {
+      const seen = new Set([contactValue(item, 'website'), contactValue(item, 'facebook'), contactValue(item, 'instagram'), contactValue(item, 'x')].map(value => cleanSummary(value).trim()).filter(Boolean));
       return (Array.isArray(item.public_data) ? item.public_data : []).map(value => {
         const text = cleanSummary(value); const split = text.indexOf(':');
         const label = split > 0 ? text.slice(0, split).trim() : 'Public';
         const content = split > 0 ? text.slice(split + 1).trim() : text;
         return [label.toLowerCase(), label, content];
-      }).filter(([, , value]) => value);
+      }).filter(([, , value]) => value && !seen.has(value.trim()));
     }
     function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
     function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
@@ -135,6 +137,12 @@
         return `<a class="detail-link" href="https://${host}/${encodeURIComponent(handle)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
       }
       return escapeHtml(text);
+    }
+    function renderNoteList(item, notes) {
+      const points = Array.isArray(item.note_points) && item.note_points.length
+        ? item.note_points
+        : String(notes || '').split(/\s+-\s+/).map(point => point.replace(/^[-•]\s*/, '').trim()).filter(Boolean);
+      return points.length ? `<ul class="entry-note-list">${points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>` : '';
     }
     function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(d), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(d) }; }
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
@@ -196,7 +204,7 @@
         }).sort((a, b) => String(a.starts_at || '').localeCompare(String(b.starts_at || '')));
 
         // Related places (share same location or cross-referenced)
-        const relatedSlugs = new Set([...(item.related_places || [])].map(s => String(s).trim().toLowerCase()));
+        const relatedSlugs = new Set([...(item.related_places || [])].map(s => normalize(s)));
         const relatedPlaces = items.filter(i => i.slug !== item.slug && !i.draft && (relatedSlugs.has(normalize(i.slug)) || (item.location_id && i.location_id === item.location_id))).slice(0, 6);
 
         const eventsHtml = relatedEvents.length ? `
@@ -223,7 +231,7 @@
             <h1>${escapeHtml(itemTitle)}</h1>
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${renderInlineMarkdown(description)}</p>` : ''}
-            ${Array.isArray(item.note_points) && item.note_points.length ? `<ul class="entry-note-list">${item.note_points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>` : (notes ? `<p class="notes">${renderInlineMarkdown(notes)}</p>` : '')}
+            ${renderNoteList(item, notes)}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
