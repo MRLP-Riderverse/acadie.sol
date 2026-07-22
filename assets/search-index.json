@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 79,
+  "item_count": 81,
   "items": [
     {
       "type": "entry",
@@ -65,6 +65,30 @@
         "information center",
         "waterfront",
         "Tourism Information Center"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "acadie-sol",
+      "title": "Acadie.sol",
+      "subtitle": "community · Acadie-Bathurst",
+      "badges": [
+        "community"
+      ],
+      "url": "directory.html#entry-acadie-sol",
+      "terms": [
+        "Acadie.sol",
+        "community",
+        "Acadie-Bathurst",
+        "Projet Pilote Acadien - 2026, a web3-inspired Acadian community and cultural media project stewarded by MidnightRider.sol.",
+        "Acadie.sol",
+        "community project",
+        "social club",
+        "Acadian cultural media",
+        "digital project",
+        "web3-inspired",
+        "Projet Pilote Acadien",
+        "Acadian community project"
       ]
     },
     {
@@ -894,6 +918,33 @@
         "restaurant",
         "takeout",
         "st peters ave"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "midnightrider-sol",
+      "title": "MidnightRider.sol",
+      "subtitle": "creator · Acadie-Bathurst",
+      "badges": [
+        "creator"
+      ],
+      "url": "directory.html#entry-midnightrider-sol",
+      "terms": [
+        "MidnightRider.sol",
+        "creator",
+        "Acadie-Bathurst",
+        "Systems designer, frontier tech creator-builder, and steward of community-shaped projects from Bathurst.",
+        "systems designer",
+        "frontier tech",
+        "creator",
+        "builder",
+        "Project LP",
+        "Riderverse.sol",
+        "Acadie.sol",
+        "The Strays",
+        "digital identity",
+        "MR LP",
+        "Midnight Rider"
       ]
     },
     {
