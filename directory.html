@@ -715,6 +715,13 @@
         .replaceAll("'", '&#39;');
     }
 
+    // Render only the small Markdown subset used by steward-authored links;
+    // all labels and URLs are escaped before becoming real outbound anchors.
+    function renderInlineMarkdown(value) {
+      const escaped = escapeHtml(value);
+      return escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, url) => `<a class="detail-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+    }
+
     function normalize(value) { return String(value || '').toLowerCase(); }
     function localizedText(value) {
       if (value && typeof value === 'object') {
@@ -924,8 +931,8 @@
 
     function renderNoteBlock(item, notes) {
       const points = Array.isArray(item.note_points) ? item.note_points.map(cleanSummary).filter(Boolean) : [];
-      if (points.length) return `<ul class="note-list">${points.map(point => `<li>${escapeHtml(point)}</li>`).join('')}</ul>`;
-      return notes ? `<p class="notes">${escapeHtml(notes)}</p>` : '';
+      if (points.length) return `<ul class="note-list">${points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>`;
+      return notes ? `<p class="notes">${renderInlineMarkdown(notes)}</p>` : '';
     }
 
     function parseEventDate(value) {
@@ -1018,13 +1025,13 @@
                   ${renderUpcomingBadge(item)}
                 </span>
                 <span class="meta-line">
-                  ${description.first ? `<span class="summary-description">${escapeHtml(description.first)}</span>` : ''}
+                  ${description.first ? `<span class="summary-description">${renderInlineMarkdown(description.first)}</span>` : ''}
                 </span>
               </span>
             </div>
           </summary>
           <div class="card-body">
-            ${description.rest ? `<p class="description">${escapeHtml(description.rest)}</p>` : ''}
+            ${description.rest ? `<p class="description">${renderInlineMarkdown(description.rest)}</p>` : ''}
             ${renderNoteBlock(item, notes)}
             ${(detailRows.length || locationContext) ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailValue(type, value)}</div></div>`).join('')}${locationContext}</div>` : ''}
             ${eventFeed}

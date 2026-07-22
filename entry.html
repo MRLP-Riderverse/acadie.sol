@@ -49,6 +49,9 @@
     .entry-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
     .entry-tag { margin-top: 0; font-size: .66rem; }
     .description { margin: 0; font-size: .92rem; line-height: 1.42; color: var(--ink); }
+    .entry-note-list { margin: 10px 0 0; padding-left: 1.15rem; display: grid; gap: 5px; color: var(--ink); font-size: .88rem; line-height: 1.4; }
+    .entry-note-list li::marker { color: var(--red); }
+    h1 { text-shadow: 2px 0 0 rgba(218, 38, 54, .72), -2px 0 0 rgba(47, 116, 180, .62); }
     .detail-grid { display: grid; gap: 8px; margin-top: 12px; }
     .detail-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
     .detail-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 900; white-space: nowrap; }
@@ -84,6 +87,11 @@
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
     function escapeHtml(str) { const d=document.createElement("div"); d.textContent=String(str||""); return d.innerHTML; }
+    // Keep authored Markdown links intact as safe, readable outbound links.
+    function renderInlineMarkdown(value) {
+      const escaped = escapeHtml(value);
+      return escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, url) => `<a class="detail-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
+    }
     function normalize(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
     function cleanSummary(v) {
       if (v && typeof v === 'object') {
@@ -214,8 +222,8 @@
           <section class="surface">
             <h1>${escapeHtml(itemTitle)}</h1>
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
-            ${description ? `<p class="description" style="margin-top:10px">${escapeHtml(description)}</p>` : ''}
-            ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
+            ${description ? `<p class="description" style="margin-top:10px">${renderInlineMarkdown(description)}</p>` : ''}
+            ${Array.isArray(item.note_points) && item.note_points.length ? `<ul class="entry-note-list">${item.note_points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>` : (notes ? `<p class="notes">${renderInlineMarkdown(notes)}</p>` : '')}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
