@@ -94,6 +94,14 @@
     }
     function localized(v) { return cleanSummary(v); }
     function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
+    function publicDataRows(item) {
+      return (Array.isArray(item.public_data) ? item.public_data : []).map(value => {
+        const text = cleanSummary(value); const split = text.indexOf(':');
+        const label = split > 0 ? text.slice(0, split).trim() : 'Public';
+        const content = split > 0 ? text.slice(split + 1).trim() : text;
+        return [label.toLowerCase(), label, content];
+      }).filter(([, , value]) => value);
+    }
     function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
     function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
     function phoneHref(v) { const d = cleanSummary(v).replace(/[^\d+]/g, ''); return d ? `tel:${d}` : ''; }
@@ -113,7 +121,11 @@
       if (lower === 'phone') { const h = phoneHref(text); return h ? `<a class="detail-link" href="${h}">${escapeHtml(text)}</a>` : escapeHtml(text); }
       if (lower === 'address') { const h = mapsHref(text); return h ? `<a class="detail-link" href="${h}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>` : escapeHtml(text); }
       if (lower === 'email') return `<a class="detail-link" href="mailto:${encodeURIComponent(text)}">${escapeHtml(text)}</a>`;
-      if (lower === 'website') { const h = /^https?:\/\//i.test(text) ? text : `https://${text}`; return `<a class="detail-link" href="${escapeHtml(h)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`; }
+      if (lower === 'website' || /^https?:\/\//i.test(text)) { const h = /^https?:\/\//i.test(text) ? text : `https://${text}`; return `<a class="detail-link" href="${escapeHtml(h)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`; }
+      if ((lower === 'instagram' || lower === 'x' || lower === 'twitter') && /^@?[a-z0-9._]+$/i.test(text)) {
+        const handle = text.replace(/^@/, ''); const host = lower === 'instagram' ? 'instagram.com' : 'x.com';
+        return `<a class="detail-link" href="https://${host}/${encodeURIComponent(handle)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`;
+      }
       return escapeHtml(text);
     }
     function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(d), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(d) }; }
@@ -133,7 +145,7 @@
       catch { return ''; }
     }
     const slug = safeHashFragment();
-    if (!slug) { location.replace('directory.html'); }
+    if (!slug) { location.replace('directory.html#browse'); }
 
     async function render() {
       const root = document.getElementById('entry-root');
@@ -148,7 +160,7 @@
         const events = evtData.items || [];
         const item = items.find(i => i.slug === slug);
         if (!item) {
-          root.innerHTML = `<div class="empty-msg"><h1>Entry not found</h1><p>No entry matches <code>${escapeHtml(slug)}</code>.</p><p><a href="directory.html">Back to directory</a></p></div>`;
+          root.innerHTML = `<div class="empty-msg"><h1>Entry not found</h1><p>No entry matches <code>${escapeHtml(slug)}</code>.</p><p><a href="directory.html#browse">Back to directory</a></p></div>`;
           return;
         }
         // Drafts don't get full pages — redirect to expanded card
@@ -157,14 +169,15 @@
         const itemTitle = cleanSummary(item.title_localized) || item.title || 'Entry';
         document.title = `${itemTitle} — Acadie.sol`;
         const city = publicCity(item);
-        const description = cleanSummary(item.description_localized || item.description || item.summary);
-        const tags = (Array.isArray(item.tags) ? item.tags : []).map(cleanSummary).filter(Boolean);
+        const description = cleanSummary(item.description || item.description_localized || item.summary);
+        const notes = cleanSummary(item.notes);
         const detailRows = [
           ['Address', contactValue(item, 'address')],
           ['Hours', contactValue(item, 'hours')],
           ['Phone', contactValue(item, 'phone')],
           ['Email', contactValue(item, 'email')],
           ['Website', contactValue(item, 'website')],
+          ...publicDataRows(item).map(([type, label, value]) => [label, value]),
         ].filter(([, v]) => cleanSummary(v));
 
         // Related events
@@ -201,13 +214,12 @@
           <section class="surface">
             <h1>${escapeHtml(itemTitle)}</h1>
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
-            ${item.category ? `<span class="entry-category">${escapeHtml(item.category)}</span>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${escapeHtml(description)}</p>` : ''}
+            ${notes ? `<p class="notes">${escapeHtml(notes)}</p>` : ''}
             ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
-            ${tags.length ? `<div class="entry-tags">${tags.map(t => `<span class="entry-category entry-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
-          <footer class="page-footer"><p><a href="directory.html">Back to directory</a></p></footer>
+          <footer class="page-footer"><p><a href="directory.html#browse">Back to directory</a></p></footer>
         `;
       } catch (err) {
         root.innerHTML = `<div class="empty-msg"><h1>Couldn't load entry</h1><p>${escapeHtml(err.message)}</p></div>`;
