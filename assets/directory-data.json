@@ -254,18 +254,18 @@
       "public_area": "Acadie-Bathurst",
       "description": "Digitally based Acadian community project and cultural media space.",
       "description_localized": {
-        "en": "Projet Pilote Acadien - 2026, a web3-inspired Acadian community and cultural media project stewarded by MidnightRider.sol.",
-        "fr": "Projet Pilote Acadien - 2026, un projet communautaire et de médias culturels acadiens inspiré par le web3 et porté par MidnightRider.sol.",
-        "shiac": "Projet Pilote Acadien - 2026, a web3-inspired Acadian community and cultural media project stewarded by MidnightRider.sol."
+        "en": "Projet Pilote Acadien - 2026, a web3-inspired Acadian community and cultural media project stewarded by MRLP.Acadie.sol.",
+        "fr": "Projet Pilote Acadien - 2026, un projet communautaire et de médias culturels acadiens inspiré par le web3 et porté par MRLP.Acadie.sol.",
+        "shiac": "Projet Pilote Acadien - 2026, a web3-inspired Acadian community and cultural media project stewarded by MRLP.Acadie.sol."
       },
-      "notes": "- Projet Pilote Acadien - 2026. - Community project. - Social club. - Acadian cultural media. - Web3-inspired public infrastructure. - Stewarded by MidnightRider.sol. - Based digitally in Bathurst / Acadie-Bathurst. - No civic address.",
+      "notes": "- Projet Pilote Acadien - 2026. - Community project. - Social club. - Acadian cultural media. - Web3-inspired public infrastructure. - Stewarded by MRLP.Acadie.sol. - Based digitally in Bathurst / Acadie-Bathurst. - No civic address.",
       "note_points": [
         "Projet Pilote Acadien - 2026.",
         "Community project.",
         "Social club.",
         "Acadian cultural media.",
         "Web3-inspired public infrastructure.",
-        "Stewarded by MidnightRider.sol.",
+        "Stewarded by MRLP.Acadie.sol.",
         "Based digitally in Bathurst / Acadie-Bathurst.",
         "No civic address."
       ],
@@ -297,8 +297,8 @@
         "Facebook: https://www.facebook.com/share/1JA4uo3a2U/?mibextid=wwXIfr"
       ],
       "related_places": [
-        "MidnightRider.sol",
-        "MidnightRider.sol"
+        "MRLP.Acadie.sol",
+        "MRLP.Acadie.sol"
       ],
       "sources": [
         "https://acadie.sol.site/",
@@ -307,8 +307,8 @@
       ],
       "source_type": "public-source",
       "path": "entries/acadie-sol/entry.md",
-      "source_modified_at": "2026-07-22T00:50:09.153634Z",
-      "source_modified_ts": 1784681409
+      "source_modified_at": "2026-08-01T21:45:34.121137Z",
+      "source_modified_ts": 1785620734
     },
     {
       "title": "Apollo Cinema",
@@ -3054,21 +3054,21 @@
       "source_modified_ts": 1781836355
     },
     {
-      "title": "MidnightRider.sol",
+      "title": "MRLP.Acadie.sol",
       "title_localized": {
-        "en": "MidnightRider.sol",
-        "fr": "MidnightRider.sol",
-        "shiac": "MidnightRider.sol"
+        "en": "MRLP.Acadie.sol",
+        "fr": "MRLP.Acadie.sol",
+        "shiac": "MRLP.Acadie.sol"
       },
-      "name": "MidnightRider.sol",
-      "sort_name": "MidnightRider.sol",
+      "name": "MRLP.Acadie.sol",
+      "sort_name": "MRLP.Acadie.sol",
       "brand_name": "",
       "branch_name": "",
       "aliases": [
         "MR LP",
         "Midnight Rider"
       ],
-      "slug": "midnightrider-sol",
+      "slug": "mrlp-acadie-sol",
       "location_id": "",
       "region_id": "acadie-bathurst",
       "street_id": "",
@@ -3144,9 +3144,9 @@
         "Steward-reviewed / self-submitted"
       ],
       "source_type": "public-source",
-      "path": "entries/midnightrider-sol/entry.md",
-      "source_modified_at": "2026-07-22T00:50:15.784641Z",
-      "source_modified_ts": 1784681415
+      "path": "entries/mrlp-acadie-sol/entry.md",
+      "source_modified_at": "2026-08-01T21:45:34.111445Z",
+      "source_modified_ts": 1785620734
     },
     {
       "title": "Monty's Pretzelria",

@@ -55,4 +55,4 @@ Camera originals do **not** belong in this repository. Keep them in the private 
 
 ## Author
 
-MidnightRider.sol — created June 8 2026
+MRLP.Acadie.sol — created June 8 2026

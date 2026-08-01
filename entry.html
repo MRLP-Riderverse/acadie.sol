@@ -91,7 +91,7 @@
     function renderInlineMarkdown(value) {
       const escaped = escapeHtml(value);
       const linked = escaped.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_, label, url) => `<a class="detail-link" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`);
-      return linked.split(/(<[^>]+>)/g).map(part => part.startsWith('<') ? part : part.replace(/\b(MidnightRider\.sol|Acadie\.sol)\b/g, name => `<a class="detail-link" href="entry.html#${name === 'Acadie.sol' ? 'acadie-sol' : 'midnightrider-sol'}">${name}</a>`)).join('');
+      return linked.split(/(<[^>]+>)/g).map(part => part.startsWith('<') ? part : part.replace(/\b(MRLP\.Acadie\.sol|Acadie\.sol)\b/g, name => `<a class="detail-link" href="entry.html#${name === 'Acadie.sol' ? 'acadie-sol' : 'mrlp-acadie-sol'}">${name}</a>`)).join('');
     }
     function normalize(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim(); }
     function cleanSummary(v) {
