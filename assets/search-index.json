@@ -1451,10 +1451,10 @@
       "type": "event",
       "id": "hangout-dacadiennes-2026",
       "title": "Hangout d’Acadien(ne)s!",
-      "subtitle": "active · 2026-07-28T10:00:00-03:00",
+      "subtitle": "archived · 2026-07-28T10:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "community",
         "acadian"
       ],
@@ -1474,10 +1474,10 @@
       "type": "event",
       "id": "after-block-party-2026",
       "title": "After Block Party 2026",
-      "subtitle": "active · 2026-07-31T22:00:00-03:00",
+      "subtitle": "archived · 2026-07-31T22:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "music",
         "nightlife"
       ],

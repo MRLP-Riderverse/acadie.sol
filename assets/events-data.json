@@ -2,8 +2,8 @@
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
   "event_count": 8,
-  "active_count": 3,
-  "archived_count": 5,
+  "active_count": 1,
+  "archived_count": 7,
   "items": [
     {
       "id": "socialite-reading-marc-chamberlain-bathurst-library",
@@ -119,7 +119,7 @@
     },
     {
       "id": "east-coast-invasion-tour-black-pug-live",
-      "status": "active",
+      "status": "archived",
       "computed_status": "archived",
       "kind": "event",
       "title": {
@@ -175,7 +175,7 @@
     },
     {
       "id": "louga-event-placeholder",
-      "status": "published",
+      "status": "archived",
       "computed_status": "archived",
       "kind": "event",
       "title": {
@@ -230,7 +230,7 @@
     },
     {
       "id": "big-d-community-placeholder",
-      "status": "published",
+      "status": "archived",
       "computed_status": "archived",
       "kind": "event",
       "title": {
@@ -285,8 +285,8 @@
     },
     {
       "id": "hangout-dacadiennes-2026",
-      "status": "published",
-      "computed_status": "active",
+      "status": "archived",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "Hangout d’Acadien(ne)s!",
@@ -340,8 +340,8 @@
     },
     {
       "id": "after-block-party-2026",
-      "status": "published",
-      "computed_status": "active",
+      "status": "archived",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "After Block Party 2026",

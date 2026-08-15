@@ -99,6 +99,8 @@
     .pilot-project { margin: 0; color: var(--muted); font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace; letter-spacing: .08em; }
     .welcome-gif { display: block; width: min(240px, 68vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 34px rgba(0, 0, 0, .32), 0 0 24px color-mix(in srgb, var(--gold) 18%, transparent); }
     .merch-teaser { margin: 8px 0 0; color: var(--red); font-size: .72rem; letter-spacing: .08em; }
+    .merch-teaser a { color: inherit; text-decoration: none; }
+    .merch-teaser a:hover, .merch-teaser a:focus-visible { text-decoration: underline; }
     .welcome-question { margin-top: 6px; padding-top: 6px; }
 
     .home-pulse {
@@ -429,9 +431,9 @@
             <a href="events.html"><strong id="home-event-count">…</strong><span id="home-event-label">events</span></a>
           </div>
           <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
-          <p class="welcome-kicker welcome-question" id="welcome-question">What if we tried something different?</p>
           <img class="welcome-gif" src="assets/images/acadie.gif" width="480" height="360" alt="Vive l’Acadie animated graphic" />
-          <h4 class="merch-teaser" id="merch-teaser">⁜ MERCH COMING SOON ⁜</h4>
+          <p class="welcome-kicker welcome-question" id="welcome-question">What if we tried something different?</p>
+          <h4 class="merch-teaser" id="merch-teaser"><a href="https://riderverse.sol.site" target="_blank" rel="noopener noreferrer">⁜ MERCH COMING SOON ⁜</a></h4>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
@@ -530,7 +532,8 @@
       setText('welcome-pilot', c.pilotProject);
       setText('welcome-line', c.welcomeLine);
       setText('welcome-question', c.welcomeQuestion);
-      setText('merch-teaser', c.merchTeaser);
+      const merchTeaser = document.getElementById('merch-teaser');
+      if (merchTeaser?.firstElementChild) merchTeaser.firstElementChild.textContent = c.merchTeaser;
       setText('mobile-deck-hint', c.mobileHint);
       setText('home-entry-label', c.entries);
       setText('home-event-label', c.events);
