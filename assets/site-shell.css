@@ -138,17 +138,35 @@ body { padding-top: 0; }
 
 .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
 .lang-button { display: inline-flex; gap: 3px; align-items: center; padding-inline: 12px; }
-.drawer-nav { display: grid; gap: 8px; margin-top: 18px; }
+/* The focused menu reads as four equal choices rather than a secondary list.
+   Icon-over-label tiles make the compact overlay feel like a small launch pad. */
+.drawer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
 .drawer-nav a {
   width: 100%;
-  grid-template-columns: 24px 1fr 24px;
-  gap: 8px;
-  padding: 12px 14px;
+  min-height: 82px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 7px;
+  padding: 14px 8px;
   border-radius: 17px;
   text-align: center;
 }
-.drawer-nav a .route-icon { grid-column: 1; }
-.drawer-nav a .route-label { grid-column: 2; }
+.drawer-nav a .route-icon,
+.drawer-nav a .route-label {
+  grid-column: 1;
+}
+.drawer-nav a .route-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+.drawer-nav a .route-label {
+  font-size: .72rem;
+}
 
 .menu-control:hover,
 .drawer-nav a:hover,
