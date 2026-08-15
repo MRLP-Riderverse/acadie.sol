@@ -275,6 +275,18 @@
 
 
 
+    /* Quiet attribution stays with the homepage without competing with the
+       discovery deck or duplicating the links intentionally housed in Extras. */
+    .home-footer {
+      display: flex;
+      justify-content: center;
+      padding: 6px 12px 2px;
+      color: var(--muted);
+      font-size: .56rem;
+      line-height: 1;
+      text-align: center;
+    }
+
     @keyframes live-pulse {
       0% { box-shadow: 0 0 0 0 rgba(255,255,255,.38); }
       70%, 100% { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
@@ -450,6 +462,10 @@
 
     </nav>
 
+    <footer class="home-footer" id="home-footer" aria-label="Site attribution">
+      <span class="footer-created" id="footer-created">Created in 2026</span>
+    </footer>
+
 
   </main>
 
@@ -461,7 +477,7 @@
         welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', welcomeQuestion: 'What if we tried something different?', merchTeaser: '⁜ MERCH COMING SOON ⁜', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         shareTitle: 'Share with friends!', shareButton: 'Share with friends! ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
-        pulseLabel: 'Site pulse',
+        pulseLabel: 'Site pulse', footerCreated: 'Created in 2026',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added'
       },
       fr: {
@@ -469,7 +485,7 @@
         welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', welcomeQuestion: 'Et si on essayait quelque chose de différent ?', merchTeaser: '⁜ MARCHANDISE À VENIR ⁜', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partagez avec vos amis ! ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
-        pulseLabel: 'Pouls du site',
+        pulseLabel: 'Pouls du site', footerCreated: 'Créé en 2026',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent'
       }
     };
@@ -516,6 +532,7 @@
       setText('recent-link', c.recentCta);
       setText('live-share-title', c.shareTitle);
       setText('live-share-button', c.shareButton);
+      setText('footer-created', c.footerCreated);
       document.getElementById('home-pulse').setAttribute('aria-label', c.pulseLabel);
       const deck = document.getElementById('deck-controls');
       deck.setAttribute('aria-label', c.deckLabel);
