@@ -15,7 +15,7 @@
       light: 'Switch to light mode',
       langToFr: 'Switch language to French',
       langToEn: 'Switch language to English',
-      remembrance: 'Remembrance',
+
       headerBanner: (entries, events) => `${entries} Entries · Vive l'Acadie! · ${events} Events`,
       routes: {
         home: 'Home', directory: 'Directory', events: 'Events', search: 'Search',
@@ -30,7 +30,7 @@
       light: 'Passer en mode clair',
       langToFr: 'Passer en français',
       langToEn: 'Passer en anglais',
-      remembrance: 'Souvenirs',
+
       headerBanner: (entries, events) => `${entries} entrées · Vive l'Acadie! · ${events} événements`,
       routes: {
         home: 'Accueil', directory: 'Répertoire', events: 'Événements', search: 'Recherche',
@@ -148,11 +148,6 @@
 
     const close = document.querySelector('.drawer-backdrop');
     if (close) close.setAttribute('aria-label', copy.closeMenu);
-    const remembrance = document.querySelector('.drawer-close');
-    if (remembrance) {
-      remembrance.setAttribute('aria-label', copy.remembrance);
-      remembrance.setAttribute('title', copy.remembrance);
-    }
 
     const { entryCount, eventCount } = SHELL_DATA;
     const headerText = document.getElementById('global-header-text');
@@ -219,7 +214,7 @@
     <aside class="drawer" id="site-menu-drawer" aria-label="Menu">
       <div class="drawer-controls" aria-label="Display and language controls">
         <button class="menu-control theme-button" type="button" id="theme-toggle">☾</button>
-        <a class="drawer-close" href="${siteUrl('obituaries.html')}">✟</a>
+
         <button class="menu-control lang-button" type="button" id="lang-toggle"><span class="lang-en">EN</span><span class="lang-sep">/</span><span class="lang-fr">FR</span></button>
       </div>
       <nav class="drawer-nav">${MENU_KEYS.map(key => routeLink(key, 'drawer-route')).join('')}</nav>

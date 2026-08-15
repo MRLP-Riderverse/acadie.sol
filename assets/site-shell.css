@@ -108,7 +108,6 @@ body { padding-top: 0; }
 }
 
 .menu-control,
-.drawer-close,
 .drawer-nav a,
 .site-menu-fab,
 .desktop-menu-launch {
@@ -129,7 +128,6 @@ body { padding-top: 0; }
 }
 
 .menu-control:focus-visible,
-.drawer-close:focus-visible,
 .drawer-nav a:focus-visible,
 .site-menu-fab:focus-visible,
 .site-desktop-nav a:focus-visible,
@@ -140,14 +138,6 @@ body { padding-top: 0; }
 
 .theme-button { width: 44px; font-size: 1.15rem; line-height: 1; }
 .lang-button { display: inline-flex; gap: 3px; align-items: center; padding-inline: 12px; }
-.drawer-close {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  width: 44px;
-  font-size: 1.15rem;
-}
 .drawer-nav { display: grid; gap: 8px; margin-top: 18px; }
 .drawer-nav a {
   width: 100%;
@@ -161,7 +151,6 @@ body { padding-top: 0; }
 .drawer-nav a .route-label { grid-column: 2; }
 
 .menu-control:hover,
-.drawer-close:hover,
 .drawer-nav a:hover,
 .site-menu-fab:hover,
 .desktop-menu-launch:hover {

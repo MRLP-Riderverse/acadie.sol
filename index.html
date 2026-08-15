@@ -267,32 +267,12 @@
       transition: width .2s ease, background-color .2s ease;
     }
     .deck-dot[aria-current="true"]::before { width: 22px; background: var(--gold); }
-    .deck-dot:focus-visible,
-    .home-footer a:focus-visible {
+    .deck-dot:focus-visible {
       outline: 2px solid color-mix(in srgb, var(--acadian-yellow) 76%, transparent);
       outline-offset: 3px;
     }
 
-    .home-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      padding: 6px 12px 2px;
-      color: var(--muted);
-      font-size: .72rem;
-    }
-    .home-footer a { color: inherit; text-decoration: none; }
-    .home-footer a:hover { color: var(--link); }
-    .footer-icon { color: var(--gold); margin-right: 4px; }
-    .footer-created {
-      flex-basis: 100%;
-      color: var(--muted);
-      font-size: .56rem;
-      line-height: 1;
-      text-align: center;
-    }
+
 
 
     @keyframes live-pulse {
@@ -406,7 +386,7 @@
       #recent-summary { display: none; }
       .deck-controls { display: flex; }
 
-      .home-footer { min-height: 32px; padding: 2px 12px 0; row-gap: 4px; }
+
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -470,12 +450,7 @@
 
     </nav>
 
-    <footer class="home-footer" id="home-footer" aria-label="Community links">
-      <a href="community.html"><span class="footer-icon" aria-hidden="true">✦</span><span id="footer-community">Community</span></a>
-      <a href="about-us.html"><span class="footer-icon" aria-hidden="true">⁜</span><span id="footer-about">About</span></a>
-      <a href="support.html"><span class="footer-icon" aria-hidden="true">◇</span><span id="footer-support">Support</span></a>
-      <span class="footer-created" id="footer-created">Created in 2026</span>
-    </footer>
+
   </main>
 
 
@@ -486,7 +461,7 @@
         welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', welcomeQuestion: 'What if we tried something different?', merchTeaser: '⁜ MERCH COMING SOON ⁜', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         shareTitle: 'Share with friends!', shareButton: 'Share with friends! ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
-        footerCommunity: 'Community', footerAbout: 'About', footerSupport: 'Support', footerCreated: 'Created in 2026', pulseLabel: 'Site pulse', footerLabel: 'Community links',
+        pulseLabel: 'Site pulse',
         deckLabel: 'Homepage sections', welcomeTab: 'Show welcome', shareTab: 'Show share card', recentTab: 'Show recently added'
       },
       fr: {
@@ -494,7 +469,7 @@
         welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', welcomeQuestion: 'Et si on essayait quelque chose de différent ?', merchTeaser: '⁜ MARCHANDISE À VENIR ⁜', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partagez avec vos amis ! ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
-        footerCommunity: 'Communauté', footerAbout: 'À propos', footerSupport: 'Soutien', footerCreated: 'Créé en 2026', pulseLabel: 'Pouls du site', footerLabel: 'Liens communautaires',
+        pulseLabel: 'Pouls du site',
         deckLabel: 'Sections de la page d’accueil', welcomeTab: 'Afficher l’accueil', shareTab: 'Afficher la carte de partage', recentTab: 'Afficher l’ajout récent'
       }
     };
@@ -541,12 +516,7 @@
       setText('recent-link', c.recentCta);
       setText('live-share-title', c.shareTitle);
       setText('live-share-button', c.shareButton);
-      setText('footer-community', c.footerCommunity);
-      setText('footer-about', c.footerAbout);
-      setText('footer-support', c.footerSupport);
-      setText('footer-created', c.footerCreated);
       document.getElementById('home-pulse').setAttribute('aria-label', c.pulseLabel);
-      document.getElementById('home-footer').setAttribute('aria-label', c.footerLabel);
       const deck = document.getElementById('deck-controls');
       deck.setAttribute('aria-label', c.deckLabel);
       const dots = [...deck.querySelectorAll('.deck-dot')];
