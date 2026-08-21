@@ -2,8 +2,8 @@
   "schema_version": 1,
   "generated_from": "/home/midnight/ExoCortex/websites/projects/acadie_sol_directory",
   "event_count": 8,
-  "active_count": 1,
-  "archived_count": 7,
+  "active_count": 0,
+  "archived_count": 8,
   "items": [
     {
       "id": "socialite-reading-marc-chamberlain-bathurst-library",
@@ -397,7 +397,7 @@
     {
       "id": "farmers-market-bathurst-dart-hall-2026",
       "status": "published",
-      "computed_status": "active",
+      "computed_status": "archived",
       "kind": "event",
       "title": {
         "en": "Farmer’s Market",

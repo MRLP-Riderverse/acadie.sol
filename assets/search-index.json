@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "item_count": 81,
+  "item_count": 82,
   "items": [
     {
       "type": "entry",
@@ -45,6 +45,28 @@
         "drive-thru",
         "A and W",
         "A&W Restaurant"
+      ]
+    },
+    {
+      "type": "entry",
+      "id": "a-n-luxe-cleaning",
+      "title": "A.N Luxe Cleaning",
+      "subtitle": "business · Acadie-Bathurst",
+      "badges": [
+        "business"
+      ],
+      "url": "directory.html#entry-a-n-luxe-cleaning",
+      "terms": [
+        "A.N Luxe Cleaning",
+        "business",
+        "Acadie-Bathurst",
+        "New cleaning service based around Bathurst, NB, and serving the surrounding Chaleur Region.",
+        "cleaning service",
+        "deep cleaning",
+        "regular cleaning",
+        "home services",
+        "Chaleur Region",
+        "AN Luxe Cleaning"
       ]
     },
     {
@@ -922,6 +944,26 @@
     },
     {
       "type": "entry",
+      "id": "montys-pretzelria",
+      "title": "Monty's Pretzelria",
+      "subtitle": "food · Acadie-Bathurst",
+      "badges": [
+        "food"
+      ],
+      "url": "directory.html#entry-montys-pretzelria",
+      "terms": [
+        "Monty's Pretzelria",
+        "food",
+        "Acadie-Bathurst",
+        "Seasonal pretzel / pizza spot at La Promenade Waterfront in Bathurst.",
+        "pretzel",
+        "pizza",
+        "waterfront",
+        "seasonal"
+      ]
+    },
+    {
+      "type": "entry",
       "id": "mrlp-acadie-sol",
       "title": "MRLP.Acadie.sol",
       "subtitle": "creator · Acadie-Bathurst",
@@ -945,26 +987,6 @@
         "digital identity",
         "MR LP",
         "Midnight Rider"
-      ]
-    },
-    {
-      "type": "entry",
-      "id": "montys-pretzelria",
-      "title": "Monty's Pretzelria",
-      "subtitle": "food · Acadie-Bathurst",
-      "badges": [
-        "food"
-      ],
-      "url": "directory.html#entry-montys-pretzelria",
-      "terms": [
-        "Monty's Pretzelria",
-        "food",
-        "Acadie-Bathurst",
-        "Seasonal pretzel / pizza spot at La Promenade Waterfront in Bathurst.",
-        "pretzel",
-        "pizza",
-        "waterfront",
-        "seasonal"
       ]
     },
     {
@@ -1497,10 +1519,10 @@
       "type": "event",
       "id": "farmers-market-bathurst-dart-hall-2026",
       "title": "Farmer’s Market",
-      "subtitle": "active · 2026-08-16T08:00:00-03:00",
+      "subtitle": "archived · 2026-08-16T08:00:00-03:00",
       "badges": [
         "event",
-        "active",
+        "archived",
         "market",
         "farmers-market"
       ],
