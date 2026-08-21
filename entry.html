@@ -56,6 +56,11 @@
     .detail-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--line); }
     .detail-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 900; white-space: nowrap; }
     .detail-value { font-size: .88rem; word-break: break-word; }
+    .hours-stack { display: grid; gap: 3px; width: 100%; }
+    .hours-day { display: grid; grid-template-columns: minmax(82px, 1fr) 1.35fr; gap: 10px; padding: 2px 0; line-height: 1.35; }
+    .hours-day-name { color: var(--muted); font-weight: 800; }
+    .hours-day-value { color: var(--ink); }
+    .hours-day-value.is-closed { color: var(--muted); font-style: italic; }
     .detail-link { color: var(--link); text-decoration: underline; text-underline-offset: 2px; font-weight: 800; }
     .section-label { font-size: .72rem; text-transform: uppercase; letter-spacing: .11em; color: var(--muted); font-weight: 900; margin-top: 12px; margin-bottom: 6px; }
     .event-row { display: grid; grid-template-columns: auto 1fr; gap: 9px; align-items: center; padding: 8px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper-soft); text-decoration: none; margin-top: 6px; }
@@ -153,6 +158,15 @@
       }
       return escapeHtml(text);
     }
+    function renderHoursValue(value, schedule) {
+      if (!Array.isArray(schedule) || !schedule.length) return renderDetailLink('Hours', value);
+      return `<div class="hours-stack" aria-label="Hours by day">${schedule.map(row => {
+        const day = escapeHtml(row.day || '');
+        const hours = String(row.hours || '').trim();
+        const closed = /^closed$/i.test(hours);
+        return `<div class="hours-day"><span class="hours-day-name">${day}</span><span class="hours-day-value${closed ? ' is-closed' : ''}">${escapeHtml(hours)}</span></div>`;
+      }).join('')}</div>`;
+    }
     function renderNoteList(item, notes) {
       const points = Array.isArray(item.note_points) && item.note_points.length
         ? item.note_points
@@ -247,7 +261,7 @@
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${renderInlineMarkdown(description)}</p>` : ''}
             ${renderNoteList(item, notes)}
-            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
+            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${label === 'Hours' ? renderHoursValue(value, item.hours_schedule) : renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
           <footer class="page-footer"><p><a href="directory.html#browse">Back to directory</a></p></footer>
