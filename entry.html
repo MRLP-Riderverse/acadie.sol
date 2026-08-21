@@ -103,14 +103,29 @@
     }
     function localized(v) { return cleanSummary(v); }
     function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
+    function contactValues(item) {
+      return ['address', 'hours', 'phone', 'email', 'website']
+        .map(key => contactValue(item, key))
+        .map(value => cleanSummary(value).trim())
+        .filter(Boolean);
+    }
     function publicDataRows(item) {
-      const seen = new Set([contactValue(item, 'website'), contactValue(item, 'facebook'), contactValue(item, 'instagram'), contactValue(item, 'x')].map(value => cleanSummary(value).trim()).filter(Boolean));
+      const seen = new Set(contactValues(item));
+      ['facebook', 'instagram', 'x'].forEach(key => {
+        const value = cleanSummary(contactValue(item, key)).trim();
+        if (value) seen.add(value);
+      });
       return (Array.isArray(item.public_data) ? item.public_data : []).map(value => {
         const text = cleanSummary(value); const split = text.indexOf(':');
         const label = split > 0 ? text.slice(0, split).trim() : 'Public';
         const content = split > 0 ? text.slice(split + 1).trim() : text;
         return [label.toLowerCase(), label, content];
-      }).filter(([, , value]) => value && !seen.has(value.trim()));
+      }).filter(([, , value]) => {
+        const normalized = value.trim();
+        if (!normalized || seen.has(normalized)) return false;
+        seen.add(normalized);
+        return true;
+      });
     }
     function publicCity(item) { const d = String(item.public_area || '').trim(); if (d) return d; const a = String(item.area || '').trim(); if (/bathurst/i.test(a)) return 'Acadie-Bathurst'; return a || ''; }
     function mapsHref(v) { const q = encodeURIComponent(cleanSummary(v)); return q ? `https://www.google.com/maps/search/?api=1&query=${q}` : ''; }
