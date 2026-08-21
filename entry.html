@@ -217,9 +217,9 @@
         const description = cleanSummary(item.description || item.description_localized || item.summary);
         const notes = cleanSummary(item.notes);
         const detailRows = [
-          ['Address', contactValue(item, 'address')],
-          ['Hours', contactValue(item, 'hours')],
-          ['Phone', contactValue(item, 'phone')],
+        ['Hours', contactValue(item, 'hours')],
+        ['Address', contactValue(item, 'address')],
+        ['Phone', contactValue(item, 'phone')],
           ['Email', contactValue(item, 'email')],
           ['Website', contactValue(item, 'website')],
           ...publicDataRows(item).map(([type, label, value]) => [label, value]),

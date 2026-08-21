@@ -1018,8 +1018,8 @@
       const locationContext = renderLocationContext(item);
       const eventFeed = renderEventFeed(item);
       const detailRows = [
-        ['address', copy().address, contactValue(item, 'address')],
         ['hours', copy().hours, contactValue(item, 'hours')],
+        ['address', copy().address, contactValue(item, 'address')],
         ['phone', copy().phone, contactValue(item, 'phone')],
         ['email', copy().email, contactValue(item, 'email')],
         ...(item.draft ? [['website', copy().website, contactValue(item, 'website')]] : []),
