@@ -979,10 +979,13 @@
       return String(localizedText(event.title) || event.name || '').replace(/\s+Placeholder\b/i, ' Preview');
     }
 
+    // Profile surfaces are for current activity only. Archived events remain
+    // discoverable in events.html's All and Archive views, not beside identities.
     function relatedEventsFor(item) {
       const slug = item.slug;
       const locationId = item.location_id;
       return state.events
+        .filter(event => event.computed_status === 'active')
         .filter(event => {
           const byEntry = [...(event.host_entry_ids || []), ...(event.performer_entry_ids || []), ...(event.sponsor_entry_ids || [])].includes(slug);
           const byLocation = locationId && event.location_id === locationId;

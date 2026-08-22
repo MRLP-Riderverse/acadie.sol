@@ -248,8 +248,9 @@
           ...publicDataRows(item).map(([type, label, value]) => [type, label, value]),
         ].filter(([, , value]) => cleanSummary(value));
 
-        // Related events
+        // Full profiles show only current activity; archives stay on events.html.
         const relatedEvents = events.filter(e => {
+          if (e.computed_status !== 'active') return false;
           const byEntry = [...(e.host_entry_ids || []), ...(e.performer_entry_ids || []), ...(e.sponsor_entry_ids || [])].includes(item.slug);
           const byLoc = item.location_id && e.location_id === item.location_id;
           return byEntry || byLoc;
