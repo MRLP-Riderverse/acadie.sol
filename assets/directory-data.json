@@ -218,15 +218,15 @@
       "description": "New cleaning service based around Bathurst, NB, and serving the surrounding Chaleur Region.",
       "description_localized": {
         "en": "Bathurst-area cleaning service offering deep cleaning and regular-interval services across the Chaleur Region.",
-        "fr": "Service de nettoyage établi à Bathurst, offrant des nettoyages en profondeur et un entretien régulier dans la région Chaleur.",
+        "fr": "Service de nettoyage établi à Bathurst, offrant des nettoyages en profondeur et un entretien régulier dans la région Chaleur. Appelez-nous pour obtenir une soumission.",
         "shiac": "Bathurst-area cleaning service offering deep cleaning and regular-interval services across the Chaleur Region."
       },
-      "notes": "- Deep cleaning and regular-interval cleaning services. - Free quotes available by phone or through Facebook direct message.",
+      "notes": "- Deep cleaning and regular-interval cleaning services. - Call us to book a quoting.",
       "note_points": [
         "Deep cleaning and regular-interval cleaning services.",
-        "Free quotes available by phone or through Facebook direct message."
+        "Call us to book a quoting."
       ],
-      "summary": "New cleaning service based around Bathurst, NB, and serving the surrounding Chaleur Region. - Deep cleaning and regular-interval cleaning services. - Free quotes available by phone or through Facebook direct message.",
+      "summary": "New cleaning service based around Bathurst, NB, and serving the surrounding Chaleur Region. - Deep cleaning and regular-interval cleaning services. - Call us to book a quoting.",
       "tags": [
         "cleaning service",
         "deep cleaning",
@@ -261,8 +261,8 @@
       ],
       "source_type": "public-source",
       "path": "entries/a-n-luxe-cleaning/entry.md",
-      "source_modified_at": "2026-08-21T19:14:10.024522Z",
-      "source_modified_ts": 1787339650
+      "source_modified_at": "2026-08-22T00:26:02.189531Z",
+      "source_modified_ts": 1787358362
     },
     {
       "title": "Acadie-Bathurst Information Center",
