@@ -734,7 +734,22 @@
       }
       return value || '';
     }
+    // Public-note lists stay localized independently of prose summaries.
+    // Legacy entries fall back to English until their source notes are translated.
+    function localizedList(value) {
+      if (!value || typeof value !== 'object') return [];
+      const lang = currentLang();
+      return Array.isArray(value[lang]) && value[lang].length
+        ? value[lang]
+        : (Array.isArray(value.en) ? value.en : []);
+    }
     function cleanSummary(value) { return String(value || '').replace(/\s+/g, ' ').trim(); }
+    function localizedHoursText(value) {
+      const text = cleanSummary(value);
+      if (currentLang() !== 'fr') return text;
+      if (/^closed$/i.test(text)) return 'Fermé';
+      return ({ Monday: 'lundi', Tuesday: 'mardi', Wednesday: 'mercredi', Thursday: 'jeudi', Friday: 'vendredi', Saturday: 'samedi', Sunday: 'dimanche' })[text] || text;
+    }
     // Card prose stays prose: keep the authored description in the visible card
     // rail and reserve structured category/tag fields for filtering/search only.
     function descriptionParts(value) {
@@ -800,9 +815,9 @@
     function renderHoursValue(value, schedule) {
       if (!Array.isArray(schedule) || !schedule.length) return renderDetailValue('hours', value);
       return `<div class="hours-stack" aria-label="Hours by day">${schedule.map(row => {
-        const hours = String(row.hours || '').trim();
-        const closed = /^closed$/i.test(hours);
-        return `<div class="hours-day"><span class="hours-day-name">${escapeHtml(row.day || '')}</span><span class="hours-day-value${closed ? ' is-closed' : ''}">${escapeHtml(hours)}</span></div>`;
+        const hours = localizedHoursText(row.hours || '');
+        const closed = /^closed$/i.test(String(row.hours || '').trim());
+        return `<div class="hours-day"><span class="hours-day-name">${escapeHtml(localizedHoursText(row.day || ''))}</span><span class="hours-day-value${closed ? ' is-closed' : ''}">${escapeHtml(hours)}</span></div>`;
       }).join('')}</div>`;
     }
     function sourceLabel(src) {
@@ -942,9 +957,12 @@
     }
 
     function renderNoteBlock(item, notes) {
-      const points = Array.isArray(item.note_points) ? item.note_points.map(cleanSummary).filter(Boolean) : [];
-      if (points.length) return `<ul class="note-list">${points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>`;
-      return notes ? `<p class="notes">${renderInlineMarkdown(notes)}</p>` : '';
+      const points = localizedList(item.note_points_localized).map(cleanSummary).filter(Boolean);
+      const legacyPoints = Array.isArray(item.note_points) ? item.note_points.map(cleanSummary).filter(Boolean) : [];
+      const visiblePoints = points.length ? points : legacyPoints;
+      if (visiblePoints.length) return `<ul class="note-list">${visiblePoints.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>`;
+      const localizedNotes = localizedText(item.notes_localized) || notes;
+      return localizedNotes ? `<p class="notes">${renderInlineMarkdown(localizedNotes)}</p>` : '';
     }
 
     function parseEventDate(value) {

@@ -91,6 +91,11 @@
       if (saved === 'fr' || saved === 'en') return saved;
       return /^fr\b/i.test(navigator.language || '') ? 'fr' : 'en';
     }
+    const ENTRY_COPY = {
+      en: { loading: 'Loading entry…', notFound: 'Entry not found', noMatch: 'No entry matches', back: 'Back to directory', hours: 'Hours', address: 'Address', phone: 'Phone', email: 'Email', website: 'Website', relatedEvents: 'Related events', relatedPlaces: 'Related places', loadFailed: "Couldn't load entry" },
+      fr: { loading: 'Chargement de la fiche…', notFound: 'Fiche introuvable', noMatch: 'Aucune fiche ne correspond à', back: 'Retour au répertoire', hours: 'Heures', address: 'Adresse', phone: 'Téléphone', email: 'Courriel', website: 'Site web', relatedEvents: 'Événements liés', relatedPlaces: 'Lieux liés', loadFailed: 'Impossible de charger la fiche' }
+    };
+    function copy() { return ENTRY_COPY[currentLang()] || ENTRY_COPY.en; }
     function escapeHtml(str) { const d=document.createElement("div"); d.textContent=String(str||""); return d.innerHTML; }
     // Keep authored Markdown links intact as safe, readable outbound links.
     function renderInlineMarkdown(value) {
@@ -107,6 +112,21 @@
       return v || '';
     }
     function localized(v) { return cleanSummary(v); }
+    // Localized bullet arrays are separate from localized prose fields.
+    // English fallback preserves legacy records until their French notes land.
+    function localizedList(value) {
+      if (!value || typeof value !== 'object') return [];
+      const lang = currentLang();
+      return Array.isArray(value[lang]) && value[lang].length
+        ? value[lang]
+        : (Array.isArray(value.en) ? value.en : []);
+    }
+    function localizedHoursText(value) {
+      const text = cleanSummary(value);
+      if (currentLang() !== 'fr') return text;
+      if (/^closed$/i.test(text)) return 'Fermé';
+      return ({ Monday: 'lundi', Tuesday: 'mardi', Wednesday: 'mercredi', Thursday: 'jeudi', Friday: 'vendredi', Saturday: 'samedi', Sunday: 'dimanche' })[text] || text;
+    }
     function contactValue(item, key) { return (item.contact && item.contact[key]) || item[key] || ''; }
     function contactValues(item) {
       return ['address', 'hours', 'phone', 'email', 'website']
@@ -161,24 +181,27 @@
     function renderHoursValue(value, schedule) {
       if (!Array.isArray(schedule) || !schedule.length) return renderDetailLink('Hours', value);
       return `<div class="hours-stack" aria-label="Hours by day">${schedule.map(row => {
-        const day = escapeHtml(row.day || '');
-        const hours = String(row.hours || '').trim();
-        const closed = /^closed$/i.test(hours);
-        return `<div class="hours-day"><span class="hours-day-name">${day}</span><span class="hours-day-value${closed ? ' is-closed' : ''}">${escapeHtml(hours)}</span></div>`;
+        const day = localizedHoursText(row.day || '');
+        const hours = localizedHoursText(row.hours || '');
+        const closed = /^closed$/i.test(String(row.hours || '').trim());
+        return `<div class="hours-day"><span class="hours-day-name">${escapeHtml(day)}</span><span class="hours-day-value${closed ? ' is-closed' : ''}">${escapeHtml(hours)}</span></div>`;
       }).join('')}</div>`;
     }
     function renderNoteList(item, notes) {
-      const points = Array.isArray(item.note_points) && item.note_points.length
+      const points = localizedList(item.note_points_localized);
+      const legacyPoints = Array.isArray(item.note_points) && item.note_points.length
         ? item.note_points
         : String(notes || '').split(/\s+-\s+/).map(point => point.replace(/^[-•]\s*/, '').trim()).filter(Boolean);
-      return points.length ? `<ul class="entry-note-list">${points.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>` : '';
+      const visiblePoints = points.length ? points : legacyPoints;
+      return visiblePoints.length ? `<ul class="entry-note-list">${visiblePoints.map(point => `<li>${renderInlineMarkdown(point)}</li>`).join('')}</ul>` : '';
     }
-    function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(undefined, { month: 'short' }).format(d), day: new Intl.DateTimeFormat(undefined, { day: 'numeric' }).format(d) }; }
+    function dateParts(value) { const d = new Date(value || ''); if (Number.isNaN(d.getTime())) return { month: 'TBD', day: '' }; return { month: new Intl.DateTimeFormat(currentLang(), { month: 'short' }).format(d), day: new Intl.DateTimeFormat(currentLang(), { day: 'numeric' }).format(d) }; }
     function applyTheme(theme) { document.documentElement.dataset.theme = theme; localStorage.setItem('acadie-theme', theme); }
     const savedTheme = localStorage.getItem('acadie-theme');
     if (savedTheme) applyTheme(savedTheme);
     function updateChromeCopy() {
       document.documentElement.lang = currentLang();
+      document.getElementById('loading')?.replaceChildren(document.createTextNode(copy().loading));
       window.AcadieShell?.sync?.();
     }
     window.addEventListener('acadie:languagechange', () => { updateChromeCopy(); render(); });
@@ -205,25 +228,25 @@
         const events = evtData.items || [];
         const item = items.find(i => i.slug === slug);
         if (!item) {
-          root.innerHTML = `<div class="empty-msg"><h1>Entry not found</h1><p>No entry matches <code>${escapeHtml(slug)}</code>.</p><p><a href="directory.html#browse">Back to directory</a></p></div>`;
+          root.innerHTML = `<div class="empty-msg"><h1>${escapeHtml(copy().notFound)}</h1><p>${escapeHtml(copy().noMatch)} <code>${escapeHtml(slug)}</code>.</p><p><a href="directory.html#browse">${escapeHtml(copy().back)}</a></p></div>`;
           return;
         }
         // Drafts don't get full pages — redirect to expanded card
         if (item.draft) { location.replace(`directory.html#entry-${encodeURIComponent(item.slug)}`); return; }
 
-        const itemTitle = cleanSummary(item.title_localized) || item.title || 'Entry';
+        const itemTitle = localized(item.title_localized) || item.title || 'Entry';
         document.title = `${itemTitle} — Acadie.sol`;
         const city = publicCity(item);
-        const description = cleanSummary(item.description || item.description_localized || item.summary);
-        const notes = cleanSummary(item.notes);
+        const description = localized(item.description_localized) || cleanSummary(item.description || item.summary);
+        const notes = localized(item.notes_localized) || cleanSummary(item.notes);
         const detailRows = [
-        ['Hours', contactValue(item, 'hours')],
-        ['Address', contactValue(item, 'address')],
-        ['Phone', contactValue(item, 'phone')],
-          ['Email', contactValue(item, 'email')],
-          ['Website', contactValue(item, 'website')],
-          ...publicDataRows(item).map(([type, label, value]) => [label, value]),
-        ].filter(([, v]) => cleanSummary(v));
+          ['hours', copy().hours, contactValue(item, 'hours')],
+          ['address', copy().address, contactValue(item, 'address')],
+          ['phone', copy().phone, contactValue(item, 'phone')],
+          ['email', copy().email, contactValue(item, 'email')],
+          ['website', copy().website, contactValue(item, 'website')],
+          ...publicDataRows(item).map(([type, label, value]) => [type, label, value]),
+        ].filter(([, , value]) => cleanSummary(value));
 
         // Related events
         const relatedEvents = events.filter(e => {
@@ -237,7 +260,7 @@
         const relatedPlaces = items.filter(i => i.slug !== item.slug && !i.draft && (relatedSlugs.has(normalize(i.slug)) || (item.location_id && i.location_id === item.location_id))).slice(0, 6);
 
         const eventsHtml = relatedEvents.length ? `
-          <div class="section-label">Related events</div>
+          <div class="section-label">${escapeHtml(copy().relatedEvents)}</div>
           ${relatedEvents.map(e => {
             const p = dateParts(e.starts_at);
             const title = String(localized(e.title) || e.name || '').replace(/\s+Placeholder\b/i, ' Preview');
@@ -246,7 +269,7 @@
         ` : '';
 
         const placesHtml = relatedPlaces.length ? `
-          <div class="section-label">Related places</div>
+          <div class="section-label">${escapeHtml(copy().relatedPlaces)}</div>
           <div>${relatedPlaces.map(p => `<a class="related-place" href="entry.html#${escapeHtml(p.slug)}">${escapeHtml(cleanSummary(p.title_localized) || p.title)}</a>`).join('')}</div>
         ` : '';
 
@@ -261,13 +284,13 @@
             ${city ? `<div class="entry-city">${escapeHtml(city)}</div>` : ''}
             ${description ? `<p class="description" style="margin-top:10px">${renderInlineMarkdown(description)}</p>` : ''}
             ${renderNoteList(item, notes)}
-            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${label === 'Hours' ? renderHoursValue(value, item.hours_schedule) : renderDetailLink(label, value)}</div></div>`).join('')}</div>` : ''}
+            ${detailRows.length ? `<div class="detail-grid">${detailRows.map(([type, label, value]) => `<div class="detail-row"><div class="detail-label">${escapeHtml(label)}</div><div class="detail-value">${type === 'hours' ? renderHoursValue(value, item.hours_schedule) : renderDetailLink(type, value)}</div></div>`).join('')}</div>` : ''}
           </section>
           ${eventsHtml || placesHtml ? `<section class="surface">${eventsHtml}${placesHtml}</section>` : ''}
-          <footer class="page-footer"><p><a href="directory.html#browse">Back to directory</a></p></footer>
+          <footer class="page-footer"><p><a href="directory.html#browse">${escapeHtml(copy().back)}</a></p></footer>
         `;
       } catch (err) {
-        root.innerHTML = `<div class="empty-msg"><h1>Couldn't load entry</h1><p>${escapeHtml(err.message)}</p></div>`;
+        root.innerHTML = `<div class="empty-msg"><h1>${escapeHtml(copy().loadFailed)}</h1><p>${escapeHtml(err.message)}</p></div>`;
       }
     }
     render();
