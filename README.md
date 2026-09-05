@@ -53,6 +53,17 @@ Camera originals do **not** belong in this repository. Keep them in the private 
 | Signal | Live coordination | As needed |
 | LIVE | One owner-controlled point of attention on Home | Rotational |
 
+## Visual direction and worker handoff
+
+The site is the public discovery surface of a broader Acadian cultural project, not only a directory renderer. Its exact public positioning remains under review; technical infrastructure should not be a prerequisite for participation.
+
+- Current review: [visual direction, September 2026](docs/visual-direction-2026-09.md)
+- Ordered implementation tasks: [visual overhaul checklist](todo/visual-overhaul.md)
+- Project task index: [todo/README.md](todo/README.md)
+- Worker boundaries and verification: [AGENTS.md](AGENTS.md)
+
+The review proposes **recognize → discover something real → connect → optionally support/share**. It is a design hypothesis, not a shipped redesign or approved new public copy. Implementation is intentionally suitable for a bounded Luna pass. Historical `PROGRESS.md` records older search experiments; consult current source and the task index for present behavior.
+
 ## Author
 
 MRLP.Acadie.sol — created June 8 2026
