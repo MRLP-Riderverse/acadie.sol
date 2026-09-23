@@ -15,6 +15,7 @@
 - [x] Add the MRLP nested static profile route.
 - [x] Keep profile source copy in the directory repo; keep HTML/CSS in the site repo.
 - [x] Preserve the existing Community destination and add Profiles as a separate Project link.
+- [x] Map the existing MRLP directory slug to the shorter rendered `/profile/mrlp/` route.
 
 ## Verification still expected
 

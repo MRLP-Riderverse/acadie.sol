@@ -32,10 +32,12 @@
     const text = value => { if (!value || typeof value !== 'object') return value || ''; const c = value[lang()] || value.en || value.fr || ''; return c; };
     const escapeHtml = value => { const node = document.createElement('div'); node.textContent = String(value || ''); return node.innerHTML; };
     const summary = item => text(item.description_localized) || item.description || item.name;
+    // Public profile routes may be shorter than directory slugs; keep that mapping explicit.
+    const profileRoute = item => item.slug === 'mrlp-acadie-sol' ? 'mrlp' : item.slug;
     function render(items) {
       const root = document.getElementById('profile-list');
       const profiles = (items || []).filter(item => item.status === 'published' && item.profile === true).sort((a, b) => String(a.sort_name || a.name).localeCompare(String(b.sort_name || b.name)));
-      root.innerHTML = profiles.length ? profiles.map(item => `<a class="profile-card" href="${encodeURIComponent(item.slug)}/"><span><h2 class="profile-card-name">${escapeHtml(text(item.title_localized) || item.name)}</h2><span class="profile-card-summary">${escapeHtml(summary(item))}</span></span><span class="profile-card-arrow" aria-hidden="true">→</span></a>`).join('') : `<p class="profile-empty">${COPY[lang()].empty}</p>`;
+      root.innerHTML = profiles.length ? profiles.map(item => `<a class="profile-card" href="${encodeURIComponent(profileRoute(item))}/"><span><h2 class="profile-card-name">${escapeHtml(text(item.title_localized) || item.name)}</h2><span class="profile-card-summary">${escapeHtml(summary(item))}</span></span><span class="profile-card-arrow" aria-hidden="true">→</span></a>`).join('') : `<p class="profile-empty">${COPY[lang()].empty}</p>`;
     }
     function syncCopy() { document.documentElement.lang = lang(); document.documentElement.dataset.lang = lang(); }
     async function load() {
