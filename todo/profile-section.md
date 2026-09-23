@@ -5,7 +5,7 @@
 - Directory source: `acadie_sol_directory/entries/mrlp-acadie-sol/`
 - Export contract: `profile: true` becomes `item.profile === true`
 - Website routes: `/profile/` and `/profile/mrlp/`
-- Extras → Community points to `/profile/`
+- Extras → Community remains `community.html`; new Extras → Profiles points to `/profile/`
 
 ## Completed
 
@@ -14,6 +14,7 @@
 - [x] Add a profile cascade page driven by exported JSON.
 - [x] Add the MRLP nested static profile route.
 - [x] Keep profile source copy in the directory repo; keep HTML/CSS in the site repo.
+- [x] Preserve the existing Community destination and add Profiles as a separate Project link.
 
 ## Verification still expected
 
