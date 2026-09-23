@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Acadie.sol public profiles." />
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon.png" />
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../site.webmanifest" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
+  <title>Profiles — Acadie.sol</title>
+  <link rel="stylesheet" href="../assets/site-colors.css" />
+  <link rel="stylesheet" href="../assets/profile.css" />
+  <link rel="stylesheet" href="../assets/site-shell.css" />
+</head>
+<body>
+  <script src="../assets/site-shell.js"></script>
+  <main class="profile-shell">
+    <header class="profile-header">
+      <p class="profile-eyebrow">Acadie.sol</p>
+      <h1><span data-lang-copy="en">Profiles</span><span data-lang-copy="fr">Profils</span></h1>
+      <p><span data-lang-copy="en">A top-down cascade of people and stewards already present in the directory.</span><span data-lang-copy="fr">Une cascade de personnes et de stewards déjà présents dans le répertoire.</span></p>
+    </header>
+    <section class="profile-cascade" id="profile-list" aria-live="polite"><p class="profile-empty">Loading profiles…</p></section>
+    <footer class="profile-footer"><a href="../extras.html">← <span data-lang-copy="en">Back to Extras</span><span data-lang-copy="fr">Retour aux Extras</span></a></footer>
+  </main>
+  <script>
+    // Profile index — only entries explicitly opted into the public profile subset render here.
+    const COPY = { en: { loading: 'Loading profiles…', empty: 'No public profiles yet.', failed: "Couldn't load profiles" }, fr: { loading: 'Chargement des profils…', empty: 'Aucun profil public pour le moment.', failed: 'Impossible de charger les profils' } };
+    const lang = () => window.AcadieShell?.currentLang?.() || 'en';
+    const text = value => { if (!value || typeof value !== 'object') return value || ''; const c = value[lang()] || value.en || value.fr || ''; return c; };
+    const escapeHtml = value => { const node = document.createElement('div'); node.textContent = String(value || ''); return node.innerHTML; };
+    const summary = item => text(item.description_localized) || item.description || item.name;
+    function render(items) {
+      const root = document.getElementById('profile-list');
+      const profiles = (items || []).filter(item => item.status === 'published' && item.profile === true).sort((a, b) => String(a.sort_name || a.name).localeCompare(String(b.sort_name || b.name)));
+      root.innerHTML = profiles.length ? profiles.map(item => `<a class="profile-card" href="${encodeURIComponent(item.slug)}/"><span><h2 class="profile-card-name">${escapeHtml(text(item.title_localized) || item.name)}</h2><span class="profile-card-summary">${escapeHtml(summary(item))}</span></span><span class="profile-card-arrow" aria-hidden="true">→</span></a>`).join('') : `<p class="profile-empty">${COPY[lang()].empty}</p>`;
+    }
+    function syncCopy() { document.documentElement.lang = lang(); document.documentElement.dataset.lang = lang(); }
+    async function load() {
+      try { const response = await fetch('../assets/directory-data.json', { cache: 'no-cache' }); if (!response.ok) throw new Error('payload'); const payload = await response.json(); render(payload.items); }
+      catch (_) { document.getElementById('profile-list').innerHTML = `<p class="profile-empty">${COPY[lang()].failed}</p>`; }
+    }
+    syncCopy();
+    window.addEventListener('acadie:languagechange', () => { syncCopy(); load(); });
+    load();
+  </script>
+</body>
+</html>

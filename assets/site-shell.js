@@ -79,6 +79,7 @@
 
   function activeRouteKey() {
     const path = location.pathname;
+    if (/\/profile\//.test(path) || /\/profile\/?$/.test(path)) return 'extras';
     if (/\/photos\//.test(path)) return 'photos';
     if (/community\.html$/.test(path)) return 'community';
     if (/events\.html$/.test(path)) return 'events';

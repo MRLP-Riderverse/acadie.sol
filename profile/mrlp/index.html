@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MRLP.Acadie.sol, Acadian Steward." />
+  <link rel="icon" type="image/png" sizes="512x512" href="../../assets/favicon.png" />
+  <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
+  <link rel="manifest" href="../../site.webmanifest" />
+  <meta name="theme-color" content="#f5ede1" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c1626" media="(prefers-color-scheme: dark)" />
+  <title>MRLP.Acadie.sol — Acadie.sol</title>
+  <link rel="stylesheet" href="../../assets/site-colors.css" />
+  <link rel="stylesheet" href="../../assets/profile.css" />
+  <link rel="stylesheet" href="../../assets/site-shell.css" />
+</head>
+<body>
+  <script src="../../assets/site-shell.js"></script>
+  <main class="profile-shell">
+    <header class="profile-header">
+      <p class="profile-eyebrow">Acadie.sol / Profile</p>
+      <p><a href="../">← <span data-lang-copy="en">All profiles</span><span data-lang-copy="fr">Tous les profils</span></a></p>
+    </header>
+    <article class="profile-surface profile-detail" id="profile-root" aria-live="polite"><p class="profile-empty">Loading profile…</p></article>
+    <footer class="profile-footer"><a href="../../extras.html">← <span data-lang-copy="en">Back to Extras</span><span data-lang-copy="fr">Retour aux Extras</span></a></footer>
+  </main>
+  <script>
+    // Profile detail — renders the opted-in directory entry without duplicating its source copy.
+    const SLUG = 'mrlp-acadie-sol';
+    const COPY = { en: { loading: 'Loading profile…', missing: 'Profile not found', failed: "Couldn't load profile", notes: 'Public notes', links: 'Public links', related: 'Related projects', back: 'Back to directory' }, fr: { loading: 'Chargement du profil…', missing: 'Profil introuvable', failed: 'Impossible de charger le profil', notes: 'Notes publiques', links: 'Liens publics', related: 'Projets liés', back: 'Retour au répertoire' } };
+    const lang = () => window.AcadieShell?.currentLang?.() || 'en';
+    const copy = () => COPY[lang()] || COPY.en;
+    const text = value => { if (!value || typeof value !== 'object') return value || ''; return value[lang()] || value.en || value.fr || ''; };
+    const escapeHtml = value => { const node = document.createElement('div'); node.textContent = String(value || ''); return node.innerHTML; };
+    function inline(value) { return escapeHtml(value).replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'); }
+    function socialHref(label, value) { const handle = String(value || '').replace(/^@/, ''); const name = String(label || '').toLowerCase(); if (name === 'instagram') return `https://instagram.com/${encodeURIComponent(handle)}`; if (name === 'x' || name === 'twitter') return `https://x.com/${encodeURIComponent(handle)}`; if (/^https?:\/\//i.test(value)) return value; return ''; }
+    function render(item, allItems) {
+      const c = copy();
+      if (!item || item.status !== 'published' || item.profile !== true) { document.getElementById('profile-root').innerHTML = `<p class="profile-empty">${c.missing}</p>`; return; }
+      const notes = (item.note_points_localized && (item.note_points_localized[lang()] || item.note_points_localized.en)) || item.note_points || [];
+      const links = Array.isArray(item.public_data) ? item.public_data : [];
+      const related = Array.isArray(item.related_places) ? [...new Set(item.related_places.filter(Boolean))] : [];
+      const title = text(item.title_localized) || item.name;
+      const heading = lang() === 'fr' ? `${title}, Steward acadien` : `${title}, Acadian Steward`;
+      const linksHtml = links.map(value => { const split = String(value).indexOf(':'); const label = split > 0 ? String(value).slice(0, split).trim() : 'Public'; const detail = split > 0 ? String(value).slice(split + 1).trim() : String(value); const href = socialHref(label, detail); return `<a class="profile-link" href="${href || '#'}"${href ? ' target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(label)}: ${escapeHtml(detail)}</a>`; }).join('');
+      const normalize = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      const relatedHtml = related.map(value => {
+        const target = (allItems || []).find(candidate => normalize(candidate.slug) === normalize(value) || normalize(candidate.name) === normalize(value) || normalize(text(candidate.title_localized)) === normalize(value));
+        return target ? `<a href="../../entry.html#${encodeURIComponent(target.slug)}">${escapeHtml(value)}</a>` : `<span class="profile-related-label">${escapeHtml(value)}</span>`;
+      }).join('');
+      document.getElementById('profile-root').innerHTML = `<h1>${escapeHtml(heading)}</h1><p class="profile-lede">${escapeHtml(text(item.description_localized) || item.description)}</p>${notes.length ? `<section><p class="profile-label">${c.notes}</p><ul class="profile-notes">${notes.map(value => `<li>${inline(value)}</li>`).join('')}</ul></section>` : ''}${linksHtml ? `<section><p class="profile-label">${c.links}</p><div class="profile-links">${linksHtml}</div></section>` : ''}${relatedHtml ? `<section><p class="profile-label">${c.related}</p><div class="profile-related">${relatedHtml}</div></section>` : ''}`;
+    }
+    function syncCopy() { document.documentElement.lang = lang(); document.documentElement.dataset.lang = lang(); }
+    async function load() { try { const response = await fetch('../../assets/directory-data.json', { cache: 'no-cache' }); if (!response.ok) throw new Error('payload'); const payload = await response.json(); render((payload.items || []).find(item => item.slug === SLUG), payload.items || []); } catch (_) { document.getElementById('profile-root').innerHTML = `<p class="profile-empty">${copy().failed}</p>`; } }
+    syncCopy();
+    window.addEventListener('acadie:languagechange', () => { syncCopy(); load(); });
+    load();
+  </script>
+</body>
+</html>

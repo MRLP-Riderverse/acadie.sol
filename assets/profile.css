@@ -1,0 +1,31 @@
+/* Profile subset surfaces: calm identity-first cards shared by the index and detail routes. */
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { margin: 0; min-height: 100vh; background: var(--page-bg); color: var(--ink); font-family: "Trebuchet MS", "Verdana", "Segoe UI", sans-serif; }
+a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--link-hover); }
+.profile-shell { width: min(860px, 100%); min-height: 100svh; margin: 0 auto; padding: 42px 22px 104px; display: grid; align-content: start; gap: 24px; }
+.profile-header { display: grid; gap: 8px; }
+.profile-eyebrow { margin: 0; color: var(--label-accent); font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.profile-header h1 { margin: 0; color: var(--ink-strong); font-size: clamp(2.3rem, 10vw, 5rem); line-height: .94; letter-spacing: -.06em; text-wrap: balance; }
+.profile-header p:last-child { margin: 0; color: var(--muted); line-height: 1.45; max-width: 42rem; }
+.profile-cascade { display: grid; gap: 12px; }
+.profile-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; padding: 18px 2px; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink-strong); }
+.profile-card:last-child { border-bottom: 1px solid var(--line); }
+.profile-card:hover .profile-card-name { color: var(--link-hover); }
+.profile-card-name { margin: 0; font-size: clamp(1.25rem, 4vw, 2rem); line-height: 1.05; }
+.profile-card-summary { margin: 7px 0 0; color: var(--muted); line-height: 1.4; max-width: 42rem; }
+.profile-card-arrow { color: var(--label-accent); font-size: 1.4rem; }
+.profile-surface { border: 1px solid var(--line); border-radius: 28px; background: color-mix(in srgb, var(--paper) 90%, transparent); box-shadow: 0 18px 42px var(--shadow); padding: 20px; }
+.profile-detail { display: grid; gap: 18px; }
+.profile-detail h1 { margin: 0; color: var(--ink-strong); font-size: clamp(2rem, 8vw, 4rem); line-height: .96; letter-spacing: -.055em; text-shadow: 2px 0 0 rgba(218, 38, 54, .72), -2px 0 0 rgba(47, 116, 180, .62); }
+.profile-lede { margin: 0; color: var(--ink); font-size: 1.05rem; line-height: 1.5; }
+.profile-notes { margin: 0; padding-left: 1.2rem; display: grid; gap: 7px; line-height: 1.45; }
+.profile-notes li::marker { color: var(--red); }
+.profile-label { margin: 0 0 7px; color: var(--muted); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.profile-links, .profile-related { display: flex; flex-wrap: wrap; gap: 8px; }
+.profile-link, .profile-related a, .profile-related-label { padding: 7px 10px; border: 1px solid var(--button-border); border-radius: 14px; background: var(--button-bg); color: var(--button-fg); text-decoration: none; font-size: .82rem; font-weight: 900; }
+.profile-footer { padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: .84rem; line-height: 1.45; }
+.profile-empty { color: var(--muted); padding: 20px 0; }
+[data-lang="fr"] [data-lang-copy="en"], [data-lang="en"] [data-lang-copy="fr"] { display: none; }
+@media (max-width: 560px) { .profile-shell { padding-inline: 16px; } .profile-card { grid-template-columns: minmax(0, 1fr) 24px; gap: 10px; } .profile-surface { padding: 17px; border-radius: 22px; } }

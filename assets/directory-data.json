@@ -4158,6 +4158,7 @@
       "street_id": "",
       "status": "published",
       "draft": false,
+      "profile": true,
       "badge": "",
       "category": "creator",
       "area": "Acadie-Bathurst",
