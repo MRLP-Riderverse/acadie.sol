@@ -101,7 +101,35 @@
     .merch-teaser { margin: 8px 0 0; color: var(--red); font-size: .72rem; letter-spacing: .08em; }
     .merch-teaser a { color: inherit; text-decoration: none; }
     .merch-teaser a:hover, .merch-teaser a:focus-visible { text-decoration: underline; }
-    .welcome-question { margin-top: 6px; padding-top: 6px; }
+    /* Homepage language signal – keep the two authored lines stacked in one
+       reserved box so the VHS handoff never shifts the surrounding card. */
+    .welcome-question {
+      position: relative;
+      width: min(100%, 34ch);
+      min-height: 2.7em;
+      margin-top: 6px;
+      padding-top: 6px;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      overflow: visible;
+    }
+    .signal-copy__visual {
+      grid-area: 1 / 1;
+      transition: opacity .42s ease, transform .42s steps(3, end), filter .42s ease;
+    }
+    .signal-copy__visual[aria-hidden="true"] { opacity: 0; pointer-events: none; }
+    .signal-copy__visual[aria-hidden="false"] { opacity: 1; }
+    .welcome-question.is-shifting .signal-copy__visual[aria-hidden="false"] {
+      animation: signal-jag .34s steps(4, end);
+    }
+    @keyframes signal-jag {
+      0% { transform: translateX(0) skewX(0); filter: none; text-shadow: none; }
+      22% { transform: translateX(-2px) skewX(-4deg); filter: contrast(1.35); text-shadow: 2px 0 var(--red), -2px 0 var(--link); }
+      48% { transform: translateX(3px) skewX(3deg); filter: saturate(1.45); text-shadow: -3px 0 var(--red), 3px 0 var(--link); }
+      74% { transform: translateX(-1px) skewX(-2deg); filter: contrast(1.2); text-shadow: 1px 0 var(--red), -1px 0 var(--link); }
+      100% { transform: translateX(0) skewX(0); filter: none; text-shadow: none; }
+    }
 
     .home-pulse {
       width: min(320px, 100%);
@@ -403,6 +431,8 @@
 
     @media (prefers-reduced-motion: reduce) {
       .live-dot { animation: none; }
+      .signal-copy__visual { transition: none; }
+      .welcome-question.is-shifting .signal-copy__visual[aria-hidden="false"] { animation: none; }
     }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
@@ -424,7 +454,10 @@
           </div>
           <span class="welcome-mark" aria-hidden="true">⁜ ─────✧❅✦❅✧───── ⁜</span>
           <img class="welcome-gif" src="assets/images/acadie.gif" width="480" height="360" alt="Vive l’Acadie animated graphic" />
-          <p class="welcome-kicker welcome-question" id="welcome-question">What if we tried something different?</p>
+          <p class="welcome-kicker welcome-question" id="welcome-question" aria-label="What if we tried something different?">
+            <span class="signal-copy__visual" data-signal-language="en" lang="en" aria-hidden="false">What if we tried something different?</span>
+            <span class="signal-copy__visual" data-signal-language="fr" lang="fr" aria-hidden="true">Et si on essayait quelque chose de différent&nbsp;?</span>
+          </p>
           <h4 class="merch-teaser" id="merch-teaser"><a href="https://riderverse.sol.site" target="_blank" rel="noopener noreferrer">⁜ MERCH COMING SOON ⁜</a></h4>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
@@ -474,7 +507,7 @@
     const HOME_COPY = {
       en: {
         welcomeKicker: 'Welcome to', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', welcomeQuestion: 'What if we tried something different?', merchTeaser: '⁜ MERCH COMING SOON ⁜', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
+        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'An Acadian Pilot Project', merchTeaser: '⁜ MERCH COMING SOON ⁜', mobileHint: 'Swipe to discover →', entries: 'entries', events: 'events',
         shareTitle: 'Share with friends!', shareButton: 'Share with friends! ↗', shareDone: 'Copied ✓',
         recentKicker: 'Recently added', recentCta: 'Open ↗', photoCount: n => `${n} ${n === 1 ? 'photo' : 'photos'}`,
         pulseLabel: 'Site pulse', footerCreated: 'Created in 2026',
@@ -482,7 +515,7 @@
       },
       fr: {
         welcomeKicker: 'Bienvenue à', welcomeTitle: '⁜ Acadie.sol ⁜',
-        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', welcomeQuestion: 'Et si on essayait quelque chose de différent ?', merchTeaser: '⁜ MARCHANDISE À VENIR ⁜', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
+        welcomeLine: '⭐️💙🤍❤️', pilotProject: 'Un projet pilote acadien', merchTeaser: '⁜ MARCHANDISE À VENIR ⁜', mobileHint: 'Glissez pour découvrir →', entries: 'entrées', events: 'événements',
         shareTitle: 'Partagez avec vos amis !', shareButton: 'Partagez avec vos amis ! ↗', shareDone: 'Copié ✓',
         recentKicker: 'Ajouté récemment', recentCta: 'Ouvrir ↗', photoCount: n => `${n} photo${n === 1 ? '' : 's'}`,
         pulseLabel: 'Pouls du site', footerCreated: 'Créé en 2026',
@@ -522,7 +555,7 @@
       setText('welcome-title', c.welcomeTitle);
       setText('welcome-pilot', c.pilotProject);
       setText('welcome-line', c.welcomeLine);
-      setText('welcome-question', c.welcomeQuestion);
+
       const merchTeaser = document.getElementById('merch-teaser');
       if (merchTeaser?.firstElementChild) merchTeaser.firstElementChild.textContent = c.merchTeaser;
       setText('mobile-deck-hint', c.mobileHint);
@@ -557,6 +590,49 @@
       setText('recent-title', localize(album.title));
       setText('recent-summary', localize(album.summary));
       setText('recent-count', c.photoCount(Number(album.photo_count) || 0));
+    }
+
+    // Bilingual signal drift – this isolated homepage experiment owns only the
+    // question line, so the global EN/FR control can continue serving the rest
+    // of the site without changing this ambient visual cue.
+    function initLanguageSignal() {
+      const signal = document.getElementById('welcome-question');
+      const lines = signal ? [...signal.querySelectorAll('[data-signal-language]')] : [];
+      if (!signal || lines.length < 2) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let activeIndex = 0;
+      let timer = null;
+
+      function showSignal(index, animate = true) {
+        activeIndex = index % lines.length;
+        lines.forEach((line, lineIndex) => {
+          const active = lineIndex === activeIndex;
+          line.setAttribute('aria-hidden', String(!active));
+        });
+        signal.setAttribute('aria-label', lines[activeIndex].textContent.trim());
+        if (animate && !reducedMotion.matches) {
+          signal.classList.remove('is-shifting');
+          window.requestAnimationFrame(() => signal.classList.add('is-shifting'));
+          window.setTimeout(() => signal.classList.remove('is-shifting'), 360);
+        }
+      }
+
+      function scheduleNext() {
+        window.clearTimeout(timer);
+        if (reducedMotion.matches) return;
+        timer = window.setTimeout(() => {
+          if (!document.hidden) showSignal(activeIndex + 1);
+          scheduleNext();
+        }, 5000);
+      }
+
+      reducedMotion.addEventListener?.('change', () => {
+        showSignal(0, false);
+        scheduleNext();
+      });
+      document.addEventListener('visibilitychange', scheduleNext);
+      showSignal(0, false);
+      scheduleNext();
     }
 
     // Share action – use the native share sheet when available, then fall back to
@@ -638,6 +714,7 @@
 
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
+    initLanguageSignal();
     initDeck();
     document.getElementById('live-share-button').addEventListener('click', shareAcadie);
     loadHomeData();

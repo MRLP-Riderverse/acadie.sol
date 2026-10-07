@@ -26,6 +26,12 @@ Status: review complete; implementation pending owner selection. Recommended wor
 - [ ] Keep original palette initially; make count/link text readable rather than changing decorative gold globally.
 - [ ] Supply before/after mobile and desktop screenshots for owner review. If rejected, revert this isolated candidate rather than layering more overrides.
 
+## Homepage language signal pilot
+- [x] Isolate the welcome question from global EN/FR hydration and alternate authored EN/FR lines every five seconds.
+- [x] Keep the effect HTML/CSS-first with reduced-motion fallback, reserved layout space, and no GIF/canvas asset.
+- [ ] Review the live PWA feel on mobile and decide whether the signal should remain, soften, or expand to another short homepage phrase.
+- [ ] Keep Chiac Bodies copy static unless separately approved.
+
 ## V2 — After V1 approval only
 - [ ] Assess desktop nav contrast against its actual composited backdrop; compare paper/ink chrome with current glass. Changes belong in shared shell assets, not page-local patches.
 - [ ] Implement a verified static-media fallback for reduced-motion/data-sensitive use; do not assume CSS disables GIF motion.
