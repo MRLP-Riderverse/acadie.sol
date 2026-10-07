@@ -12,6 +12,7 @@ The Chiac Bodies text stays static.
 
 - Semantic HTML contains both translations with `lang="en"` and `lang="fr"`.
 - CSS reserves one text box so the longer French line does not shift the card.
+- The merch teaser uses the contrasting replacement treatment: centered, same slot, one copy visible at a time.
 - Small inline JavaScript owns only this line's timer and visibility state.
 - `prefers-reduced-motion: reduce` pins the line to English and disables the jitter.
 - Hidden tabs do not advance the signal.

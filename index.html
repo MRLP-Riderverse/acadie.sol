@@ -98,8 +98,37 @@
     .welcome-mark { color: var(--gold); font-size: 1rem; letter-spacing: .18em; }
     .pilot-project { margin: 0; color: var(--muted); font: 900 .62rem/1.35 "Pokemon GB", ui-monospace, monospace; letter-spacing: .08em; }
     .welcome-gif { display: block; width: min(240px, 68vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain; border-radius: 18px; box-shadow: 0 16px 34px rgba(0, 0, 0, .32), 0 0 24px color-mix(in srgb, var(--gold) 18%, transparent); }
-    .merch-teaser { margin: 8px 0 0; color: var(--red); font-size: .72rem; letter-spacing: .08em; }
-    .merch-teaser a { color: inherit; text-decoration: none; }
+    /* Merch comparison: same centered slot, one copy replaces the other. */
+    .merch-teaser {
+      display: grid;
+      min-height: 1.5em;
+      margin: 8px 0 0;
+      color: var(--red);
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+    .merch-teaser a {
+      grid-area: 1 / 1;
+      color: inherit;
+      text-decoration: none;
+    }
+    .merch-signal__visual {
+      display: block;
+      transition: opacity .42s ease, filter .42s ease;
+    }
+    .merch-signal__visual[aria-hidden="true"] { opacity: 0; pointer-events: none; }
+    .merch-signal__visual[aria-hidden="false"] { opacity: 1; }
+    .merch-teaser.is-shifting .merch-signal__visual[aria-hidden="false"] {
+      animation: merch-jag .34s steps(4, end);
+    }
+    @keyframes merch-jag {
+      0% { transform: translateX(0); filter: none; }
+      25% { transform: translateX(-2px); filter: contrast(1.3); }
+      50% { transform: translateX(2px); filter: saturate(1.3); }
+      75% { transform: translateX(-1px); filter: contrast(1.15); }
+      100% { transform: translateX(0); filter: none; }
+    }
     .merch-teaser a:hover, .merch-teaser a:focus-visible { text-decoration: underline; }
     /* Homepage language signal – keep the two authored lines stacked in one
        reserved box so the VHS handoff never shifts the surrounding card. */
@@ -433,6 +462,8 @@
       .live-dot { animation: none; }
       .signal-copy__visual { transition: none; }
       .welcome-question.is-shifting .signal-copy__visual[aria-hidden="false"] { animation: none; }
+      .merch-signal__visual { transition: none; }
+      .merch-teaser.is-shifting .merch-signal__visual[aria-hidden="false"] { animation: none; }
     }
   </style>
   <link rel="stylesheet" href="assets/site-shell.css" />
@@ -458,7 +489,12 @@
             <span class="signal-copy__visual" data-signal-language="en" lang="en" aria-hidden="false">What if we tried something different?</span>
             <span class="signal-copy__visual" data-signal-language="fr" lang="fr" aria-hidden="true">Et si on essayait quelque chose de différent&nbsp;?</span>
           </p>
-          <h4 class="merch-teaser" id="merch-teaser"><a href="https://riderverse.sol.site" target="_blank" rel="noopener noreferrer">⁜ MERCH COMING SOON ⁜</a></h4>
+          <h4 class="merch-teaser" id="merch-teaser" aria-label="Merch coming soon">
+            <a href="https://riderverse.sol.site" target="_blank" rel="noopener noreferrer">
+              <span class="merch-signal__visual" data-signal-language="en" lang="en" aria-hidden="false">⁜ MERCH COMING SOON ⁜</span>
+              <span class="merch-signal__visual" data-signal-language="fr" lang="fr" aria-hidden="true">⁜ MARCHANDISE À VENIR ⁜</span>
+            </a>
+          </h4>
         </div>
         <p class="mobile-deck-hint" id="mobile-deck-hint">Swipe to discover →</p>
       </section>
@@ -556,8 +592,6 @@
       setText('welcome-pilot', c.pilotProject);
       setText('welcome-line', c.welcomeLine);
 
-      const merchTeaser = document.getElementById('merch-teaser');
-      if (merchTeaser?.firstElementChild) merchTeaser.firstElementChild.textContent = c.merchTeaser;
       setText('mobile-deck-hint', c.mobileHint);
       setText('home-entry-label', c.entries);
       setText('home-event-label', c.events);
@@ -592,11 +626,10 @@
       setText('recent-count', c.photoCount(Number(album.photo_count) || 0));
     }
 
-    // Bilingual signal drift – this isolated homepage experiment owns only the
-    // question line, so the global EN/FR control can continue serving the rest
-    // of the site without changing this ambient visual cue.
-    function initLanguageSignal() {
-      const signal = document.getElementById('welcome-question');
+    // Bilingual signal drift – these two bounded homepage experiments bypass
+    // the global EN/FR hydration while leaving the rest of the site intact.
+    function initLanguageSignal(signalId) {
+      const signal = document.getElementById(signalId);
       const lines = signal ? [...signal.querySelectorAll('[data-signal-language]')] : [];
       if (!signal || lines.length < 2) return;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -714,7 +747,8 @@
 
     window.addEventListener('acadie:languagechange', hydrateHome);
     hydrateHome();
-    initLanguageSignal();
+    initLanguageSignal('welcome-question');
+    initLanguageSignal('merch-teaser');
     initDeck();
     document.getElementById('live-share-button').addEventListener('click', shareAcadie);
     loadHomeData();

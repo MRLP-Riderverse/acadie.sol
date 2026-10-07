@@ -29,6 +29,7 @@ Status: review complete; implementation pending owner selection. Recommended wor
 ## Homepage language signal pilot
 - [x] Isolate the welcome question from global EN/FR hydration and alternate authored EN/FR lines every five seconds.
 - [x] Keep the effect HTML/CSS-first with reduced-motion fallback, reserved layout space, and no GIF/canvas asset.
+- [x] Add a centered replacement-style merch teaser so the two language treatments can be compared in the same homepage visit.
 - [ ] Review the live PWA feel on mobile and decide whether the signal should remain, soften, or expand to another short homepage phrase.
 - [ ] Keep Chiac Bodies copy static unless separately approved.
 
