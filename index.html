@@ -136,7 +136,7 @@
       position: relative;
       width: min(100%, 34ch);
       min-height: 2.7em;
-      margin-top: 6px;
+      margin: 6px 0 10px;
       padding-top: 6px;
       display: grid;
       align-items: center;
@@ -628,6 +628,10 @@
 
     // Bilingual signal drift – these two bounded homepage experiments bypass
     // the global EN/FR hydration while leaving the rest of the site intact.
+    // One shared hold interval keeps the bilingual experiments synchronized.
+    // Change this single value to tune both signals together.
+    const LANGUAGE_SIGNAL_INTERVAL_MS = 5000;
+
     function initLanguageSignal(signalId) {
       const signal = document.getElementById(signalId);
       const lines = signal ? [...signal.querySelectorAll('[data-signal-language]')] : [];
@@ -656,7 +660,7 @@
         timer = window.setTimeout(() => {
           if (!document.hidden) showSignal(activeIndex + 1);
           scheduleNext();
-        }, 5000);
+        }, LANGUAGE_SIGNAL_INTERVAL_MS);
       }
 
       reducedMotion.addEventListener?.('change', () => {
